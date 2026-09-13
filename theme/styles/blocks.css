@@ -1,0 +1,413 @@
+/* ══════════════════════════════════════════════════════════════════════════
+   Blocks - recurring compositions used by the deck's slides
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Speakers ──────────────────────────────────────────────────────────── */
+
+.speaker {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.4rem 1.5rem;
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+  --speaker-c: #33a9cc;
+}
+.speaker::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: var(--speaker-c);
+}
+.speaker.is-max { --speaker-c: #e8434b; }
+
+.speaker-head { display: flex; align-items: center; gap: 1rem; }
+.speaker .avatar { width: 96px; height: 96px; flex: none; }
+.speaker-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+.speaker-org {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  margin-top: 0.2rem;
+}
+.speaker ul > li::before { background: var(--speaker-c); }
+
+/* ── Acts (programme) ──────────────────────────────────────────────────── */
+
+.act {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  padding: 0.72rem 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--white);
+}
+.act:first-child {
+  background: var(--accent-soft);
+  border-color: var(--accent-line);
+}
+.act-n {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--line-2);
+  width: 1.6rem;
+  flex: none;
+  text-align: center;
+}
+.act:first-child .act-n { color: var(--accent); }
+.act-body { flex: 1; }
+.act-title {
+  font-size: 0.98rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+.act-desc {
+  font-size: 0.79rem;
+  color: var(--muted);
+  margin-top: 0.1rem;
+}
+
+/* ── Goals ─────────────────────────────────────────────────────────────── */
+
+.goal {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 1.3rem;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--line-2);
+  border-radius: var(--r-lg);
+  background: var(--white);
+}
+.goal:first-child {
+  border-left-color: var(--accent);
+  background: var(--accent-soft);
+  border-color: var(--accent-line);
+}
+
+/* ── Dimensions (4 filtres) ────────────────────────────────────────────── */
+
+.dim {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.2rem 1.15rem;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--white);
+}
+.dim::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: var(--dim-c);
+}
+.dim-1 { --dim-c: #d8461c; }
+.dim-2 { --dim-c: #b5651d; }
+.dim-3 { --dim-c: #0f7a6f; }
+.dim-4 { --dim-c: #1f6f8b; }
+
+.dim-k {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--dim-c);
+}
+.dim-t {
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0.35rem 0 0.5rem;
+}
+.dim-d {
+  font-size: 0.84rem;
+  line-height: 1.45;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* ── Parameter list ────────────────────────────────────────────────────── */
+
+.param-grid { display: flex; flex-direction: column; gap: 0.5rem; }
+.param-grid > div {
+  font-size: 0.79rem;
+  color: var(--muted);
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--line);
+}
+.param-grid > div:last-child { border-bottom: none; padding-bottom: 0; }
+.param-k {
+  display: inline-block;
+  min-width: 5.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--teal-deep);
+}
+
+/* ── Roles (plan / exécute / vérifie) ──────────────────────────────────── */
+
+.role {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  padding: 0.7rem 0.95rem;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--white);
+  font-size: 0.88rem;
+}
+
+/* ── Section definition stack (partie 3) ───────────────────────────────── */
+
+.sect-def { display: flex; flex-direction: column; }
+.def-row {
+  padding: 0.85rem 0;
+  border-top: 1px solid rgba(253, 251, 247, 0.13);
+}
+.def-row:last-child { border-bottom: 1px solid rgba(253, 251, 247, 0.13); }
+.def-k {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(253, 251, 247, 0.45);
+  margin-bottom: 0.28rem;
+}
+.def-v {
+  font-size: 0.97rem;
+  line-height: 1.4;
+  color: rgba(253, 251, 247, 0.72);
+}
+.def-v strong { color: var(--paper); font-weight: 600; }
+.def-row.is-hero .def-k { color: #ff8a5e; }
+.def-row.is-hero .def-v { font-size: 1.12rem; color: var(--paper); }
+.def-row.is-hero .def-v strong { color: #ff8a5e; }
+
+.sect-src {
+  margin-top: 1.1rem;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  line-height: 1.5;
+  color: rgba(253, 251, 247, 0.4);
+}
+
+/* ── Surprise → extension mapping ──────────────────────────────────────── */
+
+.surprise-head {
+  display: grid;
+  grid-template-columns: 1fr 2rem 1.35fr;
+  gap: 0.9rem;
+  margin-bottom: 0.55rem;
+}
+.surprise-head > :nth-child(2) { grid-column: 3; }
+
+.surprise {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 2rem 1.35fr;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.62rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--white);
+}
+.s-left { font-size: 0.93rem; color: var(--ink); }
+.s-arrow {
+  font-family: var(--font-mono);
+  color: var(--line-2);
+  text-align: center;
+}
+.s-right {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* ── Advantages ────────────────────────────────────────────────────────── */
+
+.adv {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  padding: 0.85rem 1.1rem;
+  border-radius: var(--r-md);
+  background: var(--surface);
+  font-size: 0.88rem;
+}
+
+/* ── IDE options ───────────────────────────────────────────────────────── */
+
+.opt {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 0.9rem 1.3rem;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--white);
+}
+.opt.is-hero {
+  background: var(--accent-soft);
+  border-color: var(--accent-line);
+}
+.opt-k {
+  flex: none;
+  width: 5.2rem;
+  padding-top: 0.12rem;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--quiet);
+}
+.opt.is-hero .opt-k { color: var(--accent); }
+
+/* ── NÉON flaws ────────────────────────────────────────────────────────── */
+
+.flaw {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 0.95rem;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  font-size: 0.87rem;
+  color: var(--ink-soft);
+}
+.flaw-d {
+  width: 7px; height: 7px; border-radius: 50%;
+  flex: none;
+  background: var(--accent);
+}
+.flaw:nth-child(2) .flaw-d { background: #b5651d; }
+.flaw:nth-child(3) .flaw-d { background: #0f7a6f; }
+.flaw:nth-child(4) .flaw-d { background: #1f6f8b; }
+.flaw:nth-child(5) .flaw-d { background: #b03a3a; }
+.flaw:nth-child(6) .flaw-d { background: #6b4a8f; }
+
+/* ── Maintenance steps ─────────────────────────────────────────────────── */
+
+.step {
+  position: relative;
+  padding: 0.7rem 0.8rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--white);
+}
+.step + .step::before {
+  content: '';
+  position: absolute;
+  left: -0.78rem;
+  top: 50%;
+  width: 0.55rem;
+  height: 1px;
+  background: var(--line-2);
+}
+.step-n {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+.step-t {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+.step-d {
+  font-size: 0.7rem;
+  color: var(--muted);
+  margin-top: 0.08rem;
+}
+
+/* ── "Le harnais doit alors" ───────────────────────────────────────────── */
+
+.must {
+  position: relative;
+  padding: 0.3rem 0 0.3rem 1.2rem;
+  font-size: 0.86rem;
+  color: var(--ink-soft);
+  border-bottom: 1px solid var(--line);
+}
+.must:last-child { border-bottom: none; }
+.must::before {
+  content: '';
+  position: absolute;
+  left: 0.1rem;
+  top: 0.78em;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--teal);
+}
+.must.is-warn { color: var(--ink); font-weight: 500; }
+.must.is-warn::before { background: var(--accent); }
+
+/* ── Pipeline strip ────────────────────────────────────────────────────── */
+
+.pipeline {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  padding: 0.75rem 1.15rem;
+  border-radius: var(--r-lg);
+  background: var(--ink);
+  color: var(--paper);
+}
+.pipeline-k {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #ff8a5e;
+  flex: none;
+}
+.pipeline-flow {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  letter-spacing: 0.01em;
+  flex: none;
+}
+.pipeline-flow i { color: #ff8a5e; font-style: normal; padding: 0 0.15em; }
+.pipeline-note {
+  font-size: 0.76rem;
+  color: rgba(253, 251, 247, 0.6);
+  margin-left: auto;
+}

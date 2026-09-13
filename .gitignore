@@ -1,0 +1,7 @@
+node_modules/
+dist/
+export-png/
+.DS_Store
+
+# Les PDF sont des artefacts d'export (npm run export)
+*.pdf

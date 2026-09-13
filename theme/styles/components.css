@@ -1,0 +1,284 @@
+/* ══════════════════════════════════════════════════════════════════════════
+   Components - the deck's visual vocabulary
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Eyebrow / kicker ──────────────────────────────────────────────────── */
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55em;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+}
+.eyebrow::before {
+  content: '';
+  width: 14px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--accent);
+}
+.eyebrow.is-teal { color: var(--teal-deep); }
+.eyebrow.is-teal::before { background: var(--teal); }
+.eyebrow.is-quiet { color: var(--muted); }
+.eyebrow.is-quiet::before { background: var(--line-2); }
+
+/* ── Tag / pill ────────────────────────────────────────────────────────── */
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  font-family: var(--font-mono);
+  font-size: 0.63rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
+  border-radius: 999px;
+  padding: 0.22em 0.72em;
+  white-space: nowrap;
+}
+.tag.is-teal {
+  color: var(--teal-deep);
+  background: var(--teal-soft);
+  border-color: var(--teal-line);
+}
+.tag.is-plain {
+  color: var(--muted);
+  background: var(--surface);
+  border-color: var(--line);
+}
+.tag.is-code {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.7rem;
+}
+
+/* ── Cards ─────────────────────────────────────────────────────────────── */
+
+.card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 1rem 1.15rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.card-soft {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 1rem 1.15rem;
+}
+
+.card-flat {
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 1rem 1.15rem;
+}
+
+.card-accent {
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
+  border-radius: var(--r-lg);
+  padding: 1rem 1.15rem;
+}
+
+.card-teal {
+  background: var(--teal-soft);
+  border: 1px solid var(--teal-line);
+  border-radius: var(--r-lg);
+  padding: 1rem 1.15rem;
+}
+
+.card-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.3rem;
+}
+
+/* ── Numbered badge ────────────────────────────────────────────────────── */
+
+.num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  flex: none;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 600;
+  line-height: 1;
+}
+.num.is-accent { background: var(--accent); color: #fff; }
+.num.is-teal   { background: var(--teal);   color: #fff; }
+.num.is-ghost  {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--line-2);
+}
+.num.is-lg { width: 2rem; height: 2rem; font-size: 0.85rem; }
+
+/* ── Figures ───────────────────────────────────────────────────────────── */
+
+.figure {
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--white);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+.figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.figure-body {
+  padding: 0.6rem 0.7rem 0.5rem;
+}
+.figure-body img { border-radius: var(--r-sm); }
+
+.figure-caption {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.72rem;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+  background: var(--surface);
+}
+.figure-caption a { border-bottom-color: var(--line-2); }
+
+.figure-bare img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ── Callouts ──────────────────────────────────────────────────────────── */
+
+.takeaway {
+  position: relative;
+  display: block;
+  padding: 0.8rem 1.1rem 0.8rem 2.5rem;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  border-radius: 0 var(--r-md) var(--r-md) 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.takeaway::before {
+  content: '\2192';
+  position: absolute;
+  left: 1rem;
+  top: 0.8rem;
+  font-family: var(--font-mono);
+  color: var(--accent);
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.note {
+  font-size: 0.78rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.lead {
+  font-size: 1.02rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 46rem;
+}
+
+/* ── Text helpers ──────────────────────────────────────────────────────── */
+
+.muted  { color: var(--muted); }
+.quiet  { color: var(--quiet); }
+.accent { color: var(--accent-deep); }
+.tealtx { color: var(--teal-deep); }
+.mono   { font-family: var(--font-mono); }
+.serif  { font-family: var(--font-serif); }
+
+.t-xs { font-size: 0.75rem; line-height: 1.45; }
+.t-sm { font-size: 0.84rem; line-height: 1.5;  }
+.t-md { font-size: 0.93rem; line-height: 1.55; }
+.t-lg { font-size: 1.06rem; line-height: 1.55; }
+
+.hairline {
+  height: 1px;
+  background: var(--line);
+  border: 0;
+}
+
+/* ── Key/value rows ────────────────────────────────────────────────────── */
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.55rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--white);
+}
+.row + .row { margin-top: 0.4rem; }
+
+/* ── Logo plate ────────────────────────────────────────────────────────── */
+
+.logo-plate {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  padding: 0.5rem 1.1rem;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-sm);
+}
+.logo-plate img {
+  display: block;
+  width: auto;
+  object-fit: contain;
+  filter: saturate(1);
+}
+
+/* ── Avatar ────────────────────────────────────────────────────────────── */
+
+.avatar {
+  display: block;
+  border-radius: 50%;
+  background: var(--surface);
+}
+
+/* ── Screen-frame for terminal screenshots ─────────────────────────────── */
+
+.screen {
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  border: 1px solid var(--line-2);
+  box-shadow: var(--shadow-md);
+  background: #1b1b25;
+}
+.screen img { display: block; width: 100%; height: auto; }
+
+/* Stretched containers whose content should sit in the optical centre ------ */
+.v-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

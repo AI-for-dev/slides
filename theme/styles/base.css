@@ -1,0 +1,184 @@
+/* ══════════════════════════════════════════════════════════════════════════
+   Base - surfaces, typographic scale, vertical rhythm
+   ══════════════════════════════════════════════════════════════════════════ */
+
+html, body, #app, #page-root, .slidev-page {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+html { color-scheme: light; }
+
+.slidev-layout {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.55;
+  background: var(--paper);
+  color: var(--ink);
+  padding: 0;
+  font-feature-settings: 'ss01' 1, 'cv05' 1;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Headings ------------------------------------------------------------------ */
+
+:where(.slidev-layout) :is(h1, h2, h3, h4) {
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+:where(.slidev-layout) h1 {
+  font-size: 1.95rem;
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.028em;
+  margin: 0;
+}
+
+:where(.slidev-layout) h2 {
+  font-size: 1.15rem;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  color: var(--muted);
+  margin: 0;
+}
+
+:where(.slidev-layout) h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+/* Body ---------------------------------------------------------------------- */
+
+:where(.slidev-layout) p { margin: 0 0 0.7em; }
+:where(.slidev-layout) p:last-child { margin-bottom: 0; }
+
+:where(.slidev-layout) strong { font-weight: 600; color: var(--ink); }
+:where(.slidev-layout) em { font-style: italic; }
+
+.slidev-layout a {
+  color: var(--accent-deep);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent-line);
+  transition: border-color .15s ease, color .15s ease;
+}
+.slidev-layout a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+:where(.slidev-layout) code {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  padding: 0.08em 0.35em;
+}
+
+.slidev-layout ::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* Lists - custom bullets ----------------------------------------------------- */
+
+:where(.slidev-layout) ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+:where(.slidev-layout) ul > li {
+  position: relative;
+  padding-left: 1.15rem;
+  margin: 0 0 0.5rem;
+}
+
+:where(.slidev-layout) ul > li::before {
+  content: '';
+  position: absolute;
+  left: 0.05rem;
+  top: 0.62em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+:where(.slidev-layout) ul ul {
+  margin-top: 0.4rem;
+}
+:where(.slidev-layout) ul ul > li::before {
+  background: none;
+  border: 1px solid var(--line-2);
+  width: 5px;
+  height: 5px;
+}
+
+:where(.slidev-layout) ol {
+  list-style: none;
+  counter-reset: li;
+  margin: 0;
+  padding: 0;
+}
+:where(.slidev-layout) ol > li {
+  position: relative;
+  counter-increment: li;
+  padding-left: 1.6rem;
+  margin: 0 0 0.5rem;
+}
+:where(.slidev-layout) ol > li::before {
+  content: counter(li);
+  position: absolute;
+  left: 0;
+  top: 0.06em;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+/* Tables --------------------------------------------------------------------- */
+
+.slidev-layout table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+.slidev-layout th {
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 0 0 0.55rem;
+  border-bottom: 1px solid var(--line-2);
+}
+.slidev-layout td {
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+.slidev-layout tr:last-child td { border-bottom: none; }
+
+/* Slidev chrome -------------------------------------------------------------- */
+
+.slidev-page,
+.slidev-layout blockquote {
+  background: transparent;
+}
+
+.slidev-vclick-target {
+  transition: opacity 260ms cubic-bezier(.22,.61,.36,1),
+              transform 260ms cubic-bezier(.22,.61,.36,1);
+}
+.slidev-vclick-hidden {
+  opacity: 0 !important;
+  transform: translateY(6px);
+}
