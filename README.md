@@ -3,6 +3,13 @@
 Support de l'atelier (ANF jour 1, octobre 2026), construit avec
 [Slidev](https://sli.dev).
 
+Slides en ligne : <https://ai-for-dev.github.io/slides/>
+
+## Publication
+
+Chaque push sur `main` déclenche `.github/workflows/deploy.yml`, qui construit
+le site et le publie sur GitHub Pages (source : GitHub Actions).
+
 ## Lancer
 
 ```bash
