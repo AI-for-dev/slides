@@ -8,6 +8,7 @@ author: Max Beligné, Loïc Gouarin
 colorSchema: light
 transition: fade
 mdc: true
+editor: false
 drawings:
   persist: false
 fonts:

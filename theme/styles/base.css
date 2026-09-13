@@ -174,6 +174,16 @@ html { color-scheme: light; }
   background: transparent;
 }
 
+/* Bug Slidev 51 : la boîte « Goto » (touche g) est masquée hors écran quand
+   elle est fermée, mais sa liste d'autocomplétion reste rendue et déborde sur
+   la droite de la slide. Fuse renvoie toutes les slides pour une recherche
+   vide, donc la liste n'est jamais considérée comme vide.
+   On la masque tant que le champ est désactivé, c'est-à-dire tant que la
+   boîte est fermée. */
+#slidev-goto-dialog:has(#slidev-goto-input:disabled) .autocomplete-list {
+  display: none;
+}
+
 .slidev-vclick-target {
   transition: opacity 260ms cubic-bezier(.22,.61,.36,1),
               transform 260ms cubic-bezier(.22,.61,.36,1);
