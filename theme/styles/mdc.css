@@ -1,0 +1,220 @@
+/* ══════════════════════════════════════════════════════════════════════════
+   MDC - colle entre le markdown des slides et les blocs du thème
+
+   Les composants de theme/components/ n'émettent que des classes déjà
+   définies ailleurs. Ce fichier ajoute les quelques conteneurs génériques et
+   remet d'aplomb le rythme des paragraphes markdown à l'intérieur des blocs.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Conteneurs génériques ─────────────────────────────────────────────── */
+
+.cols { display: grid; }
+.cols.is-fill { flex: 1; min-height: 0; }
+.cell { min-width: 0; }
+
+.stack { display: flex; flex-direction: column; }
+.stack > p { margin: 0; }
+.stack.is-fill { flex: 1; min-height: 0; }
+
+/* ── Titre de slide + note de droite ───────────────────────────────────── */
+
+/* Le titre est une rangée flex : la note s'aligne sur la ligne de base sans
+   nombre magique. Corollaire : pas d'autre balise inline dans le `#`, chaque
+   balise deviendrait un élément flex séparé. */
+.slidev-layout.dflt .slide-body > h1 {
+  display: flex;
+  align-items: baseline;
+}
+
+.title-hint {
+  margin-left: auto;
+  padding-left: 1.5rem;
+  flex: none;
+  font-family: var(--font-sans);
+  font-size: 0.74rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--muted);
+  text-align: right;
+}
+
+.ord {
+  flex: none;
+  margin-right: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--quiet);
+}
+
+/* ── Échelle de texte dans les cartes ──────────────────────────────────── */
+
+.is-xs :is(p, li) { font-size: 0.75rem; line-height: 1.45; }
+.is-sm :is(p, li) { font-size: 0.84rem; line-height: 1.5; }
+.is-md :is(p, li) { font-size: 0.93rem; line-height: 1.55; }
+.is-lg :is(p, li) { font-size: 1.06rem; line-height: 1.55; }
+
+/* MDC déplie les paragraphes uniques : l'espacement se joue sous le sur-titre. */
+:is(.card, .card-soft, .card-accent, .card-teal, .quote-body) > .eyebrow {
+  margin-bottom: 0.65rem;
+}
+.quote-body > .eyebrow { margin-bottom: 1.1rem; }
+.eyebrow + :is(p, ul, ol, .specs, .chips, .musts, .stack, .bullet, .detail) { margin-top: 0.65rem; }
+
+/* ── Blocs qui tiennent sur une ligne : pas de marge de paragraphe ─────── */
+
+:is(.act-desc, .criterion-d, .item-body, .bullet-body, .def-v, .step-d,
+    .s-right, .detail, .note-body, .choice-body, .takeaway,
+    .lead, .qte-text) > p {
+  margin: 0;
+}
+
+.detail {
+  display: block;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+/* ── Intérieur des blocs composés ──────────────────────────────────────── */
+
+.speaker-body { margin-top: 1rem; }
+.speaker-body :is(p, li) { font-size: 0.93rem; }
+
+.item-body > p:first-child { margin: 0; }
+.goal .item-body > p:first-child { font-size: 0.95rem; font-weight: 600; letter-spacing: -0.01em; }
+.adv .item-body > p:first-child { font-weight: 600; }
+
+.goal .detail { font-size: 0.84rem; }
+.adv .detail,
+.role .detail,
+.step .detail { font-size: 0.75rem; }
+.choice .detail { font-size: 0.84rem; }
+
+.choice-body > p { margin: 0; }
+.choice-body .card-title { margin-bottom: 0.15rem; }
+
+.s-right > p {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0;
+}
+
+/* ── Sommaire de section : liste markdown numérotée ────────────────────── */
+
+.agenda ul {
+  counter-reset: agenda;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+
+.agenda li {
+  counter-increment: agenda;
+  position: relative;
+  margin: 0;
+  padding: 0.62rem 0 0.62rem 2.6rem;
+  border-top: 1px solid rgba(253, 251, 247, 0.13);
+  font-size: 0.92rem;
+  color: rgba(253, 251, 247, 0.82);
+}
+.agenda li:last-child { border-bottom: 1px solid rgba(253, 251, 247, 0.13); }
+
+.agenda li::before {
+  content: counter(agenda, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 0.9rem;
+  width: 2rem;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: #ff8a5e;
+}
+.agenda.is-roman li::before { content: counter(agenda, upper-roman); }
+
+/* ── Slide de section : rythme vertical du bloc de gauche ──────────────── */
+
+.sect-head .sect-num { margin-top: 1.25rem; }
+.sect-head h1 { margin-top: 1.5rem; }
+.sect-head h2 { margin-top: 0.75rem; }
+
+/* ── Note de bas de bloc ───────────────────────────────────────────────── */
+
+.note-line {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+.note-line.muted { color: var(--muted); }
+.note-line.quiet { color: var(--quiet); }
+.note-line.is-tight { margin-top: -0.5rem; }
+.note-line .tag { position: relative; top: 0.1em; flex: none; }
+
+/* ── Plaque de logos sur fond sombre ───────────────────────────────────── */
+
+.logo-bar.on-dark {
+  background: rgba(255, 255, 255, 0.96);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* ── Ajouts entre crochets dans une citation ───────────────────────────── */
+
+.add { color: var(--muted); }
+.add::before { content: '['; }
+.add::after { content: ']'; }
+
+/* ── Tête de carte : pastille + titre ──────────────────────────────────── */
+
+.card-head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.9rem;
+}
+.card-head .card-title { margin: 0; }
+
+/* ── Filet ─────────────────────────────────────────────────────────────── */
+
+.rule-line {
+  display: block;
+  height: 1px;
+  background: var(--line);
+  margin: 0.9rem 0;
+}
+
+/* ── Pastilles : le code inline ne doit pas casser la ligne ────────────── */
+
+.chips li code { padding: 0.05em 0.25em; }
+
+/* ── Exergue en serif ──────────────────────────────────────────────────── */
+
+.pull {
+  font-family: var(--font-serif);
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--ink);
+}
+.pull.is-md { font-size: 1.05rem; }
+.pull.is-lg { font-size: 1.12rem; line-height: 1.35; }
+.pull > p { margin: 0; }
+.eyebrow + .pull { margin-top: 0.75rem; }
+
+/* ── Couverture ────────────────────────────────────────────────────────── */
+
+.cover-title {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.cover-title h2 { margin-top: 1.25rem; }

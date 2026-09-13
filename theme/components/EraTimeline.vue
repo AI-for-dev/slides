@@ -10,7 +10,7 @@ const eras = [
     year: '2023 – 24',
     title: 'Agent',
     lines: ['Interaction par le chat en langage naturel'],
-    sub: ['un fichier · prompt engineering', 'multi-fichiers · context engineering'],
+    detail: ['un fichier · prompt engineering', 'multi-fichiers · context engineering'],
     tone: 'b',
   },
   {
@@ -36,8 +36,8 @@ const eras = [
         <div class="era-card">
           <div class="era-title">{{ e.title }}</div>
           <p v-for="l in e.lines" :key="l" class="era-text">{{ l }}</p>
-          <div v-if="e.sub" class="era-sub">
-            <div v-for="(s, j) in e.sub" :key="s" class="era-sub-item">
+          <div v-if="e.detail" class="era-sub">
+            <div v-for="(s, j) in e.detail" :key="s" class="era-sub-item">
               <span v-if="j > 0" class="era-arrow">↓</span>{{ s }}
             </div>
           </div>

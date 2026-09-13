@@ -103,7 +103,7 @@
 
 /* ── Dimensions (4 filtres) ────────────────────────────────────────────── */
 
-.dim {
+.criterion {
   position: relative;
   overflow: hidden;
   display: flex;
@@ -114,57 +114,36 @@
   border-radius: var(--r-lg);
   background: var(--white);
 }
-.dim::before {
+.criterion::before {
   content: '';
   position: absolute;
   inset: 0 0 auto 0;
   height: 3px;
-  background: var(--dim-c);
+  background: var(--criterion-c);
 }
-.dim-1 { --dim-c: #d8461c; }
-.dim-2 { --dim-c: #b5651d; }
-.dim-3 { --dim-c: #0f7a6f; }
-.dim-4 { --dim-c: #1f6f8b; }
+.criterion-1 { --criterion-c: #d8461c; }
+.criterion-2 { --criterion-c: #b5651d; }
+.criterion-3 { --criterion-c: #0f7a6f; }
+.criterion-4 { --criterion-c: #1f6f8b; }
 
-.dim-k {
+.criterion-k {
   font-family: var(--font-mono);
   font-size: 0.66rem;
   font-weight: 600;
   letter-spacing: 0.12em;
-  color: var(--dim-c);
+  color: var(--criterion-c);
 }
-.dim-t {
+.criterion-t {
   font-size: 1.05rem;
   font-weight: 600;
   letter-spacing: -0.02em;
   margin: 0.35rem 0 0.5rem;
 }
-.dim-d {
+.criterion-d {
   font-size: 0.84rem;
   line-height: 1.45;
   color: var(--muted);
   margin: 0;
-}
-
-/* ── Parameter list ────────────────────────────────────────────────────── */
-
-.param-grid { display: flex; flex-direction: column; gap: 0.5rem; }
-.param-grid > div {
-  font-size: 0.79rem;
-  color: var(--muted);
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--line);
-}
-.param-grid > div:last-child { border-bottom: none; padding-bottom: 0; }
-.param-k {
-  display: inline-block;
-  min-width: 5.4rem;
-  font-family: var(--font-mono);
-  font-size: 0.66rem;
-  font-weight: 600;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  color: var(--teal-deep);
 }
 
 /* ── Roles (plan / exécute / vérifie) ──────────────────────────────────── */
@@ -182,7 +161,7 @@
 
 /* ── Section definition stack (partie 3) ───────────────────────────────── */
 
-.sect-def { display: flex; flex-direction: column; }
+.definition { display: flex; flex-direction: column; }
 .def-row {
   padding: 0.85rem 0;
   border-top: 1px solid rgba(253, 251, 247, 0.13);
@@ -207,7 +186,7 @@
 .def-row.is-hero .def-v { font-size: 1.12rem; color: var(--paper); }
 .def-row.is-hero .def-v strong { color: #ff8a5e; }
 
-.sect-src {
+.definition-src {
   margin-top: 1.1rem;
   font-family: var(--font-mono);
   font-size: 0.62rem;
@@ -217,13 +196,23 @@
 
 /* ── Surprise → extension mapping ──────────────────────────────────────── */
 
-.surprise-head {
+.surprises { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+
+.surprises-head {
   display: grid;
   grid-template-columns: 1fr 2rem 1.35fr;
   gap: 0.9rem;
   margin-bottom: 0.55rem;
 }
-.surprise-head > :nth-child(2) { grid-column: 3; }
+.surprises-head > :nth-child(2) { grid-column: 3; }
+
+.surprises-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
 
 .surprise {
   flex: 1;
@@ -263,7 +252,7 @@
 
 /* ── IDE options ───────────────────────────────────────────────────────── */
 
-.opt {
+.choice {
   display: flex;
   align-items: center;
   gap: 1.2rem;
@@ -272,11 +261,11 @@
   border-radius: var(--r-lg);
   background: var(--white);
 }
-.opt.is-hero {
+.choice.is-hero {
   background: var(--accent-soft);
   border-color: var(--accent-line);
 }
-.opt-k {
+.choice-k {
   flex: none;
   width: 5.2rem;
   padding-top: 0.12rem;
@@ -287,31 +276,7 @@
   text-transform: uppercase;
   color: var(--quiet);
 }
-.opt.is-hero .opt-k { color: var(--accent); }
-
-/* ── NÉON flaws ────────────────────────────────────────────────────────── */
-
-.flaw {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.6rem 0.95rem;
-  border: 1px solid var(--line);
-  border-radius: var(--r-md);
-  font-size: 0.87rem;
-  color: var(--ink-soft);
-}
-.flaw-d {
-  width: 7px; height: 7px; border-radius: 50%;
-  flex: none;
-  background: var(--accent);
-}
-.flaw:nth-child(2) .flaw-d { background: #b5651d; }
-.flaw:nth-child(3) .flaw-d { background: #0f7a6f; }
-.flaw:nth-child(4) .flaw-d { background: #1f6f8b; }
-.flaw:nth-child(5) .flaw-d { background: #b03a3a; }
-.flaw:nth-child(6) .flaw-d { background: #6b4a8f; }
+.choice.is-hero .choice-k { color: var(--accent); }
 
 /* ── Maintenance steps ─────────────────────────────────────────────────── */
 
@@ -357,28 +322,6 @@
   margin-top: 0.08rem;
 }
 
-/* ── "Le harnais doit alors" ───────────────────────────────────────────── */
-
-.must {
-  position: relative;
-  padding: 0.3rem 0 0.3rem 1.2rem;
-  font-size: 0.86rem;
-  color: var(--ink-soft);
-  border-bottom: 1px solid var(--line);
-}
-.must:last-child { border-bottom: none; }
-.must::before {
-  content: '';
-  position: absolute;
-  left: 0.1rem;
-  top: 0.78em;
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--teal);
-}
-.must.is-warn { color: var(--ink); font-weight: 500; }
-.must.is-warn::before { background: var(--accent); }
-
 /* ── Pipeline strip ────────────────────────────────────────────────────── */
 
 .pipeline {
@@ -405,9 +348,85 @@
   letter-spacing: 0.01em;
   flex: none;
 }
-.pipeline-flow i { color: #ff8a5e; font-style: normal; padding: 0 0.15em; }
+.pipeline-flow i { color: #ff8a5e; font-style: normal; padding: 0 0.55em; }
 .pipeline-note {
   font-size: 0.76rem;
   color: rgba(253, 251, 247, 0.6);
   margin-left: auto;
 }
+
+/* ── Listes markdown stylées ───────────────────────────────────────────── */
+
+/* Paires clé / valeur : le **gras** de tête est la clé. */
+.specs ul { display: flex; flex-direction: column; gap: 0.5rem; }
+.specs li {
+  margin: 0;
+  padding: 0 0 0.5rem;
+  font-size: 0.84rem;
+  color: var(--muted);
+  border-bottom: 1px solid var(--line);
+}
+.specs li:last-child { border-bottom: none; padding-bottom: 0; }
+.specs li::before { display: none; }
+.specs li > strong:first-child {
+  display: inline-block;
+  min-width: 5.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--teal-deep);
+}
+
+/* Pastilles : une liste markdown, une couleur par rang. */
+.chips ul { display: contents; }
+.chips {
+  display: grid;
+  gap: 0.75rem;
+  align-content: center;
+}
+.chips li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0.6rem 0.95rem 0.6rem 1.9rem;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  font-size: 0.87rem;
+  color: var(--ink-soft);
+}
+.chips li::before {
+  left: 0.95rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 7px;
+  height: 7px;
+}
+.chips li:nth-child(2)::before { background: #b5651d; }
+.chips li:nth-child(3)::before { background: #0f7a6f; }
+.chips li:nth-child(4)::before { background: #1f6f8b; }
+.chips li:nth-child(5)::before { background: #b03a3a; }
+.chips li:nth-child(6)::before { background: #6b4a8f; }
+
+/* Exigences : l'item en **gras** est celui qui alerte. */
+.musts ul { display: flex; flex-direction: column; }
+.musts li {
+  margin: 0;
+  padding: 0.32rem 0 0.32rem 1.2rem;
+  font-size: 0.86rem;
+  color: var(--ink-soft);
+  border-bottom: 1px solid var(--line);
+}
+.musts li:last-child { border-bottom: none; }
+.musts li::before {
+  left: 0.1rem;
+  top: 0.78em;
+  width: 6px;
+  height: 6px;
+  background: var(--teal);
+}
+.musts li:has(strong) { color: var(--ink); }
+.musts li:has(strong)::before { background: var(--accent); }
+.musts li strong { font-weight: 500; }

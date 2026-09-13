@@ -81,25 +81,6 @@
   margin-bottom: 1rem;
 }
 
-/* Title with a trailing right-aligned note on the same rule */
-.title-row {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1.5rem;
-  padding-bottom: 0.6rem;
-  margin-bottom: 1.05rem;
-  border-bottom: 1px solid var(--line);
-}
-.title-row h1 { flex: 0 1 auto; }
-.title-row .title-note {
-  flex: none;
-  font-size: 0.74rem;
-  color: var(--muted);
-  text-align: right;
-}
-.slidev-layout.dflt .slide-body > .title-row + * { margin-top: 0; }
-
 /* ── cover ─────────────────────────────────────────────────────────────── */
 
 .slidev-layout.cvr {
@@ -143,7 +124,7 @@
   letter-spacing: -0.01em;
 }
 
-.cvr-meta {
+.cover-meta {
   display: flex;
   align-items: center;
   gap: 0.7rem;
@@ -153,7 +134,7 @@
   text-transform: uppercase;
   color: var(--muted);
 }
-.cvr-meta .dot {
+.cover-meta .dot {
   width: 4px; height: 4px; border-radius: 50%;
   background: var(--line-2);
 }
@@ -228,29 +209,11 @@
   -webkit-text-stroke: 1.5px rgba(253,251,247,.32);
 }
 
-.sect-list {
+.agenda {
   display: flex;
   flex-direction: column;
   gap: 0;
 }
-.sect-list .item {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.85rem;
-  padding: 0.62rem 0;
-  border-top: 1px solid rgba(253,251,247,.13);
-  font-size: 0.92rem;
-  color: rgba(253,251,247,.82);
-}
-.sect-list .item:last-child { border-bottom: 1px solid rgba(253,251,247,.13); }
-.sect-list .item .k {
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  color: #ff8a5e;
-  padding-top: 0.28em;
-  flex: none;
-}
-
 /* Inline emphasis has to flip on the dark layouts ------------------------- */
 
 .slidev-layout.sect strong,

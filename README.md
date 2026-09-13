@@ -21,21 +21,111 @@ public/images/            les figures, logos et avatars
 theme/                    le thème maison
   styles/tokens.css       palette, typographie, géométrie
   styles/base.css         éléments de base (titres, listes, liens)
-  styles/components.css   vocabulaire visuel réutilisable (card, tag, figure…)
-  styles/blocks.css       compositions propres aux slides
+  styles/components.css   vocabulaire visuel (card, tag, figure, num…)
+  styles/blocks.css       compositions propres au deck
   styles/layouts.css      cover / section / quote / statement / default
+  styles/mdc.css          colle entre le markdown et les blocs
   layouts/*.vue           les cinq gabarits de slide
-  components/*.vue        les diagrammes (frise, échelle 0-5, carte du harnais)
-archive-original-jour1/   trace de la version PowerPoint/PDF d'origine
+  components/*.vue        les briques utilisées dans slides.md
+archive-original-jour1/   trace de la version d'origine
 ```
+
+## Écrire une slide
+
+Le contenu est du markdown. La mise en forme passe par des composants, avec la
+syntaxe MDC : `::Nom` … `::` pour un bloc, `:Nom[texte]` pour de l'inline, et
+`{prop=valeur .classe}` pour les options.
+
+```markdown
+---
+section: Partie 4 · Les outils      # alimente le pied de page
+---
+
+# Titre de la slide :Hint[note alignée à droite]
+
+::::Cols{cols=2 gap=6 fill}
+:::Card{eyebrow="Un sur-titre"}
+- une liste
+- **du gras**, des [liens](https://sli.dev), du `code`
+:::
+:::Card{variant=soft center}
+Un paragraphe.
+:::
+::::
+
+::Takeaway
+Ce qu'il faut retenir.
+::
+```
+
+### Mise en page
+
+| Composant | Rôle |
+| --- | --- |
+| `Cols` | grille ; `cols` (nombre ou template CSS), `gap`, `align`, `content`, `fill` |
+| `Cell` | cellule qui déborde sur plusieurs colonnes (`span`) ou prend toute la hauteur (`fill`) |
+| `Stack` | pile verticale ; `gap`, `fill`, `center` |
+| `Rule` | filet horizontal |
+
+### Contenu
+
+| Composant | Rôle |
+| --- | --- |
+| `Card` | carte ; `variant` (plain/soft/accent/teal), `eyebrow`, `tone`, `badge`, `title`, `size`, `center`, `fill` |
+| `Takeaway` | encadré « ce qu'il faut retenir » |
+| `Note` | ligne de commentaire discrète ; `tag`, `tone`, `tight` |
+| `Lead` | chapeau sous le titre |
+| `Detail` | sous-ligne petite et grise |
+| `Tag` | étiquette inline ; `tone`, `code` |
+| `Eyebrow` | sur-titre isolé ; `tone` |
+| `Pull` | exergue en serif ; `size` |
+| `Hint` | note à droite du titre ; `prefix`, `href` |
+| `Ord` | numéro romain devant un titre |
+| `Fig` | figure encadrée ; `src`, `caption`, `href`, `frame`, `contain` |
+| `Added` | ajout des auteurs dans une citation (les crochets viennent du CSS) |
+
+### Blocs du deck
+
+| Composant | Slide |
+| --- | --- |
+| `SectionHead`, `Agenda` | slides de section ; `Agenda` prend une liste markdown, `numbering=roman` pour I/II/III |
+| `Definition`, `Def` | les trois définitions de la partie 3 |
+| `Speaker` | « D'où parlons-nous ? » |
+| `Act` | programme de l'atelier |
+| `Criterion` | les quatre filtres « quels modèles » |
+| `Item` | ligne pastille + titre + `Detail` ; `variant` = goal / role / adv |
+| `Bullet` | ligne encadrée avec pastille ou étiquette |
+| `Surprises`, `Surprise` | ce qui surprend dans Pi et l'extension qui répond |
+| `Choice` | les options pour l'IDE |
+| `Step` | les six étapes du cycle de maintenance |
+| `Chips`, `Musts`, `Specs` | listes markdown stylées (pastilles, exigences, paires clé/valeur) |
+| `Quote` | corps d'une slide `layout: quote` |
+| `CoverTitle`, `LogoBar`, `Author`, `CoverMeta` | couverture et clôture |
+| `EraTimeline`, `AutonomyLadder`, `HarnessMap` | les trois diagrammes |
+
+Chaque composant émet la classe CSS qui porte son nom (`Card` → `.card`,
+`Criterion` → `.criterion`…) : pour changer une apparence, chercher la classe
+dans `theme/styles/`.
+
+## Pièges MDC à connaître
+
+- **Le contenu d'un composant inline est du texte brut.** `:Detail[du **gras**]`
+  affiche les astérisques. Dès qu'il y a du markdown, passer en bloc :
+  `::Detail` … `::`.
+- **Pas de `##` dans un bloc `::`** : le parseur le prend pour des paramètres.
+  Les sous-titres passent par une prop (`SectionHead{sub="…"}`).
+- **Imbrication** : le bloc parent prend un deux-points de plus que ses enfants
+  (`::::Cols` > `:::Card` > `::Detail`).
+- **Noms de composants** : MDC passe le nom en minuscules, donc tout nom qui
+  existe en HTML ou en SVG (`col`, `sub`, `param`, `option`, `meta`, `filter`…)
+  serait rendu comme balise native. D'où `Cell`, `Detail`, `Spec`, `Choice`,
+  `CoverMeta`, `Criterion`.
+- **Le titre de slide est une rangée flex** : ne pas y mettre d'autre balise
+  inline que `:Ord[]` et `:Hint[]`.
 
 ## Conventions
 
 - Schéma de couleurs **clair uniquement** : toutes les figures du deck sont des
   captures sur fond clair, un thème sombre casserait le système visuel.
 - Un seul accent (`--accent`, orange braise) plus un appui (`--teal`).
-- Les titres de slide sont des `#` markdown ; pour ajouter une note à droite du
-  titre, utiliser `.title-row`.
-- `section:` dans le frontmatter d'une slide alimente le pied de page.
-- Espaces insécables devant `: ; ! ?` et dans les guillemets (typographie
-  française).
+- Espaces insécables devant `: ; ! ?` et dans les guillemets.

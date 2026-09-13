@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // Levels 0 → 5 of "how much of the code does the model write".
-// Intensity of the row grows with the level: the visual reads as a ramp.
+// Intensity of the bullet grows with the level: the visual reads as a ramp.
 const levels = [
   { n: '0', title: 'Suggestion « améliorée »',        desc: 'Ou copier-coller d’extraits de code depuis ChatGPT.' },
   { n: '1', title: 'Le stagiaire en programmation',   desc: 'Génération de code sans importance, soumise à une révision humaine complète.' },
