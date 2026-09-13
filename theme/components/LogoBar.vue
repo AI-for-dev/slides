@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { asset } from '../lib/asset'
+
 /** Les trois logos institutionnels, toujours sur leur plaque blanche. */
 withDefaults(defineProps<{ size?: number | string; dark?: boolean }>(), { size: 46 })
 
@@ -14,7 +16,7 @@ const LOGOS = [
     <img
       v-for="l in LOGOS"
       :key="l.file"
-      :src="`/images/${l.file}.png`"
+      :src="asset(`/images/${l.file}.png`)"
       :alt="l.alt"
       :style="{ height: Number(size) * l.scale + 'px' }"
     />

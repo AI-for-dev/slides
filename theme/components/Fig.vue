@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { asset } from '../lib/asset'
+
 withDefaults(defineProps<{
   src: string
   caption?: string
@@ -13,7 +15,7 @@ withDefaults(defineProps<{
 <template>
   <figure class="fig" :class="['fig-' + frame, { 'is-contain': contain }]">
     <div class="fig-media">
-      <img :src="src" alt="" />
+      <img :src="asset(src)" alt="" />
     </div>
     <figcaption v-if="caption" class="fig-cap">
       <span class="fig-cap-mark" />

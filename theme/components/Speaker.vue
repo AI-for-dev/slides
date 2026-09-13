@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { asset } from '../lib/asset'
+
 withDefaults(defineProps<{
   name: string
   org: string
@@ -11,7 +13,7 @@ withDefaults(defineProps<{
 <template>
   <div class="speaker" :class="{ 'is-max': tone === 'red' }">
     <div class="speaker-head">
-      <img class="avatar" :src="`/images/${avatar}.png`" :alt="name" />
+      <img class="avatar" :src="asset(`/images/${avatar}.png`)" :alt="name" />
       <div>
         <div class="speaker-name">{{ name }}</div>
         <div class="speaker-org">{{ org }}</div>
