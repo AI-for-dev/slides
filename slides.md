@@ -510,7 +510,7 @@ section: Partie 4 · Les outils
 
 # Pi peut surprendre à la première utilisation :Hint[pi.dev/packages]{prefix="Extensions sur" href="https://pi.dev/packages"}
 
-:::::Surprises{left="Surprise !" right="Extension possible pour y remédier"}
+:::Surprises{left="Surprise !" right="Extension possible pour y remédier"}
 ::Surprise{q="Mode Yolo"}
 :Tag[pi-permission-modes]{tone=teal code}
 ::
@@ -526,7 +526,7 @@ section: Partie 4 · Les outils
 ::Surprise{q="Pas de MCP directement"}
 :Tag[pi-mcp-adapter]{tone=teal code}
 ::
-:::::
+:::
 
 ::Note{tone=quiet .mt-4}
 Cette formation souhaite éviter le catalogue d’extensions <span class="mono">:-)</span>

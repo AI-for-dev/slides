@@ -65,8 +65,8 @@ function arrow(m: Msg) {
     </g>
 
     <!-- construction du message, côté Pi -->
-    <text :x="(X.pi + X.llm) / 2" y="100" text-anchor="middle" class="ps-label">Construction du message</text>
-    <text :x="(X.pi + X.llm) / 2" y="114" text-anchor="middle" class="ps-label is-muted">(system prompt + historique + tools + …)</text>
+    <text :x="(X.pi + X.llm) / 2" y="94" text-anchor="middle" class="ps-label">Construction du message</text>
+    <text :x="(X.pi + X.llm) / 2" y="108" text-anchor="middle" class="ps-label is-muted">(system prompt + historique + tools + …)</text>
 
     <!-- activations -->
     <rect v-for="(a, i) in activations" :key="'a' + i" :x="a.x - 6" :y="a.y1" width="12" :height="a.y2 - a.y1"

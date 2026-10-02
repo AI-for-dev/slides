@@ -13,7 +13,7 @@ section: Partie 1 · Premier pas avec Pi
 
 # Fonctionnement avec une requête impliquant une seule lecture de fichier
 
-::::Cols{cols="10rem 1fr" gap=6 fill align=center}
+::::Cols{cols="12.5rem 1fr" gap=6 fill align=center}
 :::Stack{gap=3}
 ::Bullet{k="1"}
 Question → LLM
@@ -36,12 +36,13 @@ section: Partie 1 · Premier pas avec Pi
 
 # L’organisation du code source de Pi
 
+::::::Stack{fill center gap=6}
 ::Lead
 Sur le github du projet : [https://github.com/earendil-works/pi/](https://github.com/earendil-works/pi/)
 indique qu’il y a trois briques principales :
 ::
 
-::::Cols{cols=3 gap=6 fill align=center .mt-4}
+::::Cols{cols=3 gap=6}
 :::Card{center}
 :Eyebrow[Couche applicative de Pi]
 
@@ -64,6 +65,7 @@ Boucle agentique<br />état · outils · sessions · événements
 API multi-fournisseurs : commerciale et locale
 :::
 ::::
+::::::
 
 ---
 layout: section
@@ -141,7 +143,7 @@ section: Partie 1 · Premier pas avec Pi
 
 # Méthode 2 : en utilisant dans pi, la commande /login
 
-::::Cols{cols=2 gap=8 fill align=center}
+::::Cols{cols="4fr 3fr" gap=8 fill align=center}
 :::Stack{gap=5}
 ::Card{variant=soft}
 - lancer votre terminal
@@ -189,19 +191,19 @@ section: Partie 1 · Premier pas avec Pi
 
 # À savoir :Hint[docs/providers.md]{prefix="source :" href="https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/providers.md"}
 
-::::Cols{cols="3fr 2fr" gap=8 fill}
+::::Cols{cols="3fr 2fr" gap=8 fill align=center}
 :::Stack{gap=4}
 Si vous ouvrez votre `auth.json`, vous pouvez voir vos clés et tokens d’accès en clair.
 
 Les permissions du fichier sont `0600` : lecture + écriture pour le propriétaire, aucun droit pour le groupe ni pour les autres.
 
-::Card{variant=soft eyebrow="Conseils"}
+::Card{variant=soft eyebrow="Conseils" size=sm}
 - chiffrement de votre disque dur (ex. VeraCrypt)
 - si vous avez des sauvegardes synchronisées cloud de votre disque et que vous avez un peu peur d’une maladresse, possible d’avoir des `!command`
 ::
 :::
-:::Stack{gap=4}
-<Fig src="/images/jour2/pi-dossier-agent.jpg" />
+:::Stack{gap=3 .code-sm}
+<Fig src="/images/jour2/pi-dossier-agent.jpg" h="190px" />
 
 ```json
 {
@@ -259,14 +261,14 @@ section: Partie 1 · Premier pas avec Pi
 
 ::::Cols{cols=2 gap=7 fill align=center}
 :::Card{center}
-::Specs
+::Specs{w="8.5rem" raw}
 - **/scoped-models** permet de choisir dans une sous-sélection
 - **Ctrl+P** permet de faire défiler les modèles disponibles
 - **Ctrl+S** enregistre le modèle et le niveau de réflexion par défaut pour vos futures nouvelles sessions
 ::
 :::
 :::Card{center}
-::Specs
+::Specs{w="5.5rem" raw}
 - **/thinking** permet de sélectionner le niveau de réflexion, mais `Shift + Tab` est vraiment pratique
 - **Ctrl+T** permet de voir ou ne pas voir les blocs de réflexion
 ::
@@ -285,7 +287,7 @@ Plus globalement, pour les raccourcis disponibles : `/hotkeys`
 
 :Eyebrow[Quels sont les premiers raccourcis au quotidien pour commencer ?]
 
-::::Cols{cols=2 gap=7 fill .mt-4}
+::::Cols{cols=2 gap=7 fill align=start .mt-4}
 :::Stack{gap=3}
 ::Card{variant=soft eyebrow="Pour aller à la ligne" size=sm}
 En général : `Shift+Enter`. Pour WSL : `Alt+Enter`.
@@ -295,7 +297,7 @@ Ce n’est pas « copier » mais « effacer dans l’éditeur ».
 ::
 :::
 :::Card{size=sm}
-::Specs
+::Specs{w="8.5rem"}
 - **Copier** Linux / Windows Terminal : généralement `Ctrl+Shift+C` · macOS : `Cmd+C` · `Ctrl+X` ou `/copy` pour copier
 - **Coller du texte** Linux / Windows Terminal : généralement `Ctrl+Shift+V` · macOS : `Cmd+V`
 - **Coller des images** Linux natif / macOS : `Ctrl+V` · Windows et WSL : `Alt+V`
@@ -324,9 +326,9 @@ Sur Mac, c’est Option+Entrée.
 ::
 ::::
 
-::::Cols{cols=2 gap=7 fill align=center .mt-5}
-:::Card
-::Specs
+::::Cols{cols=2 gap=7 fill align=center .mt-4}
+:::Card{size=sm}
+::Specs{w="4rem" raw}
 - **@** dans l’éditeur pour chercher et insérer un fichier (`Tab` en autocomplete)
 - **!** pour lancer une commande shell directement
 - **Échap** interrompt l’agent et restaure les messages en file dans l’éditeur
@@ -381,6 +383,7 @@ section: Partie 1 · Premier pas avec Pi
 
 # Comprendre les sessions (suite)
 
+::::::Stack{fill center gap=6}
 ::::Stack{gap=2.5}
 :::Bullet{k="12" accent}
 Sortez de votre session (`Ctrl+D`). `pi -c` permet de reprendre votre dernière session
@@ -389,17 +392,20 @@ Sortez de votre session (`Ctrl+D`). `pi -c` permet de reprendre votre dernière 
 Quelques commandes utiles que vous pouvez tester :
 ::Detail
 `/fork` → repart d’un ancien message mais dans **une nouvelle session**.
+::
+::Detail
 `/clone` → duplique la branche active actuelle dans **une nouvelle session**.
 ::
 :::
 ::::
 
-::Card{variant=accent eyebrow="Attention" .mt-6}
+::Card{variant=accent eyebrow="Attention"}
 Il n’y a pas par défaut de suppression de vos sessions.
 Quand vous effacez un projet, comme les sessions sont dans `.pi/agents`, elles ne sont pas effacées !
 Vous pouvez le faire à la main.
 Une petite extension qui peut aider à faire des nettoyages ciblés : `pi-session-cleanup`
 ::
+::::::
 
 ---
 section: Partie 1 · Premier pas avec Pi
@@ -407,6 +413,7 @@ section: Partie 1 · Premier pas avec Pi
 
 # Comprendre les sessions (suite)
 
+::::Stack{fill center gap=6}
 ::Lead
 Pour voir les statistiques de votre session en cours : `/session`
 ::
@@ -416,9 +423,10 @@ Indique le lieu où est stockée votre session. C’est en format jsonl : pas t
 Possibilité d’un `/export` pour récupérer en format html.
 ::
 
-:::Bullet{k="14" accent .mt-6}
+:::Bullet{k="14" accent}
 Faites un export de votre session en html, puis l’ouvrir et commencer à le lire
 :::
+::::
 
 ---
 layout: section
@@ -440,7 +448,7 @@ Vous pouvez lire le system prompt de Pi dans votre export de session.
 
 Il est possible de le personnaliser pour un projet :
 
-::Specs
+::Specs{w="8.5rem" raw}
 - **SYSTEM.md** `…/neon/.pi/SYSTEM.md` **remplace** le system prompt par défaut de Pi pour ce projet
 - **APPEND_SYSTEM.md** `…/neon/.pi/APPEND_SYSTEM.md` **ajoute** ton contenu au system prompt existant de Pi
 ::
@@ -464,25 +472,27 @@ section: Partie 1 · Premier pas avec Pi
 - ce fichier doit être placé à la racine du projet
 - son contenu va être envoyé à chaque fois après le system prompt
 
-::::Cols{cols="2fr 3fr" gap=7 fill .mt-3}
-:::Card{variant=soft eyebrow="Historiquement, on a conseillé comme bonne pratique de décrire dans AGENTS.md" size=sm}
-::Chips{cols=2}
-- Le contexte du projet
-- L’environnement
-- La charte graphique
-- La documentation interne
-- Les tests d’UX
-- L’audit par sous-agents
-- Les conventions de nommage
-- Les règles de sécurité
-- La politique Git
-- Les problèmes récurrents
+::::Cols{cols="1fr 1fr" gap=7 fill align=center .mt-2}
+:::Card{variant=soft size=sm}
+Historiquement, on a conseillé comme bonne pratique de décrire dans AGENTS.md :
+
+::Stack{.list-2 .mt-3}
+- le contexte du projet
+- l’environnement
+- la charte graphique
+- la documentation interne
+- les tests d’UX
+- l’audit par sous-agents
+- les conventions de nommage
+- les règles de sécurité
+- la politique Git
+- les problèmes récurrents
 ::
 :::
 :::Stack{gap=2}
 :Eyebrow[Exemple]{tone=quiet}
 
-<Fig src="/images/jour2/agents-md-exemple.jpg" caption="david-informaticien.com : claude-md et agents-md, les meilleures pratiques" href="https://david-informaticien.com/blog/conseils-pratiques/4076-claude-md-et-agents-md-les-meilleures-pratiques-pour-un-meilleur-code-avec-un-agent-ia" />
+<Fig src="/images/jour2/agents-md-exemple.jpg" h="220px" caption="david-informaticien.com : claude-md et agents-md, les meilleures pratiques" href="https://david-informaticien.com/blog/conseils-pratiques/4076-claude-md-et-agents-md-les-meilleures-pratiques-pour-un-meilleur-code-avec-un-agent-ia" />
 :::
 ::::
 
@@ -500,7 +510,7 @@ section: Partie 1 · Premier pas avec Pi
 :::Stack{gap=2}
 :Eyebrow[Exemple]{tone=quiet}
 
-<Fig src="/images/jour2/agents-md-minimal.jpg" frame="screen" contain />
+<Fig src="/images/jour2/agents-md-minimal.jpg" frame="screen" h="270px" />
 :::
 ::Note
 Les `** **` peuvent servir à indiquer ce qui est le plus important.
@@ -513,7 +523,7 @@ section: Partie 1 · Premier pas avec Pi
 
 # :Ord[15)] Créer un AGENTS.md dans neon
 
-::::Cols{cols=2 gap=8 fill}
+::::Cols{cols=2 gap=8 fill align=center}
 :::Stack{gap=4}
 Il est possible de faire référence à un ou à d’autres fichiers. Exemple :
 
@@ -528,7 +538,7 @@ Conventions complètes dans `CONTRIBUTING.md`
 :::
 :::Card{variant=accent eyebrow="Attention" center}
 Ce n’est pas parce qu’il est écrit dans `CONTRIBUTING.md`
-« ``**Never** read secrets (`.env`) nor forward them anywhere`` »
+« \*\*Never\*\* read secrets (`.env`) nor forward them anywhere »
 que votre agent ne va pas le faire.
 
 :Rule
@@ -558,16 +568,10 @@ Sur des projets plus gros, indiquer le fichier adéquat en fonction de la tâche
 :::
 ::::
 
-:Eyebrow[Deux stratégies pour faire évoluer son AGENTS.md dans le temps (nouveau modèle)]{.mt-6}
-
-::::Cols{cols=2 gap=6 .mt-3}
-::Bullet{k="·"}
-Effacer tout son contenu et le reconstruire au fur et à mesure que des problèmes réapparaissent ou pas…
+::Card{variant=soft eyebrow="Deux stratégies pour faire évoluer son AGENTS.md dans le temps (nouveau modèle)" size=sm .mt-5}
+- Effacer tout son contenu et le reconstruire au fur et à mesure que des problèmes réapparaissent ou pas…
+- Évaluer l’impact en ne retirant que certaines parties qu’on suppose ne plus être nécessaires (cf. l’outil trysquare [https://github.com/AI-for-dev/trysquare](https://github.com/AI-for-dev/trysquare), qui sera présenté ensuite)
 ::
-::Bullet{k="·"}
-Évaluer l’impact en ne retirant que certaines parties qu’on suppose ne plus être nécessaires (cf. l’outil trysquare [https://github.com/AI-for-dev/trysquare](https://github.com/AI-for-dev/trysquare), qui sera présenté ensuite)
-::
-::::
 
 ---
 layout: section
@@ -633,7 +637,7 @@ Si dans votre pratique, vous voyez que vous tapez plusieurs fois un prompt simil
 ::
 
 :::Stack{gap=2 .mt-2}
-:Eyebrow[Exemple ~/.pi/agent/prompts/continue.md]{tone=quiet}
+:Eyebrow[Exemple ~/.pi/agent/prompts/continue.md]{tone=quiet code}
 
 ```markdown
 ---
@@ -701,13 +705,13 @@ section: Partie 1 · Premier pas avec Pi
 # Extensions
 
 ::Lead
-Possibilité bien entendu de construire sa propre extension ou de la faire construire par Pi :-)
+Possibilité bien entendu de construire sa propre extension ou de la faire construire par Pi <span class="mono">:-)</span>
 ::
 
 :::Stack{gap=2 .mt-2}
 Page de référence : [https://pi.dev/docs/latest/extensions](https://pi.dev/docs/latest/extensions)
 
-:Eyebrow[~/.pi/agent/extensions/hello.ts]{tone=quiet .mt-3}
+:Eyebrow[~/.pi/agent/extensions/hello.ts]{tone=quiet code .mt-3}
 
 ```ts
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
