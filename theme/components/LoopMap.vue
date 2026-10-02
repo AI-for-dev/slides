@@ -8,7 +8,7 @@ interface Node { id: string; kind: Kind; w: number; title: string; sub?: string 
 
 const Y = 62
 const H = 58
-const GAP = 18
+const GAP = 17
 
 const spec: Node[] = [
   { id: 'ticket', kind: 'end', w: 72, title: 'ticket #2' },
@@ -26,7 +26,7 @@ const spec: Node[] = [
 // large pour porter son étiquette.
 let x = 4
 const nodes = spec.map((n, i) => {
-  if (i === spec.length - 1) x += 36
+  if (i === spec.length - 1) x += 46
   const node = { ...n, x, cx: x + n.w / 2 }
   x += n.w + GAP
   return node
@@ -65,7 +65,7 @@ function path(r: typeof returns[number]) {
     <g stroke="var(--line-2)" stroke-width="1.4" fill="none">
       <line v-for="(f, i) in forward" :key="'f' + i" :x1="f.x1" :y1="Y + H / 2" :x2="f.x2" :y2="Y + H / 2" marker-end="url(#lm-head)" />
     </g>
-    <text :x="by.done.x - 4" :y="Y + H / 2 - 9" text-anchor="end" class="lm-edge">dernier pas</text>
+    <text :x="(by.verdict.x + by.verdict.w + by.done.x) / 2" :y="Y + H / 2 - 8" text-anchor="middle" class="lm-edge">dernier pas</text>
 
     <!-- retours -->
     <g v-for="(r, i) in returns" :key="'r' + i">
@@ -113,7 +113,7 @@ function path(r: typeof returns[number]) {
 .loop-map .lm-title.is-human { fill: var(--accent-deep); font-weight: 500; font-size: 13px; }
 .loop-map .lm-title.is-end { fill: var(--ink-soft); font-weight: 500; font-size: 13px; }
 .loop-map .lm-sub {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 10.5px;
   fill: var(--muted);
 }
@@ -125,7 +125,7 @@ function path(r: typeof returns[number]) {
   fill: var(--teal-deep);
 }
 .loop-map .lm-edge {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 10.5px;
   fill: var(--muted);
 }

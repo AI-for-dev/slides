@@ -144,7 +144,7 @@ section: 2.1 · Le contexte
 
 ::::Cols{cols=2 gap=8 fill align=center}
 :::Card{eyebrow="Le procédé"}
-::Specs
+::Specs{w="7rem" raw}
 - **delivered** au moins un fichier modifié
 - **in_scope** seuls `neon.js` et `neon.test.js` touchés
 - **suite_lancee** `npm test` lancé par l’agent, lu dans sa session
@@ -152,7 +152,7 @@ section: 2.1 · Le contexte
 ::
 :::
 :::Card{eyebrow="La correction, par la sonde" tone=teal}
-::Specs
+::Specs{w="6rem" raw}
 - **briques** le critère : sur chaque face, l’axe touché s’inverse et l’autre ne bouge pas
 - **angles** dans le coin, les deux composantes s’inversent
 - **sortie** après le rebond, la balle est hors de la brique
@@ -168,8 +168,9 @@ section: 2.1 · Le contexte
 
 # Les curseurs, à la main
 
-::::Cols{cols=2 gap=7 fill}
-:::Card{badge="1" title="Le modèle"}
+:::::Stack{fill center gap=5}
+::::Cols{cols=2 gap=7}
+:::Card{badge="1" title="Le modèle" .code-sm}
 Même demande sur deux modèles de tailles différentes, dans deux clones séparés. La « demande négligée », celle qu’on écrit le premier jour.
 
 ```bash
@@ -193,6 +194,7 @@ Refaites la comparaison entre deux niveaux réellement distincts, `off` et `high
 ::Takeaway{.mt-5}
 Un réglage exposé par le harnais n’est pas forcément transmis au modèle. Cherchez où atterrit un flag avant de lui faire confiance.
 ::
+:::::
 
 ---
 section: 2.1 · Le contexte
@@ -232,7 +234,8 @@ section: 2.1 · Le contexte
 
 # Prompt système et compaction
 
-::::Cols{cols=2 gap=7 fill}
+:::::Stack{fill center gap=5}
+::::Cols{cols=2 gap=7}
 :::Card{badge="A" title="Remplacer le prompt système" center}
 `.pi/SYSTEM.md` à la racine du projet, ou `~/.pi/agent/SYSTEM.md`, remplace entièrement celui de Pi.
 `--system-prompt` laisse en plus les fichiers de contexte et les skills s’ajouter.
@@ -255,6 +258,7 @@ contextTokens > contextWindow - reserveTokens
 ::Takeaway{.mt-5}
 La fenêtre que connaît un harnais est une ligne de configuration, pas une propriété du modèle.
 ::
+:::::
 
 ---
 section: 2.1 · Le contexte
@@ -267,6 +271,7 @@ section: 2.1 · Le contexte
 Un outil Python écrit pour la formation : il lance les configurations d’un scénario, note chaque exécution, agrège et synthétise.
 Il ne sait rien de NÉON ni de l’issue #1.
 
+::Cell{.code-sm}
 ```text
 trysquare-campaign/
   trysquare.toml   où est NÉON, où vivent les clones
@@ -276,10 +281,11 @@ trysquare-campaign/
   validateurs/     ce qui note
   results/         une matrice par répertoire
 ```
+::
 :::
 :::Stack{gap=3}
 ::::Card{variant=soft eyebrow="Ce que garde chaque exécution" size=sm}
-::Specs
+::Specs{w="7.5rem" raw}
 - **session** l’export JSONL de Pi, rejouable en HTML
 - **validation** l’état de chaque test de validation
 - **configuration** modèle, harnais, tests
@@ -337,17 +343,19 @@ section: 2.1 · Le contexte
 | critère atteint | :Mark{v=yes} | :Mark{v=yes} | :Mark{v=yes} | :Mark{v=no} | :Mark{v=yes} | :Mark{v=no} |
 ::
 
-::::Cols{cols=3 gap=5 fill .mt-5}
+:::::Stack{fill center gap=5}
+::::Cols{cols=3 gap=5 .mt-5}
 ::Card{variant=soft eyebrow="Un point" size=sm}
 Un point de pourcentage de réussite. 18/20 contre 11/20 : **+35 points**.
 ::
 ::Card{variant=soft eyebrow="* établi · o non concluant" size=sm}
-Une seule question : l’intervalle de l’écart contient-il zéro ? Les +35 points viennent avec [+10, +60] : positif, sans taille précise.
+Une seule question : l’intervalle de l’écart contient-il zéro ? Les +35 points viennent avec \[+10, +60\] : positif, sans taille précise.
 ::
 ::Card{variant=soft eyebrow="Combien de répétitions" size=sm}
 Trois suffisent à **voir** la dispersion. Départager deux leviers en demande bien plus : nos tables sont à vingt.
 ::
 ::::
+:::::
 
 ---
 section: 2.1 · Le contexte
@@ -405,7 +413,7 @@ section: 2.1 · Le contexte
 ::
 
 ::Note{.mt-4}
-`delivered` et `in_scope` sont à 18/20 ou plus partout. `+well_crafted` et `+thinking` ont perdu des exécutions sur des `Request timed out` d’ILaaS.
+`delivered` et `in_scope` sont à 18/20 ou plus partout. `+well_crafted` et `+thinking` ont perdu des exécutions sur des « Request timed out » d’ILaaS.
 ::
 
 ---
@@ -456,10 +464,10 @@ section: 2.1 · Le contexte
 ::Matrix{size=md first="10rem"}
 | colonne | sans la sonde | avec la sonde | écart |
 | --- | --- | --- | --- |
-| `sortie` | :Score{v=9} | :Score{v=18 hi} | +43 pts `*` [+17, +69] |
-| `voisines` | :Score{v=9} | :Score{v=18 hi} | +43 pts `*` [+17, +69] |
-| `briques` | :Score{v=11} | :Score{v=18 hi} | +32 pts `*` [+6, +58] |
-| `angles` | :Score{v=12} | :Score{v=18 hi} | +27 pts `*` [+1, +53] |
+| `sortie` | :Score{v=9} | :Score{v=18 hi} | +43 pts `*` \[+17, +69\] |
+| `voisines` | :Score{v=9} | :Score{v=18 hi} | +43 pts `*` \[+17, +69\] |
+| `briques` | :Score{v=11} | :Score{v=18 hi} | +32 pts `*` \[+6, +58\] |
+| `angles` | :Score{v=12} | :Score{v=18 hi} | +27 pts `*` \[+1, +53\] |
 | `tests_ajoutes` | :Score{v=17} | :Score{v=17} | -4 pts `o` |
 | `sonde_intacte` | sans objet | :Score{v=20} | |
 ::
@@ -480,7 +488,8 @@ section: 2.1 · Le contexte
 
 # Trois vérifications avant de citer une table
 
-::::Cols{cols=3 gap=5 fill}
+:::::Stack{fill center gap=5}
+::::Cols{cols=3 gap=5}
 :::Card{badge="1" title="Le compte de reprises"}
 Un tour relancé parce que le fournisseur a échoué rejoue tout le contexte et **re-pilote** l’agent.
 
@@ -506,6 +515,7 @@ Modèle et fournisseur changent ensemble : même sens, sans pouvoir attribuer l
 ::
 :::
 ::::
+:::::
 
 ---
 section: 2.1 · Le contexte
@@ -513,9 +523,9 @@ section: 2.1 · Le contexte
 
 # Trois conclusions tentantes, qui ne tiennent pas
 
-:::::Surprises{left="Ce qu’on aimerait dire" right="Ce que dit l’intervalle"}
+:::Surprises{left="Ce qu’on aimerait dire" right="Ce que dit l’intervalle"}
 ::Surprise{q="« Le fichier de règles casse la correction »"}
-`+agents` : 9/20 contre 11/20, soit -10 points. L’intervalle contient zéro : rien à en dire.
+« +agents » : 9/20 contre 11/20, soit -10 points. L’intervalle contient zéro : rien à en dire.
 ::
 ::Surprise{q="« Retirer le prompt système améliore le rebond »"}
 14/20 contre 11/20, non concluant. Avec trois exécutions bien tirées, 3/3 contre 1/3 : on y aurait cru.
@@ -523,7 +533,7 @@ section: 2.1 · Le contexte
 ::Surprise{q="« Le prompt cadré corrige mieux le bug »"}
 +17 points sur le critère, non concluant. Son effet réel est ailleurs : tests ajoutés et coin.
 ::
-:::::
+:::
 
 ::Takeaway{.mt-4}
 Un effet qui ne dépasse pas la dispersion de sa propre configuration n’est pas un effet. Et un effet établi ne l’est que sur cette tâche, ce ticket, ce modèle.

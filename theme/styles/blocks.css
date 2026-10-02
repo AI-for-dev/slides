@@ -444,7 +444,7 @@
 .matrix.is-sm td { font-size: 0.8rem; }
 .matrix.is-xs td { font-size: 0.72rem; padding-top: 0.28rem; padding-bottom: 0.28rem; }
 .matrix.is-xs th { font-size: 0.6rem; }
-.matrix td code { font-size: 0.82em; white-space: nowrap; }
+.slidev-layout .matrix td code { font-size: 0.82em; white-space: nowrap; }
 .matrix td strong { color: var(--accent-deep); }
 
 /* ── Score « 18/20 » avec jauge ────────────────────────────────────────── */

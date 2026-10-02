@@ -152,5 +152,5 @@ const motifs: Motif[] = [
   text-transform: uppercase;
   color: var(--quiet);
 }
-.motif-flow code { width: fit-content; font-size: 0.7rem; }
+.motif .motif-flow code { width: fit-content; font-size: 0.66rem; }
 </style>

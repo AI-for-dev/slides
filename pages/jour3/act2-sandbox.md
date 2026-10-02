@@ -65,7 +65,9 @@ L’agent qui l’ouvre traite l’instruction comme si elle venait de vous.
 :::
 :::Item{variant=goal n=2 ghost}
 Une extension de l’annuaire communautaire
-:Detail[Elle s’exécute avec l’intégralité de vos droits.]
+::Detail
+Elle s’exécute avec l’intégralité de vos droits.
+::
 :::
 ::Note{tone=muted}
 Dans les deux cas la faille est dans le harnais : une ligne dans `AGENTS.md` ne vous protège pas.
@@ -90,7 +92,8 @@ section: 2.0 · Le bac à sable
 
 # Trois niveaux d’isolation
 
-::::Cols{cols=3 gap=5 fill}
+:::::Stack{fill center gap=5}
+::::Cols{cols=3 gap=5}
 ::Criterion{n=1 title="Clone jetable"}
 NÉON cloné à un tag dans un répertoire temporaire, à chaque exécution. Ne coûte presque rien, mais le processus garde votre identité, votre `home` et votre réseau : seul le dépôt est protégé, et encore, si l’agent a `gh` il peut pousser.
 ::
@@ -101,6 +104,7 @@ Pi dans une image Docker où seul le dépôt est monté : votre `home` est hors
 Docker Sandboxes : un noyau par sandbox, un proxy sur l’hôte qui filtre le trafic sortant et injecte les clés. « Credential values never enter the VM ». Prix : une image de 700 Mo, un démon, une liste à entretenir.
 ::
 ::::
+:::::
 
 ---
 section: 2.0 · Le bac à sable
@@ -108,6 +112,7 @@ section: 2.0 · Le bac à sable
 
 # Ce que chaque niveau protège
 
+:::Stack{fill center gap=6}
 ::Matrix{size=md first="15rem"}
 | ce qui est protégé | clone jetable | conteneur | Docker Sandboxes |
 | --- | --- | --- | --- |
@@ -117,9 +122,10 @@ section: 2.0 · Le bac à sable
 | vos clés d’API | :Mark{v=no} | :Mark[elles entrent dans l’image]{v=no} | :Mark[seul le proxy de l’hôte les voit]{v=yes} |
 ::
 
-::Takeaway{.mt-6}
+::Takeaway
 Ces niveaux isolent Pi de l’hôte. À l’intérieur, rien n’empêche encore un `rm -rf` sur le dépôt ou la lecture d’un `.env`.
 ::
+:::
 
 ---
 section: 2.0 · Le bac à sable
@@ -132,7 +138,7 @@ section: 2.0 · Le bac à sable
 L’extension s’accroche à l’événement `tool_call` : chaque outil, commande bash, appel MCP ou skill est comparé
 à des règles `allow` / `deny` / `ask` **avant** de s’exécuter.
 
-::Specs
+::Specs{w="4.5rem"}
 - **Global** `~/.pi/agent/extensions/…/config.json`
 - **Projet** `.pi/extensions/…/config.json`, si le projet est approuvé
 - **Agent** l’en-tête YAML du fichier d’agent, qui l’emporte
@@ -143,7 +149,7 @@ Elle vit dans le même processus Node que Pi : elle resserre ce que Pi fait, el
 ::
 :::
 
-:::Stack{gap=2}
+:::Stack{gap=2 .code-sm}
 ```bash
 pi install npm:@gotgenes/pi-permission-system
 ```
@@ -152,8 +158,12 @@ pi install npm:@gotgenes/pi-permission-system
 {
   "permission": {
     "*": "allow",
-    "path": { "*": "allow", "*.env": "deny", "*.env.*": "deny" },
-    "bash": { "*": "ask", "rm -rf *": "deny", "sudo *": "ask" },
+    "path": {
+      "*": "allow", "*.env": "deny", "*.env.*": "deny"
+    },
+    "bash": {
+      "*": "ask", "rm -rf *": "deny", "sudo *": "ask"
+    },
     "external_directory": "ask"
   }
 }
@@ -171,7 +181,8 @@ section: 2.0 · Le bac à sable
 
 # Exercice : une consigne contre une garde
 
-::::Cols{cols=3 gap=5 fill}
+:::::Stack{fill center gap=5}
+::::Cols{cols=3 gap=5}
 :::Card{variant=accent eyebrow="En salle · 1" size=sm}
 Dans un **clone jetable** de NÉON, déposez la configuration et un faux `.env`, puis demandez à Pi :
 
@@ -192,6 +203,7 @@ Retirez le bloc `path` et écrivez à la place « ne lis jamais de fichier `.en
 Reposez la demande dans cinq sessions et **comptez les refus** : vous avez votre propre chiffre sur ce que vaut une consigne.
 :::
 ::::
+:::::
 
 ---
 section: 2.0 · Le bac à sable
@@ -219,13 +231,13 @@ Versions vérifiées : `sbx` 0.45.1, Docker Engine 29.7.2, Pi 0.87.1.
 ```yaml
 sandbox:
   image: "pi-sandbox:0.87.1"
-  entrypoint: [pi, -a]        # fichiers du projet déclarés sûrs
+  entrypoint: [pi, -a]   # projet déclaré sûr
 
 credentials:
   - service: ilaas
     apiKey:
       name: ILAAS_API_KEY
-      proxyManaged: true      # Pi ne voit qu'une sentinelle
+      proxyManaged: true   # Pi ne voit qu'une sentinelle
       inject:
         - domain: llm.ilaas.fr
           header: Authorization
@@ -299,7 +311,8 @@ section: 2.0 · Le bac à sable
 
 # Ce que le bac à sable ne protège pas
 
-::::Cols{cols=3 gap=5 fill}
+:::::Stack{fill center gap=5}
+::::Cols{cols=3 gap=5}
 :::Card{badge="A" title="Le mode direct" center}
 L’agent édite votre arbre de travail en place. Il peut modifier un hook git, un `Makefile` ou une config de CI, qui s’exécuteront plus tard **sur l’hôte**.
 
@@ -314,6 +327,7 @@ Le bac à sable ne vous dispense pas de relire le diff.
 `sudo` sans mot de passe et un démon Docker à lui. Nous l’acceptons : rien n’en sort et la VM est jetable.
 :::
 ::::
+:::::
 
 ---
 section: 2.0 · Le bac à sable
@@ -321,7 +335,8 @@ section: 2.0 · Le bac à sable
 
 # Exercice et livrable
 
-::::Cols{cols=2 gap=7 fill}
+:::::Stack{fill center gap=5}
+::::Cols{cols=2 gap=7}
 :::Card{variant=teal eyebrow="En autonomie" tone=teal}
 Déroulez les cinq étapes jusqu’au premier `sbx run`, puis dans la session Pi :
 
@@ -347,6 +362,7 @@ Après une séance entière dans le sandbox, n’ajoutez à `permissions.network
 ::
 :::
 ::::
+:::::
 
 ---
 section: 2.0 · Le bac à sable
