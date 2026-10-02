@@ -431,6 +431,73 @@
 .musts li:has(strong)::before { background: var(--accent); }
 .musts li strong { font-weight: 500; }
 
+/* ── Tableaux de mesures (Matrix) ──────────────────────────────────────── */
+
+.matrix table { table-layout: auto; }
+.matrix th, .matrix td { padding-left: 0.5rem; padding-right: 0.5rem; }
+.matrix :is(th, td):first-child { padding-left: 0; width: var(--matrix-first, auto); }
+.matrix :is(th, td):last-child { padding-right: 0; }
+.matrix:not(.is-left) :is(th, td):not(:first-child) { text-align: center; }
+.matrix td { padding-top: 0.38rem; padding-bottom: 0.38rem; vertical-align: middle; }
+.matrix th { padding-bottom: 0.45rem; }
+.matrix.is-md td { font-size: 0.9rem; }
+.matrix.is-sm td { font-size: 0.8rem; }
+.matrix.is-xs td { font-size: 0.72rem; padding-top: 0.28rem; padding-bottom: 0.28rem; }
+.matrix.is-xs th { font-size: 0.6rem; }
+.matrix td code { font-size: 0.82em; white-space: nowrap; }
+.matrix td strong { color: var(--accent-deep); }
+
+/* ── Score « 18/20 » avec jauge ────────────────────────────────────────── */
+
+.score {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+.score-bar {
+  position: relative;
+  width: 2.2rem;
+  height: 5px;
+  border-radius: 3px;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+.score-bar i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: 3px;
+  background: var(--teal);
+}
+.score.is-hi { color: var(--accent-deep); font-weight: 600; }
+.score.is-hi .score-bar i { background: var(--accent); }
+.score.is-zero { color: var(--quiet); }
+
+/* ── Verdict inline ✓ ✗ ~ ─────────────────────────────────────────────── */
+
+.mark { display: inline-flex; align-items: baseline; gap: 0.4rem; }
+.mark-g {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.05rem;
+  height: 1.05rem;
+  flex: none;
+  border-radius: 50%;
+  font-size: 0.66rem;
+  font-weight: 700;
+  line-height: 1;
+  transform: translateY(0.1em);
+}
+.mark.is-yes .mark-g { background: var(--teal-soft); color: var(--teal-deep); border: 1px solid var(--teal-line); }
+.mark.is-no .mark-g { background: var(--accent-soft); color: var(--accent-deep); border: 1px solid var(--accent-line); }
+.mark.is-part .mark-g { background: var(--surface); color: var(--muted); border: 1px solid var(--line-2); }
+.mark-t:empty { display: none; }
+
 /* ── Blocs de code dans les slides ─────────────────────────────────────── */
 
 /* Slidev applique taille, interligne et marge interne en !important à

@@ -5,13 +5,15 @@ Supports de l'atelier (ANF, octobre 2026), construits avec
 
 - Jour 1 : <https://ai-for-dev.github.io/slides/>
 - Jour 2 : <https://ai-for-dev.github.io/slides/jour2/>
+- Jour 3 : <https://ai-for-dev.github.io/slides/jour3/>
 
 ## Publication
 
 Chaque push sur `main` déclenche `.github/workflows/deploy.yml`, qui construit
-les decks et les publie sur GitHub Pages (source : GitHub Actions). Le jour 2
-sort dans `dist/jour2/` et utilise `routerMode: hash`, parce que le
-`404.html` servi par GitHub Pages est celui du jour 1.
+les decks et les publie sur GitHub Pages (source : GitHub Actions). Les jours 2
+et 3 sortent dans `dist/jour2/` et `dist/jour3/` et utilisent
+`routerMode: hash`, parce que le `404.html` servi par GitHub Pages est celui
+du jour 1.
 
 ## Lancer
 
@@ -23,8 +25,8 @@ npm run export     # Jour1.pdf
 npm run export:png # une image par slide dans export-png/
 ```
 
-Chaque commande a sa variante pour le jour 2 : `dev:jour2`, `build:jour2`,
-`export:jour2`, `export:png:jour2`.
+Chaque commande a sa variante pour les jours 2 et 3 : `dev:jour2`,
+`build:jour2`, `export:jour2`, `export:png:jour2`, et de même avec `jour3`.
 
 ## Organisation
 
@@ -32,6 +34,8 @@ Chaque commande a sa variante pour le jour 2 : `dev:jour2`, `build:jour2`,
 slides.md                 jour 1
 jour2.md                  jour 2 : couverture et plan, puis un import par partie
 pages/jour2/              une partie du jour 2 par fichier
+jour3.md                  jour 3 : couverture et programme, puis un import par module
+pages/jour3/              un module du jour 3 par fichier
 public/images/            les figures, logos et avatars
 theme/                    le thème maison
   styles/tokens.css       palette, typographie, géométrie
@@ -121,6 +125,12 @@ Ce qu'il faut retenir.
 | `CoverTitle`, `LogoBar`, `Author`, `CoverMeta` | couverture et clôture |
 | `EraTimeline`, `AutonomyLadder`, `HarnessMap` | les trois diagrammes du jour 1 |
 | `PiSequence` | la séquence d'une requête avec lecture de fichier (jour 2) |
+| `Matrix` | enveloppe d'un tableau de mesures : lignes serrées, colonnes centrées ; `size`, `first`, `left` |
+| `Score` | taux de réussite `v/of` avec jauge (`of` vaut 20 par défaut) ; `hi` le met en avant |
+| `Mark` | verdict inline ✓ ✗ ~ ; `v` = yes / no / part, texte optionnel en contenu |
+| `ContextStack` | les cinq sources de la fenêtre de contexte (jour 3) |
+| `LoopMap` | la boucle explorer → planner → coder → reviewer (jour 3) |
+| `Motifs` | les cinq motifs d'un flux de travail (jour 3) |
 
 Les classes `.code-sm` et `.code-xs` posées sur un bloc (`:::Cell{.code-sm}`)
 réduisent les blocs de code qu'il contient.

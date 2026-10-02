@@ -5,12 +5,16 @@
   "scripts": {
     "dev": "slidev slides.md --open",
     "dev:jour2": "slidev jour2.md --open",
+    "dev:jour3": "slidev jour3.md --open",
     "build": "slidev build slides.md",
     "build:jour2": "slidev build jour2.md --out dist/jour2",
+    "build:jour3": "slidev build jour3.md --out dist/jour3",
     "export": "slidev export slides.md --output Jour1.pdf",
     "export:jour2": "slidev export jour2.md --output Jour2.pdf",
+    "export:jour3": "slidev export jour3.md --output Jour3.pdf",
     "export:png": "slidev export slides.md --format png --output export-png",
-    "export:png:jour2": "slidev export jour2.md --format png --output export-png-jour2"
+    "export:png:jour2": "slidev export jour2.md --format png --output export-png-jour2",
+    "export:png:jour3": "slidev export jour3.md --format png --output export-png-jour3"
   },
   "dependencies": {
     "@fontsource/geist": "^5.3.0",
