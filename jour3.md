@@ -78,7 +78,8 @@ section: Acte 2 · Reconstruire
 
 # Chaque module en trois temps
 
-::::Cols{cols=3 gap=5 fill}
+:::::Stack{fill center gap=6}
+::::Cols{cols=3 gap=5}
 ::Criterion{n=1 title="Comprendre"}
 On part du besoin : à quoi sert la brique, pourquoi elle est indispensable, comment un harnais réel la réalise.
 ::
@@ -90,7 +91,7 @@ On dégage le principe indépendant de l’outil. C’est le seul temps qui ne p
 ::
 ::::
 
-::::Cols{cols=2 gap=5 .mt-5}
+::::Cols{cols=2 gap=5}
 ::Note{tag="En salle"}
 Tient dans la séance et suffit à comprendre les enjeux du module.
 ::
@@ -98,6 +99,7 @@ Tient dans la séance et suffit à comprendre les enjeux du module.
 Approfondit, et se refait seul, plus tard, sur votre propre dépôt.
 ::
 ::::
+:::::
 
 ---
 section: Acte 2 · Reconstruire

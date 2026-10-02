@@ -46,7 +46,7 @@ section: 2.2 · Les compétences
 
 ::::Cols{cols=2 gap=8 fill align=center}
 :::Stack{gap=2}
-:Eyebrow[.pi/skills/revue-rapide/SKILL.md]{tone=quiet}
+:Eyebrow[.pi/skills/revue-rapide/SKILL.md]{tone=quiet code}
 
 ```markdown
 ---
@@ -69,7 +69,7 @@ description: Relit les modifications en cours du dépôt.
 Un frontmatter (au minimum un nom et une description) et un corps d’instructions. Ni code, ni enregistrement : déposer le fichier suffit.
 
 ::::Card{variant=soft size=sm}
-::Specs
+::Specs{w="6.5rem" raw}
 - **AGENTS.md** entre dans le contexte à chaque tour, et coûte à chaque tour
 - **Skill** fait pour n’entrer que quand la tâche le demande
 ::
@@ -139,7 +139,8 @@ session neuve, `/skill:revue-rapide` : le corps est dans votre premier message
 ::
 ::::
 
-::::Cols{cols=2 gap=6 fill .mt-6}
+:::::Stack{fill center gap=5}
+::::Cols{cols=2 gap=6 .mt-6}
 ::Card{variant=accent eyebrow="En salle" center}
 Le premier chemin repose entièrement sur la description, le second n’en a pas besoin. L’appel à l’outil de lecture se voit dans la session.
 ::
@@ -147,6 +148,7 @@ Le premier chemin repose entièrement sur la description, le second n’en a pas
 Écrivez la vôtre avant de lire la nôtre. Dit-elle **quand** s’en servir, ou seulement **ce que** fait la procédure ? Seule la première aide le modèle à décider.
 ::
 ::::
+:::::
 
 ---
 section: 2.2 · Les compétences
@@ -185,7 +187,8 @@ section: 2.2 · Les compétences
 
 # Comment la compétence entre dans la mesure
 
-::::Cols{cols=3 gap=5 fill}
+:::::Stack{fill center gap=5}
+::::Cols{cols=3 gap=5}
 ::Criterion{n=1 title="La demande négligée"}
 Le même prompt d’une ligne que la base du module 2.1.
 ::
@@ -200,6 +203,7 @@ La procédure travaille sur le symptôme du joueur, pas sur un ticket déjà ré
 ::Note{tag="skill_invoque" .mt-5}
 20/20 sur ces configurations par construction, 0/20 ailleurs. Rien de ce qui suit ne dit si une bonne description déclenche.
 ::
+:::::
 
 ---
 section: 2.2 · Les compétences
@@ -295,7 +299,8 @@ section: 2.2 · Les compétences
 
 # La révision : playtest-court :Hint[6 étapes → 4, 182 lignes → 86]
 
-::::Cols{cols=2 gap=7 fill}
+:::::Stack{fill center gap=5}
+::::Cols{cols=2 gap=7}
 :::Card{variant=teal eyebrow="Ce qu’elle garde" tone=teal}
 - le rôle du playtesteur
 - le repère de coordonnées
@@ -308,6 +313,7 @@ section: 2.2 · Les compétences
 - double rouge et bloc de douze champs deviennent une ligne : le cas vérifie le comportement attendu **en valeurs**
 :::
 ::::
+:::::
 
 ---
 section: 2.2 · Les compétences
@@ -386,7 +392,8 @@ section: 2.2 · Les compétences
 
 # Ce que ce module ne sait pas encore
 
-::::Cols{cols=2 gap=7 fill}
+:::::Stack{fill center gap=5}
+::::Cols{cols=2 gap=7}
 :::Card{badge="?" badgeTone=ghost title="Une bonne description déclenche-t-elle ?" center}
 Nos configurations imposent la compétence par `/skill:` : les matrices mesurent une procédure **appliquée**, jamais **choisie**.
 :::
@@ -399,6 +406,7 @@ Il manque le témoin : la même configuration sans la compétence. La seconde m
 Ajoutez `+agents+skill_par_nom`, identique à `+agents+skill` mais sans `/skill:` dans le prompt, et lisez `skill_invoque`.
 Vous mesurerez la seule chose que ce module affirme sans l’avoir établie.
 ::
+:::::
 
 ---
 section: 2.2 · Les compétences

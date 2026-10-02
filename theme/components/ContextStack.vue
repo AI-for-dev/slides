@@ -14,14 +14,18 @@ const layers = [
   <div class="ctx-stack">
     <div v-for="l in layers" :key="l.n" class="ctx-row">
       <span class="ctx-n">{{ l.n }}</span>
-      <span class="ctx-title">{{ l.title }}</span>
-      <span class="ctx-desc">{{ l.desc }}</span>
+      <span class="ctx-text">
+        <span class="ctx-title">{{ l.title }}</span>
+        <span class="ctx-desc">{{ l.desc }}</span>
+      </span>
       <span v-if="l.size" class="ctx-size">{{ l.size }}</span>
     </div>
     <div class="ctx-row is-history">
       <span class="ctx-n">5</span>
-      <span class="ctx-title">Historique</span>
-      <span class="ctx-desc">réponses du modèle et raisonnement, appels d’outils, sorties d’outils</span>
+      <span class="ctx-text">
+        <span class="ctx-title">Historique</span>
+        <span class="ctx-desc">réponses du modèle et raisonnement, appels d’outils, sorties d’outils</span>
+      </span>
       <span class="ctx-grow"><i /><i /><i /><i /><i /></span>
     </div>
     <div class="ctx-br is-stable"><span>stable d’un tour à l’autre</span></div>
@@ -42,7 +46,7 @@ const layers = [
   display: flex;
   align-items: center;
   gap: 0.8rem;
-  padding: 0.5rem 0.9rem;
+  padding: 0.45rem 0.9rem;
   border: 1px solid var(--line);
   border-radius: var(--r-md);
   background: var(--white);
@@ -55,8 +59,9 @@ const layers = [
   width: 0.8rem;
   flex: none;
 }
-.ctx-title { font-size: 0.88rem; font-weight: 600; letter-spacing: -0.01em; flex: none; }
-.ctx-desc { font-size: 0.76rem; color: var(--muted); }
+.ctx-text { display: flex; flex-direction: column; min-width: 0; }
+.ctx-title { font-size: 0.86rem; font-weight: 600; letter-spacing: -0.01em; line-height: 1.3; }
+.ctx-desc { font-size: 0.72rem; line-height: 1.35; color: var(--muted); }
 .ctx-size {
   margin-left: auto;
   font-family: var(--font-mono);

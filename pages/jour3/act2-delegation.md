@@ -54,7 +54,8 @@ Une session ouverte par la session principale, avec son prompt système, ses out
 Elle reçoit une tâche en texte et ne renvoie que sa conclusion : lectures, appels d’outils et raisonnement disparaissent avec elle.
 ::
 
-::::Cols{cols=3 gap=5 fill .mt-2}
+:::::Stack{fill center gap=5}
+::::Cols{cols=3 gap=5 .mt-2}
 ::Criterion{n=1 title="Isoler le contexte"}
 Établir quels fichiers touche un ticket demande d’en lire une dizaine. La note qui en résulte tient en trente lignes, et seule elle revient.
 ::
@@ -65,6 +66,7 @@ Un agent sans outil d’écriture ne peut pas écrire. La question de l’obéis
 Un modèle qui relit son code relit ses intentions. Un relecteur neuf ne connaît que le ticket, le plan et le diff.
 ::
 ::::
+:::::
 
 ---
 section: 2.3 · La délégation
@@ -88,13 +90,13 @@ Chargée avec `-e`, elle ajoute un outil `subagent` que le modèle principal app
 :::Stack{gap=3}
 :Eyebrow[Plus éprouvées pour un usage quotidien]{tone=teal}
 
-::Bullet{k="subagent" badge=tag}
+::Bullet{size=sm k="subagent" badge=tag}
 L’exemple du dépôt de Pi : single, parallel et chain, un processus `pi` par sous-agent
 ::
-::Bullet{k="pi-subagents" badge=tag}
+::Bullet{size=sm k="pi-subagents" badge=tag}
 Le plus abouti : agents prêts à l’emploi (`scout`, `reviewer`, `oracle`…), tâches de fond
 ::
-::Bullet{k="pi-envoy" badge=tag}
+::Bullet{size=sm k="pi-envoy" badge=tag}
 La gouvernance : un contrat de délégation par enfant, budgets, tableau de bord
 ::
 :::
@@ -107,8 +109,8 @@ section: 2.3 · La délégation
 # L’anatomie d’un agent
 
 ::::Cols{cols=2 gap=8 fill align=center}
-:::Stack{gap=3}
-:Eyebrow[.pi/agents/reader.md]{tone=quiet}
+:::Stack{gap=3 .code-sm}
+:Eyebrow[.pi/agents/reader.md]{tone=quiet code}
 
 ```markdown
 ---
@@ -127,7 +129,7 @@ Le corps devient le **prompt système** du sous-agent : il est lu à coup sûr,
 ::
 :::
 :::Card{variant=soft eyebrow="Les champs" tone=teal}
-::Specs
+::Specs{w="5rem" raw}
 - **tools** les outils enregistrés : sans `write`, aucun moyen d’écrire. Absent : `read, grep, find, ls`
 - **model** absent, le sous-agent tourne sur vos réglages du jour
 - **lifetime** propre à combo : `task` (défaut) ou `workflow`
@@ -142,7 +144,8 @@ section: 2.3 · La délégation
 
 # Trois avertissements avant de lancer
 
-::::Cols{cols=3 gap=5 fill}
+:::::Stack{fill center gap=5}
+::::Cols{cols=3 gap=5}
 :::Card{badge="1" title="Le modèle n’est jamais hérité"}
 Il vient de l’argument d’appel, à défaut du fichier de pipeline, à défaut de l’en-tête de l’agent, et en dernier recours de `~/.pi/agent/settings.json`.
 
@@ -165,6 +168,7 @@ Lancez Pi dans herdr, puis `/herdr on` : chaque sous-agent ouvre son volet, qui
 Plus agréable que la trace après coup.
 :::
 ::::
+:::::
 
 ---
 section: 2.3 · La délégation
@@ -187,10 +191,10 @@ Seuls `neon.js` et `neon.test.js` changent, les tests vont dans la suite, `npm t
 :::Stack{gap=4 center}
 :Eyebrow[Pourquoi ce ticket]{tone=teal}
 
-::Bullet{k="1"}
+::Bullet{size=sm k="1"}
 Chaque rôle a un livrable **falsifiable** : la note se vérifie en ouvrant les fichiers cités, le plan pas à pas, le diff avec la suite, le verdict contre la liste des exports.
 ::
-::Bullet{k="2"}
+::Bullet{size=sm k="2"}
 Le ticket affirme ce qu’il ne mesure pas : « la collision est lente » est une phrase du mainteneur, pas un chiffre.
 ::
 :::
@@ -211,7 +215,8 @@ section: 2.3 · La délégation
 | `reviewer` | `APPROVED` ou `CHANGES REQUESTED`, motivé | `read, grep, find, ls` | corriger ce qu’il relit |
 ::
 
-::::Cols{cols=4 gap=4 fill .mt-5}
+:::::Stack{fill center gap=5}
+::::Cols{cols=4 gap=4 .mt-5}
 ::Card{variant=soft size=xs}
 Une note, pas un avis. Le ticket peut se tromper sur l’emplacement du code : la note vérifie au lieu de recopier.
 ::
@@ -225,6 +230,7 @@ De quoi écrire, rien pour exécuter : il ne lance pas les tests et ne prétend
 Ne corrige jamais : un vérificateur qui corrige devient un second codeur que personne ne relit.
 ::
 ::::
+:::::
 
 ---
 section: 2.3 · La délégation
@@ -250,12 +256,12 @@ pi
 ::::
 :::Stack{gap=4}
 ::Card{eyebrow="explorer" size=sm}
-<p class="mono t-xs muted">utilise le subagent "explorer" pour la tâche "Nomme exactement les outils dont tu disposes."</p>
+<p class="mono muted" style="font-size:0.68rem;line-height:1.45">utilise le subagent "explorer" pour la tâche "Nomme exactement les outils dont tu disposes."</p>
 
 « Je dispose des outils suivants : `read`, `grep`, `find`, `ls`. »
 ::
 ::Card{eyebrow="coder" size=sm}
-<p class="mono t-xs muted">utilise le subagent "coder" pour la tâche "Lance npm test et rapporte le résultat."</p>
+<p class="mono muted" style="font-size:0.68rem;line-height:1.45">utilise le subagent "coder" pour la tâche "Lance npm test et rapporte le résultat."</p>
 
 « Le subagent "coder" indique qu’il ne dispose pas d’un outil lui permettant d’exécuter des commandes shell, et ne peut donc pas lancer npm test. »
 ::
@@ -294,23 +300,23 @@ section: 2.3 · La délégation
 # Les six étapes
 
 ::::Cols{cols="3fr 2fr" gap=8 fill}
-:::Stack{gap=2.5 center}
-::Bullet{k="1" accent}
+:::Stack{gap=2 center}
+::Bullet{size=sm k="1" accent}
 `/step explorer traite le ticket #2 d’ISSUES.md` rend la note d’impact
 ::
-::Bullet{k="2" accent}
+::Bullet{size=sm k="2" accent}
 Vous la lisez, puis `/step planner` la reçoit avec le ticket et rend le plan
 ::
-::Bullet{k="3" accent}
+::Bullet{size=sm k="3" accent}
 `/step coder` : dictez-lui **le pas 1 et rien d’autre**. Le diff est dans l’arbre
 ::
-::Bullet{k="4"}
+::Bullet{size=sm k="4"}
 Vous lancez **`npm test` vous-même**, dans un second terminal
 ::
-::Bullet{k="5"}
+::Bullet{size=sm k="5"}
 `/step reviewer` : collez le ticket, le pas, `git diff` et la sortie des tests
 ::
-::Bullet{k="6"}
+::Bullet{size=sm k="6"}
 Pas suivant, retour au coder, ou retour au planner : `/step --from <id>`
 ::
 :::
@@ -330,7 +336,8 @@ section: 2.3 · La délégation
 
 # Exercices : la boucle, la fenêtre, la trace
 
-::::Cols{cols=3 gap=5 fill}
+:::::Stack{fill center gap=5}
+::::Cols{cols=3 gap=5}
 :::Card{variant=accent eyebrow="En salle · la boucle" size=sm}
 Jusqu’au premier `APPROVED` : le pas 1 livré, testé et relu.
 
@@ -357,6 +364,7 @@ La seule réponse fiable à « qui a tourné ? », si vous n’avez pas suivi
 ::Note{tag="Pas de matrice" .mt-5}
 Ce module montre la mécanique, il n’affirme pas que le découpage corrige mieux le ticket qu’un agent seul. C’est une question de mesure.
 ::
+:::::
 
 ---
 section: 2.3 · La délégation
@@ -428,7 +436,7 @@ section: 2.3 · La délégation
 :::
 :::Cell{span=3}
 ::::Stack{gap=4 fill}
-::Card{variant=accent eyebrow="Critère de réussite" center fill}
+::Card{variant=accent eyebrow="Critère de réussite" center}
 Vous savez montrer, trace en main, quel agent a tourné à chaque étape, avec quels outils et quel modèle, et quelles actions vous refuseriez de refaire vingt fois.
 ::
 ::Card{variant=teal eyebrow="En autonomie" tone=teal size=sm}

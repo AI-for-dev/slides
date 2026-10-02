@@ -55,7 +55,7 @@ section: 2.4 · Les workflows
 
 ::::Cols{cols=2 gap=8 fill align=center}
 :::Stack{gap=2 .code-sm}
-:Eyebrow[.pi/flows/impact-plan.md]{tone=quiet}
+:Eyebrow[.pi/flows/impact-plan.md]{tone=quiet code}
 
 ```md
 ---
@@ -80,7 +80,7 @@ avec la note sous `note` comme carte.
 ```
 :::
 :::Stack{gap=4}
-::Specs
+::Specs{w="4.5rem" raw}
 - **En-tête** la structure : les nœuds, dans l’ordre, et ce que chacun lit
 - **Corps** une section `## <id>` par nœud, la consigne de l’agent
 - **reads** l’agent reçoit sa section et ces éléments, rien d’autre
@@ -102,6 +102,7 @@ section: 2.4 · Les workflows
 
 # Ce que le flow remplace
 
+:::Stack{fill center}
 ::Matrix{size=md left first="22rem"}
 | au module 2.3 | dans le flow |
 | --- | --- |
@@ -113,6 +114,7 @@ section: 2.4 · Les workflows
 | le retour au planner | un second tour : l’auditeur relit tout, le planner replanifie ce qui reste |
 | `/chain` et votre journal | `runs/<horodatage>/`, avec la trace de chaque agent |
 ::
+:::
 
 ---
 section: 2.4 · Les workflows
@@ -210,7 +212,8 @@ section: 2.4 · Les workflows
 
 # Ce que les premiers runs ont appris
 
-::::Cols{cols=2 gap=6 fill}
+:::::Stack{fill center gap=5}
+::::Cols{cols=2 gap=6}
 :::Card{badge="1" title="retry: 1 sur chaque agent" center}
 Au premier run réel, le planner a écrit un très bon plan… en texte libre, sans l’outil prévu, et le run s’est arrêté.
 Un second essai, avec l’erreur nommée, a suffi.
@@ -223,6 +226,7 @@ Un run a planifié un pas « écrire les tests rouges » seul, sans le code. L
 ::Takeaway{.mt-6}
 Quand une boucle ne converge pas, regardez d’abord si sa condition était atteignable. Chaque échec lu dans la trace devient une modification du flow.
 ::
+:::::
 
 ---
 section: 2.4 · Les workflows
@@ -231,7 +235,7 @@ section: 2.4 · Les workflows
 # Exercice : lancer la boucle
 
 ::::Cols{cols=2 gap=7 fill}
-:::Cell{.code-sm}
+:::Stack{gap=3 .code-sm}
 ```bash
 cd /chemin/vers/neon
 mkdir -p .pi/agents .pi/flows .pi/checks
@@ -254,13 +258,13 @@ pi
 ```
 :::
 :::Stack{gap=3}
-::Bullet{k="1" accent}
+::Bullet{size=sm k="1" accent}
 Au premier lancement, choisissez **Trust** : sans cela, Pi ne charge ni `.pi/` ni combo
 ::
-::Bullet{k="2" accent}
+::Bullet{size=sm k="2" accent}
 Cassez le fichier exprès (`agent: codeur`) : `/flows` nomme le nœud et propose le bon nom
 ::
-::Bullet{k="3" accent}
+::Bullet{size=sm k="3" accent}
 Lancez : Pi dessine le flow au-dessus de l’invite, la carte de remarque arrive après la note d’impact
 ::
 ::Card{variant=accent eyebrow="Ne vous contentez pas du verdict" size=sm .mt-2}
@@ -300,7 +304,7 @@ section: 2.4 · Les workflows
 ::Lead
 Le flow s’arrête à l’audit et c’est vous qui commitez. Pour qu’il vous propose le commit : une question, un branchement, le commit.
 ::
-::Specs
+::Specs{w="7.5rem" raw}
 - **committer** livré avec combo, guidé par une section `## message`
 - **commit** sur une branche propre au run, rien n’est poussé
 - **default: false** sans personne devant l’écran, pas de commit
@@ -344,13 +348,13 @@ fait pour la demande sous `input`.
 :::Stack{gap=3}
 :Eyebrow[Le reste suit la même logique]{tone=teal}
 
-::Bullet{k="·"}
+::Bullet{size=sm}
 Un modèle plus gros pour le planner et l’auditeur : dans leurs fichiers d’agents
 ::
-::Bullet{k="·"}
+::Bullet{size=sm}
 Un audit inutile sur un petit ticket : supprimez son nœud, simplifiez la condition du tour
 ::
-::Bullet{k="·"}
+::Bullet{size=sm}
 Des pas indépendants en parallèle, chacun dans sa copie : `concurrency: 2` et `copies: true` sur le `map`
 ::
 ::Card{variant=teal eyebrow="En autonomie" tone=teal size=sm .mt-2}
@@ -374,7 +378,9 @@ Le flow est votre journal du module 2.3 réécrit : chaque ligne répond à une
 :::
 :::Item{variant=goal n=2 ghost}
 Le harnais se construit par corrections successives
-:Detail[Chaque échec lu dans la trace devient une modification du flux.]
+::Detail
+Chaque échec lu dans la trace devient une modification du flux.
+::
 :::
 :::Item{variant=goal n=3 ghost}
 Une décision mérite son propre canal
@@ -384,7 +390,9 @@ Tant qu’un verdict se lit dans de la prose, il dépend de la façon dont le mo
 :::
 :::Item{variant=goal n=4 ghost}
 Les arrêts humains sont des choix de conception
-:Detail[Là où une erreur coûte plus cher à défaire qu’à prévenir, et pas ailleurs.]
+::Detail
+Là où une erreur coûte plus cher à défaire qu’à prévenir, et pas ailleurs.
+::
 :::
 ::::
 
