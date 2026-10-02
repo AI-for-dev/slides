@@ -149,6 +149,12 @@ dans `theme/styles/`.
   `CoverMeta`, `Criterion`.
 - **Le titre de slide est une rangée flex** : ne pas y mettre d'autre balise
   inline que `:Ord[]` et `:Hint[]`.
+- **Un bloc fermé par cinq deux-points ou plus avale ce qui le suit** dans la
+  slide : le contenu placé après `:::::` n'est pas rendu. Fermer ces blocs en
+  fin de slide, ou réduire la profondeur (un bloc dont les enfants ont deux
+  deux-points n'a besoin que de trois).
+- **`:-)` est lu comme un composant inline** : l'écrire dans du HTML
+  (`<span class="mono">:-)</span>`) ou dans une prop.
 
 ## Conventions
 
