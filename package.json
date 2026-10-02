@@ -17,5 +17,8 @@
   },
   "devDependencies": {
     "playwright-chromium": "^1.63.0"
+  },
+  "overrides": {
+    "image-size": "^2.0.3"
   }
 }
