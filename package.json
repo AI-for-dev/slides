@@ -4,9 +4,13 @@
   "type": "module",
   "scripts": {
     "dev": "slidev slides.md --open",
+    "dev:jour2": "slidev jour2.md --open",
     "build": "slidev build slides.md",
+    "build:jour2": "slidev build jour2.md --out dist/jour2",
     "export": "slidev export slides.md --output Jour1.pdf",
-    "export:png": "slidev export slides.md --format png --output export-png"
+    "export:jour2": "slidev export jour2.md --output Jour2.pdf",
+    "export:png": "slidev export slides.md --format png --output export-png",
+    "export:png:jour2": "slidev export jour2.md --format png --output export-png-jour2"
   },
   "dependencies": {
     "@fontsource/geist": "^5.3.0",

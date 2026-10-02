@@ -1,6 +1,8 @@
 node_modules/
 dist/
 export-png/
+export-png-jour2/
+worktree/
 .DS_Store
 
 # Les PDF sont des artefacts d'export (npm run export)

@@ -30,9 +30,13 @@ jobs:
       # --omit=dev : évite le téléchargement de playwright-chromium (export PDF uniquement)
       - run: npm ci --omit=dev
 
-      # Le site est servi sous https://<org>.github.io/<repo>/
+      # Le jour 1 est servi sous https://<org>.github.io/<repo>/, le jour 2 sous
+      # .../<repo>/jour2/. Le jour 2 se construit en second : le build du jour 1
+      # vide dist/.
       - name: Build
-        run: npm run build -- --base /${{ github.event.repository.name }}/
+        run: |
+          npm run build -- --base /${{ github.event.repository.name }}/
+          npm run build:jour2 -- --base /${{ github.event.repository.name }}/jour2/
 
       - uses: actions/configure-pages@v5
 

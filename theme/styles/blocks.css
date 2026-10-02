@@ -430,3 +430,16 @@
 .musts li:has(strong) { color: var(--ink); }
 .musts li:has(strong)::before { background: var(--accent); }
 .musts li strong { font-weight: 500; }
+
+/* ── Blocs de code dans les slides ─────────────────────────────────────── */
+
+.slidev-layout .slidev-code-wrapper { margin: 0; }
+.slidev-layout pre.slidev-code {
+  font-size: 0.7rem;
+  line-height: 1.55;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--line);
+}
+.code-sm pre.slidev-code { font-size: 0.62rem; line-height: 1.5; padding: 0.65rem 0.85rem; }
+.code-xs pre.slidev-code { font-size: 0.56rem; line-height: 1.45; padding: 0.6rem 0.8rem; }
+.slidev-code-wrapper + .slidev-code-wrapper { margin-top: 0.6rem; }
