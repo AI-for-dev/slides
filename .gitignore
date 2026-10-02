@@ -2,6 +2,7 @@ node_modules/
 dist/
 export-png/
 export-png-jour2/
+export-png-jour3/
 worktree/
 .DS_Store
 
