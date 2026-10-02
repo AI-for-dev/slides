@@ -1,14 +1,17 @@
-# IA4Dev 2026 - Jour 1
+# IA4Dev 2026 - Slides
 
-Support de l'atelier (ANF jour 1, octobre 2026), construit avec
+Supports de l'atelier (ANF, octobre 2026), construits avec
 [Slidev](https://sli.dev).
 
-Slides en ligne : <https://ai-for-dev.github.io/slides/>
+- Jour 1 : <https://ai-for-dev.github.io/slides/>
+- Jour 2 : <https://ai-for-dev.github.io/slides/jour2/>
 
 ## Publication
 
 Chaque push sur `main` déclenche `.github/workflows/deploy.yml`, qui construit
-le site et le publie sur GitHub Pages (source : GitHub Actions).
+les decks et les publie sur GitHub Pages (source : GitHub Actions). Le jour 2
+sort dans `dist/jour2/` et utilise `routerMode: hash`, parce que le
+`404.html` servi par GitHub Pages est celui du jour 1.
 
 ## Lancer
 
@@ -20,10 +23,15 @@ npm run export     # Jour1.pdf
 npm run export:png # une image par slide dans export-png/
 ```
 
+Chaque commande a sa variante pour le jour 2 : `dev:jour2`, `build:jour2`,
+`export:jour2`, `export:png:jour2`.
+
 ## Organisation
 
 ```
-slides.md                 le contenu des 30 slides
+slides.md                 jour 1
+jour2.md                  jour 2 : couverture et plan, puis un import par partie
+pages/jour2/              une partie du jour 2 par fichier
 public/images/            les figures, logos et avatars
 theme/                    le thème maison
   styles/tokens.css       palette, typographie, géométrie
@@ -38,6 +46,9 @@ archive-original-jour1/   trace de la version d'origine
 ```
 
 ## Écrire une slide
+
+Une partie importée avec `src:` est un fichier markdown ordinaire, sans en-tête
+de deck.
 
 Le contenu est du markdown. La mise en forme passe par des composants, avec la
 syntaxe MDC : `::Nom` … `::` pour un bloc, `:Nom[texte]` pour de l'inline, et
@@ -108,7 +119,16 @@ Ce qu'il faut retenir.
 | `Chips`, `Musts`, `Specs` | listes markdown stylées (pastilles, exigences, paires clé/valeur) |
 | `Quote` | corps d'une slide `layout: quote` |
 | `CoverTitle`, `LogoBar`, `Author`, `CoverMeta` | couverture et clôture |
-| `EraTimeline`, `AutonomyLadder`, `HarnessMap` | les trois diagrammes |
+| `EraTimeline`, `AutonomyLadder`, `HarnessMap` | les trois diagrammes du jour 1 |
+| `PiSequence` | la séquence d'une requête avec lecture de fichier (jour 2) |
+
+Les classes `.code-sm` et `.code-xs` posées sur un bloc (`:::Cell{.code-sm}`)
+réduisent les blocs de code qu'il contient.
+
+### Pied de page
+
+Le pied de page affiche le `section` de la slide, sinon
+`themeConfig.footer` de l'en-tête du deck.
 
 Chaque composant émet la classe CSS qui porte son nom (`Card` → `.card`,
 `Criterion` → `.criterion`…) : pour changer une apparence, chercher la classe
