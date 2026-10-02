@@ -6,6 +6,8 @@ info: |
   Max Beligné (PUD-GA / MSH Alpes / UGA) · Loïc Gouarin (CMAP / CNRS / École polytechnique)
 author: Max Beligné, Loïc Gouarin
 colorSchema: light
+themeConfig:
+  footer: IA4Dev 2026 · ANF jour 1
 transition: fade
 mdc: true
 editor: false
