@@ -8,7 +8,6 @@ author: Max Beligné, Loïc Gouarin
 colorSchema: auto
 themeConfig:
   footer: IA4Dev 2026 · ANF jour 2
-transition: fade
 # Publié sous /slides/jour2/ : le 404.html de GitHub Pages est celui du jour 1,
 # donc les liens profonds passent par le hash.
 routerMode: hash

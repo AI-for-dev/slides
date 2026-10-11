@@ -8,7 +8,6 @@ author: Max Beligné, Loïc Gouarin
 colorSchema: auto
 themeConfig:
   footer: IA4Dev 2026 · ANF jour 1
-transition: fade
 mdc: true
 editor: false
 drawings:

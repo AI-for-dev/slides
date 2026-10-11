@@ -67,7 +67,6 @@ html.dark { color-scheme: dark; }
   color: var(--accent-deep);
   text-decoration: none;
   border-bottom: 1px solid var(--accent-line);
-  transition: border-color .15s ease, color .15s ease;
 }
 .slidev-layout a:hover {
   color: var(--accent);
@@ -186,11 +185,7 @@ html.dark { color-scheme: dark; }
   display: none;
 }
 
-.slidev-vclick-target {
-  transition: opacity 260ms cubic-bezier(.22,.61,.36,1),
-              transform 260ms cubic-bezier(.22,.61,.36,1);
-}
-.slidev-vclick-hidden {
-  opacity: 0 !important;
-  transform: translateY(6px);
-}
+/* Aucune animation : une slide est une image fixe. Un élément révélé au clic
+   apparaît d'un coup, sans le fondu que Slidev pose par défaut. */
+.slidev-vclick-target { transition: none !important; }
+.slidev-vclick-hidden { opacity: 0 !important; }
