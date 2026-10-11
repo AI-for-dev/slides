@@ -50,19 +50,15 @@ withDefaults(defineProps<{
 
 .fig-paper .fig-media {
   background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: var(--r-lg);
-  box-shadow: var(--shadow-md);
   padding: 0.55rem;
+  overflow: visible;
+  --pc-o: 0.6;
 }
-.fig-paper .fig-media img { border-radius: 6px; }
 
 .fig-screen .fig-media {
   background: #1b1b25;
-  border: 1px solid #2c2c3a;
-  border-radius: var(--r-lg);
-  box-shadow: var(--shadow-md);
-  overflow: hidden;
+  overflow: visible;
+  --pc-o: 0.6;
 }
 
 .fig-bare .fig-media { background: transparent; }
@@ -71,18 +67,19 @@ withDefaults(defineProps<{
   display: flex;
   align-items: center;
   gap: 0.55rem;
-  margin-top: 0.55rem;
+  margin-top: 0.7rem;
   font-family: var(--font-mono);
   font-size: 0.66rem;
   letter-spacing: 0.02em;
   color: var(--muted);
 }
 .fig-cap-mark {
-  width: 14px;
-  height: 2px;
-  border-radius: 2px;
-  background: var(--line-2);
+  width: 16px;
+  height: 7px;
   flex: none;
+  background: var(--graphite-2);
+  -webkit-mask: var(--pc-dash) center / 100% 100% no-repeat;
+          mask: var(--pc-dash) center / 100% 100% no-repeat;
 }
 .fig-cap a { border-bottom-color: var(--line-2); }
 </style>

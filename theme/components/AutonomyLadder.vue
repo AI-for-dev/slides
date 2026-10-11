@@ -30,18 +30,19 @@ const levels = [
   height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
-  padding-left: 2.55rem;
+  gap: 0.3rem;
+  padding-left: 2.7rem;
 }
 
+/* Le rail : un seul trait vertical, du gris vers la sanguine. */
 .ladder-rail {
   position: absolute;
-  left: 0.85rem;
+  left: 0.92rem;
   top: 0.9rem;
   bottom: 0.9rem;
   width: 2px;
-  border-radius: 2px;
-  background: linear-gradient(180deg, var(--line-2), var(--accent));
+  background: linear-gradient(180deg, var(--graphite-2), var(--accent));
+  opacity: 0.7;
 }
 
 .ladder-row {
@@ -53,40 +54,58 @@ const levels = [
 
 .ladder-num {
   position: absolute;
-  left: -2.55rem;
+  left: -2.7rem;
   top: 50%;
   transform: translateY(-50%);
-  width: 1.7rem;
-  height: 1.7rem;
+  width: 1.85rem;
+  height: 1.85rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
   font-family: var(--font-mono);
   font-size: 0.74rem;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--ink);
   background: var(--paper);
-  border: 1.5px solid color-mix(in srgb, var(--accent) calc(18% + var(--i) * 16%), var(--line-2));
-  box-shadow: 0 0 0 4px var(--paper);
+  border-radius: 50%;
+  --c: color-mix(in srgb, var(--accent) calc(var(--i) * 20%), var(--graphite-2));
+}
+.ladder-num::before {
+  content: '';
+  position: absolute;
+  inset: -0.18rem;
+  background: var(--c);
+  -webkit-mask: var(--pc-circle-2) center / 100% 100% no-repeat;
+          mask: var(--pc-circle-2) center / 100% 100% no-repeat;
+}
+.ladder-row:nth-child(odd) .ladder-num::before {
+  -webkit-mask-image: var(--pc-circle-3);
+          mask-image: var(--pc-circle-3);
 }
 .ladder-row:nth-child(6) .ladder-num,
-.ladder-row:nth-child(7) .ladder-num {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #fff;
-}
+.ladder-row:nth-child(7) .ladder-num { color: var(--accent-deep); }
 
 .ladder-bar {
+  position: relative;
   flex: 1;
   display: grid;
   grid-template-columns: 16.5rem 1fr;
   align-items: center;
   gap: 1.2rem;
-  padding: 0.5rem 1.2rem;
-  border-radius: 10px;
-  background: color-mix(in srgb, var(--accent-soft) calc(20% + var(--i) * 16%), var(--surface));
-  border: 1px solid color-mix(in srgb, var(--accent-line) calc(25% + var(--i) * 15%), var(--line));
+  padding: 0.45rem 1.2rem;
+}
+/* Un filet au crayon sous chaque niveau, de plus en plus appuyé. */
+.ladder-bar::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 8px;
+  background: color-mix(in srgb, var(--accent) calc(var(--i) * 18%), var(--graphite-2));
+  opacity: calc(0.35 + var(--i) * 0.1);
+  -webkit-mask: var(--pc-rule-2) center / 100% 100% no-repeat;
+          mask: var(--pc-rule-2) center / 100% 100% no-repeat;
 }
 
 .ladder-title {
@@ -102,10 +121,15 @@ const levels = [
   color: var(--muted);
 }
 
-.ladder-row:last-child .ladder-bar {
-  background: var(--ink);
-  border-color: var(--ink);
+/* Le dernier niveau : cerné à la sanguine. */
+.ladder-row:last-child .ladder-bar::after {
+  inset: -3px;
+  height: auto;
+  opacity: 0.95;
+  background: var(--accent);
+  -webkit-mask: none;
+          mask: none;
+  -webkit-mask-box-image: var(--pc-frame-3) 28 / 28px stretch round;
 }
-.ladder-row:last-child .ladder-title { color: var(--paper); }
-.ladder-row:last-child .ladder-desc { color: rgba(253, 251, 247, 0.68); }
+.ladder-row:last-child .ladder-title { color: var(--accent-deep); }
 </style>

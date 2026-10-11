@@ -1,6 +1,6 @@
 <template>
   <div class="slidev-layout cvr">
-    <div class="cvr-rule" />
+    <Bascule class="cvr-art" :amp="220" />
     <div class="cvr-inner">
       <slot />
     </div>

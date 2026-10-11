@@ -43,7 +43,7 @@ const eras = [
           </div>
         </div>
       </div>
-      <div v-if="i < eras.length - 1" class="era-chev">›</div>
+      <div v-if="i < eras.length - 1" class="era-chev" />
     </template>
   </div>
 </template>
@@ -51,7 +51,7 @@ const eras = [
 <style>
 .era-line {
   display: grid;
-  grid-template-columns: 1fr 14px 1fr 14px 1fr 14px 1fr;
+  grid-template-columns: 1fr 18px 1fr 18px 1fr 18px 1fr;
   align-items: stretch;
   gap: 0.55rem;
 }
@@ -61,21 +61,19 @@ const eras = [
 .era-year {
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.08em;
-  color: var(--tone);
-  margin-bottom: 0.4rem;
+  color: var(--tone-ink);
+  margin-bottom: 0.55rem;
 }
 
 .era-card {
   flex: 1;
   display: flex;
   flex-direction: column;
-  border: 1px solid color-mix(in srgb, var(--tone) 30%, var(--line));
-  border-top: 3px solid var(--tone);
-  border-radius: 4px 4px 12px 12px;
-  background: color-mix(in srgb, var(--tone) 5%, var(--paper));
-  padding: 0.8rem 0.85rem 0.9rem;
+  padding: 0.85rem 0.9rem 0.95rem;
+  --pc: var(--tone);
+  --pc-o: 0.85;
 }
 
 .era-title {
@@ -97,7 +95,7 @@ const eras = [
 .era-sub {
   margin-top: auto;
   padding-top: 0.7rem;
-  border-top: 1px dashed color-mix(in srgb, var(--tone) 35%, var(--line));
+  border-top: 1px dashed var(--line-2);
 }
 .era-sub-item {
   font-size: 0.76rem;
@@ -115,17 +113,19 @@ const eras = [
 
 .era-chev {
   align-self: center;
-  font-family: var(--font-mono);
-  font-size: 1.1rem;
-  line-height: 1;
-  color: var(--accent);
-  opacity: 0.55;
-  text-align: center;
+  justify-self: center;
+  width: 18px;
+  height: 10px;
   margin-top: 1.4rem;
+  font-size: 0;
+  background: var(--graphite-2);
+  -webkit-mask: var(--pc-arrow) center / 100% 100% no-repeat;
+          mask: var(--pc-arrow) center / 100% 100% no-repeat;
 }
 
-.era.tone-a { --tone: #3d8fd1; --tone-ink: #1f5f93; }
-.era.tone-b { --tone: #1f4f96; --tone-ink: #1a3f79; }
-.era.tone-c { --tone: #8b3fc0; --tone-ink: #6f2ea0; }
-.era.tone-d { --tone: #b03a3a; --tone-ink: #8f2b2b; }
+/* Du gris au rouge : plus on s'approche d'aujourd'hui, plus le trait appuie. */
+.era.tone-a { --tone: var(--graphite-2); --tone-ink: var(--muted); }
+.era.tone-b { --tone: var(--graphite);   --tone-ink: var(--ink-soft); }
+.era.tone-c { --tone: var(--blue);       --tone-ink: var(--blue-deep); }
+.era.tone-d { --tone: var(--accent);     --tone-ink: var(--accent-deep); }
 </style>

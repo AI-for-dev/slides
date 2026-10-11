@@ -12,8 +12,8 @@ editor: false
 drawings:
   persist: false
 fonts:
-  sans: Geist
-  mono: Geist Mono
+  sans: IBM Plex Sans
+  mono: IBM Plex Mono
   serif: Instrument Serif
   provider: none
 layout: cover

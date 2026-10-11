@@ -27,6 +27,8 @@ slides.md                 le contenu des 30 slides
 public/images/            les figures, logos et avatars
 theme/                    le thème maison
   styles/tokens.css       palette, typographie, géométrie
+  styles/pencil.ts        les traits au crayon réutilisés par le CSS
+  lib/pencil.ts           le tracé à main levée (lignes, cadres, hachures)
   styles/base.css         éléments de base (titres, listes, liens)
   styles/components.css   vocabulaire visuel (card, tag, figure, num…)
   styles/blocks.css       compositions propres au deck
@@ -109,6 +111,7 @@ Ce qu'il faut retenir.
 | `Quote` | corps d'une slide `layout: quote` |
 | `CoverTitle`, `LogoBar`, `Author`, `CoverMeta` | couverture et clôture |
 | `EraTimeline`, `AutonomyLadder`, `HarnessMap` | les trois diagrammes |
+| `Bascule`, `PencilNumeral` | dessins des gabarits cover, section et statement ; pas besoin de les appeler dans `slides.md` |
 
 Chaque composant émet la classe CSS qui porte son nom (`Card` → `.card`,
 `Criterion` → `.criterion`…) : pour changer une apparence, chercher la classe
@@ -134,5 +137,11 @@ dans `theme/styles/`.
 
 - Schéma de couleurs **clair uniquement** : toutes les figures du deck sont des
   captures sur fond clair, un thème sombre casserait le système visuel.
-- Un seul accent (`--accent`, orange braise) plus un appui (`--teal`).
+- Deux registres de trait. Ce qui est établi est tiré à la règle (filets nets
+  de 1 px). Ce qui change est dessiné au crayon : cadres, soulignés, cercles,
+  flèches, générés par `theme/lib/pencil.ts` et exposés en variables CSS
+  `--pc-*` par `theme/styles/pencil.ts`. Les traits sont seedés, l'écran, le
+  PDF et les PNG sont donc identiques.
+- Graphite pour le trait courant, sanguine (`--accent`) pour l'accent, bleu
+  (`--blue`) en appui. Les composants appellent encore ce bleu `teal`.
 - Espaces insécables devant `: ; ! ?` et dans les guillemets.

@@ -1,51 +1,52 @@
 /* ══════════════════════════════════════════════════════════════════════════
    IA4Dev - design tokens
-   Warm-paper editorial palette. Single light scheme: every figure in the deck
-   is a light screenshot, so a dark scheme would break the visual system.
+   Papier blanc, graphite et sanguine. Ce qui est établi est tiré à la règle,
+   ce qui change est dessiné au crayon (voir lib/pencil.ts et styles/pencil.ts).
+   Un seul schéma clair : toutes les figures du deck sont des captures claires.
    ══════════════════════════════════════════════════════════════════════════ */
 
 :root {
-  /* Ink ------------------------------------------------------------------ */
-  --ink:          #15171d;
-  --ink-soft:     #3c424e;
-  --muted:        #697080;
-  --quiet:        #9aa1ae;
+  /* Encre ---------------------------------------------------------------- */
+  --ink:          #1c1d21;
+  --ink-soft:     #3b3d43;
+  --muted:        #6a6c72;
+  --quiet:        #9a9b9f;
 
-  /* Paper ---------------------------------------------------------------- */
-  --paper:        #fdfbf7;
-  --surface:      #f5f1e9;
-  --surface-2:    #ece7dc;
+  /* Papier --------------------------------------------------------------- */
+  --paper:        #fbfaf7;
+  --surface:      #f3f2ed;
+  --surface-2:    #ebe9e2;
   --white:        #ffffff;
 
-  /* Lines ---------------------------------------------------------------- */
-  --line:         #e6e0d3;
-  --line-2:       #d3ccbb;
+  /* Règle : filets nets, ce qui est déjà là ------------------------------- */
+  --line:         #e3e1da;
+  --line-2:       #cdcac1;
 
-  /* Accent - ember ------------------------------------------------------- */
-  --accent:       #d8461c;
-  --accent-deep:  #a63410;
-  --accent-soft:  #fceee8;
-  --accent-line:  #f2c9b9;
+  /* Crayons -------------------------------------------------------------- */
+  --graphite:     #3d3f45;
+  --graphite-2:   #8d8e92;
 
-  /* Support - deep teal -------------------------------------------------- */
-  --teal:         #0f7a6f;
-  --teal-deep:    #0a5a52;
-  --teal-soft:    #e6f2f0;
-  --teal-line:    #bcdcd7;
+  /* Accent - sanguine ---------------------------------------------------- */
+  --accent:       #b4472a;
+  --accent-deep:  #8f3419;
+  --accent-soft:  #f7ebe5;
+  --accent-line:  #e5c2b4;
 
-  /* Geometry ------------------------------------------------------------- */
-  --r-sm: 8px;
-  --r-md: 12px;
-  --r-lg: 16px;
-  --r-xl: 22px;
+  /* Second crayon - bleu (les composants l'appellent encore `teal`) ------ */
+  --blue:         #2f5f97;
+  --blue-deep:    #234b79;
+  --blue-soft:    #e9eff6;
+  --blue-line:    #c3d2e5;
 
-  --shadow-sm: 0 1px 2px rgba(21,23,29,.05), 0 2px 6px rgba(21,23,29,.04);
-  --shadow-md: 0 2px 4px rgba(21,23,29,.04), 0 10px 24px rgba(21,23,29,.06);
-  --shadow-lg: 0 4px 8px rgba(21,23,29,.05), 0 24px 48px rgba(21,23,29,.09);
+  /* Géométrie : presque pas d'arrondi, le crayon fait les coins ----------- */
+  --r-sm: 2px;
+  --r-md: 3px;
+  --r-lg: 4px;
+  --r-xl: 4px;
 
   /* Type ----------------------------------------------------------------- */
-  --font-sans:  'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
-  --font-mono:  'Geist Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-sans:  'IBM Plex Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+  --font-mono:  'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --font-serif: 'Instrument Serif', 'Iowan Old Style', Palatino, Georgia, serif;
 
   /* Slidev overrides ----------------------------------------------------- */

@@ -2,59 +2,95 @@
    Components - the deck's visual vocabulary
    ══════════════════════════════════════════════════════════════════════════ */
 
+/* ── Cadre au crayon ───────────────────────────────────────────────────────
+   Un pseudo-élément ::after reçoit l'un des quatre cadres de pencil.ts en
+   masque découpé en 9 : les coins gardent leur dépassement, les côtés
+   s'adaptent. La couleur est celle de --pc, graphite par défaut. On alterne
+   les cadres pour que deux blocs voisins ne soient jamais tracés pareil. */
+
+/* :where() pour que chaque bloc puisse changer de crayon sans surenchère. */
+:where(.card, .card-accent, .card-teal, .speaker, .act, .goal, .criterion,
+    .role, .choice, .step, .bullet, .chips li, .pipeline, .era-card,
+    .fig-paper .fig-media, .fig-screen .fig-media) {
+  position: relative;
+  --pc: var(--graphite);
+  --pc-o: 0.78;
+}
+:is(.card, .card-accent, .card-teal, .speaker, .act, .goal, .criterion,
+    .role, .choice, .step, .bullet, .chips li, .pipeline, .era-card,
+    .fig-paper .fig-media, .fig-screen .fig-media)::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  pointer-events: none;
+  background: var(--pc);
+  opacity: var(--pc-o);
+  -webkit-mask-box-image: var(--pc-frame-1) 28 / 28px stretch round;
+}
+:is(.card, .card-accent, .card-teal, .speaker, .act, .goal, .criterion,
+    .role, .choice, .step, .bullet, .chips li, .pipeline, .era-card):nth-child(4n+2)::after {
+  -webkit-mask-box-image: var(--pc-frame-2) 28 / 28px stretch round;
+}
+:is(.card, .card-accent, .card-teal, .speaker, .act, .goal, .criterion,
+    .role, .choice, .step, .bullet, .chips li, .pipeline, .era-card):nth-child(4n+3)::after {
+  -webkit-mask-box-image: var(--pc-frame-3) 28 / 28px stretch round;
+}
+:is(.card, .card-accent, .card-teal, .speaker, .act, .goal, .criterion,
+    .role, .choice, .step, .bullet, .chips li, .pipeline, .era-card):nth-child(4n)::after {
+  -webkit-mask-box-image: var(--pc-frame-4) 28 / 28px stretch round;
+}
+
 /* ── Eyebrow / kicker ──────────────────────────────────────────────────── */
 
 .eyebrow {
   display: flex;
   width: fit-content;
   align-items: center;
-  gap: 0.55em;
+  gap: 0.6em;
   font-family: var(--font-mono);
   font-size: 0.66rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  font-weight: 500;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--accent-deep);
 }
 .eyebrow::before {
   content: '';
-  width: 14px;
-  height: 2px;
-  border-radius: 2px;
+  width: 16px;
+  height: 7px;
   background: var(--accent);
+  -webkit-mask: var(--pc-dash) center / 100% 100% no-repeat;
+          mask: var(--pc-dash) center / 100% 100% no-repeat;
 }
-.eyebrow.is-teal { color: var(--teal-deep); }
-.eyebrow.is-teal::before { background: var(--teal); }
+.eyebrow.is-teal { color: var(--blue-deep); }
+.eyebrow.is-teal::before { background: var(--blue); }
 .eyebrow.is-quiet { color: var(--muted); }
-.eyebrow.is-quiet::before { background: var(--line-2); }
+.eyebrow.is-quiet::before { background: var(--graphite-2); }
 
-/* ── Tag / pill ────────────────────────────────────────────────────────── */
+/* ── Tag ───────────────────────────────────────────────────────────────── */
 
 .tag {
   display: inline-flex;
   align-items: center;
   gap: 0.4em;
   font-family: var(--font-mono);
-  font-size: 0.63rem;
-  font-weight: 600;
-  letter-spacing: 0.09em;
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--accent-deep);
   background: var(--accent-soft);
-  border: 1px solid var(--accent-line);
-  border-radius: 999px;
-  padding: 0.22em 0.72em;
+  border-radius: var(--r-sm);
+  padding: 0.22em 0.6em;
   white-space: nowrap;
 }
 .tag.is-teal {
-  color: var(--teal-deep);
-  background: var(--teal-soft);
-  border-color: var(--teal-line);
+  color: var(--blue-deep);
+  background: var(--blue-soft);
 }
 .tag.is-plain {
   color: var(--muted);
-  background: var(--surface);
-  border-color: var(--line);
+  background: var(--surface-2);
 }
 .tag.is-code {
   text-transform: none;
@@ -64,40 +100,17 @@
 
 /* ── Cards ─────────────────────────────────────────────────────────────── */
 
-.card {
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: var(--r-lg);
-  padding: 1rem 1.15rem;
-  box-shadow: var(--shadow-sm);
-}
-
-.card-soft {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--r-lg);
-  padding: 1rem 1.15rem;
-}
-
-.card-flat {
-  border: 1px solid var(--line);
-  border-radius: var(--r-lg);
-  padding: 1rem 1.15rem;
-}
-
-.card-accent {
-  background: var(--accent-soft);
-  border: 1px solid var(--accent-line);
-  border-radius: var(--r-lg);
-  padding: 1rem 1.15rem;
-}
-
+.card,
+.card-soft,
+.card-accent,
 .card-teal {
-  background: var(--teal-soft);
-  border: 1px solid var(--teal-line);
-  border-radius: var(--r-lg);
   padding: 1rem 1.15rem;
+  border-radius: var(--r-lg);
 }
+
+.card-soft { background: var(--surface); }
+.card-accent { --pc: var(--accent); --pc-o: 0.9; }
+.card-teal { --pc: var(--blue); --pc-o: 0.85; }
 
 .card-title {
   font-size: 0.95rem;
@@ -106,91 +119,78 @@
   margin-bottom: 0.3rem;
 }
 
-/* ── Numbered badge ────────────────────────────────────────────────────── */
+/* ── Numéro entouré au crayon ──────────────────────────────────────────── */
 
 .num {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 1.6rem;
   height: 1.6rem;
   flex: none;
-  border-radius: 50%;
-  background: var(--ink);
-  color: var(--paper);
+  color: var(--ink);
   font-family: var(--font-mono);
   font-size: 0.74rem;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1;
+  --pc: var(--graphite);
 }
-.num.is-accent { background: var(--accent); color: #fff; }
-.num.is-teal   { background: var(--teal);   color: #fff; }
-.num.is-ghost  {
-  background: transparent;
-  color: var(--muted);
-  border: 1px solid var(--line-2);
+.num::before {
+  content: '';
+  position: absolute;
+  inset: -0.28rem;
+  background: var(--pc);
+  -webkit-mask: var(--pc-circle-1) center / 100% 100% no-repeat;
+          mask: var(--pc-circle-1) center / 100% 100% no-repeat;
 }
+:nth-child(2n) > .num::before,
+:nth-child(2n) > * > .num::before {
+  -webkit-mask-image: var(--pc-circle-2);
+          mask-image: var(--pc-circle-2);
+}
+:nth-child(3n) > .num::before,
+:nth-child(3n) > * > .num::before {
+  -webkit-mask-image: var(--pc-circle-3);
+          mask-image: var(--pc-circle-3);
+}
+.num.is-accent { color: var(--accent-deep); --pc: var(--accent); }
+.num.is-teal   { color: var(--blue-deep);   --pc: var(--blue); }
+.num.is-ghost  { color: var(--muted);       --pc: var(--graphite-2); }
 .num.is-lg { width: 2rem; height: 2rem; font-size: 0.85rem; }
-
-/* ── Figures ───────────────────────────────────────────────────────────── */
-
-.figure {
-  border: 1px solid var(--line);
-  border-radius: var(--r-lg);
-  background: var(--white);
-  overflow: hidden;
-  box-shadow: var(--shadow-md);
-}
-.figure img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-.figure-body {
-  padding: 0.6rem 0.7rem 0.5rem;
-}
-.figure-body img { border-radius: var(--r-sm); }
-
-.figure-caption {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 0.9rem;
-  font-size: 0.72rem;
-  color: var(--muted);
-  border-top: 1px solid var(--line);
-  background: var(--surface);
-}
-.figure-caption a { border-bottom-color: var(--line-2); }
-
-.figure-bare img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
 
 /* ── Callouts ──────────────────────────────────────────────────────────── */
 
+/* « À retenir » : une accolade et une flèche à la sanguine, pas de fond. */
 .takeaway {
   position: relative;
   display: block;
-  padding: 0.8rem 1.1rem 0.8rem 2.5rem;
-  border-left: 3px solid var(--accent);
-  background: var(--accent-soft);
-  border-radius: 0 var(--r-md) var(--r-md) 0;
-  font-size: 0.92rem;
+  padding: 0.4rem 0.6rem 0.4rem 3.1rem;
+  font-size: 0.95rem;
   line-height: 1.5;
   color: var(--ink);
 }
 .takeaway::before {
-  content: '\2192';
+  content: '';
   position: absolute;
-  left: 1rem;
-  top: 0.8rem;
-  font-family: var(--font-mono);
-  color: var(--accent);
-  font-weight: 600;
-  line-height: 1.5;
+  left: 0;
+  top: 0.15rem;
+  bottom: 0.15rem;
+  width: 6px;
+  background: var(--accent);
+  -webkit-mask: var(--pc-stem) center / 100% 100% no-repeat;
+          mask: var(--pc-stem) center / 100% 100% no-repeat;
+}
+.takeaway::after {
+  content: '';
+  position: absolute;
+  left: 0.95rem;
+  top: calc(0.4rem + 0.75em - 6px);
+  width: 25px;
+  height: 12px;
+  background: var(--accent);
+  -webkit-mask: var(--pc-arrow) center / 100% 100% no-repeat;
+          mask: var(--pc-arrow) center / 100% 100% no-repeat;
 }
 
 .note {
@@ -211,7 +211,7 @@
 .muted  { color: var(--muted); }
 .quiet  { color: var(--quiet); }
 .accent { color: var(--accent-deep); }
-.tealtx { color: var(--teal-deep); }
+.tealtx { color: var(--blue-deep); }
 .mono   { font-family: var(--font-mono); }
 .serif  { font-family: var(--font-serif); }
 
@@ -220,12 +220,6 @@
 .t-md { font-size: 0.93rem; line-height: 1.55; }
 .t-lg { font-size: 1.06rem; line-height: 1.55; }
 
-.hairline {
-  height: 1px;
-  background: var(--line);
-  border: 0;
-}
-
 /* ── Key/value rows ────────────────────────────────────────────────────── */
 
 .bullet {
@@ -233,29 +227,24 @@
   align-items: center;
   gap: 0.9rem;
   padding: 0.55rem 0.9rem;
-  border: 1px solid var(--line);
-  border-radius: var(--r-md);
-  background: var(--white);
+  --pc-o: 0.6;
 }
 .bullet + .bullet { margin-top: 0.4rem; }
 
-/* ── Logo plate ────────────────────────────────────────────────────────── */
+/* ── Logos ─────────────────────────────────────────────────────────────── */
 
 .logo-bar {
   display: flex;
   align-items: center;
-  gap: 1.4rem;
-  padding: 0.5rem 1.1rem;
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: var(--r-lg);
-  box-shadow: var(--shadow-sm);
+  gap: 1.6rem;
 }
 .logo-bar img {
   display: block;
   width: auto;
   object-fit: contain;
-  filter: saturate(1);
+  mix-blend-mode: multiply;
+  /* certains logos ont un fond presque blanc : on le ramène au papier */
+  filter: brightness(1.04) contrast(1.05);
 }
 
 /* ── Avatar ────────────────────────────────────────────────────────────── */
@@ -265,17 +254,6 @@
   border-radius: 50%;
   background: var(--surface);
 }
-
-/* ── Screen-frame for terminal screenshots ─────────────────────────────── */
-
-.screen {
-  border-radius: var(--r-lg);
-  overflow: hidden;
-  border: 1px solid var(--line-2);
-  box-shadow: var(--shadow-md);
-  background: #1b1b25;
-}
-.screen img { display: block; width: 100%; height: auto; }
 
 /* Stretched containers whose content should sit in the optical centre ------ */
 .v-center {
