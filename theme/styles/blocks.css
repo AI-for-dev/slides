@@ -400,7 +400,6 @@
   inset: auto 0 -4px 0;
   height: 8px;
   opacity: 0.35;
-  -webkit-mask-box-image: none;
   -webkit-mask: var(--pc-rule-2) center / 100% 100% no-repeat;
           mask: var(--pc-rule-2) center / 100% 100% no-repeat;
 }

@@ -5,7 +5,7 @@ const p = withDefaults(defineProps<{
   gap?: number | string
   align?: 'start' | 'center' | 'stretch'
   content?: 'start' | 'center'
-  fill?: boolean
+  fill?: boolean | 'true'
 }>(), { cols: 2, gap: 6, align: 'stretch' })
 
 const template = () =>

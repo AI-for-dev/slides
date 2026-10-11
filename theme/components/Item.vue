@@ -3,7 +3,7 @@
 withDefaults(defineProps<{
   variant?: 'goal' | 'role' | 'adv'
   n?: string | number
-  ghost?: boolean
+  ghost?: boolean | 'true'
 }>(), { variant: 'goal' })
 </script>
 

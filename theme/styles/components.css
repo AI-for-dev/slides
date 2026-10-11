@@ -4,7 +4,7 @@
 
 /* ── Cadre au crayon ───────────────────────────────────────────────────────
    Un pseudo-élément ::after reçoit l'un des quatre cadres de pencil.ts en
-   masque découpé en 9 : les coins gardent leur dépassement, les côtés
+   masque découpé en 9 (nineSlice dans pencil.ts) : les coins gardent leur dépassement, les côtés
    s'adaptent. La couleur est celle de --pc, graphite par défaut. On alterne
    les cadres pour que deux blocs voisins ne soient jamais tracés pareil. */
 
@@ -25,19 +25,23 @@
   pointer-events: none;
   background: var(--pc);
   opacity: var(--pc-o);
-  -webkit-mask-box-image: var(--pc-frame-1) 28 / 28px stretch;
+  -webkit-mask: var(--pc-frame-1);
+          mask: var(--pc-frame-1);
 }
 :is(.card, .card-accent, .card-teal, .speaker, .act, .goal, .criterion,
     .role, .choice, .step, .bullet, .chips li, .pipeline, .era-card):nth-child(4n+2)::after {
-  -webkit-mask-box-image: var(--pc-frame-2) 28 / 28px stretch;
+  -webkit-mask: var(--pc-frame-2);
+          mask: var(--pc-frame-2);
 }
 :is(.card, .card-accent, .card-teal, .speaker, .act, .goal, .criterion,
     .role, .choice, .step, .bullet, .chips li, .pipeline, .era-card):nth-child(4n+3)::after {
-  -webkit-mask-box-image: var(--pc-frame-3) 28 / 28px stretch;
+  -webkit-mask: var(--pc-frame-3);
+          mask: var(--pc-frame-3);
 }
 :is(.card, .card-accent, .card-teal, .speaker, .act, .goal, .criterion,
     .role, .choice, .step, .bullet, .chips li, .pipeline, .era-card):nth-child(4n)::after {
-  -webkit-mask-box-image: var(--pc-frame-4) 28 / 28px stretch;
+  -webkit-mask: var(--pc-frame-4);
+          mask: var(--pc-frame-4);
 }
 
 /* ── Eyebrow / kicker ──────────────────────────────────────────────────── */
@@ -276,7 +280,8 @@ html.dark .logo-bar::after {
   pointer-events: none;
   background: var(--graphite);
   opacity: 0.55;
-  -webkit-mask-box-image: var(--pc-frame-2) 28 / 28px stretch;
+  -webkit-mask: var(--pc-frame-2);
+          mask: var(--pc-frame-2);
 }
 html.dark .avatar { box-shadow: 0 0 0 3px var(--plate); }
 

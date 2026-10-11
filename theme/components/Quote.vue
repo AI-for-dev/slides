@@ -6,7 +6,7 @@ defineProps<{
   href?: string
   hrefLabel?: string
   note?: string
-  small?: boolean
+  small?: boolean | 'true'
 }>()
 </script>
 

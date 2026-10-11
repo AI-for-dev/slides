@@ -10,8 +10,8 @@ withDefaults(defineProps<{
   /** teinte du sur-titre */
   tone?: 'accent' | 'teal'
   /** centre verticalement le contenu quand la carte est étirée */
-  center?: boolean
-  fill?: boolean
+  center?: boolean | 'true'
+  fill?: boolean | 'true'
   /** taille du texte courant de la carte */
   size?: 'xs' | 'sm' | 'md' | 'lg'
 }>(), { variant: 'plain', tone: 'accent', size: 'md', badgeTone: 'accent' })

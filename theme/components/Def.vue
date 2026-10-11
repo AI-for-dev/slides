@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /** Une ligne de `Definition`. `hero` met la ligne en avant. */
-defineProps<{ term: string; hero?: boolean }>()
+defineProps<{ term: string; hero?: boolean | 'true' }>()
 </script>
 
 <template>

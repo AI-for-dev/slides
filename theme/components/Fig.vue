@@ -8,7 +8,7 @@ withDefaults(defineProps<{
   /** 'paper' = light card, 'screen' = dark chrome for terminal captures, 'bare' = no frame */
   frame?: 'paper' | 'screen' | 'bare'
   /** object-fit behaviour inside a fixed-height parent */
-  contain?: boolean
+  contain?: boolean | 'true'
   /** hauteur fixe de la figure (CSS), l'image s'y ajuste */
   h?: string
 }>(), { frame: 'paper', contain: false })

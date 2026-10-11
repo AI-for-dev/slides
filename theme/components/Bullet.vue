@@ -3,7 +3,7 @@
 withDefaults(defineProps<{
   k?: string
   badge?: 'num' | 'tag'
-  accent?: boolean
+  accent?: boolean | 'true'
   size?: 'sm' | 'md'
 }>(), { badge: 'num', size: 'md' })
 </script>

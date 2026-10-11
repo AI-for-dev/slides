@@ -4,7 +4,7 @@
  * centrées après la première. `size` règle la taille du texte, `first` la
  * largeur de la première colonne.
  */
-withDefaults(defineProps<{ size?: 'xs' | 'sm' | 'md'; first?: string; left?: boolean }>(), { size: 'sm' })
+withDefaults(defineProps<{ size?: 'xs' | 'sm' | 'md'; first?: string; left?: boolean | 'true' }>(), { size: 'sm' })
 </script>
 
 <template>

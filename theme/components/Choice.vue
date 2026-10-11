@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps<{ k: string; title: string; hero?: boolean }>()
+defineProps<{ k: string; title: string; hero?: boolean | 'true' }>()
 </script>
 
 <template>
