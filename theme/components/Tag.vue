@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps<{ tone?: 'teal' | 'plain'; code?: boolean }>()
+defineProps<{ tone?: 'teal' | 'plain'; code?: boolean | 'true' }>()
 </script>
 
 <template>

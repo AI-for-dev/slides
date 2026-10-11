@@ -4,7 +4,7 @@ withDefaults(defineProps<{
   tag?: string
   tone?: 'muted' | 'quiet'
   /** colle la note au titre qui la précède */
-  tight?: boolean
+  tight?: boolean | 'true'
 }>(), { tone: 'muted' })
 </script>
 

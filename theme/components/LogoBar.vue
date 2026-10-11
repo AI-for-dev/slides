@@ -2,7 +2,7 @@
 import { asset } from '../lib/asset'
 
 /** Les trois logos institutionnels, toujours sur leur plaque blanche. */
-withDefaults(defineProps<{ size?: number | string; dark?: boolean }>(), { size: 46 })
+withDefaults(defineProps<{ size?: number | string; dark?: boolean | 'true' }>(), { size: 46 })
 
 const LOGOS = [
   { file: 'logo-devlog', alt: 'Réseau DevLog', scale: 1 },

@@ -2,8 +2,8 @@
 /** Pile verticale. `fill` prend la hauteur restante, `center` centre le contenu. */
 withDefaults(defineProps<{
   gap?: number | string
-  fill?: boolean
-  center?: boolean
+  fill?: boolean | 'true'
+  center?: boolean | 'true'
 }>(), { gap: 4 })
 </script>
 

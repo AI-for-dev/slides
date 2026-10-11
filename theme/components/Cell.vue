@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /** Cellule de `Cols` qui déborde sur plusieurs colonnes ou occupe toute la hauteur. */
-defineProps<{ span?: number | string; fill?: boolean }>()
+defineProps<{ span?: number | string; fill?: boolean | 'true' }>()
 </script>
 
 <template>

@@ -216,8 +216,11 @@ export function arc(cx: number, cy: number, r: number, a0: number, a1: number, r
  * Filtre « graphite » : grain du papier dans le trait et bords légèrement
  * rongés. À poser dans les `<defs>` de chaque SVG qui l'utilise.
  */
-export function graphiteFilter(id: string, seed = 3, grain = 1.1, bite = 1.6) {
-  return `<filter id="${id}" x="-20%" y="-20%" width="140%" height="140%" filterUnits="userSpaceOnUse">
+export function graphiteFilter(id: string, seed = 3, grain = 1.1, bite = 1.6, region?: [number, number, number, number]) {
+  // Sans zone explicite, les pourcentages se rapportent à la vue du SVG. Un
+  // morceau découpé loin de l'origine sortirait alors de la zone du filtre.
+  const [x, y, w, h] = region ?? ['-20%', '-20%', '140%', '140%']
+  return `<filter id="${id}" x="${x}" y="${y}" width="${w}" height="${h}" filterUnits="userSpaceOnUse">
   <feTurbulence type="fractalNoise" baseFrequency="${grain}" numOctaves="2" seed="${seed}" result="n"/>
   <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  1.8 0 0 0 -0.2" result="g"/>
   <feComposite in="SourceGraphic" in2="g" operator="in" result="t"/>

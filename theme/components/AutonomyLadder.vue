@@ -128,9 +128,8 @@ const levels = [
   height: auto;
   opacity: 0.95;
   background: var(--accent);
-  -webkit-mask: none;
-          mask: none;
-  -webkit-mask-box-image: var(--pc-frame-3) 28 / 28px stretch;
+  -webkit-mask: var(--pc-frame-3);
+          mask: var(--pc-frame-3);
 }
 .ladder-row:last-child .ladder-title { color: var(--accent-deep); }
 </style>

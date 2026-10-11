@@ -3,7 +3,7 @@
  * Sur-titre : petit label mono en capitales, précédé d'un tiret coloré.
  * `code` garde la casse, pour un nom de fichier ou un chemin.
  */
-defineProps<{ tone?: 'teal' | 'quiet'; code?: boolean }>()
+defineProps<{ tone?: 'teal' | 'quiet'; code?: boolean | 'true' }>()
 </script>
 
 <template>

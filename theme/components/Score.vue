@@ -3,7 +3,7 @@
 const p = withDefaults(defineProps<{
   v: number | string
   of?: number | string
-  hi?: boolean
+  hi?: boolean | 'true'
 }>(), { of: 20 })
 
 const pct = () => Math.max(0, Math.min(100, (100 * Number(p.v)) / Number(p.of)))

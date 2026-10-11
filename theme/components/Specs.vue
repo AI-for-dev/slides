@@ -4,7 +4,7 @@
  * `w` aligne les valeurs sur une colonne de cette largeur (retrait suspendu),
  * `raw` garde la casse de la clé (commandes, chemins, identifiants).
  */
-defineProps<{ w?: string; raw?: boolean }>()
+defineProps<{ w?: string; raw?: boolean | 'true' }>()
 </script>
 
 <template>
