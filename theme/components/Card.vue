@@ -1,6 +1,6 @@
 <script setup lang="ts">
 withDefaults(defineProps<{
-  /** plain (blanc) · soft (sable) · accent (braise) · teal (sarcelle) */
+  /** plain (cadre graphite) · soft (fond gris papier) · accent (cadre sanguine) · teal (cadre bleu) */
   variant?: 'plain' | 'soft' | 'accent' | 'teal'
   eyebrow?: string
   /** pastille et titre en tête de carte */

@@ -19,7 +19,7 @@
   position: absolute;
   left: 3rem;
   right: 3rem;
-  bottom: 1.15rem;
+  bottom: 1.1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -35,25 +35,30 @@
   color: var(--muted);
 }
 
+/* Avancement : le filet tiré à la règle, repassé au crayon jusqu'ici. */
 .slide-progress {
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 2px;
+  left: 3rem;
+  right: 3rem;
+  bottom: 2.25rem;
+  height: 1px;
   background: var(--line);
 }
 .slide-progress i {
+  position: absolute;
+  left: -2px;
+  top: -4px;
   display: block;
-  height: 100%;
+  height: 9px;
   background: var(--accent);
-  transition: width 300ms cubic-bezier(.22,.61,.36,1);
+  -webkit-mask: var(--pc-rule-3) left center / 100% 100% no-repeat;
+          mask: var(--pc-rule-3) left center / 100% 100% no-repeat;
 }
 
 /* ── default ───────────────────────────────────────────────────────────── */
 
 .slidev-layout.dflt {
-  padding: 2.1rem 3rem 3.15rem;
+  padding: 2.1rem 3rem 3.4rem;
   display: flex;
   flex-direction: column;
 }
@@ -69,10 +74,23 @@
   margin-bottom: 0.45rem;
 }
 
+/* Titre souligné au crayon, sur toute la largeur. */
 .slidev-layout.dflt .slide-body > h1 {
-  padding-bottom: 0.6rem;
-  margin-bottom: 1.05rem;
-  border-bottom: 1px solid var(--line);
+  position: relative;
+  padding-bottom: 0.7rem;
+  margin-bottom: 1.1rem;
+}
+.slidev-layout.dflt .slide-body > h1::after {
+  content: '';
+  position: absolute;
+  left: -0.3rem;
+  right: -0.1rem;
+  bottom: -4px;
+  height: 9px;
+  background: var(--graphite);
+  opacity: 0.75;
+  -webkit-mask: var(--pc-rule-1) center / 100% 100% no-repeat;
+          mask: var(--pc-rule-1) center / 100% 100% no-repeat;
 }
 
 .slidev-layout.dflt .slide-body > h1 + .lead,
@@ -81,72 +99,73 @@
   margin-bottom: 1rem;
 }
 
+/* ── Le motif de bascule, commun aux slides d'ouverture ────────────────── */
+
+.bascule {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+}
+.bascule .b-ruled { stroke: var(--ink); stroke-width: 1; }
+.bascule .b-dot   { stroke: var(--graphite); }
+.bascule .b-try   { stroke: var(--graphite); }
+.bascule .b-main  { stroke: var(--accent); }
+
 /* ── cover ─────────────────────────────────────────────────────────────── */
 
-.slidev-layout.cvr {
-  padding: 0;
-  display: grid;
-  grid-template-columns: 1fr;
-}
+.slidev-layout.cvr { padding: 0; }
 
 .cvr-inner {
   position: relative;
   height: 100%;
-  padding: 2.6rem 3.4rem 2.6rem;
+  padding: 2.4rem 3.4rem 2.3rem;
   display: flex;
   flex-direction: column;
 }
 
-.cvr-rule {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 5px;
-  background: linear-gradient(90deg, var(--accent) 0%, var(--accent) 34%, var(--teal) 34%, var(--teal) 55%, var(--line-2) 55%);
-}
-
 .slidev-layout.cvr h1 {
-  font-size: 3.7rem;
-  font-weight: 600;
-  line-height: 1.02;
-  letter-spacing: -0.04em;
+  font-size: var(--fs-display);
+  font-weight: 720;
+  line-height: 0.98;
+  letter-spacing: -0.025em;
 }
 .slidev-layout.cvr h1 .accent-word {
   color: var(--accent);
 }
 .slidev-layout.cvr h2 {
-  font-family: var(--font-serif);
-  font-size: 1.75rem;
+  font-family: var(--font-quote);
+  font-size: 1.8rem;
   font-weight: 400;
   font-style: italic;
   color: var(--ink-soft);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.005em;
 }
+
+.slidev-layout.cvr .rule-line { visibility: hidden; }
 
 .cover-meta {
   display: flex;
   align-items: center;
   gap: 0.7rem;
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--muted);
-}
-.cover-meta .dot {
-  width: 4px; height: 4px; border-radius: 50%;
-  background: var(--line-2);
 }
 
 .author {
   display: flex;
   align-items: baseline;
-  gap: 0.55rem;
+  gap: 0.6rem;
 }
 .author .who {
-  font-size: 1rem;
-  font-weight: 600;
+  font-family: var(--font-title);
+  font-size: 1.05rem;
+  font-weight: 640;
   letter-spacing: -0.01em;
   color: var(--ink);
 }
@@ -159,105 +178,104 @@
 
 .slidev-layout.sect {
   padding: 0;
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--surface);
 }
+
+.sect-numeral {
+  position: absolute;
+  right: 2.2rem;
+  top: 2.4rem;
+  width: 27rem;
+  height: auto;
+  pointer-events: none;
+}
+.pencil-num .pn-glyph {
+  font-family: var(--font-title);
+  font-size: 300px;
+  font-weight: 760;
+  letter-spacing: 0;
+}
+.pencil-num .pn-hatch  { stroke: var(--graphite); stroke-width: 1.1; }
+.pencil-num .pn-line   { fill: none; stroke: var(--ink); stroke-width: 1.3; }
+.pencil-num .pn-line-2 { stroke-width: 0.8; opacity: 0.5; }
+.pencil-num .pn-erased { fill: none; stroke: var(--graphite-2); stroke-width: 1; opacity: 0.35; }
 
 .sect-inner {
   position: relative;
   height: 100%;
-  padding: 3rem 3.4rem;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  align-items: center;
-  gap: 3rem;
+  padding: 3.3rem 3.4rem 7rem;
+  width: 55%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
 }
 
 .slidev-layout.sect h1 {
-  color: var(--paper);
-  font-size: 2.9rem;
-  font-weight: 600;
-  line-height: 1.04;
-  letter-spacing: -0.035em;
+  font-size: var(--fs-section);
+  font-weight: 720;
+  line-height: 1;
+  letter-spacing: -0.022em;
 }
 .slidev-layout.sect h2 {
-  color: rgba(253,251,247,.55);
+  color: var(--muted);
   font-size: 1rem;
   font-weight: 400;
 }
-.slidev-layout.sect .eyebrow { color: #ff8a5e; }
-.slidev-layout.sect .eyebrow::before { background: #ff8a5e; }
 
 .sect-index {
   position: absolute;
-  right: 3.4rem;
-  bottom: 2.2rem;
+  left: 3.4rem;
+  bottom: 1.6rem;
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: 0.6rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(253,251,247,.35);
+  color: var(--muted);
 }
 
-.sect-num {
-  font-family: var(--font-mono);
-  font-size: 5.6rem;
-  font-weight: 500;
-  line-height: 0.86;
-  letter-spacing: -0.05em;
-  color: transparent;
-  -webkit-text-stroke: 1.5px rgba(253,251,247,.32);
-}
+.slidev-layout.sect .sect-head > .eyebrow + h1 { margin-top: 1rem; }
+.slidev-layout.sect .sect-head > h1:first-child { margin-top: 0; }
 
 .agenda {
   display: flex;
   flex-direction: column;
   gap: 0;
 }
-/* Inline emphasis has to flip on the dark layouts ------------------------- */
-
-.slidev-layout.sect strong,
-.slidev-layout.stmt strong {
-  color: var(--paper);
-  font-weight: 600;
-}
-.slidev-layout.sect code,
-.slidev-layout.stmt code {
-  background: rgba(253, 251, 247, 0.08);
-  border-color: rgba(253, 251, 247, 0.18);
-  color: var(--paper);
-}
 
 /* ── quote ─────────────────────────────────────────────────────────────── */
 
 .slidev-layout.qte {
-  padding: 3rem 3.4rem 2.6rem;
+  padding: 3rem 3.4rem 3.4rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: var(--surface);
 }
 
+/* Le guillemet est dessiné comme les numéros de partie : hachuré, repassé,
+   avec sa version gommée, mais à la sanguine. Seul le haut du glyphe porte
+   de l'encre, d'où la marge négative. */
 .qte-mark {
-  font-family: var(--font-serif);
-  font-size: 3.6rem;
-  line-height: 0.62;
-  height: 1.5rem;
-  color: var(--accent);
-  opacity: 0.4;
+  display: block;
+  width: 6.2rem;
+  height: auto;
+  margin: 0 0 0.4rem -0.5rem;
   user-select: none;
 }
+.qte-mark .pn-glyph  { font-family: var(--font-quote); font-size: 600px; font-weight: 400; }
+.qte-mark .pn-hatch  { stroke: var(--accent); }
+.qte-mark .pn-line   { stroke: var(--accent-deep); }
+.qte-mark .pn-erased { stroke: var(--accent-line); opacity: 0.6; }
 
 .qte-text {
-  font-family: var(--font-serif);
+  font-family: var(--font-quote);
   font-size: 1.55rem;
   line-height: 1.38;
-  letter-spacing: -0.005em;
   color: var(--ink);
   max-width: 52rem;
   text-wrap: pretty;
 }
-.qte-text.is-small { font-size: 1.24rem; line-height: 1.5; max-width: 46rem; }
+.qte-text.is-small { font-size: 1.24rem; line-height: 1.5; max-width: 47rem; }
 .qte-text em { color: var(--accent-deep); font-style: italic; }
 .qte-text .add { color: var(--muted); }
 
@@ -271,31 +289,29 @@
   color: var(--muted);
 }
 .qte-cite .bar {
-  width: 22px; height: 2px; border-radius: 2px;
-  background: var(--accent);
+  width: 22px;
+  height: 8px;
   flex: none;
+  background: var(--accent);
+  -webkit-mask: var(--pc-dash) center / 100% 100% no-repeat;
+          mask: var(--pc-dash) center / 100% 100% no-repeat;
 }
 
 /* ── statement ─────────────────────────────────────────────────────────── */
 
 .slidev-layout.stmt {
-  padding: 3rem;
+  padding: 3rem 3rem 5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--surface);
 }
+.slidev-layout.stmt > :not(.bascule) { position: relative; }
 .slidev-layout.stmt h1 {
-  color: var(--paper);
-  font-size: 3.4rem;
-  font-weight: 600;
-  letter-spacing: -0.04em;
+  font-size: var(--fs-section);
+  font-weight: 720;
+  letter-spacing: -0.022em;
 }
-.slidev-layout.stmt .eyebrow { color: #ff8a5e; }
-.slidev-layout.stmt .eyebrow::before { background: #ff8a5e; }
-.slidev-layout.stmt a { color: #ffb098; border-bottom-color: rgba(255,176,152,.45); }
-.slidev-layout.stmt a:hover { color: #fff; border-bottom-color: #fff; }
-.slidev-layout.stmt .muted { color: rgba(253,251,247,.6); }
+.slidev-layout.stmt .muted { color: var(--muted); }

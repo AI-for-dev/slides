@@ -1,0 +1,401 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-11T10:23:57+00:00",
+  "title": "Design System: IA4Dev 2026",
+  "extensions": {
+    "colorMeta": {
+      "sanguine": {
+        "role": "primary",
+        "displayName": "Sanguine",
+        "canonical": "oklch(54.0% 0.148 36)",
+        "tonalRamp": [
+          "#200000",
+          "#440f02",
+          "#6b2715",
+          "#94402a",
+          "#bb5f47",
+          "#d88670",
+          "#f7b09d",
+          "#ffdfd0"
+        ]
+      },
+      "blue": {
+        "role": "secondary",
+        "displayName": "Crayon bleu",
+        "canonical": "oklch(48.0% 0.105 254)",
+        "tonalRamp": [
+          "#000926",
+          "#00234b",
+          "#104074",
+          "#2f5f97",
+          "#4f80ba",
+          "#6fa2de",
+          "#9dc8fc",
+          "#d0f2ff"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Encre graphite",
+        "canonical": "oklch(23.1% 0.008 275)",
+        "tonalRamp": [
+          "#0a0b0f",
+          "#232428",
+          "#3e3f44",
+          "#5c5d62",
+          "#7c7d82",
+          "#9d9ea3",
+          "#c2c4c9",
+          "#edeef4"
+        ]
+      },
+      "graphite": {
+        "role": "neutral",
+        "displayName": "Mine graphite",
+        "canonical": "oklch(36.8% 0.011 271)",
+        "tonalRamp": [
+          "#090b10",
+          "#222429",
+          "#3e4046",
+          "#5b5d64",
+          "#7b7d84",
+          "#9c9ea5",
+          "#c1c4cb",
+          "#eceef6"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Papier blanc cassé",
+        "canonical": "oklch(98.5% 0.004 91)",
+        "tonalRamp": [
+          "#0c0b09",
+          "#252422",
+          "#40403d",
+          "#5e5d5b",
+          "#7e7d7a",
+          "#9f9e9b",
+          "#c5c4c1",
+          "#efeeeb"
+        ]
+      },
+      "sanguine-deep": {
+        "role": "primary",
+        "displayName": "Sanguine appuyée"
+      },
+      "sanguine-soft": {
+        "role": "primary",
+        "displayName": "Sanguine lavée"
+      },
+      "sanguine-line": {
+        "role": "primary",
+        "displayName": "Filet sanguine"
+      },
+      "blue-deep": {
+        "role": "secondary",
+        "displayName": "Bleu appuyé"
+      },
+      "blue-soft": {
+        "role": "secondary",
+        "displayName": "Bleu lavé"
+      },
+      "blue-line": {
+        "role": "secondary",
+        "displayName": "Filet bleu"
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Papier de fond"
+      },
+      "surface-2": {
+        "role": "neutral",
+        "displayName": "Papier de fond appuyé"
+      },
+      "raised": {
+        "role": "neutral",
+        "displayName": "Surface surélevée (--white)"
+      },
+      "plate": {
+        "role": "neutral",
+        "displayName": "Plaque claire"
+      },
+      "ink-soft": {
+        "role": "neutral",
+        "displayName": "Encre douce"
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Encre secondaire"
+      },
+      "quiet": {
+        "role": "neutral",
+        "displayName": "Encre éteinte"
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Filet"
+      },
+      "line-2": {
+        "role": "neutral",
+        "displayName": "Filet appuyé"
+      },
+      "graphite-2": {
+        "role": "neutral",
+        "displayName": "Mine claire"
+      },
+      "paper-dark": {
+        "role": "neutral",
+        "displayName": "Ardoise graphite (sombre)"
+      },
+      "plate-dark": {
+        "role": "neutral",
+        "displayName": "Plaque claire (sombre)"
+      },
+      "sanguine-dark": {
+        "role": "primary",
+        "displayName": "Sanguine (sombre)"
+      },
+      "blue-dark": {
+        "role": "secondary",
+        "displayName": "Crayon bleu (sombre)"
+      },
+      "ink-dark": {
+        "role": "neutral",
+        "displayName": "Crayon clair (sombre)"
+      }
+    },
+    "colorSchemes": {
+      "light": ":root dans theme/styles/tokens.css",
+      "dark": "html.dark dans theme/styles/tokens.css ; les clés *-dark du frontmatter",
+      "aliases": {
+        "--teal": "--blue",
+        "--teal-deep": "--blue-deep",
+        "--teal-soft": "--blue-soft",
+        "--teal-line": "--blue-line",
+        "--font-sans": "--font-text",
+        "--white": "surface surélevée, suit le schéma"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Titre de couverture (--fs-display)."
+      },
+      "section": {
+        "displayName": "Section",
+        "purpose": "Titre des slides de partie et d'énoncé (--fs-section)."
+      },
+      "headline": {
+        "displayName": "Titre de slide",
+        "purpose": "h1 des slides ordinaires, souligné au crayon (--fs-h1)."
+      },
+      "title": {
+        "displayName": "Titre de bloc",
+        "purpose": "Titres de carte, d'acte, d'objectif (--fs-block)."
+      },
+      "figure": {
+        "displayName": "Chiffre léger",
+        "purpose": "Grands chiffres 01, 02 des critères et actes."
+      },
+      "subtitle": {
+        "displayName": "Sous-titre",
+        "purpose": "h2 en Lexend, couleur muted."
+      },
+      "body": {
+        "displayName": "Texte",
+        "purpose": "Texte courant, Lexend 16px."
+      },
+      "lead": {
+        "displayName": "Chapeau",
+        "purpose": "Phrase d'introduction sous un titre, max 46rem."
+      },
+      "label": {
+        "displayName": "Étiquette",
+        "purpose": "Mono capitales : en-têtes de tableau, clés, étiquettes."
+      },
+      "footer": {
+        "displayName": "Pied de page",
+        "purpose": "Mono capitales quiet, section et compteur."
+      },
+      "code": {
+        "displayName": "Code",
+        "purpose": "Blocs de code (12/18px, variantes 10.5 et 9.5px)."
+      },
+      "quote": {
+        "displayName": "Citation",
+        "purpose": "Instrument Serif, citations et exergues seulement."
+      }
+    },
+    "shadows": [],
+    "motion": [],
+    "pencil": {
+      "source": "theme/lib/pencil.ts (traits seedés, mulberry32) et theme/styles/pencil.ts (variables --pc-*)",
+      "masks": [
+        "--pc-rule-1..3 (filets 1200×10)",
+        "--pc-frame-1..4 (cadres 1000×120, masque 9 parties, coins 28px, côtés verticaux droits)",
+        "--pc-circle-1..4 (cercles 48×48)",
+        "--pc-dash (puce 20×10)",
+        "--pc-arrow (flèche 38×18)",
+        "--pc-stem (trait vertical 10×300)"
+      ],
+      "frameInset": "4px",
+      "frameOpacity": {
+        "default": 0.78,
+        "row": "0.45 à 0.6",
+        "hero": "0.9 à 0.95"
+      },
+      "grainFilter": "feTurbulence fractalNoise + feDisplacementMap (graphiteFilter)"
+    },
+    "breakpoints": []
+  },
+  "components": [
+    {
+      "name": "Carte cernée au crayon",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Bloc de contenu sans fond, cerné d'un cadre au crayon graphite en masque 9 parties.",
+      "html": "<div class=\"ds-card\"><div class=\"ds-card-title\">Le harnais</div><p>Tout ce qui entoure le modèle : outils, contexte, vérification.</p></div>",
+      "css": ".ds-card{position:relative;--pc:var(--graphite,#3d3f45);--pc-o:.78;padding:1rem 1.15rem;border-radius:4px;background:transparent;color:var(--ink,#1c1d21);font-family:'Lexend Variable', 'Lexend', ui-sans-serif, system-ui, sans-serif;font-size:.93rem;line-height:1.55;max-width:22rem} .ds-card::after{content:'';position:absolute;inset:-4px;pointer-events:none;background:var(--pc);opacity:var(--pc-o);-webkit-mask-box-image:var(--pc-frame-1,url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 120'><g fill='none' stroke='%23000' stroke-linecap='round' stroke-width='1.35'><path d='M5 9.4 Q250 8.1 500 9.6 T996 8.8'/><path d='M4 111.2 Q250 112.6 500 110.9 T995 111.6'/><path d='M9 4 L9 116' stroke-width='1.55'/><path d='M991 5 L991 115' stroke-width='1.55'/></g></svg>\")) 28 / 28px stretch;mask-border:var(--pc-frame-1,url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 120'><g fill='none' stroke='%23000' stroke-linecap='round' stroke-width='1.35'><path d='M5 9.4 Q250 8.1 500 9.6 T996 8.8'/><path d='M4 111.2 Q250 112.6 500 110.9 T995 111.6'/><path d='M9 4 L9 116' stroke-width='1.55'/><path d='M991 5 L991 115' stroke-width='1.55'/></g></svg>\")) 28 / 28px stretch;} .ds-card:focus-visible{outline:1px solid var(--accent,#b4472a);outline-offset:6px} .ds-card-title{font-family:'Bricolage Grotesque Variable', 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;font-size:1.06rem;font-weight:640;letter-spacing:-.015em;line-height:1.2;margin-bottom:.3rem} .ds-card p{margin:0}"
+    },
+    {
+      "name": "Carte mise en avant (sanguine)",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "La carte à retenir : même cadre, crayon sanguine plus appuyé.",
+      "html": "<div class=\"ds-card-accent\"><div class=\"ds-card-title\">2026</div><p>Le cycle complet de développement.</p></div>",
+      "css": ".ds-card-accent{position:relative;--pc:var(--graphite,#3d3f45);--pc-o:.78;--pc:var(--accent,#b4472a);--pc-o:.9;padding:1rem 1.15rem;border-radius:4px;color:var(--ink,#1c1d21);font-family:'Lexend Variable', 'Lexend', ui-sans-serif, system-ui, sans-serif;font-size:.93rem;line-height:1.55;max-width:22rem} .ds-card-accent::after{content:'';position:absolute;inset:-4px;pointer-events:none;background:var(--pc);opacity:var(--pc-o);-webkit-mask-box-image:var(--pc-frame-1,url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 120'><g fill='none' stroke='%23000' stroke-linecap='round' stroke-width='1.35'><path d='M5 9.4 Q250 8.1 500 9.6 T996 8.8'/><path d='M4 111.2 Q250 112.6 500 110.9 T995 111.6'/><path d='M9 4 L9 116' stroke-width='1.55'/><path d='M991 5 L991 115' stroke-width='1.55'/></g></svg>\")) 28 / 28px stretch;mask-border:var(--pc-frame-1,url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 120'><g fill='none' stroke='%23000' stroke-linecap='round' stroke-width='1.35'><path d='M5 9.4 Q250 8.1 500 9.6 T996 8.8'/><path d='M4 111.2 Q250 112.6 500 110.9 T995 111.6'/><path d='M9 4 L9 116' stroke-width='1.55'/><path d='M991 5 L991 115' stroke-width='1.55'/></g></svg>\")) 28 / 28px stretch;} .ds-card-accent .ds-card-title{font-family:'Bricolage Grotesque Variable', 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;font-size:1.06rem;font-weight:640;letter-spacing:-.015em;color:var(--accent-deep,#8f3419);margin-bottom:.3rem} .ds-card-accent p{margin:0}"
+    },
+    {
+      "name": "Carte pleine",
+      "kind": "card",
+      "refersTo": "card-soft",
+      "description": "Bloc de fond sur le papier un cran plus sombre, sans cadre.",
+      "html": "<div class=\"ds-card-soft\"><p>Pas de volonté de promouvoir l'usage de l'IA : à chacun de construire son positionnement.</p></div>",
+      "css": ".ds-card-soft{padding:1rem 1.15rem;border-radius:4px;background:var(--surface,#f3f2ed);color:var(--ink,#1c1d21);font-family:'Lexend Variable', 'Lexend', ui-sans-serif, system-ui, sans-serif;font-size:.93rem;line-height:1.55;max-width:22rem} .ds-card-soft p{margin:0}"
+    },
+    {
+      "name": "Étiquettes",
+      "kind": "chip",
+      "refersTo": "tag",
+      "description": "Étiquette mono en capitales sur fond lavé : sanguine, bleu, neutre.",
+      "html": "<span class=\"ds-tag\">À retenir</span> <span class=\"ds-tag ds-tag-blue\">Outil</span> <span class=\"ds-tag ds-tag-plain\">Option</span>",
+      "css": ".ds-tag{display:inline-flex;align-items:center;font-family:'Atkinson Hyperlegible Mono Variable', 'Atkinson Hyperlegible Mono', ui-monospace, Menlo, monospace;font-size:.62rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep,#8f3419);background:var(--accent-soft,#f7ebe5);border-radius:2px;padding:.22em .6em;white-space:nowrap} .ds-tag-blue{color:var(--blue-deep,#234b79);background:var(--blue-soft,#e9eff6)} .ds-tag-plain{color:var(--muted,#6a6c72);background:var(--surface-2,#ebe9e2)}"
+    },
+    {
+      "name": "Numéro entouré",
+      "kind": "custom",
+      "refersTo": "num",
+      "description": "Chiffre mono dans un cercle au crayon, graphite ou sanguine.",
+      "html": "<span class=\"ds-num\">1</span> <span class=\"ds-num ds-num-accent\">2</span>",
+      "css": ".ds-num{position:relative;display:inline-flex;align-items:center;justify-content:center;width:1.6rem;height:1.6rem;margin:.3rem;color:var(--ink,#1c1d21);font-family:'Atkinson Hyperlegible Mono Variable', 'Atkinson Hyperlegible Mono', ui-monospace, Menlo, monospace;font-size:.74rem;font-weight:500;line-height:1;--pc:var(--graphite,#3d3f45)} .ds-num::before{content:'';position:absolute;inset:-.28rem;background:var(--pc);-webkit-mask:var(--pc-circle-1,url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><path d='M40 18 Q36 6 22 6.5 Q6 8 6 25 Q7 41 24 42 Q41 41 42 24 Q42 15 33 10' fill='none' stroke='%23000' stroke-width='1.3' stroke-linecap='round'/></svg>\")) center/100% 100% no-repeat;mask:var(--pc-circle-1,url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><path d='M40 18 Q36 6 22 6.5 Q6 8 6 25 Q7 41 24 42 Q41 41 42 24 Q42 15 33 10' fill='none' stroke='%23000' stroke-width='1.3' stroke-linecap='round'/></svg>\")) center/100% 100% no-repeat} .ds-num-accent{color:var(--accent-deep,#8f3419);--pc:var(--accent,#b4472a)}"
+    },
+    {
+      "name": "À retenir",
+      "kind": "custom",
+      "refersTo": "takeaway",
+      "description": "Trait vertical et flèche à la sanguine, sans fond ni cadre.",
+      "html": "<div class=\"ds-takeaway\">L'unité de travail est passée du <strong>fragment</strong> au <strong>cycle complet</strong>.</div>",
+      "css": ".ds-takeaway{position:relative;padding:.4rem .6rem .4rem 3.1rem;font-family:'Lexend Variable', 'Lexend', ui-sans-serif, system-ui, sans-serif;font-size:.95rem;line-height:1.5;color:var(--ink,#1c1d21)} .ds-takeaway strong{font-weight:680} .ds-takeaway::before{content:'';position:absolute;left:0;top:.15rem;bottom:.15rem;width:2px;background:var(--accent,#b4472a);opacity:.8} .ds-takeaway::after{content:'';position:absolute;left:.95rem;top:calc(.4rem + .75em - 4px);width:25px;height:8px;background:var(--accent,#b4472a);-webkit-mask:var(--pc-arrow,url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 10'><path d='M3 5.5 Q10 4.6 17 4.5' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round'/></svg>\")) center/100% 100% no-repeat;mask:var(--pc-arrow,url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 10'><path d='M3 5.5 Q10 4.6 17 4.5' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round'/></svg>\")) center/100% 100% no-repeat}"
+    },
+    {
+      "name": "Sommaire de partie",
+      "kind": "nav",
+      "refersTo": "agenda-row",
+      "description": "Rangées numérotées entre filets nets, numéros mono sanguine.",
+      "html": "<ul class=\"ds-agenda\"><li><span>01</span>Quelques bases sur les LLM</li><li><span>02</span>La montée des modèles open weight</li><li><span>03</span>Planifier, réaliser</li></ul>",
+      "css": ".ds-agenda{list-style:none;margin:0;padding:0;max-width:28rem;font-family:'Lexend Variable', 'Lexend', ui-sans-serif, system-ui, sans-serif} .ds-agenda li{position:relative;padding:.55rem 0 .55rem 2.4rem;border-top:1px solid var(--line-2,#cdcac1);font-size:.9rem;color:var(--ink-soft,#3b3d43)} .ds-agenda li:last-child{border-bottom:1px solid var(--line-2,#cdcac1)} .ds-agenda span{position:absolute;left:0;top:.82rem;font-family:'Atkinson Hyperlegible Mono Variable', 'Atkinson Hyperlegible Mono', ui-monospace, Menlo, monospace;font-size:.66rem;color:var(--accent,#b4472a)}"
+    },
+    {
+      "name": "Pied de page et avancement",
+      "kind": "nav",
+      "refersTo": "slide-foot",
+      "description": "Pied de page mono et règle nette repassée à la sanguine jusqu'à la slide courante.",
+      "html": "<div class=\"ds-foot\"><div class=\"ds-progress\"><i style=\"width:33%\"></i></div><div class=\"ds-foot-row\"><span>Partie 2 · Les modèles</span><span class=\"ds-foot-n\">10 / 30</span></div></div>",
+      "css": ".ds-foot{width:28rem} .ds-progress{position:relative;height:1px;background:var(--line,#e3e1da);margin-bottom:.8rem} .ds-progress i{position:absolute;left:-2px;top:-1px;height:2px;background:var(--accent,#b4472a);opacity:.85} .ds-foot-row{display:flex;justify-content:space-between;font-family:'Atkinson Hyperlegible Mono Variable', 'Atkinson Hyperlegible Mono', ui-monospace, Menlo, monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--quiet,#9a9b9f)} .ds-foot-n{font-variant-numeric:tabular-nums;color:var(--muted,#6a6c72)}"
+    },
+    {
+      "name": "Tableau tiré à la règle",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "En-têtes mono capitales, filets nets de 1 px, pas de fond alterné.",
+      "html": "<table class=\"ds-table\"><tr><th>Modèle</th><th>Licence</th></tr><tr><td>Mistral</td><td>Ouverte</td></tr><tr><td>Qwen</td><td>Ouverte</td></tr></table>",
+      "css": ".ds-table{border-collapse:collapse;width:22rem;font-family:'Lexend Variable', 'Lexend', ui-sans-serif, system-ui, sans-serif;font-size:.9rem;color:var(--ink,#1c1d21)} .ds-table th{text-align:left;font-family:'Atkinson Hyperlegible Mono Variable', 'Atkinson Hyperlegible Mono', ui-monospace, Menlo, monospace;font-size:.68rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6a6c72);padding:0 0 .55rem;border-bottom:1px solid var(--line-2,#cdcac1)} .ds-table td{padding:.6rem 0;border-bottom:1px solid var(--line,#e3e1da)} .ds-table tr:last-child td{border-bottom:none}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Le cahier de l'ingénieur",
+    "overview": "Une feuille de cahier sur laquelle on tire à la règle ce qui est établi et on dessine au crayon ce qui est en train de changer. Le thème part d'un papier blanc cassé (ou d'une ardoise graphite en sombre), écrit au graphite, et réserve la sanguine à ce qu'il faut retenir. Le crayon bleu sert d'appui, pour un second plan ou un second intervenant.\n\nLes deux registres de trait portent le sens. Le filet net de 1 px (tableaux, sommaires, ligne d'avancement, règle de la bifurcation) dit « c'est acquis ». Le trait au crayon (cadres, soulignés, cercles, flèches, puces, numéros de partie) dit « c'est en mouvement ». Les traits au crayon sont seedés : une même forme donne toujours le même tracé à l'écran, en PDF et en PNG. Ils passent par un filtre de grain de mine et leurs extrémités dépassent légèrement, comme une main qui hésite.\n\nLa page est une image fixe : aucune animation, aucune ombre, presque aucun arrondi. La profondeur vient du papier (une surface un cran plus sombre pour les slides de partie et les blocs de fond) et du crayon, jamais d'un relief simulé. Le motif signature est le diagramme de bifurcation de la suite logistique x ↦ r·x(1 - x) : une règle qui se dédouble puis finit en nuage de points. Rien dans le thème ne suggère une convergence.",
+    "keyCharacteristics": [
+      "Deux registres de trait : filet net pour l'établi, crayon seedé pour ce qui change.",
+      "Graphite pour le trait courant, sanguine pour l'essentiel, bleu en appui.",
+      "Une famille par rôle typographique, pour que titre et texte se distinguent au premier regard.",
+      "Schéma clair ou sombre selon l'écran, chaque valeur gardant son rôle.",
+      "Image fixe : ni animation, ni ombre, arrondis de 2 à 4 px."
+    ],
+    "rules": [
+      {
+        "name": "La règle de la sanguine rare",
+        "body": "La sanguine marque une chose par bloc : la carte mise en avant, l'item qui alerte, le point d'avancement. Si tout est sanguine, rien n'est à retenir.",
+        "section": "colors"
+      },
+      {
+        "name": "La règle du crayon coloré par le fond",
+        "body": "Un trait au crayon est un masque : sa couleur vient du `background` de l'élément (variable `--pc` pour les cadres). Le même trait existe donc en graphite, en sanguine ou en bleu sans nouvelle image.",
+        "section": "colors"
+      },
+      {
+        "name": "La règle du rôle conservé",
+        "body": "En sombre, chaque variable garde son nom et son rôle ; seule sa valeur change. On n'écrit jamais une couleur propre au sombre dans un composant, sauf pour la plaque.",
+        "section": "colors"
+      },
+      {
+        "name": "La règle d'une famille par rôle",
+        "body": "Titre en Bricolage, texte en Lexend, étiquette en mono, citation en Instrument Serif. Un titre ne passe jamais en Lexend, un texte courant jamais en Bricolage.",
+        "section": "typography"
+      },
+      {
+        "name": "La règle des crans nets",
+        "body": "Les titres utilisent les variables `--fs-*` et chaque cran est nettement au-dessus du suivant (4 / 3.2 / 2 / 1.06rem). On ne crée pas de taille intermédiaire.",
+        "section": "typography"
+      },
+      {
+        "name": "La règle du serif réservé",
+        "body": "Instrument Serif ne sert qu'aux citations, aux exergues (`Pull`) et au sous-titre de couverture.",
+        "section": "typography"
+      },
+      {
+        "name": "La règle du papier plat",
+        "body": "Rien ne flotte au-dessus de la feuille. Pas d'ombre portée, pas de flou, pas de dégradé.",
+        "section": "elevation"
+      },
+      {
+        "name": "La règle des deux registres",
+        "body": "Ce qui est établi est tiré à la règle (1 px net, couleur `line` ou `line-2`). Ce qui change ou ce qu'on veut faire remarquer est dessiné au crayon. On ne mélange pas les deux sur un même objet.",
+        "section": "shapes"
+      },
+      {
+        "name": "La règle du trait seedé",
+        "body": "Tout trait au crayon sort de `lib/pencil.ts` avec une graine nommée. Pas de trait aléatoire au rendu, pas d'image dessinée à la main importée.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "Do tirer à la règle (1 px, `line` ou `line-2`) ce qui est établi : tableaux, sommaires, séparateurs de définition, avancement.",
+      "Do dessiner au crayon (variables `--pc-*`, couleur par `background`) ce qui change ou ce qu'on veut faire remarquer.",
+      "Do passer par les variables de rôle (`--ink`, `--paper`, `--accent`, `--plate`...) pour que le schéma sombre suive sans retouche.",
+      "Do poser logos, avatars et captures sur `--plate`, cernée au crayon en sombre.",
+      "Do garder la sanguine pour une seule chose par bloc.",
+      "Do donner le numéro de partie par `num` dans `SectionHead` et l'avancement par `index: Partie x / total`."
+    ],
+    "donts": [
+      "Don't ajouter d'animation, de transition ou d'apparition progressive : la slide est une image fixe, identique à l'écran, en PDF et en PNG.",
+      "Don't poser d'ombre, de flou ou de dégradé ; un bloc important se cerne à la sanguine, il ne se soulève pas.",
+      "Don't arrondir au-delà de 4 px, ni construire des cartes arrondies à ombre douce façon gabarit de conférence.",
+      "Don't répéter un segment de trait au crayon pour couvrir une longueur, ni comprimer un trait courbe : étirer un côté droit.",
+      "Don't produire un trait au crayon non seedé ; un même rendu doit sortir deux fois identique.",
+      "Don't faire converger la bifurcation ou montrer un retour à l'ordre : le désordre augmente jusqu'à la fin.",
+      "Don't utiliser Instrument Serif hors citations, exergues et sous-titre de couverture.",
+      "Don't ajouter un sur-titre au-dessus d'un titre par défaut ; un sur-titre qui ne fait que répéter le rang (« Partie 2 ») est masqué par `SectionHead`."
+    ]
+  }
+}

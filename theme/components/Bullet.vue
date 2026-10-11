@@ -10,7 +10,8 @@ withDefaults(defineProps<{
 
 <template>
   <div class="bullet" :class="{ 'is-sm': size === 'sm' }">
-    <span v-if="k" :class="badge === 'tag' ? 'tag is-plain' : ['num', accent ? 'is-accent' : 'is-ghost']">{{ k }}</span>
+    <span v-if="k === '·'" class="bullet-dash" />
+    <span v-else-if="k" :class="badge === 'tag' ? 'tag is-plain' : ['num', accent ? 'is-accent' : 'is-ghost']">{{ k }}</span>
     <div class="bullet-body"><slot /></div>
   </div>
 </template>

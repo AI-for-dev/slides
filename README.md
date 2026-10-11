@@ -39,6 +39,8 @@ pages/jour3/              un module du jour 3 par fichier
 public/images/            les figures, logos et avatars
 theme/                    le thème maison
   styles/tokens.css       palette, typographie, géométrie
+  styles/pencil.ts        les traits au crayon réutilisés par le CSS
+  lib/pencil.ts           le tracé à main levée (lignes, cadres, hachures)
   styles/base.css         éléments de base (titres, listes, liens)
   styles/components.css   vocabulaire visuel (card, tag, figure, num…)
   styles/blocks.css       compositions propres au deck
@@ -124,6 +126,7 @@ Ce qu'il faut retenir.
 | `Quote` | corps d'une slide `layout: quote` |
 | `CoverTitle`, `LogoBar`, `Author`, `CoverMeta` | couverture et clôture |
 | `EraTimeline`, `AutonomyLadder`, `HarnessMap` | les trois diagrammes du jour 1 |
+| `Bascule`, `PencilNumeral` | dessins des gabarits cover, section et statement ; pas besoin de les appeler dans `slides.md` |
 | `PiSequence` | la séquence d'une requête avec lecture de fichier (jour 2) |
 | `Matrix` | enveloppe d'un tableau de mesures : lignes serrées, colonnes centrées ; `size`, `first`, `left` |
 | `Score` | taux de réussite `v/of` avec jauge (`of` vaut 20 par défaut) ; `hi` le met en avant |
@@ -168,7 +171,21 @@ dans `theme/styles/`.
 
 ## Conventions
 
-- Schéma de couleurs **clair uniquement** : toutes les figures du deck sont des
-  captures sur fond clair, un thème sombre casserait le système visuel.
-- Un seul accent (`--accent`, orange braise) plus un appui (`--teal`).
+- Schéma de couleurs **clair ou sombre**, selon le réglage de l'écran
+  (`colorSchema: auto`). La palette sombre est dans `tokens.css`, sous
+  `html.dark`. Les captures, les logos et les avatars ont été faits pour du
+  papier blanc : ils restent sur une plaque claire (`--plate`). Pour une
+  surface surélevée qui doit suivre le schéma, utiliser `--white`.
+- Deux registres de trait. Ce qui est établi est tiré à la règle (filets nets
+  de 1 px). Ce qui change est dessiné au crayon : cadres, soulignés, cercles,
+  flèches, générés par `theme/lib/pencil.ts` et exposés en variables CSS
+  `--pc-*` par `theme/styles/pencil.ts`. Les traits sont seedés, l'écran, le
+  PDF et les PNG sont donc identiques.
+- Graphite pour le trait courant, sanguine (`--accent`) pour l'accent, bleu
+  (`--blue`) en appui. Les composants appellent encore ce bleu `teal`.
+- Une famille par rôle (`--font-*` dans `tokens.css`) : Bricolage Grotesque
+  pour tout ce qui nomme (titres de slide et de bloc, chiffres), Lexend pour
+  le texte, Atkinson Hyperlegible Mono pour les étiquettes et le code,
+  Instrument Serif pour les citations. Un titre ne doit jamais être composé
+  dans la police du texte.
 - Espaces insécables devant `: ; ! ?` et dans les guillemets.

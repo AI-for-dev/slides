@@ -5,13 +5,12 @@
   "slidev": {
     "defaults": {
       "fonts": {
-        "sans": "Geist",
-        "mono": "Geist Mono",
+        "sans": "Lexend Variable",
+        "mono": "Atkinson Hyperlegible Mono Variable",
         "serif": "Instrument Serif",
         "provider": "none"
       },
-      "colorSchema": "light",
-      "transition": "fade",
+      "colorSchema": "auto",
       "aspectRatio": "16/9"
     }
   }

@@ -8,15 +8,15 @@ html, body, #app, #page-root, .slidev-page {
 }
 
 html { color-scheme: light; }
+html.dark { color-scheme: dark; }
 
 .slidev-layout {
-  font-family: var(--font-sans);
+  font-family: var(--font-text);
   font-size: 16px;
   line-height: 1.55;
   background: var(--paper);
   color: var(--ink);
   padding: 0;
-  font-feature-settings: 'ss01' 1, 'cv05' 1;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -26,12 +26,16 @@ html { color-scheme: light; }
   color: var(--ink);
   text-wrap: balance;
 }
+:where(.slidev-layout) :is(h1, h3, h4) {
+  font-family: var(--font-title);
+  font-optical-sizing: auto;
+}
 
 :where(.slidev-layout) h1 {
-  font-size: 1.95rem;
-  font-weight: 600;
-  line-height: 1.12;
-  letter-spacing: -0.028em;
+  font-size: var(--fs-h1);
+  font-weight: 680;
+  line-height: 1.06;
+  letter-spacing: -0.02em;
   margin: 0;
 }
 
@@ -45,8 +49,8 @@ html { color-scheme: light; }
 }
 
 :where(.slidev-layout) h3 {
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: var(--fs-block);
+  font-weight: 640;
   letter-spacing: -0.01em;
   margin: 0;
 }
@@ -56,14 +60,13 @@ html { color-scheme: light; }
 :where(.slidev-layout) p { margin: 0 0 0.7em; }
 :where(.slidev-layout) p:last-child { margin-bottom: 0; }
 
-:where(.slidev-layout) strong { font-weight: 600; color: var(--ink); }
+:where(.slidev-layout) strong { font-weight: 680; color: var(--ink); }
 :where(.slidev-layout) em { font-style: italic; }
 
 .slidev-layout a {
   color: var(--accent-deep);
   text-decoration: none;
   border-bottom: 1px solid var(--accent-line);
-  transition: border-color .15s ease, color .15s ease;
 }
 .slidev-layout a:hover {
   color: var(--accent);
@@ -81,7 +84,7 @@ html { color-scheme: light; }
 
 .slidev-layout ::selection {
   background: var(--accent);
-  color: #fff;
+  color: var(--paper);
 }
 
 /* Lists - custom bullets ----------------------------------------------------- */
@@ -101,22 +104,20 @@ html { color-scheme: light; }
 :where(.slidev-layout) ul > li::before {
   content: '';
   position: absolute;
-  left: 0.05rem;
-  top: 0.62em;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
+  left: -0.1rem;
+  top: 0.5em;
+  width: 12px;
+  height: 6px;
   background: var(--accent);
+  -webkit-mask: var(--pc-dash) center / 100% 100% no-repeat;
+          mask: var(--pc-dash) center / 100% 100% no-repeat;
 }
 
 :where(.slidev-layout) ul ul {
   margin-top: 0.4rem;
 }
 :where(.slidev-layout) ul ul > li::before {
-  background: none;
-  border: 1px solid var(--line-2);
-  width: 5px;
-  height: 5px;
+  background: var(--graphite-2);
 }
 
 :where(.slidev-layout) ol {
@@ -138,7 +139,7 @@ html { color-scheme: light; }
   top: 0.06em;
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--accent);
 }
 
@@ -153,7 +154,7 @@ html { color-scheme: light; }
   text-align: left;
   font-family: var(--font-mono);
   font-size: 0.68rem;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted);
@@ -184,11 +185,7 @@ html { color-scheme: light; }
   display: none;
 }
 
-.slidev-vclick-target {
-  transition: opacity 260ms cubic-bezier(.22,.61,.36,1),
-              transform 260ms cubic-bezier(.22,.61,.36,1);
-}
-.slidev-vclick-hidden {
-  opacity: 0 !important;
-  transform: translateY(6px);
-}
+/* Aucune animation : une slide est une image fixe. Un élément révélé au clic
+   apparaît d'un coup, sans le fondu que Slidev pose par défaut. */
+.slidev-vclick-target { transition: none !important; }
+.slidev-vclick-hidden { opacity: 0 !important; }
