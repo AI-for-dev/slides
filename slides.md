@@ -12,8 +12,8 @@ editor: false
 drawings:
   persist: false
 fonts:
-  sans: IBM Plex Sans
-  mono: IBM Plex Mono
+  sans: Lexend Variable
+  mono: Atkinson Hyperlegible Mono Variable
   serif: Instrument Serif
   provider: none
 layout: cover

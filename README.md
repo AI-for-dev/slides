@@ -144,4 +144,9 @@ dans `theme/styles/`.
   PDF et les PNG sont donc identiques.
 - Graphite pour le trait courant, sanguine (`--accent`) pour l'accent, bleu
   (`--blue`) en appui. Les composants appellent encore ce bleu `teal`.
+- Une famille par rôle (`--font-*` dans `tokens.css`) : Bricolage Grotesque
+  pour tout ce qui nomme (titres de slide et de bloc, chiffres), Lexend pour
+  le texte, Atkinson Hyperlegible Mono pour les étiquettes et le code,
+  Instrument Serif pour les citations. Un titre ne doit jamais être composé
+  dans la police du texte.
 - Espaces insécables devant `: ; ! ?` et dans les guillemets.

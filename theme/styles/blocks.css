@@ -20,8 +20,9 @@
 .speaker-head { display: flex; align-items: center; gap: 1.1rem; }
 .speaker .avatar { width: 96px; height: 96px; flex: none; }
 .speaker-name {
-  font-size: 1.5rem;
-  font-weight: 500;
+  font-family: var(--font-title);
+  font-size: 1.6rem;
+  font-weight: 680;
   letter-spacing: -0.02em;
   line-height: 1.1;
 }
@@ -46,8 +47,9 @@
 }
 .act:first-child { --pc: var(--accent); --pc-o: 0.95; }
 .act-n {
-  font-family: var(--font-serif);
-  font-size: 2rem;
+  font-family: var(--font-title);
+  font-size: 1.9rem;
+  font-weight: 300;
   line-height: 1;
   color: var(--quiet);
   width: 1.6rem;
@@ -57,9 +59,10 @@
 .act:first-child .act-n { color: var(--accent); }
 .act-body { flex: 1; }
 .act-title {
-  font-size: 0.98rem;
-  font-weight: 600;
-  letter-spacing: -0.012em;
+  font-family: var(--font-title);
+  font-size: var(--fs-block);
+  font-weight: 640;
+  letter-spacing: -0.015em;
 }
 .act-desc {
   font-size: 0.79rem;
@@ -88,14 +91,16 @@
 }
 
 .criterion-k {
-  font-family: var(--font-serif);
+  font-family: var(--font-title);
   font-size: 1.9rem;
+  font-weight: 300;
   line-height: 1;
   color: var(--accent);
 }
 .criterion-t {
-  font-size: 1.05rem;
-  font-weight: 600;
+  font-family: var(--font-title);
+  font-size: 1.15rem;
+  font-weight: 660;
   letter-spacing: -0.02em;
   margin: 0.45rem 0 0.5rem;
 }
@@ -264,15 +269,17 @@
 }
 .step-n {
   display: block;
-  font-family: var(--font-serif);
-  font-size: 1.5rem;
+  font-family: var(--font-title);
+  font-size: 1.45rem;
+  font-weight: 300;
   line-height: 1;
   color: var(--accent);
   margin-bottom: 0.35rem;
 }
 .step-t {
-  font-size: 0.85rem;
-  font-weight: 600;
+  font-family: var(--font-title);
+  font-size: 0.95rem;
+  font-weight: 640;
   letter-spacing: -0.01em;
   line-height: 1.15;
 }
@@ -349,14 +356,14 @@
   display: block;
   margin: 0;
   padding: 0.6rem 0.95rem 0.6rem 2.1rem;
-  font-size: 0.87rem;
+  font-size: 0.84rem;
   color: var(--ink-soft);
   --pc-o: 0.5;
 }
 .chips li::before {
   left: 0.8rem;
-  top: 50%;
-  transform: translateY(-50%);
+  /* sur la première ligne, même quand l'item passe à la ligne */
+  top: calc(0.6rem + 0.78em - 3px);
 }
 
 /* Exigences : l'item en **gras** est celui qui alerte. */

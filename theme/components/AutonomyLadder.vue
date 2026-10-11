@@ -109,8 +109,9 @@ const levels = [
 }
 
 .ladder-title {
-  font-size: 0.95rem;
-  font-weight: 600;
+  font-family: var(--font-title);
+  font-size: 1rem;
+  font-weight: 640;
   letter-spacing: -0.01em;
   color: var(--ink);
 }

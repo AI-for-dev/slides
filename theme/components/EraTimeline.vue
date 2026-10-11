@@ -77,8 +77,9 @@ const eras = [
 }
 
 .era-title {
-  font-size: 1rem;
-  font-weight: 600;
+  font-family: var(--font-title);
+  font-size: var(--fs-block);
+  font-weight: 660;
   letter-spacing: -0.015em;
   color: var(--tone-ink);
   margin-bottom: 0.45rem;

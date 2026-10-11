@@ -74,7 +74,7 @@ const hub: Stroke[] = ellipse(HUB.x, HUB.y, HUB.rx, HUB.ry, r, { passes: 3, wobb
 .harness-map .hm-frame { stroke: var(--graphite); stroke-width: 1.3; stroke-opacity: 0.75; }
 .harness-map .hm-hub   { stroke: var(--accent); }
 .harness-map .hub-label {
-  font-family: var(--font-sans);
+  font-family: var(--font-title);
   font-size: 21px;
   font-weight: 600;
   letter-spacing: 0.06em;
@@ -88,19 +88,20 @@ const hub: Stroke[] = ellipse(HUB.x, HUB.y, HUB.rx, HUB.ry, r, { passes: 3, wobb
   fill: var(--muted);
 }
 .harness-map .brick-title {
-  font-family: var(--font-sans);
+  font-family: var(--font-title);
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.02em;
   fill: var(--ink);
 }
 .harness-map .brick-num {
-  font-family: var(--font-serif);
+  font-family: var(--font-title);
   font-size: 30px;
+  font-weight: 300;
   fill: var(--accent);
 }
 .harness-map .brick-desc {
-  font-family: var(--font-sans);
+  font-family: var(--font-text);
   font-size: 11.5px;
   fill: var(--muted);
 }

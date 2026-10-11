@@ -10,7 +10,7 @@ html, body, #app, #page-root, .slidev-page {
 html { color-scheme: light; }
 
 .slidev-layout {
-  font-family: var(--font-sans);
+  font-family: var(--font-text);
   font-size: 16px;
   line-height: 1.55;
   background: var(--paper);
@@ -25,12 +25,16 @@ html { color-scheme: light; }
   color: var(--ink);
   text-wrap: balance;
 }
+:where(.slidev-layout) :is(h1, h3, h4) {
+  font-family: var(--font-title);
+  font-optical-sizing: auto;
+}
 
 :where(.slidev-layout) h1 {
-  font-size: 1.95rem;
-  font-weight: 500;
-  line-height: 1.12;
-  letter-spacing: -0.022em;
+  font-size: var(--fs-h1);
+  font-weight: 680;
+  line-height: 1.06;
+  letter-spacing: -0.02em;
   margin: 0;
 }
 
@@ -44,8 +48,8 @@ html { color-scheme: light; }
 }
 
 :where(.slidev-layout) h3 {
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: var(--fs-block);
+  font-weight: 640;
   letter-spacing: -0.01em;
   margin: 0;
 }
@@ -55,7 +59,7 @@ html { color-scheme: light; }
 :where(.slidev-layout) p { margin: 0 0 0.7em; }
 :where(.slidev-layout) p:last-child { margin-bottom: 0; }
 
-:where(.slidev-layout) strong { font-weight: 600; color: var(--ink); }
+:where(.slidev-layout) strong { font-weight: 680; color: var(--ink); }
 :where(.slidev-layout) em { font-style: italic; }
 
 .slidev-layout a {

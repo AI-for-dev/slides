@@ -44,10 +44,25 @@
   --r-lg: 4px;
   --r-xl: 4px;
 
-  /* Type ----------------------------------------------------------------- */
-  --font-sans:  'IBM Plex Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
-  --font-mono:  'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  --font-serif: 'Instrument Serif', 'Iowan Old Style', Palatino, Georgia, serif;
+  /* Type ------------------------------------------------------------------
+     Un rôle par famille, pour que titre et texte ne se confondent jamais :
+     - title : tout ce qui nomme (titres de slide, de bloc, chiffres). Bricolage
+       Grotesque, dont les encoches ont un air taillé à la main.
+     - text  : tout ce qui se lit. Lexend, dessinée pour la fluidité de
+       lecture : large, ouverte, lisible de loin.
+     - mono  : étiquettes, code, pied de page. Atkinson Hyperlegible Mono,
+       dont le zéro barré ne se confond pas avec un O.
+     - quote : la voix des autres (citations). Instrument Serif. */
+  --font-title: 'Bricolage Grotesque Variable', 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
+  --font-text:  'Lexend Variable', 'Lexend', ui-sans-serif, system-ui, sans-serif;
+  --font-mono:  'Atkinson Hyperlegible Mono Variable', 'Atkinson Hyperlegible Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-quote: 'Instrument Serif', 'Iowan Old Style', Palatino, Georgia, serif;
+
+  /* Échelle des titres : chaque cran est nettement au-dessus du suivant. */
+  --fs-display: 4rem;     /* couverture */
+  --fs-section: 3.2rem;   /* slides de partie, clôture */
+  --fs-h1:      2rem;     /* titre de slide */
+  --fs-block:   1.06rem;  /* titre de bloc */
 
   /* Slidev overrides ----------------------------------------------------- */
   --slidev-theme-primary: var(--accent);

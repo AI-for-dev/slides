@@ -113,9 +113,11 @@
 .card-teal { --pc: var(--blue); --pc-o: 0.85; }
 
 .card-title {
-  font-size: 0.95rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  font-family: var(--font-title);
+  font-size: var(--fs-block);
+  font-weight: 640;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
   margin-bottom: 0.3rem;
 }
 
@@ -202,6 +204,7 @@
 .lead {
   font-size: 1.02rem;
   line-height: 1.55;
+  text-wrap: pretty;
   color: var(--ink-soft);
   max-width: 46rem;
 }
@@ -213,7 +216,7 @@
 .accent { color: var(--accent-deep); }
 .tealtx { color: var(--blue-deep); }
 .mono   { font-family: var(--font-mono); }
-.serif  { font-family: var(--font-serif); }
+.serif  { font-family: var(--font-quote); }
 
 .t-xs { font-size: 0.75rem; line-height: 1.45; }
 .t-sm { font-size: 0.84rem; line-height: 1.5;  }
