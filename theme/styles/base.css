@@ -8,6 +8,7 @@ html, body, #app, #page-root, .slidev-page {
 }
 
 html { color-scheme: light; }
+html.dark { color-scheme: dark; }
 
 .slidev-layout {
   font-family: var(--font-text);
@@ -84,7 +85,7 @@ html { color-scheme: light; }
 
 .slidev-layout ::selection {
   background: var(--accent);
-  color: #fff;
+  color: var(--paper);
 }
 
 /* Lists - custom bullets ----------------------------------------------------- */

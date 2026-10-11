@@ -2,7 +2,9 @@
    IA4Dev - design tokens
    Papier blanc, graphite et sanguine. Ce qui est établi est tiré à la règle,
    ce qui change est dessiné au crayon (voir lib/pencil.ts et styles/pencil.ts).
-   Un seul schéma clair : toutes les figures du deck sont des captures claires.
+   Le schéma sombre (html.dark, plus bas) retourne la feuille : une ardoise
+   graphite sur laquelle on dessine au crayon clair. Les captures restent sur
+   une plaque de papier clair, comme les logos et les avatars.
    ══════════════════════════════════════════════════════════════════════════ */
 
 :root {
@@ -69,4 +71,46 @@
   --slidev-code-background: var(--surface);
   --slidev-code-foreground: var(--ink);
   --slidev-code-radius: var(--r-md);
+
+  /* Plaque claire sous ce qui ne supporte pas le sombre (logos, avatars,
+     captures). En clair, elle se confond avec le papier. */
+  --plate:        #ffffff;
+  --plate-ink:    #1c1d21;
+}
+
+/* ── Schéma sombre ─────────────────────────────────────────────────────────
+   Chaque valeur garde son rôle : le graphite devient un crayon clair, la
+   sanguine s'éclaircit pour garder son contraste, les fonds teintés passent
+   en sourdine. Les contrastes texte/fond restent au-dessus de 4,5:1. */
+html.dark {
+  color-scheme: dark;
+
+  --ink:          #ecebe5;
+  --ink-soft:     #c8c7c1;
+  --muted:        #9d9da2;
+  --quiet:        #74757a;
+
+  --paper:        #18191c;
+  --surface:      #212226;
+  --surface-2:    #2b2c31;
+  --white:        #f4f2ec;
+
+  --line:         #2f3035;
+  --line-2:       #45464c;
+
+  --graphite:     #d9d8d2;
+  --graphite-2:   #85868b;
+
+  --accent:       #e5845f;
+  --accent-deep:  #f19c7c;
+  --accent-soft:  #3a2620;
+  --accent-line:  #6e3d2d;
+
+  --blue:         #8db2df;
+  --blue-deep:    #a9c7ee;
+  --blue-soft:    #1e2938;
+  --blue-line:    #36495f;
+
+  --plate:        #f4f2ec;
+  --plate-ink:    #1c1d21;
 }

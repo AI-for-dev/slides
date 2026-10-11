@@ -25,19 +25,19 @@
   pointer-events: none;
   background: var(--pc);
   opacity: var(--pc-o);
-  -webkit-mask-box-image: var(--pc-frame-1) 28 / 28px stretch round;
+  -webkit-mask-box-image: var(--pc-frame-1) 28 / 28px stretch;
 }
 :is(.card, .card-accent, .card-teal, .speaker, .act, .goal, .criterion,
     .role, .choice, .step, .bullet, .chips li, .pipeline, .era-card):nth-child(4n+2)::after {
-  -webkit-mask-box-image: var(--pc-frame-2) 28 / 28px stretch round;
+  -webkit-mask-box-image: var(--pc-frame-2) 28 / 28px stretch;
 }
 :is(.card, .card-accent, .card-teal, .speaker, .act, .goal, .criterion,
     .role, .choice, .step, .bullet, .chips li, .pipeline, .era-card):nth-child(4n+3)::after {
-  -webkit-mask-box-image: var(--pc-frame-3) 28 / 28px stretch round;
+  -webkit-mask-box-image: var(--pc-frame-3) 28 / 28px stretch;
 }
 :is(.card, .card-accent, .card-teal, .speaker, .act, .goal, .criterion,
     .role, .choice, .step, .bullet, .chips li, .pipeline, .era-card):nth-child(4n)::after {
-  -webkit-mask-box-image: var(--pc-frame-4) 28 / 28px stretch round;
+  -webkit-mask-box-image: var(--pc-frame-4) 28 / 28px stretch;
 }
 
 /* ── Eyebrow / kicker ──────────────────────────────────────────────────── */
@@ -255,12 +255,44 @@
 .avatar {
   display: block;
   border-radius: 50%;
-  background: var(--surface);
+  background: var(--plate);
 }
+
+/* ── En sombre : ce qui a été dessiné pour du papier blanc ─────────────────
+   Les logos sont des images opaques sur fond blanc : le « multiply » qui les
+   fond dans le papier les noircirait sur l'ardoise. Les avatars sont des
+   traits noirs sur fond transparent : ils disparaîtraient. On leur rend donc
+   une plaque de papier clair, cernée au crayon comme le reste. */
+html.dark .logo-bar {
+  position: relative;
+  padding: 0.55rem 1.1rem;
+  background: var(--plate);
+  border-radius: var(--r-sm);
+}
+html.dark .logo-bar::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  pointer-events: none;
+  background: var(--graphite);
+  opacity: 0.55;
+  -webkit-mask-box-image: var(--pc-frame-2) 28 / 28px stretch;
+}
+html.dark .avatar { box-shadow: 0 0 0 3px var(--plate); }
+
+/* Les captures restent sur leur plaque claire, légèrement atténuée pour ne
+   pas éblouir à côté du fond sombre. */
+html.dark .fig img { filter: brightness(0.93); }
 
 /* Stretched containers whose content should sit in the optical centre ------ */
 .v-center {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+/* Deux cartes centrées côte à côte : leurs titres s'aligneraient chacun sur
+   leur propre contenu. On les cale en haut pour qu'ils partagent une ligne. */
+.cols:has(> .v-center ~ .v-center) > .v-center {
+  justify-content: flex-start;
+  padding-top: 1.6rem;
 }

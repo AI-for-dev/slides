@@ -144,6 +144,8 @@
   letter-spacing: -0.005em;
 }
 
+.slidev-layout.cvr .rule-line { visibility: hidden; }
+
 .cover-meta {
   display: flex;
   align-items: center;
@@ -232,8 +234,11 @@
   color: var(--muted);
 }
 
-/* Le numéro est dessiné par le gabarit ; celui de SectionHead ferait doublon. */
-.slidev-layout.sect .sect-num { display: none; }
+/* Le numéro est dessiné par le gabarit ; celui de SectionHead et le sur-titre
+   « Partie n » feraient doublon avec lui et avec le pied de page. */
+.slidev-layout.sect .sect-num,
+.slidev-layout.sect .sect-head > .eyebrow { display: none; }
+.slidev-layout.sect .sect-head h1 { margin-top: 0; }
 
 .agenda {
   display: flex;
@@ -250,14 +255,20 @@
   justify-content: center;
 }
 
+/* Le guillemet est dessiné comme les numéros de partie : hachuré, repassé,
+   avec sa version gommée, mais à la sanguine. Seul le haut du glyphe porte
+   de l'encre, d'où la marge négative. */
 .qte-mark {
-  font-family: var(--font-quote);
-  font-size: 5rem;
-  line-height: 0.62;
-  height: 2rem;
-  color: var(--accent);
+  display: block;
+  width: 6.2rem;
+  height: auto;
+  margin: 0 0 0.4rem -0.5rem;
   user-select: none;
 }
+.qte-mark .pn-glyph  { font-family: var(--font-quote); font-size: 600px; font-weight: 400; }
+.qte-mark .pn-hatch  { stroke: var(--accent); }
+.qte-mark .pn-line   { stroke: var(--accent-deep); }
+.qte-mark .pn-erased { stroke: var(--accent-line); opacity: 0.6; }
 
 .qte-text {
   font-family: var(--font-quote);

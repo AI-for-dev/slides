@@ -5,7 +5,7 @@ info: |
   IA4Dev 2026 - ANF jour 1, octobre 2026
   Max Beligné (PUD-GA / MSH Alpes / UGA) · Loïc Gouarin (CMAP / CNRS / École polytechnique)
 author: Max Beligné, Loïc Gouarin
-colorSchema: light
+colorSchema: auto
 transition: fade
 mdc: true
 editor: false

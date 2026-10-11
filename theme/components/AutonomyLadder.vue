@@ -130,7 +130,7 @@ const levels = [
   background: var(--accent);
   -webkit-mask: none;
           mask: none;
-  -webkit-mask-box-image: var(--pc-frame-3) 28 / 28px stretch round;
+  -webkit-mask-box-image: var(--pc-frame-3) 28 / 28px stretch;
 }
 .ladder-row:last-child .ladder-title { color: var(--accent-deep); }
 </style>

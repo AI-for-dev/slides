@@ -51,6 +51,7 @@
 /* ── Échelle de texte dans les cartes ──────────────────────────────────── */
 
 .is-xs :is(p, li) { font-size: 0.75rem; line-height: 1.45; }
+.is-xs > .eyebrow { letter-spacing: 0.06em; }
 .is-sm :is(p, li) { font-size: 0.84rem; line-height: 1.5; }
 .is-md :is(p, li) { font-size: 0.93rem; line-height: 1.55; }
 .is-lg :is(p, li) { font-size: 1.06rem; line-height: 1.55; }

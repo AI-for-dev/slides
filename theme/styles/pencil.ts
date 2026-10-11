@@ -26,22 +26,21 @@ for (let i = 1; i <= 3; i++) {
 
 // Cadres découpés en 9 (mask-box-image), coins de 28 px.
 // Les côtés horizontaux sont longs dans l'image (1000 px) et s'adaptent à la
-// largeur du bloc. Les côtés verticaux, eux, sont répétés à leur taille réelle
-// (`round` en CSS) : on les trace donc droits, sans courbure, pour que les
-// morceaux se raccordent. Les comprimer donnait un trait tassé, flou.
+// largeur du bloc. Les côtés verticaux sont tracés parfaitement droits : on
+// peut alors les étirer ou les comprimer à n'importe quelle hauteur sans
+// bosse (la courbure tassée donnait un trait flou) et sans raccord (des
+// morceaux répétés se décalaient d'un pixel en plein écran).
 for (let i = 1; i <= 4; i++) {
   const r = rng(`frame-${i}`)
   const j = () => (r() - 0.5) * 1.4
   const [x0, y0, x1, y1] = [9, 9, 991, 111]
   const horiz = { over: 5, bow: 2.2, wobble: 0.5, passes: 1 }
-  const vert = { over: 5, bow: 0, wobble: 0.22, passes: 1 }
+  const vert = { over: 5, bow: 0, wobble: 0, passes: 1 }
   vars[`--pc-frame-${i}`] = svg(1000, 120, [
     ...line([x0 + j(), y0 + j()], [x1 + j(), y0 + j()], r, horiz),
     ...line([x0 + j(), y1 + j()], [x1 + j(), y1 + j()], r, horiz),
-    // à taille réelle, le grain paraît plus clair qu'aux côtés comprimés :
-    // on appuie un peu plus le crayon
-    ...line([x0, y0 + j()], [x0, y1 + j()], r, vert).map(st => ({ ...st, w: 1.3 })),
-    ...line([x1, y0 + j()], [x1, y1 + j()], r, vert).map(st => ({ ...st, w: 1.3 })),
+    ...line([x0, y0 + j()], [x0, y1 + j()], r, vert).map(st => ({ ...st, w: 1.15 })),
+    ...line([x1, y0 + j()], [x1, y1 + j()], r, vert).map(st => ({ ...st, w: 1.15 })),
   ], 1.35)
 }
 

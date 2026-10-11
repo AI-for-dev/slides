@@ -13,7 +13,7 @@ defineProps<{
 <template>
   <div class="quote-body">
     <div v-if="eyebrow" class="eyebrow">{{ eyebrow }}</div>
-    <div class="qte-mark">“</div>
+    <PencilNumeral class="qte-mark" value="“" box="88 6 196 178" :base="500" />
     <div class="qte-text" :class="{ 'is-small': small }"><slot /></div>
     <div v-if="cite || note" class="qte-cite">
       <span class="bar" />

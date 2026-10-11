@@ -10,7 +10,7 @@
         "serif": "Instrument Serif",
         "provider": "none"
       },
-      "colorSchema": "light",
+      "colorSchema": "auto",
       "transition": "fade",
       "aspectRatio": "16/9"
     }

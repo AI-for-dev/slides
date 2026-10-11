@@ -86,8 +86,8 @@
 .criterion {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 1.2rem 1.15rem;
+  justify-content: flex-start;
+  padding: 1.5rem 1.15rem 1.2rem;
 }
 
 .criterion-k {
@@ -142,6 +142,7 @@
 .def-v {
   font-size: 0.97rem;
   line-height: 1.4;
+  text-wrap: balance;
   color: var(--ink-soft);
 }
 .def-v strong { color: var(--ink); font-weight: 600; }
@@ -385,8 +386,17 @@
 .musts li strong { font-weight: 500; }
 
 /* Dans une carte déjà cernée, les lignes ne reçoivent qu'un filet dessous. */
-:is(.card, .card-accent, .card-teal) .bullet { padding: 0.45rem 0; }
-:is(.card, .card-accent, .card-teal) .bullet::after {
+.bullet-dash {
+  flex: none;
+  width: 14px;
+  height: 7px;
+  background: var(--accent);
+  -webkit-mask: var(--pc-dash) center / 100% 100% no-repeat;
+          mask: var(--pc-dash) center / 100% 100% no-repeat;
+}
+
+:is(.card, .card-soft, .card-accent, .card-teal) .bullet { padding: 0.45rem 0; }
+:is(.card, .card-soft, .card-accent, .card-teal) .bullet::after {
   inset: auto 0 -4px 0;
   height: 8px;
   opacity: 0.35;
@@ -394,4 +404,4 @@
   -webkit-mask: var(--pc-rule-2) center / 100% 100% no-repeat;
           mask: var(--pc-rule-2) center / 100% 100% no-repeat;
 }
-:is(.card, .card-accent, .card-teal) .bullet:last-child::after { display: none; }
+:is(.card, .card-soft, .card-accent, .card-teal) .bullet:last-child::after { display: none; }
