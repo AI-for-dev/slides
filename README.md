@@ -1,14 +1,19 @@
-# IA4Dev 2026 - Jour 1
+# IA4Dev 2026 - Slides
 
-Support de l'atelier (ANF jour 1, octobre 2026), construit avec
+Supports de l'atelier (ANF, octobre 2026), construits avec
 [Slidev](https://sli.dev).
 
-Slides en ligne : <https://ai-for-dev.github.io/slides/>
+- Jour 1 : <https://ai-for-dev.github.io/slides/>
+- Jour 2 : <https://ai-for-dev.github.io/slides/jour2/>
+- Jour 3 : <https://ai-for-dev.github.io/slides/jour3/>
 
 ## Publication
 
 Chaque push sur `main` déclenche `.github/workflows/deploy.yml`, qui construit
-le site et le publie sur GitHub Pages (source : GitHub Actions).
+les decks et les publie sur GitHub Pages (source : GitHub Actions). Les jours 2
+et 3 sortent dans `dist/jour2/` et `dist/jour3/` et utilisent
+`routerMode: hash`, parce que le `404.html` servi par GitHub Pages est celui
+du jour 1.
 
 ## Lancer
 
@@ -20,10 +25,17 @@ npm run export     # Jour1.pdf
 npm run export:png # une image par slide dans export-png/
 ```
 
+Chaque commande a sa variante pour les jours 2 et 3 : `dev:jour2`,
+`build:jour2`, `export:jour2`, `export:png:jour2`, et de même avec `jour3`.
+
 ## Organisation
 
 ```
-slides.md                 le contenu des 30 slides
+slides.md                 jour 1
+jour2.md                  jour 2 : couverture et plan, puis un import par partie
+pages/jour2/              une partie du jour 2 par fichier
+jour3.md                  jour 3 : couverture et programme, puis un import par module
+pages/jour3/              un module du jour 3 par fichier
 public/images/            les figures, logos et avatars
 theme/                    le thème maison
   styles/tokens.css       palette, typographie, géométrie
@@ -40,6 +52,9 @@ archive-original-jour1/   trace de la version d'origine
 ```
 
 ## Écrire une slide
+
+Une partie importée avec `src:` est un fichier markdown ordinaire, sans en-tête
+de deck.
 
 Le contenu est du markdown. La mise en forme passe par des composants, avec la
 syntaxe MDC : `::Nom` … `::` pour un bloc, `:Nom[texte]` pour de l'inline, et
@@ -110,8 +125,23 @@ Ce qu'il faut retenir.
 | `Chips`, `Musts`, `Specs` | listes markdown stylées (pastilles, exigences, paires clé/valeur) |
 | `Quote` | corps d'une slide `layout: quote` |
 | `CoverTitle`, `LogoBar`, `Author`, `CoverMeta` | couverture et clôture |
-| `EraTimeline`, `AutonomyLadder`, `HarnessMap` | les trois diagrammes |
+| `EraTimeline`, `AutonomyLadder`, `HarnessMap` | les trois diagrammes du jour 1 |
 | `Bascule`, `PencilNumeral` | dessins des gabarits cover, section et statement ; pas besoin de les appeler dans `slides.md` |
+| `PiSequence` | la séquence d'une requête avec lecture de fichier (jour 2) |
+| `Matrix` | enveloppe d'un tableau de mesures : lignes serrées, colonnes centrées ; `size`, `first`, `left` |
+| `Score` | taux de réussite `v/of` avec jauge (`of` vaut 20 par défaut) ; `hi` le met en avant |
+| `Mark` | verdict inline ✓ ✗ ~ ; `v` = yes / no / part, texte optionnel en contenu |
+| `ContextStack` | les cinq sources de la fenêtre de contexte (jour 3) |
+| `LoopMap` | la boucle explorer → planner → coder → reviewer (jour 3) |
+| `Motifs` | les cinq motifs d'un flux de travail (jour 3) |
+
+Les classes `.code-sm` et `.code-xs` posées sur un bloc (`:::Cell{.code-sm}`)
+réduisent les blocs de code qu'il contient.
+
+### Pied de page
+
+Le pied de page affiche le `section` de la slide, sinon
+`themeConfig.footer` de l'en-tête du deck.
 
 Chaque composant émet la classe CSS qui porte son nom (`Card` → `.card`,
 `Criterion` → `.criterion`…) : pour changer une apparence, chercher la classe
@@ -132,11 +162,20 @@ dans `theme/styles/`.
   `CoverMeta`, `Criterion`.
 - **Le titre de slide est une rangée flex** : ne pas y mettre d'autre balise
   inline que `:Ord[]` et `:Hint[]`.
+- **Un bloc fermé par cinq deux-points ou plus avale ce qui le suit** dans la
+  slide : le contenu placé après `:::::` n'est pas rendu. Fermer ces blocs en
+  fin de slide, ou réduire la profondeur (un bloc dont les enfants ont deux
+  deux-points n'a besoin que de trois).
+- **`:-)` est lu comme un composant inline** : l'écrire dans du HTML
+  (`<span class="mono">:-)</span>`) ou dans une prop.
 
 ## Conventions
 
-- Schéma de couleurs **clair uniquement** : toutes les figures du deck sont des
-  captures sur fond clair, un thème sombre casserait le système visuel.
+- Schéma de couleurs **clair ou sombre**, selon le réglage de l'écran
+  (`colorSchema: auto`). La palette sombre est dans `tokens.css`, sous
+  `html.dark`. Les captures, les logos et les avatars ont été faits pour du
+  papier blanc : ils restent sur une plaque claire (`--plate`). Pour une
+  surface surélevée qui doit suivre le schéma, utiliser `--white`.
 - Deux registres de trait. Ce qui est établi est tiré à la règle (filets nets
   de 1 px). Ce qui change est dessiné au crayon : cadres, soulignés, cercles,
   flèches, générés par `theme/lib/pencil.ts` et exposés en variables CSS

@@ -50,6 +50,13 @@
 
 /* ── Échelle de texte dans les cartes ──────────────────────────────────── */
 
+/* La taille vaut aussi pour le texte nu : MDC déplie les paragraphes uniques,
+   le texte d'une carte n'est donc souvent pas dans un <p>. */
+:is(.card, .card-soft, .card-accent, .card-teal).is-xs { font-size: 0.75rem; line-height: 1.45; }
+:is(.card, .card-soft, .card-accent, .card-teal).is-sm { font-size: 0.84rem; line-height: 1.5; }
+:is(.card, .card-soft, .card-accent, .card-teal).is-md { font-size: 0.93rem; line-height: 1.55; }
+:is(.card, .card-soft, .card-accent, .card-teal).is-lg { font-size: 1.06rem; line-height: 1.55; }
+
 .is-xs :is(p, li) { font-size: 0.75rem; line-height: 1.45; }
 .is-xs > .eyebrow { letter-spacing: 0.06em; }
 .is-sm :is(p, li) { font-size: 0.84rem; line-height: 1.5; }
@@ -62,6 +69,7 @@
 }
 .quote-body > .eyebrow { margin-bottom: 1.1rem; }
 .eyebrow + :is(p, ul, ol, .specs, .chips, .musts, .stack, .bullet, .detail) { margin-top: 0.65rem; }
+.card-body > p:last-child { margin-bottom: 0; }
 
 /* ── Blocs qui tiennent sur une ligne : pas de marge de paragraphe ─────── */
 
@@ -144,7 +152,6 @@
 
 /* ── Slide de section : rythme vertical du bloc de gauche ──────────────── */
 
-.sect-head h1 { margin-top: 1rem; }
 .sect-head h2 { margin-top: 0.75rem; }
 
 /* ── Note de bas de bloc ───────────────────────────────────────────────── */

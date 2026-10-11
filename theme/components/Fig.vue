@@ -9,11 +9,13 @@ withDefaults(defineProps<{
   frame?: 'paper' | 'screen' | 'bare'
   /** object-fit behaviour inside a fixed-height parent */
   contain?: boolean
+  /** hauteur fixe de la figure (CSS), l'image s'y ajuste */
+  h?: string
 }>(), { frame: 'paper', contain: false })
 </script>
 
 <template>
-  <figure class="fig" :class="['fig-' + frame, { 'is-contain': contain }]">
+  <figure class="fig" :class="['fig-' + frame, { 'is-contain': contain || !!h }]" :style="h ? { height: h } : undefined">
     <div class="fig-media">
       <img :src="asset(src)" alt="" />
     </div>
@@ -49,7 +51,7 @@ withDefaults(defineProps<{
 .fig:not(.is-contain) .fig-media img { width: 100%; height: auto; }
 
 .fig-paper .fig-media {
-  background: var(--white);
+  background: var(--plate);
   padding: 0.55rem;
   overflow: visible;
   --pc-o: 0.6;

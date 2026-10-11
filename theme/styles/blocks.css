@@ -405,3 +405,134 @@
           mask: var(--pc-rule-2) center / 100% 100% no-repeat;
 }
 :is(.card, .card-soft, .card-accent, .card-teal) .bullet:last-child::after { display: none; }
+
+/* ── Tableaux de mesures (Matrix) ──────────────────────────────────────── */
+
+.matrix table { table-layout: auto; }
+.matrix th, .matrix td { padding-left: 0.5rem; padding-right: 0.5rem; }
+.matrix :is(th, td):first-child { padding-left: 0; width: var(--matrix-first, auto); }
+.matrix :is(th, td):last-child { padding-right: 0; }
+.matrix:not(.is-left) :is(th, td):not(:first-child) { text-align: center; }
+.matrix td { padding-top: 0.38rem; padding-bottom: 0.38rem; vertical-align: middle; }
+.matrix th { padding-bottom: 0.45rem; }
+.matrix.is-md td { font-size: 0.9rem; }
+.matrix.is-sm td { font-size: 0.8rem; }
+.matrix.is-xs td { font-size: 0.72rem; padding-top: 0.28rem; padding-bottom: 0.28rem; }
+.matrix.is-xs th { font-size: 0.6rem; }
+.slidev-layout .matrix td code { font-size: 0.82em; white-space: nowrap; }
+.matrix td strong { color: var(--accent-deep); }
+
+/* ── Score « 18/20 » avec jauge ────────────────────────────────────────── */
+
+.score {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+.score-bar {
+  position: relative;
+  width: 2.2rem;
+  height: 5px;
+  border-radius: 3px;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+.score-bar i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: 3px;
+  background: var(--teal);
+}
+.score.is-hi { color: var(--accent-deep); font-weight: 600; }
+.score.is-hi .score-bar i { background: var(--accent); }
+.score.is-zero { color: var(--quiet); }
+
+/* ── Verdict inline ✓ ✗ ~ ─────────────────────────────────────────────── */
+
+.mark { display: inline-flex; align-items: baseline; gap: 0.4rem; }
+.mark-g {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.05rem;
+  height: 1.05rem;
+  flex: none;
+  border-radius: 50%;
+  font-size: 0.66rem;
+  font-weight: 700;
+  line-height: 1;
+  transform: translateY(0.1em);
+}
+.mark.is-yes .mark-g { background: var(--teal-soft); color: var(--teal-deep); border: 1px solid var(--teal-line); }
+.mark.is-no .mark-g { background: var(--accent-soft); color: var(--accent-deep); border: 1px solid var(--accent-line); }
+.mark.is-part .mark-g { background: var(--surface); color: var(--muted); border: 1px solid var(--line-2); }
+.mark-t:empty { display: none; }
+
+/* ── Blocs de code dans les slides ─────────────────────────────────────── */
+
+/* Slidev applique taille, interligne et marge interne en !important à
+   travers ces variables : c'est donc elles qu'on règle. */
+.slidev-layout {
+  --slidev-code-font-size: 12px;
+  --slidev-code-line-height: 18px;
+  --slidev-code-padding: 10px 14px;
+  --slidev-code-margin: 0;
+}
+.code-sm { --slidev-code-font-size: 10.5px; --slidev-code-line-height: 16px; --slidev-code-padding: 9px 12px; }
+.code-xs { --slidev-code-font-size: 9.5px; --slidev-code-line-height: 14px; --slidev-code-padding: 8px 11px; }
+.slidev-layout pre.slidev-code { border: 1px solid var(--line); }
+.slidev-layout .slidev-code-wrapper + .slidev-code-wrapper { margin-top: 0.6rem; }
+/* Le style du code inline (fond, filet, padding) ne doit pas s'appliquer au
+   code des blocs : il dessinerait un encadré par ligne. */
+.slidev-layout pre code {
+  background: none;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* ── Specs : variantes ─────────────────────────────────────────────────── */
+
+.specs.is-hang li { position: relative; padding-left: calc(var(--specs-k) + 0.75rem); }
+.specs.is-hang li > strong:first-child {
+  position: absolute;
+  left: 0;
+  top: 0.2em;
+  width: var(--specs-k);
+  min-width: 0;
+}
+.specs.is-raw li > strong:first-child {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.74rem;
+}
+
+/* ── Sur-titre d'un chemin : casse conservée ───────────────────────────── */
+
+.eyebrow.is-code { text-transform: none; letter-spacing: 0.02em; font-size: 0.7rem; }
+
+/* ── Liste markdown sur deux colonnes ──────────────────────────────────── */
+
+.list-2 ul { columns: 2; column-gap: 1.6rem; }
+.list-2 li { break-inside: avoid; }
+
+/* Une pile qui remplit sa cellule, pour qu'une figure `contain` s'y ajuste */
+.cell > .stack.is-fill { height: 100%; }
+.stack > .fig.is-contain { flex: 1 1 auto; min-height: 0; }
+.is-sm .specs li { font-size: 0.78rem; padding-bottom: 0.4rem; }
+.is-sm .specs ul { gap: 0.4rem; }
+
+/* ── Bullet compact ────────────────────────────────────────────────────── */
+
+.bullet.is-sm { padding: 0.45rem 0.8rem; gap: 0.75rem; font-size: 0.84rem; line-height: 1.45; }
+.bullet.is-sm .num { width: 1.35rem; height: 1.35rem; font-size: 0.66rem; }
+
+/* Un code inline ne se coupe pas entre deux lignes : coupé, il dessinerait
+   deux demi-pastilles. */
+.slidev-layout :not(pre) > code { white-space: nowrap; }

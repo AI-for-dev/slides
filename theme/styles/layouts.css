@@ -234,11 +234,8 @@
   color: var(--muted);
 }
 
-/* Le numéro est dessiné par le gabarit ; celui de SectionHead et le sur-titre
-   « Partie n » feraient doublon avec lui et avec le pied de page. */
-.slidev-layout.sect .sect-num,
-.slidev-layout.sect .sect-head > .eyebrow { display: none; }
-.slidev-layout.sect .sect-head h1 { margin-top: 0; }
+.slidev-layout.sect .sect-head > .eyebrow + h1 { margin-top: 1rem; }
+.slidev-layout.sect .sect-head > h1:first-child { margin-top: 0; }
 
 .agenda {
   display: flex;

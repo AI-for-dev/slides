@@ -34,6 +34,9 @@ const CLASS = {
       <span v-if="badge" class="num" :class="'is-' + badgeTone">{{ badge }}</span>
       <span v-if="title" class="card-title">{{ title }}</span>
     </div>
-    <slot />
+    <!-- Centrée, la carte est une colonne flex : sans cette enveloppe, chaque
+         morceau de texte inline (code, gras) deviendrait un bloc séparé. -->
+    <div v-if="center" class="card-body"><slot /></div>
+    <slot v-else />
   </div>
 </template>

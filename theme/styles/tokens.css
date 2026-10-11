@@ -40,6 +40,14 @@
   --blue-soft:    #e9eff6;
   --blue-line:    #c3d2e5;
 
+  /* Anciens noms, encore employés par les composants et les decks : le
+     second crayon s'appelait « teal ». Ce sont des alias, ils suivent donc
+     aussi le schéma sombre. */
+  --teal:         var(--blue);
+  --teal-deep:    var(--blue-deep);
+  --teal-soft:    var(--blue-soft);
+  --teal-line:    var(--blue-line);
+
   /* Géométrie : presque pas d'arrondi, le crayon fait les coins ----------- */
   --r-sm: 2px;
   --r-md: 3px;
@@ -59,6 +67,7 @@
   --font-text:  'Lexend Variable', 'Lexend', ui-sans-serif, system-ui, sans-serif;
   --font-mono:  'Atkinson Hyperlegible Mono Variable', 'Atkinson Hyperlegible Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
   --font-quote: 'Instrument Serif', 'Iowan Old Style', Palatino, Georgia, serif;
+  --font-sans:  var(--font-text);   /* ancien nom */
 
   /* Échelle des titres : chaque cran est nettement au-dessus du suivant. */
   --fs-display: 4rem;     /* couverture */
@@ -93,7 +102,7 @@ html.dark {
   --paper:        #18191c;
   --surface:      #212226;
   --surface-2:    #2b2c31;
-  --white:        #f4f2ec;
+  --white:        #26272c;   /* surface surélevée, pas une plaque claire */
 
   --line:         #2f3035;
   --line-2:       #45464c;
