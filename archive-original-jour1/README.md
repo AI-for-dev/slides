@@ -14,4 +14,4 @@ Ce n'est donc pas une copie fidèle du fichier d'origine : c'est la meilleure
 reconstitution possible à partir de ce qui avait été extrait.
 
 Le contenu textuel intégral des 29 pages a été repris tel quel dans
-`../slides.md`.
+`../jour1.md`.

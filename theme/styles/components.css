@@ -101,6 +101,10 @@
   letter-spacing: 0;
   font-size: 0.7rem;
 }
+/* Étiquette cliquable : le lien garde l'apparence de l'étiquette. */
+.slidev-layout a.tag.is-link { border-bottom: 0; }
+.slidev-layout a.tag.is-link:hover { color: var(--accent); }
+.slidev-layout a.tag.is-link.is-teal:hover { color: var(--blue); }
 
 /* ── Cards ─────────────────────────────────────────────────────────────── */
 

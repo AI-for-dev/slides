@@ -92,8 +92,11 @@
 .speaker-body :is(p, li) { font-size: 0.93rem; }
 
 .item-body > p:first-child { margin: 0; }
-.goal .item-body > p:first-child { font-family: var(--font-title); font-size: var(--fs-block); font-weight: 640; letter-spacing: -0.015em; }
-.adv .item-body > p:first-child { font-family: var(--font-title); font-size: 1rem; font-weight: 640; }
+/* Le titre est posé sur le corps, pas sur son premier <p> : MDC n'en crée pas
+   quand l'item tient sur une ligne sans Detail. */
+.goal .item-body { font-family: var(--font-title); font-size: var(--fs-block); font-weight: 640; letter-spacing: -0.015em; }
+.adv .item-body { font-family: var(--font-title); font-size: 1rem; font-weight: 640; }
+:is(.goal, .adv) .item-body .detail { font-family: var(--font-text); font-weight: 400; letter-spacing: normal; }
 
 .goal .detail { font-size: 0.84rem; }
 .adv .detail,

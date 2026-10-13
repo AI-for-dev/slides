@@ -260,13 +260,13 @@
 .step + .step::before {
   content: '';
   position: absolute;
-  left: -0.8rem;
-  top: calc(50% - 4px);
-  width: 0.6rem;
-  height: 8px;
+  left: -0.68rem;
+  top: calc(50% - 3px);
+  width: 0.56rem;
+  height: 6px;
   background: var(--graphite-2);
-  -webkit-mask: var(--pc-dash) center / 100% 100% no-repeat;
-          mask: var(--pc-dash) center / 100% 100% no-repeat;
+  -webkit-mask: var(--pc-arrow) center / 100% 100% no-repeat;
+          mask: var(--pc-arrow) center / 100% 100% no-repeat;
 }
 .step-n {
   display: block;
@@ -396,7 +396,9 @@
 }
 
 :is(.card, .card-soft, .card-accent, .card-teal) .bullet { padding: 0.45rem 0; }
-:is(.card, .card-soft, .card-accent, .card-teal) .bullet::after {
+/* `:nth-child(n)` passe devant les cadres alternés de components.css, qui
+   sinon écrasent ce trait par un cadre aplati sur les lignes 2, 3 et 4. */
+:is(.card, .card-soft, .card-accent, .card-teal) .bullet:nth-child(n)::after {
   inset: auto 0 -4px 0;
   height: 8px;
   opacity: 0.35;

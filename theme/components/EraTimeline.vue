@@ -1,22 +1,30 @@
 <script setup lang="ts">
-const eras = [
+/**
+ * Frise des époques. `eras` remplace la frise par défaut. Une époque `future`
+ * est une projection : cadre estompé et flèche pointillée. Au-delà de quatre
+ * époques, la frise resserre sa typographie.
+ */
+type Era = { year: string; title: string; lines: string[]; tone: 'a' | 'b' | 'c' | 'd'; detail?: string[]; future?: boolean }
+
+const p = defineProps<{ eras?: Era[] }>()
+
+const defaultEras: Era[] = [
   {
-    year: '2022 – 23',
+    year: '2021 – 22',
     title: 'Autocomplétion',
     lines: ['Suggestions en ligne plus développées'],
     tone: 'a',
   },
   {
     year: '2023 – 24',
-    title: 'Agent',
-    lines: ['Interaction par le chat en langage naturel'],
-    detail: ['un fichier · prompt engineering', 'multi-fichiers · context engineering'],
+    title: 'Chat + multi edit',
+    lines: ['Prompt engineering', 'Multi-fichiers'],
     tone: 'b',
   },
   {
     year: '2025',
-    title: 'Harnais',
-    lines: ['Itération + tools, MCP, skills, …'],
+    title: 'Agent',
+    lines: ['Itération + tools, MCP, skill, …', 'Context engineering'],
     tone: 'c',
   },
   {
@@ -26,12 +34,15 @@ const eras = [
     tone: 'd',
   },
 ]
+
+const eras = p.eras ?? defaultEras
+const cols = `repeat(${eras.length - 1}, 1fr 18px) 1fr`
 </script>
 
 <template>
-  <div class="era-line">
+  <div class="era-line" :class="{ 'is-dense': eras.length > 4 }" :style="{ gridTemplateColumns: cols }">
     <template v-for="(e, i) in eras" :key="e.year">
-      <div class="era" :class="'tone-' + e.tone">
+      <div class="era" :class="['tone-' + e.tone, { 'is-future': e.future }]">
         <div class="era-year">{{ e.year }}</div>
         <div class="era-card">
           <div class="era-title">{{ e.title }}</div>
@@ -43,7 +54,7 @@ const eras = [
           </div>
         </div>
       </div>
-      <div v-if="i < eras.length - 1" class="era-chev" />
+      <div v-if="i < eras.length - 1" class="era-chev" :class="{ 'is-future': eras[i + 1].future }" />
     </template>
   </div>
 </template>
@@ -51,7 +62,6 @@ const eras = [
 <style>
 .era-line {
   display: grid;
-  grid-template-columns: 1fr 18px 1fr 18px 1fr 18px 1fr;
   align-items: stretch;
   gap: 0.55rem;
 }
@@ -122,6 +132,15 @@ const eras = [
   background: var(--graphite-2);
   -webkit-mask: var(--pc-arrow) center / 100% 100% no-repeat;
           mask: var(--pc-arrow) center / 100% 100% no-repeat;
+}
+
+.era-line.is-dense .era-title { font-size: calc(var(--fs-block) * 0.88); white-space: nowrap; }
+.era-line.is-dense .era-text { font-size: 0.8rem; }
+
+/* Une projection : le trait se fait léger, la flèche pointillée. */
+.era.is-future .era-card { --pc-o: 0.4; }
+.era-chev.is-future {
+  background: repeating-linear-gradient(90deg, var(--graphite-2) 0 3px, transparent 3px 6px);
 }
 
 /* Du gris au rouge : plus on s'approche d'aujourd'hui, plus le trait appuie. */

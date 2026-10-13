@@ -2,12 +2,12 @@
 version: 1
 slug: "theme"
 primary_target: "theme"
-related_targets: ["slides.md","jour2.md","jour3.md"]
+related_targets: ["jour1.md","jour2.md","jour3.md"]
 ---
 
 ## Portée
 
-Le thème Slidev `theme/`, partagé par les trois decks (`slides.md`, `jour2.md`, `jour3.md`). Mode de visite : Read. Le public suit une présentation projetée, puis la relit en ligne ou en PDF.
+Le thème Slidev `theme/`, partagé par les trois decks (`jour1.md`, `jour2.md`, `jour3.md`). Mode de visite : Read. Le public suit une présentation projetée, puis la relit en ligne ou en PDF.
 
 ## Ce que la surface doit faire
 

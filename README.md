@@ -31,7 +31,7 @@ Chaque commande a sa variante pour les jours 2 et 3 : `dev:jour2`,
 ## Organisation
 
 ```
-slides.md                 jour 1
+jour1.md                  jour 1
 jour2.md                  jour 2 : couverture et plan, puis un import par partie
 pages/jour2/              une partie du jour 2 par fichier
 jour3.md                  jour 3 : couverture et programme, puis un import par module
@@ -47,7 +47,7 @@ theme/                    le thème maison
   styles/layouts.css      cover / section / quote / statement / default
   styles/mdc.css          colle entre le markdown et les blocs
   layouts/*.vue           les cinq gabarits de slide
-  components/*.vue        les briques utilisées dans slides.md
+  components/*.vue        les briques utilisées dans les decks
 archive-original-jour1/   trace de la version d'origine
 ```
 
@@ -100,7 +100,7 @@ Ce qu'il faut retenir.
 | `Note` | ligne de commentaire discrète ; `tag`, `tone`, `tight` |
 | `Lead` | chapeau sous le titre |
 | `Detail` | sous-ligne petite et grise |
-| `Tag` | étiquette inline ; `tone`, `code` |
+| `Tag` | étiquette inline ; `tone`, `code`, `href` (étiquette cliquable) |
 | `Eyebrow` | sur-titre isolé ; `tone` |
 | `Pull` | exergue en serif ; `size` |
 | `Hint` | note à droite du titre ; `prefix`, `href` |
@@ -113,7 +113,7 @@ Ce qu'il faut retenir.
 | Composant | Slide |
 | --- | --- |
 | `SectionHead`, `Agenda` | slides de section ; `Agenda` prend une liste markdown, `numbering=roman` pour I/II/III |
-| `Definition`, `Def` | les trois définitions de la partie 3 |
+| `Definition`, `Def` | les trois définitions de la partie 3 ; `source`, `href` |
 | `Speaker` | « D'où parlons-nous ? » |
 | `Act` | programme de l'atelier |
 | `Criterion` | les quatre filtres « quels modèles » |
@@ -126,11 +126,13 @@ Ce qu'il faut retenir.
 | `Quote` | corps d'une slide `layout: quote` |
 | `CoverTitle`, `LogoBar`, `Author`, `CoverMeta` | couverture et clôture |
 | `EraTimeline`, `AutonomyLadder`, `HarnessMap` | les trois diagrammes du jour 1 |
-| `Bascule`, `PencilNumeral` | dessins des gabarits cover, section et statement ; pas besoin de les appeler dans `slides.md` |
+| `Bascule`, `PencilNumeral` | dessins des gabarits cover, section et statement ; pas besoin de les appeler dans `jour1.md` |
 | `PiSequence` | la séquence d'une requête avec lecture de fichier (jour 2) |
 | `Matrix` | enveloppe d'un tableau de mesures : lignes serrées, colonnes centrées ; `size`, `first`, `left` |
 | `Score` | taux de réussite `v/of` avec jauge (`of` vaut 20 par défaut) ; `hi` le met en avant |
 | `Mark` | verdict inline ✓ ✗ ~ ; `v` = yes / no / part, texte optionnel en contenu |
+| `ToolLoop` | la boucle d'appel d'outils entre modèle et harnais (jour 1) |
+| `LostInMiddle` | la fenêtre de contexte et la courbe en U de « Lost in the Middle » (jour 1) |
 | `ContextStack` | les cinq sources de la fenêtre de contexte (jour 3) |
 | `LoopMap` | la boucle explorer → planner → coder → reviewer (jour 3) |
 | `Motifs` | les cinq motifs d'un flux de travail (jour 3) |
