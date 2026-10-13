@@ -12,9 +12,9 @@ const HUB = { x: 450, y: 150, rx: 88, ry: 47 }
 
 const bricks = [
   { n: '1', x: 0,   y: 0,   title: 'GESTION DU CONTEXTE', lines: ['Sélectionner, ordonner', 'et compacter'] },
-  { n: '2', x: 0,   y: 118, title: 'OUTILS',              lines: ['Donner des capacités', 'd\u2019action si c\u2019est utile'] },
-  { n: '3', x: 0,   y: 236, title: 'DÉLÉGATION',          lines: ['Sous-tâches à des agents pour', 'alléger le fil principal'] },
-  { n: '7', x: 632, y: 0,   title: 'VÉRIFICATION & ÉVAL.', lines: ['Tester, évaluer et boucler', 'sur la qualité et le coût'] },
+  { n: '2', x: 0,   y: 118, title: 'OUTILS',              lines: ['Donner des capacités', 'd\u2019actions si c\u2019est utile'] },
+  { n: '3', x: 0,   y: 236, title: 'DÉLÉGATION',          lines: ['Sous-tâches à des agents pour alléger', 'le contexte du fil principal'] },
+  { n: '7', x: 632, y: 0,   title: 'VÉRIFICATION ET ÉVALUATION', lines: ['Tester, évaluer et boucler', 'sur la qualité et le coût'] },
   { n: '6', x: 632, y: 118, title: 'SÛRETÉ',              lines: ['Borner les permissions', 'et isoler l\u2019exécution'] },
   { n: '5', x: 632, y: 236, title: 'MÉMOIRE',             lines: ['Persister décisions, règles', 'et état entre les sessions'] },
   { n: '4', x: 316, y: 322, title: 'ORCHESTRATION',       lines: ['Coordonner agents, plans, exécution', 'et tâches de longue durée'] },

@@ -6,7 +6,7 @@ const levels = [
   { n: '1', title: 'Le stagiaire en programmation',   desc: 'Génération de code sans importance, soumise à une révision humaine complète.' },
   { n: '2', title: 'Le développeur junior',           desc: 'Programmation en binôme avec le modèle, en continuant de vérifier chaque ligne.' },
   { n: '3', title: 'Le développeur',                  desc: 'La majeure partie du code est générée par l’IA ; vous devenez réviseur de code à temps plein.' },
-  { n: '4', title: 'L’orchestrateur',            desc: 'Vous cadrez les besoins et faites évoluer votre harnais pour qu’il devienne plus efficace.' },
+  { n: '4', title: 'L’orchestrateur',            desc: 'Vous cadrez les besoins et faites évoluer votre harnais au fur et à mesure pour qu’il devienne plus efficace.' },
   { n: '5', title: 'L’usine logicielle « obscure »', desc: 'Personne ne relit le code : le système fonctionne en autonomie totale.' },
 ]
 </script>
