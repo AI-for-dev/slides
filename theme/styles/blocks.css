@@ -422,6 +422,28 @@
 .matrix.is-xs th { font-size: 0.6rem; }
 .slidev-layout .matrix td code { font-size: 0.82em; white-space: nowrap; }
 .matrix td strong { color: var(--accent-deep); }
+/* Ligne de groupe : <tr class="is-group"><th colspan="…">Titre</th></tr>,
+   un sur-titre en sanguine qui ouvre un bloc de lignes. */
+.matrix tr.is-group th {
+  padding-top: 1.25rem;
+  padding-bottom: 0.4rem;
+  border-bottom: none;
+  letter-spacing: 0.12em;
+  color: var(--accent-deep);
+}
+.matrix tr.is-group th::before {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 7px;
+  margin-right: 0.6em;
+  vertical-align: 0.1em;
+  background: var(--accent);
+  -webkit-mask: var(--pc-dash) center / 100% 100% no-repeat;
+          mask: var(--pc-dash) center / 100% 100% no-repeat;
+}
+.matrix tbody tr.is-group:first-child th { padding-top: 0.8rem; }
+.matrix tr:has(+ tr.is-group) td { border-bottom: none; }
 
 /* ── Score « 18/20 » avec jauge ────────────────────────────────────────── */
 
