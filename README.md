@@ -34,8 +34,8 @@ Chaque commande a sa variante pour les jours 2 et 3 : `dev:jour2`,
 jour1.md                  jour 1
 jour2.md                  jour 2 : couverture et plan, puis un import par partie
 pages/jour2/              une partie du jour 2 par fichier
-jour3.md                  jour 3 : couverture et programme, puis un import par module
-pages/jour3/              un module du jour 3 par fichier
+jour3.md                  jour 3 : hooks, délégation et workflows
+pages/jour3/              sandbox, contexte et skill, que jour3.md n'importe plus
 public/images/            les figures, logos et avatars
 theme/                    le thème maison
   styles/tokens.css       palette, typographie, géométrie
@@ -128,7 +128,7 @@ Ce qu'il faut retenir.
 | `EraTimeline`, `AutonomyLadder`, `HarnessMap` | les trois diagrammes du jour 1 |
 | `Bascule`, `PencilNumeral` | dessins des gabarits cover, section et statement ; pas besoin de les appeler dans `jour1.md` |
 | `PiSequence` | la séquence d'une requête avec lecture de fichier (jour 2) |
-| `Matrix` | enveloppe d'un tableau de mesures : lignes serrées, colonnes centrées ; `size`, `first`, `left` |
+| `Matrix` | enveloppe d'un tableau de mesures : lignes serrées, colonnes centrées ; `size`, `first`, `left`. Dans un tableau HTML, `<tr class="is-group"><th colspan="n">Titre</th></tr>` ouvre un bloc de lignes |
 | `Score` | taux de réussite `v/of` avec jauge (`of` vaut 20 par défaut) ; `hi` le met en avant |
 | `Mark` | verdict inline ✓ ✗ ~ ; `v` = yes / no / part, texte optionnel en contenu |
 | `ToolLoop` | la boucle d'appel d'outils entre modèle et harnais (jour 1) |
