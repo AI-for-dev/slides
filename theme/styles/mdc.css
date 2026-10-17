@@ -12,7 +12,10 @@
 .cols.is-fill { flex: 1; min-height: 0; }
 .cell { min-width: 0; }
 
-.stack { display: flex; flex-direction: column; }
+.stack { display: flex; flex-direction: column; gap: var(--stack-gap, 1rem); }
+/* Une étiquette seule colle à ce qu'elle annonce : 0.65rem, quel que soit
+   l'écart de la pile (MDC l'enveloppe dans un paragraphe). */
+.stack > :is(.eyebrow, p:has(> .eyebrow:only-child)) + * { margin-top: calc(0.65rem - var(--stack-gap, 1rem)); }
 .stack > p { margin: 0; }
 .stack.is-fill { flex: 1; min-height: 0; }
 
@@ -152,6 +155,7 @@
   color: var(--accent);
 }
 .agenda.is-roman li::before { content: counter(agenda, upper-roman); }
+.agenda.is-alpha li::before { content: counter(agenda, upper-alpha); }
 
 /* ── Slide de section : rythme vertical du bloc de gauche ──────────────── */
 

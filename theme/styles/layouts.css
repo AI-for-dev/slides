@@ -30,6 +30,20 @@
   color: var(--quiet);
   pointer-events: none;
 }
+.slide-foot .foot-left {
+  display: flex;
+  align-items: center;
+  gap: 1.1em;
+}
+/* Slide facultative : même étiquette que `Tag`, dans le pied de page. */
+.slide-foot .foot-tag {
+  color: var(--accent-deep);
+  background: var(--accent-soft);
+  border-radius: var(--r-sm);
+  /* la marge négative garde la hauteur du pied de page, avec ou sans étiquette */
+  padding: 0.22em 0.6em;
+  margin: -0.22em 0;
+}
 .slide-foot .foot-right {
   font-variant-numeric: tabular-nums;
   color: var(--muted);

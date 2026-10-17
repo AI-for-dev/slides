@@ -32,10 +32,8 @@ Chaque commande a sa variante pour les jours 2 et 3 : `dev:jour2`,
 
 ```
 jour1.md                  jour 1
-jour2.md                  jour 2 : couverture et plan, puis un import par partie
-pages/jour2/              une partie du jour 2 par fichier
+jour2.md                  jour 2 : Pi, sandbox, contexte, évaluation et skills
 jour3.md                  jour 3 : hooks, délégation, workflows et Pi Durable
-pages/jour3/              sandbox, contexte et skill, que jour3.md n'importe plus
 public/images/            les figures, logos et avatars
 theme/                    le thème maison
   styles/tokens.css       palette, typographie, géométrie
@@ -52,9 +50,6 @@ archive-original-jour1/   trace de la version d'origine
 ```
 
 ## Écrire une slide
-
-Une partie importée avec `src:` est un fichier markdown ordinaire, sans en-tête
-de deck.
 
 Le contenu est du markdown. La mise en forme passe par des composants, avec la
 syntaxe MDC : `::Nom` … `::` pour un bloc, `:Nom[texte]` pour de l'inline, et
@@ -112,7 +107,7 @@ Ce qu'il faut retenir.
 
 | Composant | Slide |
 | --- | --- |
-| `SectionHead`, `Agenda` | slides de section ; `Agenda` prend une liste markdown, `numbering=roman` pour I/II/III |
+| `SectionHead`, `Agenda` | slides de section ; `Agenda` prend une liste markdown, `numbering=roman` pour I/II/III, `numbering=alpha` pour A/B/C |
 | `Definition`, `Def` | les trois définitions de la partie 3 ; `source`, `href` |
 | `Speaker` | « D'où parlons-nous ? » |
 | `Act` | programme de l'atelier |
@@ -130,6 +125,8 @@ Ce qu'il faut retenir.
 | `PiSequence` | la séquence d'une requête avec lecture de fichier (jour 2) |
 | `Matrix` | enveloppe d'un tableau de mesures : lignes serrées, colonnes centrées ; `size`, `first`, `left`. Dans un tableau HTML, `<tr class="is-group"><th colspan="n">Titre</th></tr>` ouvre un bloc de lignes |
 | `Score` | taux de réussite `v/of` avec jauge (`of` vaut 20 par défaut) ; `hi` le met en avant |
+| `Heatmap` | grilles de comptes côte à côte, une par groupe ; `groups`, `notes`, `rowGroups` × `rowLabels`, `colGroups` × `colLabels`, `values`, `of` (20 par défaut). S'écrit en syntaxe Vue (`<Heatmap :values="[…]" />`) |
+| `Effect` | écart en points et son intervalle à 95 % ; `v`, `lo`, `hi`, `max` (60 par défaut). Point plein si l'intervalle exclut zéro |
 | `Mark` | verdict inline ✓ ✗ ~ ; `v` = yes / no / part, texte optionnel en contenu |
 | `ToolLoop` | la boucle d'appel d'outils entre modèle et harnais (jour 1) |
 | `LostInMiddle` | la fenêtre de contexte et la courbe en U de « Lost in the Middle » (jour 1) |
@@ -143,7 +140,9 @@ réduisent les blocs de code qu'il contient.
 ### Pied de page
 
 Le pied de page affiche le `section` de la slide, sinon
-`themeConfig.footer` de l'en-tête du deck.
+`themeConfig.footer` de l'en-tête du deck. `deeper: true` dans l'en-tête de la
+slide y ajoute l'étiquette « Pour aller plus loin », pour les slides qu'on
+passe vite en salle.
 
 Chaque composant émet la classe CSS qui porte son nom (`Card` → `.card`,
 `Criterion` → `.criterion`…) : pour changer une apparence, chercher la classe

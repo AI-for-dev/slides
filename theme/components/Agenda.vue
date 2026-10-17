@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /** Sommaire d'une section : une liste markdown, numérotée automatiquement. */
-withDefaults(defineProps<{ numbering?: 'decimal' | 'roman' }>(), { numbering: 'decimal' })
+withDefaults(defineProps<{ numbering?: 'decimal' | 'roman' | 'alpha' }>(), { numbering: 'decimal' })
 </script>
 
 <template>

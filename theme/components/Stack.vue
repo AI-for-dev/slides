@@ -11,7 +11,7 @@ withDefaults(defineProps<{
   <div
     class="stack"
     :class="{ 'is-fill': fill }"
-    :style="{ gap: Number(gap) * 0.25 + 'rem', justifyContent: center ? 'center' : undefined }"
+    :style="{ '--stack-gap': Number(gap) * 0.25 + 'rem', justifyContent: center ? 'center' : undefined }"
   >
     <slot />
   </div>
