@@ -34,7 +34,7 @@ Chaque commande a sa variante pour les jours 2 et 3 : `dev:jour2`,
 jour1.md                  jour 1
 jour2.md                  jour 2 : couverture et plan, puis un import par partie
 pages/jour2/              une partie du jour 2 par fichier
-jour3.md                  jour 3 : hooks, délégation et workflows
+jour3.md                  jour 3 : hooks, délégation, workflows et Pi Durable
 pages/jour3/              sandbox, contexte et skill, que jour3.md n'importe plus
 public/images/            les figures, logos et avatars
 theme/                    le thème maison

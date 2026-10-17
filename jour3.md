@@ -1,6 +1,6 @@
 ---
 theme: ./theme
-title: Hooks, délégation et workflows - IA4Dev 2026
+title: Hooks, délégation, workflows et Pi Durable - IA4Dev 2026
 info: |
   IA4Dev 2026 - ANF jour 3, octobre 2026
   Max Beligné (PUD-GA / MSH Alpes / UGA) · Loïc Gouarin (CMAP / CNRS / École polytechnique)
@@ -31,8 +31,8 @@ IA4Dev 2026 · ANF jour 3
 ::
 :::
 
-::CoverTitle{sub="Comprendre et construire son harnais"}
-# Hooks, délégation<br />et workflows
+::CoverTitle{sub="Comprendre et construire son harnais" style="transform: translateY(-3rem)"}
+# Hooks, délégation,<br />workflows et Pi Durable
 ::
 
 :::Cols{cols="1fr auto" align=end}
@@ -53,7 +53,7 @@ section: Introduction
 
 # Le programme du jour
 
-::::Stack{fill gap=2.5}
+::::Stack{fill gap=1.5}
 ::Act{n=1 title="Les hooks"}
 Déclencher du code à un moment défini de la boucle, de manière déterministe
 ::
@@ -63,11 +63,14 @@ Découper le travail en sous-agents, et tenir la boucle à la main
 ::Act{n=3 title="Les workflows"}
 La même boucle, écrite dans un fichier que Pi déroule seul
 ::
+::Act{n=4 title="Pi Durable"}
+Faire survivre l’état d’exécution et les tâches au processus qui les porte
+::
 ::::
 
-::::Stack{gap=1.5 .mt-5}
+::::Stack{gap=1.5 .mt-4}
 ::Note{tag="Version écrite"}
-Chaque partie suit un module du cours :
+Les trois premières parties suivent un module du cours :
 [hooks](https://ai-for-dev.github.io/hands-on-harness/act2-hooks),
 [délégation](https://ai-for-dev.github.io/hands-on-harness/act2-delegation),
 [workflows](https://ai-for-dev.github.io/hands-on-harness/act2-workflows)
@@ -79,7 +82,7 @@ Toujours [NÉON](https://github.com/AI-for-dev/neon) : seuls `game/neon.js` et `
 
 ---
 layout: section
-index: Partie 1 / 3
+index: Partie 1 / 4
 ---
 
 ::SectionHead{num="01" detail="Des événements déterministes"}
@@ -593,7 +596,7 @@ Le gros avantage du sous-agent : **son contexte est indépendant** de celui de l
 
 ---
 layout: section
-index: Partie 2 / 3
+index: Partie 2 / 4
 ---
 
 ::SectionHead{num="02" detail="Découper le travail en sous-agents"}
@@ -1104,7 +1107,7 @@ Tenir la boucle à la main fait apparaître les décisions, les critères et les
 
 ---
 layout: section
-index: Partie 3 / 3
+index: Partie 3 / 4
 ---
 
 ::SectionHead{num="03" detail="La boucle écrite dans un fichier"}
@@ -1559,6 +1562,129 @@ section: Partie 3 · Les workflows
 </tbody>
 </table>
 ::
+
+---
+layout: section
+index: Partie 4 / 4
+---
+
+::SectionHead{num="04" detail="Faire survivre le travail au processus"}
+# Pi Durable
+::
+
+::Agenda
+- Distinguer historique de conversation et état d’exécution
+- Installer le SDK et assembler un harnais durable
+- Voir deux usages : interface collaborative et runtime multi-agent
+::
+
+---
+section: Partie 4 · Pi Durable
+---
+
+# Pi et Pi Durable : deux rôles distincts
+
+:::::Stack{fill center gap=5}
+::::Cols{cols=2 gap=7}
+:::Card{eyebrow="Pi" title="Agent de programmation" size=sm}
+- Interface terminal prête à l’emploi
+- Sessions et historique de conversation
+:::
+:::Card{variant=teal eyebrow="Pi Durable" title="SDK de longue durée" tone=teal size=sm}
+- État d’exécution et appels d’outils persistés
+- Reprise des tâches après redémarrage
+:::
+::::
+
+::Takeaway
+Pi Durable sauvegarde le **travail en cours**, pas seulement le dialogue.
+::
+
+::::Cols{cols=3 gap=5}
+::Note{tag="Depuis Pi 1.0.0"}
+Le SDK est intégré au dépôt de Pi.
+::
+::Note{tag="Expérimental"}
+Il reste pour l’instant distinct de Pi et son API peut évoluer.
+::
+::Note{tag="À construire"}
+Le SDK fournit le moteur durable, pas l’interface utilisateur.
+::
+::::
+:::::
+
+---
+section: Partie 4 · Pi Durable
+---
+
+# Installation et premiers pas :Hint[README officiel]{href="https://github.com/earendil-works/pi/blob/main/packages/durable/README.md"}
+
+::Lead
+Node.js ≥ 22.19 et npm — un SDK qui s’installe à côté de Pi.
+::
+
+:::Cell{.code-sm}
+```bash
+npm install @earendil-works/pi-durable @earendil-works/pi-ai @earendil-works/chord
+```
+:::
+
+::::Cols{cols=4 gap=4 fill align=center .mt-5}
+::Step{n="01" title="Choisir le modèle"}
+Clé API ou authentification.
+::
+::Step{n="02" title="Configurer le stockage"}
+SQLite ou JSONL pour reprendre après un arrêt.
+::
+::Step{n="03" title="Brancher les outils"}
+`CodingTools`, dossier projet et environnement.
+::
+::Step{n="04" title="Démarrer le Harness"}
+`open()`, `root()`, `submit()` et `resume()`.
+::
+::::
+
+::Note{tag="Exemples" .mt-5}
+[Agent de code](https://github.com/earendil-works/pi/blob/main/packages/durable/test/examples/26-coding-agent.ts) · [sous-agents en arrière-plan](https://github.com/earendil-works/pi/blob/main/packages/durable/test/examples/23-subagent-background.ts)
+::
+
+---
+section: Partie 4 · Pi Durable
+---
+
+# Deux exemples parmi d’autres
+
+::::Cols{cols=2 gap=7 fill}
+:::Card{variant=accent eyebrow="Expérience collaborative" title="Pi Pocket" size=sm}
+- Application web et mobile pour Pi
+- Accès aux agents depuis un navigateur
+- Sessions partagées et pilotage en direct
+- Tâches et sous-agents qui survivent aux redémarrages
+
+:Rule
+
+**Rôle de Pi Durable :** exécution et état persistants.
+
+::Detail
+[github.com/TannerMidd/pi-pocket](https://github.com/TannerMidd/pi-pocket)
+::
+:::
+
+:::Card{variant=teal eyebrow="Orchestration multi-agent" title="pi-fabric" tone=teal size=sm}
+- Runtime programmable pour Pi
+- Agents résidents et workflows composables
+- Coordination et tâches durables
+- Runner fondé sur Pi Durable pour la reprise
+
+:Rule
+
+**Rôle de Pi Durable :** composant du runtime.
+
+::Detail
+[github.com/fabric-runtime/pi-fabric](https://github.com/fabric-runtime/pi-fabric)
+::
+:::
+::::
 
 ---
 layout: statement
