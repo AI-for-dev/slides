@@ -1721,10 +1721,12 @@ Première version qui livre `--until agree` et l’agent `debater`.
 section: Partie 4 · L’essaim
 ---
 
-# Exercice : trois copies d’un même agent
+# Exercice : trois copies, puis trois camps à prendre
 
 ::::Cols{cols=2 gap=8 fill align=center}
-:::Stack{gap=4 .code-xs}
+:::Stack{gap=2 .code-xs}
+:Eyebrow[1 · Sans camp]{tone=quiet code}
+
 ```text
 /herdr on
 /swarm --members 3 --until agree --rounds 4 --agent debater
@@ -1732,38 +1734,8 @@ section: Partie 4 · L’essaim
        logiciel de calcul scientifique ?
 ```
 
-::Card{variant=accent eyebrow="En salle" size=sm}
-Un volet herdr par membre, plus un volet `board` : la seule vue où l’on voit **un échange** et non trois monologues.
-::
+:Eyebrow[2 · Un langage à prendre par membre]{tone=quiet code .mt-3}
 
-::Note{tag="La trace"}
-`runs/<date>/1-debater/` : une session HTML par membre, et `usage.json` pour les tokens et la durée.
-::
-:::
-:::Stack{gap=4}
-:Eyebrow[À relever]{tone=teal}
-
-::Specs{w="6rem" raw}
-- **tours** combien ont été joués avant l’arrêt
-- **vote** le langage de chaque membre, à chaque tour
-- **échanges** combien de `tell` avec `re` répondent à un autre membre
-- **arguments** qui avance quoi, et qui reprend l’argument d’un autre
-::
-
-::Card{variant=soft eyebrow="À discuter" size=sm}
-Trois copies d’un même agent, est-ce trois avis ?
-::
-:::
-::::
-
----
-section: Partie 4 · L’essaim
----
-
-# Imposer le désaccord avec --claim
-
-::::Cols{cols=2 gap=8 fill align=center}
-:::Stack{gap=4 .code-xs}
 ```text
 /swarm --members 3 --claim Python,Julia,C++ --hold 1
        --until agree --rounds 4 --agent debater
@@ -1772,25 +1744,22 @@ section: Partie 4 · L’essaim
        défend au départ le langage qu'il a pris.
 ```
 
-::Lead
-Chaque langage devient une chose à prendre, et `--hold 1` limite chaque membre à une prise. Un membre qui demande un langage déjà pris est refusé, et invité à choisir parmi ceux qui restent libres.
+::Note{tag="--claim" .mt-3}
+Un membre qui demande un langage déjà pris est refusé, et invité à choisir parmi ceux qui restent libres.
 ::
 :::
 :::Stack{gap=4}
-:Eyebrow[À relever dans chaque session]{tone=teal}
+:Eyebrow[À relever, dans le volet board et les sessions]{tone=teal}
 
-::Bullet{size=sm k="1"}
-Quel langage chaque membre a-t-il **demandé** ?
-::
-::Bullet{size=sm k="2"}
-Qu’a répondu l’outil à chacun ?
-::
-::Bullet{size=sm k="3"}
-Pour quel langage a-t-il **voté** ensuite ?
+::Specs{w="6rem" raw}
+- **prise** le langage demandé par chaque membre, et ce que l’outil lui a répondu
+- **vote** le langage de chaque membre, à chaque tour
+- **échanges** les `tell` avec `re` qui répondent à un autre membre
+- **tours** combien ont été joués avant l’arrêt
 ::
 
 ::Card{variant=soft eyebrow="À discuter" size=sm}
-Le mécanisme garantit qu’un langage n’a qu’un détenteur. Garantit-il que chaque langage sera défendu ?
+Trois copies d’un même agent, est-ce trois avis ? Un langage qui n’a qu’un détenteur est-il pour autant défendu ?
 ::
 :::
 ::::
@@ -1831,7 +1800,10 @@ Python and C++. […]
 Un fichier par camp, avec son prompt, son modèle et la ligne qui dit ce qu’il défend. Un camp **écrit** ne peut pas être refusé.
 ::
 ::Note{tag="--agent"}
-Une liste d’agents place chacun d’eux une fois sur le tableau. Elle demande une version de combo plus récente que la 0.6.0.
+Une liste d’agents place chacun d’eux une fois sur le tableau. Demande combo > 0.6.0.
+::
+::Note{tag="--timeout"}
+Un débatteur peut relire le tableau en boucle : `/swarm` coupe un tour après 5 minutes, `--timeout 3m` raccourcit, et un membre coupé deux fois sort du débat.
 ::
 ::Card{variant=accent eyebrow="En salle" size=sm}
 Copiez `debat-*.md` dans `.pi/agents/`, lancez le débat et suivez le volet `board`. Dans `runs/<date>/1-swarm/`, notez à quel tour chaque débatteur change de vote, s’il en change.
@@ -1935,42 +1907,6 @@ Que ne disait pas la première question ? Qu’est-ce qui change dans les écha
 ::
 :::
 ::::
-
----
-section: Partie 4 · L’essaim
----
-
-# Exercices : lire ce qui a décidé
-
-:::::Stack{fill center gap=5}
-::::Cols{cols=3 gap=5}
-:::Card{variant=accent eyebrow="01 · En salle" title="Le critère de chaque vote" size=sm}
-Lancez le débat sur l’énoncé du plasma. Pour chaque changement de vote, retrouvez dans le tableau le critère invoqué.
-
-::Detail
-Puis trois copies de `debater` sur la même question, sans camp : comparez leur réponse à celle du débat.
-::
-:::
-:::Card{variant=accent eyebrow="02 · En autonomie" title="Retirer un critère" size=sm}
-Supprimez le noyau Fortran de l’énoncé. La réponse change-t-elle ? Quel argument disparaît ?
-
-::Detail
-Puis un modèle différent derrière chaque camp, avec la ligne `model:` des débatteurs.
-::
-:::
-:::Card{variant=accent eyebrow="03 · En autonomie" title="Une décision de votre domaine" size=sm}
-Écrivez un énoncé avec ses exigences, pour une décision que vous avez réellement eue à prendre.
-
-::Detail
-Comparez le débat à ce que vous aviez décidé.
-::
-:::
-::::
-
-::Note{tag="Plafonner chaque tour" .mt-2}
-La boucle de Pi n’a pas de maximum d’appels d’outils, et un débatteur peut relire le tableau en boucle pendant son tour. `/swarm` donne 5 minutes par tour, `--timeout 3m` raccourcit, et un membre coupé deux fois sort du débat. Lisez `usage.json` après chaque exécution.
-::
-:::::
 
 ---
 section: Partie 4 · L’essaim
