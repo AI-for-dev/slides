@@ -28,7 +28,7 @@ IA4Dev 2026 · ANF jour 1
 ::
 :::
 
-::CoverTitle{sub="Comprendre et construire son harnais"}
+::CoverTitle{sub="Comprendre et construire son harnais" style="transform: translateY(-2rem)"}
 # Présentation<br />de l’atelier
 ::
 
@@ -61,7 +61,7 @@ section: Introduction
 - IR dans le domaine des SHS à l’UGA
 - Responsable du groupe TIPS-IA
 - Membre de la cellule CDGA
-- Traitement de données et dev autodidacte
+- Traitement de données et développement
 :::
 ::::
 
@@ -73,7 +73,8 @@ section: Introduction
 
 :::::Stack{fill center gap=7}
 ::Lead
-Nous ne sommes pas des experts de l’agentique. Nous nous en servons tous les jours et nous essayons de **dompter la bête**.
+Nous ne sommes pas des experts de l’agentique. <br />
+Nous essayons de **comprendre et dompter la bête**.
 ::
 
 ::::Cols{cols=2 gap=6 content=center}
@@ -175,9 +176,9 @@ section: Partie 1 · Les fondations
 Mieux comprendre et contrôler ses agents et son harnais
 :::
 :::Item{variant=goal n=2 ghost}
-Ce qui implique souvent une utilisation plus intensive de l’IA
+Expérimenter, discuter et avancer collectivement
 ::Detail
-Connaissant les problématiques (environnementales, sociales…), **quel est notre positionnement ?**
+Avant, pendant et après la formation
 ::
 :::
 ::::
@@ -185,7 +186,7 @@ Connaissant les problématiques (environnementales, sociales…), **quel est not
 
 :::Cell{span=2}
 ::Card{variant=soft center}
-**De notre côté, pas de volonté de promouvoir l’usage de l’IA.**
+**De notre côté, pas de volonté de promouvoir l’usage de l’IA.**<br />
 À chacun de construire son positionnement.
 
 :Rule
@@ -197,7 +198,7 @@ Mais en organisant cette ANF et cet atelier, ça encourage l’usage de l’IA ?
 ::::
 
 ::Note{tag="Ailleurs dans l’ANF" .mt-4}
-Les questions juridiques, sociales et environnementales sont traitées par d’autres intervenants. Le cours en donne des références en annexe.
+Les questions juridiques, sociales et environnementales sont traitées par d’autres intervenants.<br /> Le cours en donne des références en annexe.
 ::
 
 ---
@@ -249,7 +250,7 @@ section: Partie 2 · Du modèle à l’agent
   ::
 - Les quantifications et optimisations
   ::Detail
-  GGUF, voir par exemple [unsloth](https://unsloth.ai/docs/fr/commencer/unsloth-model-catalog) · [MLX](https://korben.info/rapid-mlx-installation-macos.html) pour Mac · [DS4](https://github.com/antirez/ds4) pour les MoE DeepSeek et GLM
+  GGUF, voir par exemple [unsloth](https://unsloth.ai/docs/fr/commencer/unsloth-model-catalog) · [MLX](https://korben.info/rapid-mlx-installation-macos.html) pour Mac · <br /> [DS4](https://github.com/antirez/ds4) pour les MoE DeepSeek et GLM
   ::
 - [huggingface.co/models](https://huggingface.co/models)
   :Detail[pas de catégorie à part pour le code, classé dans « text generation »]
@@ -279,7 +280,7 @@ Avant de répondre, le modèle produit une longue chaîne de réflexion intermé
 ::
 
 ::Note{tag="En quelques mois"}
-[OpenAI o1](https://openai.com/index/learning-to-reason-with-llms/) en septembre 2024, [DeepSeek-R1](https://arxiv.org/abs/2501.12948) en janvier 2025, Claude 3.7 Sonnet en février 2025
+[OpenAI o1](https://openai.com/index/learning-to-reason-with-llms/) en septembre 2024, <br /> [DeepSeek-R1](https://arxiv.org/abs/2501.12948) en janvier 2025
 ::
 :::
 
@@ -315,7 +316,7 @@ Retrouver un fait isolé marche presque parfaitement sur les modèles récents (
 :::
 
 ::Takeaway
-Remplir la fenêtre ne suffit pas. Ce qui compte, c’est **ce qu’on y met, et où**. Point de départ du travail sur le contexte, demain.
+Différence entre fenêtre de contexte maximale et effective. Nécessité de gérer son contexte. <br /> Cf. travail demain et après-demain.
 ::
 ::::
 :::::
@@ -327,7 +328,7 @@ section: Partie 2 · Du modèle à l’agent
 # L’appel d’outils, ou comment un modèle agit
 
 ::Lead
-Le modèle n’exécute rien lui-même. Il produit une **demande structurée** ; le harnais l’exécute et lui renvoie le résultat.
+Le modèle n’exécute rien lui-même. Il produit une **demande structurée**.  <br /> Le harnais l’exécute et lui renvoie le résultat.
 ::
 
 :::::Stack{fill gap=5}
@@ -345,7 +346,7 @@ Le modèle n’exécute rien lui-même. Il produit une **demande structurée** ;
 :::
 
 ::Takeaway
-Cette boucle est le cœur de l’agent. Un harnais est ce qui l’organise.
+Cette boucle est le cœur de l’agent. <br />Un harnais permet une orchestration qui va au-delà des appels d'outils
 ::
 ::::
 :::::
@@ -611,7 +612,6 @@ Humanity’s Last Exam, GDP.pdf, CritPt, AA-Omniscience, AA-LCR v1.1
 ::
 
 ---
-# À VÉRIFIER : GLM 5.2 ou 5.3 chez Scaleway ?
 section: Partie 4 · Le paysage
 ---
 
@@ -643,7 +643,7 @@ La situation s’améliore, mais reste pas terrible.
 **Qwen 3.8 27B** <span class="muted">(via IlaaS)</span>
 ::
 ::Bullet{k="·"}
-**GLM 5.2** <span class="muted">(limité et avec problème de cache pour l’instant, via Scaleway)</span>
+**GLM 5.2 et 5.3** <span class="muted">(limité et avec problème de cache pour l’instant, via Scaleway)</span>
 ::
 ::::
 :::
@@ -1041,7 +1041,7 @@ section: Partie 6 · Le fil rouge
 # NÉON : un dépôt imparfait :Hint[github.com/AI-for-dev/neon]{href="https://github.com/AI-for-dev/neon"}
 
 ::Lead
-L’objectif n’est pas de construire un jeu, mais d’**améliorer un existant pas super…** <span class="muted">(ça arrive parfois <span>:-)</span></span>
+L’objectif n’est pas de construire un jeu, mais d’**améliorer un existant pas super…** <span class="muted"> <br /> (ça arrive parfois <span>:-)</span></span>
 ::
 
 ::::Cols{cols=5 gap=6 fill align=center .mt-4}

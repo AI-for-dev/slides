@@ -1,21 +1,22 @@
 <script setup lang="ts">
-// Levels 0 → 5 of "how much of the code does the model write".
-// Intensity of the bullet grows with the level: the visual reads as a ramp.
+// The marker intensity grows with autonomy: the visual reads as a continuum.
 const levels = [
-  { n: '0', title: 'Suggestion « améliorée »',        desc: 'Ou copier-coller d’extraits de code depuis ChatGPT.' },
-  { n: '1', title: 'Le stagiaire en programmation',   desc: 'Génération de code sans importance, soumise à une révision humaine complète.' },
-  { n: '2', title: 'Le développeur junior',           desc: 'Programmation en binôme avec le modèle, en continuant de vérifier chaque ligne.' },
-  { n: '3', title: 'Le développeur',                  desc: 'La majeure partie du code est générée par l’IA ; vous devenez réviseur de code à temps plein.' },
-  { n: '4', title: 'L’orchestrateur',            desc: 'Vous cadrez les besoins et faites évoluer votre harnais au fur et à mesure pour qu’il devienne plus efficace.' },
-  { n: '5', title: 'L’usine logicielle « obscure »', desc: 'Personne ne relit le code : le système fonctionne en autonomie totale.' },
+  { title: 'Suggestion « améliorée »',        desc: 'Ou copier-coller d’extraits de code depuis ChatGPT.' },
+  { title: 'Le stagiaire en programmation',   desc: 'Génération de code sans importance, soumise à une révision humaine complète.' },
+  { title: 'Le développeur junior',           desc: 'Programmation en binôme avec le modèle, en continuant de vérifier chaque ligne.' },
+  { title: 'Le développeur',                  desc: 'La majeure partie du code est générée par l’IA ; vous devenez réviseur de code à temps plein.' },
+  { title: 'L’orchestrateur',                  desc: 'Vous cadrez les besoins et faites évoluer votre harnais au fur et à mesure pour qu’il devienne plus efficace.' },
+  { title: 'L’usine logicielle « obscure »',  desc: 'Personne ne relit le code : le système fonctionne en autonomie totale.' },
 ]
 </script>
 
 <template>
   <div class="ladder">
     <div class="ladder-rail" />
-    <div v-for="(l, i) in levels" :key="l.n" class="ladder-row" :style="{ '--i': i }">
-      <div class="ladder-num">{{ l.n }}</div>
+    <div v-for="(l, i) in levels" :key="l.title" class="ladder-row" :style="{ '--i': i }">
+      <div v-if="i === 0" class="ladder-axis-label">Contrôle humain fort</div>
+      <div v-if="i === levels.length - 1" class="ladder-axis-label">Autonomie du système forte</div>
+      <div class="ladder-marker" />
       <div class="ladder-bar">
         <div class="ladder-title">{{ l.title }}</div>
         <div class="ladder-desc">{{ l.desc }}</div>
@@ -26,18 +27,19 @@ const levels = [
 
 <style>
 .ladder {
+  --axis-gutter: 9.5rem;
   position: relative;
   height: 100%;
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
-  padding-left: 2.7rem;
+  padding-left: var(--axis-gutter);
 }
 
-/* Le rail : un seul trait vertical, du gris vers la sanguine. */
+/* Le rail matérialise un continuum, du contrôle humain vers l’autonomie. */
 .ladder-rail {
   position: absolute;
-  left: 0.92rem;
+  left: calc(var(--axis-gutter) - 2.05rem);
   top: 0.9rem;
   bottom: 0.9rem;
   width: 2px;
@@ -52,38 +54,45 @@ const levels = [
   align-items: stretch;
 }
 
-.ladder-num {
+.ladder-axis-label {
+  position: absolute;
+  left: calc(-1 * var(--axis-gutter));
+  top: 50%;
+  width: 6.25rem;
+  transform: translateY(-50%);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: right;
+  text-transform: uppercase;
+  letter-spacing: 0.035em;
+}
+
+.ladder-marker {
   position: absolute;
   left: -2.7rem;
   top: 50%;
   transform: translateY(-50%);
-  width: 1.85rem;
-  height: 1.85rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-mono);
-  font-size: 0.74rem;
-  font-weight: 500;
-  color: var(--ink);
+  width: 1.3rem;
+  height: 1.3rem;
   background: var(--paper);
   border-radius: 50%;
   --c: color-mix(in srgb, var(--accent) calc(var(--i) * 20%), var(--graphite-2));
 }
-.ladder-num::before {
+.ladder-marker::before {
   content: '';
   position: absolute;
-  inset: -0.18rem;
+  inset: 0.08rem;
   background: var(--c);
   -webkit-mask: var(--pc-circle-2) center / 100% 100% no-repeat;
           mask: var(--pc-circle-2) center / 100% 100% no-repeat;
 }
-.ladder-row:nth-child(odd) .ladder-num::before {
+.ladder-row:nth-child(odd) .ladder-marker::before {
   -webkit-mask-image: var(--pc-circle-3);
           mask-image: var(--pc-circle-3);
 }
-.ladder-row:nth-child(6) .ladder-num,
-.ladder-row:nth-child(7) .ladder-num { color: var(--accent-deep); }
 
 .ladder-bar {
   position: relative;
@@ -122,14 +131,4 @@ const levels = [
   color: var(--muted);
 }
 
-/* Le dernier niveau : cerné à la sanguine. */
-.ladder-row:last-child .ladder-bar::after {
-  inset: -3px;
-  height: auto;
-  opacity: 0.95;
-  background: var(--accent);
-  -webkit-mask: var(--pc-frame-3);
-          mask: var(--pc-frame-3);
-}
-.ladder-row:last-child .ladder-title { color: var(--accent-deep); }
 </style>
