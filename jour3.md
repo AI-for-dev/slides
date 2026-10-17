@@ -1,6 +1,6 @@
 ---
 theme: ./theme
-title: Hooks, délégation, workflows et Pi Durable - IA4Dev 2026
+title: Hooks, délégation, workflows, essaim et Pi Durable - IA4Dev 2026
 info: |
   IA4Dev 2026 - ANF jour 3, octobre 2026
   Max Beligné (PUD-GA / MSH Alpes / UGA) · Loïc Gouarin (CMAP / CNRS / École polytechnique)
@@ -32,7 +32,7 @@ IA4Dev 2026 · ANF jour 3
 :::
 
 ::CoverTitle{sub="Comprendre et construire son harnais" style="transform: translateY(-3rem)"}
-# Hooks, délégation,<br />workflows et Pi Durable
+# Hooks, délégation, workflows,<br />essaim et Pi Durable
 ::
 
 :::Cols{cols="1fr auto" align=end}
@@ -51,9 +51,9 @@ Octobre 2026
 section: Introduction
 ---
 
-# Le programme du jour
+# Le programme du jour :Hint[NÉON]{prefix="Fil rouge," href="https://github.com/AI-for-dev/neon"}
 
-::::Stack{fill gap=1.5}
+::::Stack{gap=1}
 ::Act{n=1 title="Les hooks"}
 Déclencher du code à un moment défini de la boucle, de manière déterministe
 ::
@@ -63,26 +63,27 @@ Découper le travail en sous-agents, et tenir la boucle à la main
 ::Act{n=3 title="Les workflows"}
 La même boucle, écrite dans un fichier que Pi déroule seul
 ::
-::Act{n=4 title="Pi Durable"}
+::Act{n=4 title="L’essaim"}
+Faire débattre des agents sur un tableau commun, jusqu’à l’accord
+::
+::Act{n=5 title="Pi Durable"}
 Faire survivre l’état d’exécution et les tâches au processus qui les porte
 ::
 ::::
 
-::::Stack{gap=1.5 .mt-4}
+::::Stack{gap=1 .mt-4}
 ::Note{tag="Version écrite"}
-Les trois premières parties suivent un module du cours :
+Les quatre premières parties suivent un module du cours :
 [hooks](https://ai-for-dev.github.io/hands-on-harness/act2-hooks),
 [délégation](https://ai-for-dev.github.io/hands-on-harness/act2-delegation),
-[workflows](https://ai-for-dev.github.io/hands-on-harness/act2-workflows)
-::
-::Note{tag="Fil rouge"}
-Toujours [NÉON](https://github.com/AI-for-dev/neon) : seuls `game/neon.js` et `game/neon.test.js` changent, et `npm test` finit vert
+[workflows](https://ai-for-dev.github.io/hands-on-harness/act2-workflows),
+[essaim](https://ai-for-dev.github.io/hands-on-harness/act2-swarm)
 ::
 ::::
 
 ---
 layout: section
-index: Partie 1 / 4
+index: Partie 1 / 5
 ---
 
 ::SectionHead{num="01" detail="Des événements déterministes"}
@@ -596,7 +597,7 @@ Le gros avantage du sous-agent : **son contexte est indépendant** de celui de l
 
 ---
 layout: section
-index: Partie 2 / 4
+index: Partie 2 / 5
 ---
 
 ::SectionHead{num="02" detail="Découper le travail en sous-agents"}
@@ -1107,7 +1108,7 @@ Tenir la boucle à la main fait apparaître les décisions, les critères et les
 
 ---
 layout: section
-index: Partie 3 / 4
+index: Partie 3 / 5
 ---
 
 ::SectionHead{num="03" detail="La boucle écrite dans un fichier"}
@@ -1565,10 +1566,534 @@ section: Partie 3 · Les workflows
 
 ---
 layout: section
-index: Partie 4 / 4
+index: Partie 4 / 5
 ---
 
-::SectionHead{num="04" detail="Faire survivre le travail au processus"}
+::SectionHead{num="04" detail="Faire débattre des agents"}
+# L’essaim
+::
+
+::Agenda
+- Ce qui sépare un essaim d’une délégation ou d’un workflow
+- Le tableau partagé, et ce qui arrête une discussion
+- Trois débats qui ne tranchent rien, et pourquoi
+- Donner au débat une question qu’il peut trancher
+::
+
+---
+section: Partie 4 · L’essaim
+---
+
+# Des agents qui se répondent :Hint[module essaim]{prefix="Cours," href="https://ai-for-dev.github.io/hands-on-harness/act2-swarm"}
+
+::Stack{fill center}
+<Topologies />
+::
+
+::::Cols{cols=2 gap=6 .mt-4}
+::Takeaway
+Une question **sans chemin connu** demande une discussion : quelqu’un qui défend une autre option, et qui change d’avis quand vous avez raison.
+::
+::Note{tag="Le prix"}
+Chaque membre relit à chaque tour ce que les autres ont écrit, et on ne sait pas d’avance combien de tours il faudra.
+::
+::::
+
+---
+section: Partie 4 · L’essaim
+---
+
+# Le tableau : un journal partagé :Hint[doc de combo, essaims]{href="https://github.com/AI-for-dev/combo/blob/main/docs/guide/swarm.md"}
+
+::::Cols{cols=2 gap=8 fill align=center}
+:::Stack{gap=4}
+::Lead
+Un membre d’essaim est un agent ordinaire dont la panoplie contient l’outil `board`. Il garde son contexte et ne voit des autres que **ce qu’ils publient**.
+::
+::Specs{w="7rem" raw}
+- **ajout seul** personne ne modifie ni n’efface un message : le débat se relit tel qu’il s’est déroulé
+- **auteur** inscrit par le tableau, pas déclaré par le membre : nul ne parle au nom d’un autre
+- **à chaque tour** combo remet à chaque membre ce qui est nouveau, en commençant par ce qui lui répond
+- **plafonds** 200 messages, 50 par membre, 2 000 caractères, pas deux fois le même message
+::
+:::
+:::Stack{gap=4}
+:Eyebrow[Trois sortes de messages pour un débat]{tone=teal}
+
+::Matrix{size=md left first="6rem"}
+| sorte | usage |
+| --- | --- |
+| `result` | sa réponse à la question, ici son vote ; une seule par tour |
+| `tell` | un argument ; avec `re`, il répond à un message précis |
+| `ask` | une question, adressée à un seul membre avec `to` |
+::
+
+::Note{tag="Ailleurs"}
+Dans [Swarm](https://github.com/openai/swarm) d’OpenAI, un agent passe la main à un autre, qui hérite de tout l’historique. combo garde un contexte par membre : la trace dit qui a dit quoi à qui.
+::
+:::
+::::
+
+---
+section: Partie 4 · L’essaim
+---
+
+# Qu’est-ce qui arrête un essaim ?
+
+:::::Stack{fill center gap=5}
+::Lead
+Un ticket est fini quand les tests passent. Un débat n’a pas de critère aussi net : combo en propose trois.
+::
+
+::::Cols{cols=3 gap=5}
+:::Card{badge="1" title="Le nombre de tours" size=sm}
+`--rounds`, 3 par défaut. Il borne la dépense.
+
+::Detail
+Un débat arrêté par ce plafond n’a rien conclu.
+::
+:::
+:::Card{badge="2" badgeTone=teal title="La couverture" size=sm}
+`--claim` donne une liste de choses à prendre, et l’essaim s’arrête quand chacune a un résultat.
+
+::Detail
+Détourné pour distribuer les camps : `--hold 1` limite chaque membre à une prise.
+::
+:::
+:::Card{variant=accent badge="3" title="L’accord" size=sm}
+`--until agree` : chaque membre publie un `result` qui commence par `VOTE: <réponse>`, et l’essaim s’arrête quand **tous** les derniers votes sont identiques.
+
+::Detail
+Deux sur trois ne suffisent pas. Un membre qui abandonne empêche l’accord.
+::
+:::
+::::
+:::::
+
+---
+section: Partie 4 · L’essaim
+---
+
+# Le débatteur livré avec combo
+
+::::Cols{cols="5fr 4fr" gap=7 fill align=center}
+:::Stack{gap=2 .code-xs}
+:Eyebrow[combo/agents/debater.md, extrait]{tone=quiet code}
+
+```markdown
+---
+name: debater
+description: Argues one side of a question beside other
+  debaters, and votes every turn until they all vote the same
+tools: board
+lifetime: workflow
+---
+
+You are one of several agents arguing about one question.
+The others argue at the same time, none of you can see
+another's context, and nobody arbitrates.
+
+Every turn, post one `result` to the board: your vote,
+and under it the one argument the others have not answered.
+
+To answer somebody, post a `tell` with `re` set to the id
+of the post you are answering.
+
+Change your vote when somebody is right: agreeing is the
+result, not a defeat. But agreeing to be done with it,
+without a reason you could give out loud, is worse than
+still disagreeing.
+```
+:::
+:::Stack{gap=4}
+::Specs{w="6.4rem" raw}
+- **tools** le seul outil `board` : il ne lit aucun fichier, le débat ne dépend pas du dépôt
+- **lifetime** `workflow` : il se souvient de ce qu’on lui a objecté au tour d’avant
+- **consigne** un vote par tour, répondre avec `re`, changer d’avis quand l’autre a raison, jamais pour en finir
+::
+::Note{tag="combo ≥ 0.5.0"}
+Première version qui livre `--until agree` et l’agent `debater`.
+::
+:::
+::::
+
+---
+section: Partie 4 · L’essaim
+---
+
+# Exercice : trois copies d’un même agent
+
+::::Cols{cols=2 gap=8 fill align=center}
+:::Stack{gap=4 .code-xs}
+```text
+/herdr on
+/swarm --members 3 --until agree --rounds 4 --agent debater
+       Quel langage choisir pour écrire un nouveau
+       logiciel de calcul scientifique ?
+```
+
+::Card{variant=accent eyebrow="En salle" size=sm}
+Un volet herdr par membre, plus un volet `board` : la seule vue où l’on voit **un échange** et non trois monologues. Dans `runs/<date>/1-debater/`, notez le nombre de tours, le langage choisi, et les `tell` avec `re`.
+::
+:::
+:::Stack{gap=4}
+:Eyebrow[Notre exécution, trois copies de gemma-4-31b]{tone=teal}
+
+::Specs{w="5.6rem" raw}
+- **vote** Julia pour les trois, dès le premier message
+- **argument** le même : le « problème des deux langages »
+- **durée** un tour, 51 secondes, un seul message qui répond à un autre
+::
+
+::Card{variant=soft size=sm}
+« Je suis tout à fait d’accord. La compilation JIT est justement ce qui permet d’éviter le passage au C/Fortran. »
+::
+
+::Takeaway
+Trois copies d’un même modèle partagent la même réponse la plus probable : les faire voter revient à poser **trois fois** la question à un seul agent.
+::
+:::
+::::
+
+---
+section: Partie 4 · L’essaim
+---
+
+# Imposer le désaccord avec --claim
+
+:::::Cols{cols=2 gap=8 fill align=center}
+::::Stack{gap=4 .code-xs}
+```text
+/swarm --members 3 --claim Python,Julia,C++ --hold 1
+       --until agree --rounds 4 --agent debater
+       Quel langage choisir pour écrire un nouveau
+       logiciel de calcul scientifique ? Chacun de vous
+       défend au départ le langage qu'il a pris.
+```
+
+:Eyebrow[Ce qu’ont reçu debater#1 et debater#2]{tone=quiet code}
+
+```text
+`Julia` is held by debater#3 - ask debater#3,
+or take something else. Still free: Python, C++
+```
+::::
+::::Stack{gap=4}
+::Lead
+Les trois copies ont demandé Julia. debater#3 l’a obtenu, les deux autres ont été refusés…
+::
+:::Card{variant=soft size=sm}
+… et **aucun** n’a pris Python ni C++. Ils ont voté Julia comme s’ils l’avaient obtenu : accord au premier tour, en 105 secondes.
+
+::Detail
+La doc de combo rapporte la même chose sur gemma-4-31b et qwen-3.6-35b-instruct : deux exécutions sur quatre.
+::
+:::
+::Takeaway
+Le mécanisme a fonctionné, mais il n’oblige personne à défendre ce qui reste. Un membre ne défend une position que si elle est **écrite dans son prompt système**.
+::
+::::
+:::::
+
+---
+section: Partie 4 · L’essaim
+---
+
+# Un agent par camp :Hint[hands-on-harness/scripts/agents/]{href="https://github.com/AI-for-dev/hands-on-harness/tree/main/scripts/agents"}
+
+::::Cols{cols=2 gap=8 fill align=center}
+:::Stack{gap=2 .code-xs}
+:Eyebrow[neon/.pi/agents/debat-julia.md, extrait]{tone=quiet code}
+
+```markdown
+---
+name: debat-julia
+tools: board
+lifetime: workflow
+model: ilaas/gemma-4-31b
+---
+
+You are one of three agents debating one question on a
+shared board. You open for Julia. The two others open for
+Python and C++. […]
+```
+
+```text
+/herdr on
+/swarm --agent debat-python,debat-julia,debat-cpp
+       --until agree --rounds 6
+       Quel langage choisir pour écrire un nouveau
+       logiciel de calcul scientifique ?
+```
+:::
+:::Stack{gap=4}
+::Lead
+Un fichier par camp, avec son prompt, son modèle et la ligne qui dit ce qu’il défend. Un camp **écrit** ne peut pas être refusé.
+::
+::Note{tag="--agent"}
+Une liste d’agents place chacun d’eux une fois sur le tableau. Elle demande une version de combo plus récente que la 0.6.0.
+::
+::Card{variant=accent eyebrow="En salle" size=sm}
+Copiez `debat-*.md` dans `.pi/agents/`, lancez le débat et suivez le volet `board`. Dans `runs/<date>/1-swarm/`, notez à quel tour chaque débatteur change de vote, s’il en change.
+::
+:::
+::::
+
+---
+section: Partie 4 · L’essaim
+---
+
+# Ils se répondent, et personne ne bouge
+
+::::Cols{cols="4fr 5fr" gap=8 fill align=center}
+:::Stack{gap=4}
+::Lead
+Deux exécutions sur gemma-4-31b : les six tours permis, **aucun vote** n’a bougé.
+::
+::Matrix{size=md left first="8rem"}
+| exécution | messages | réponses adressées (`re`) |
+| --- | --- | --- |
+| première | 61 | 43 |
+| seconde | 49 | 31 |
+::
+::Note{tag="Ce n’est pas"}
+un défaut de communication : le tableau est plein de réponses qui citent l’argument d’en face.
+::
+:::
+:::Stack{gap=3}
+::Card{size=sm eyebrow="C++ · p7, en réponse à Python"}
+« L’écosystème de Python repose presque entièrement sur des bibliothèques écrites en C ou Fortran. Pour un nouveau logiciel qui doit innover dans les calculs \[…\], Python devient un goulot d’étranglement. »
+::
+::Card{variant=teal size=sm tone=teal eyebrow="Python · p9, en réponse à p7"}
+« L’argument du “goulot d’étranglement” est aujourd’hui largement mitigé par des outils comme Numba, Cython ou Jax \[…\] sans quitter l’écosystème Python. »
+::
+::Card{size=sm eyebrow="C++ · p14, en réponse à p9"}
+« S’appuyer sur Numba ou Jax revient à admettre que Python n’est qu’une interface. »
+::
+:::
+::::
+
+---
+section: Partie 4 · L’essaim
+---
+
+# Qu’est-ce qui empêche des agents de converger ?
+
+::::Cols{cols=2 gap=8 fill align=center}
+:::Stack{gap=4}
+:Eyebrow[Le débatteur Python, au quatrième tour]{tone=teal}
+
+::Pull
+« However, to win the debate (get everyone to vote the same), I need to find a way to convince them \[…\]. But as a Python agent, my primary goal is to defend Python. »
+::
+
+::Lead
+Chacun traite son camp comme une identité et l’accord comme la reddition des autres. Conclusion à chaque tour : « Maintain my vote ».
+::
+:::
+:::Stack{gap=3}
+::Bullet{size=sm k="1"}
+**La consigne de vote** se termine par « This ends when every one of you has voted for the same thing » : gemma la lit comme un objectif de victoire
+::
+::Bullet{size=sm k="2"}
+**Le prompt** pousse à tenir : « agreeing to be done with it \[…\] is worse than still disagreeing »
+::
+::Bullet{size=sm k="3"}
+**La question** n’a aucun critère : chacun ramène le débat sur l’axe où son langage gagne, la performance, l’écosystème ou le coût humain
+::
+::Card{variant=accent eyebrow="Une seule phrase ajoutée à la question" size=sm .mt-2}
+« Le but n’est pas de gagner : c’est de trouver la réponse que les autres peuvent aussi tenir. »
+::
+:::
+::::
+
+---
+section: Partie 4 · L’essaim
+---
+
+# Trois modèles, trois conditions
+
+::Lead
+Les mêmes essais, en imposant le modèle à tous les membres avec `--model`.
+::
+
+:::Stack{fill center}
+::Matrix{size=md left first="17rem"}
+| condition | gemma-4-31b | qwen3.8-flash | deepseek-v4.1-flash |
+| --- | --- | --- | --- |
+| trois copies de `debater`, sans camp | Julia au 1er tour | Julia au 2e tour | Julia au 3e tour |
+| un agent par camp | 2 × aucun vote ne bouge | pas d’accord, deux membres coupés par le délai | accord sur Julia au 6e tour |
+| un agent par camp, avec la phrase sur le but | 1 accord (Julia), 1 membre sorti | accord sur le fond, **non compté** | accord sur Python au 3e tour |
+::
+:::
+
+::::Cols{cols=3 gap=5 .mt-2}
+::Note{tag="gemma"}
+La phrase compte beaucoup : ses débatteurs la citent presque à chaque tour, et leurs changements de vote restent motivés.
+::
+::Note{tag="deepseek"}
+Converge même sans elle, en zigzag : son débatteur C++ passe à Python au 4e tour, puis à Julia au 5e.
+::
+::Note{tag="qwen"}
+Trois votes pour la même architecture, écrits chacun à sa façon : « Python pour piloter, C++ pour le noyau »… `--until agree` compare à l’identique.
+::
+::::
+
+::Takeaway{.mt-4}
+Une case, une exécution : ce tableau ne mesure pas les modèles. Il montre que l’issue dépend de **réglages qu’on choisit**, la consigne, le format du vote et le modèle.
+::
+
+---
+section: Partie 4 · L’essaim
+---
+
+# Donner au débat une question qu’il peut trancher
+
+::::Cols{cols="3fr 2fr" gap=7 fill align=center}
+:::Card{variant=soft eyebrow="L’énoncé, à la suite de la commande" size=sm}
+<p class="mono muted" style="font-size:0.64rem;line-height:1.45;white-space:nowrap">/swarm --agent debat-python,debat-julia,debat-cpp --until agree --rounds 4</p>
+
+Une équipe de six physiciens et deux ingénieurs de recherche lance un nouveau code de simulation de plasma. Il doit tourner sur les **GPU NVIDIA et AMD** du calculateur national, être maintenu **au moins dix ans**, et reprendre un **noyau existant de 40 000 lignes en Fortran 90**. Les physiciens connaissent **bien Python et peu le C++**. Quel langage principal choisir pour ce code ?
+
+:Rule
+
+Votez pour le langage principal seulement, en un mot : la place des autres langages va dans votre argument. Le but n’est pas de gagner : c’est de trouver la réponse que les autres peuvent aussi tenir.
+:::
+:::Stack{gap=3}
+::Bullet{size=sm k="critères" badge=tag}
+Des exigences que tous reconnaissent, sur lesquelles un argument peut en battre un autre
+::
+::Bullet{size=sm k="vote" badge=tag}
+Un mot : l’accord devient comptable, la répartition entre langages va dans l’argument
+::
+::Bullet{size=sm k="but" badge=tag}
+Une raison de bouger : chercher une réponse commune plutôt que gagner
+::
+::Takeaway{.mt-2}
+« Un nouveau logiciel de calcul scientifique » n’a pas de réponse : rien ne dit ce qu’il doit faire. Une décision réelle s’appuie sur des **exigences**.
+::
+:::
+::::
+
+---
+section: Partie 4 · L’essaim
+---
+
+# Six débats, six accords
+
+::::Cols{cols="11fr 9fr" gap=7 fill align=center}
+:::Stack{gap=4}
+::Matrix{size=md left first="10rem"}
+| modèle | sans camp | débat 1 | débat 2 |
+| --- | --- | --- | --- |
+| gemma-4-31b | C++ | Julia (4) | Julia (3) |
+| qwen3.8-flash | Fortran | C++ (2) | C++ (2) |
+| deepseek-v4.1-flash | Fortran | C++ (4) | Fortran (3) |
+::
+::Lead
+Entre parenthèses, les tours joués. Chaque changement de vote cite un **critère de l’énoncé**, et cinq débats sur six s’écartent du témoin : le débat ne restitue pas seulement l’a priori du modèle.
+::
+:::
+:::Stack{gap=3}
+::Card{size=sm eyebrow="gemma · C++ se rallie à Julia"}
+« Le risque de dépendance exclusive envers les deux ingénieurs pour la maintenance d’un code C++ sur dix ans est plus critique que le risque technique lié à l’utilisation de Julia. »
+::
+::Card{variant=accent size=sm eyebrow="deepseek · Julia corrige son propre argument"}
+« Les 40 000 lignes doivent tourner sur GPU, pas seulement être liées. Mon ccall vers le F90 ne les exécutait que sur le CPU \[…\]. Le portage caché que je reprochais aux autres, je le portais aussi. »
+::
+::Note{tag="Désaccords lisibles"}
+gemma met en premier l’autonomie des physiciens, qwen la pérennité des outils, deepseek de ne pas réécrire un noyau validé.
+::
+:::
+::::
+
+---
+section: Partie 4 · L’essaim
+---
+
+# Exercices : lire ce qui a décidé
+
+:::::Stack{fill center gap=5}
+::::Cols{cols=3 gap=5}
+:::Card{variant=accent eyebrow="01 · En salle" title="Le critère de chaque vote" size=sm}
+Lancez le débat sur l’énoncé du plasma. Pour chaque changement de vote, retrouvez dans le tableau le critère invoqué.
+
+::Detail
+Puis trois copies de `debater` sur la même question, sans camp : comparez.
+::
+:::
+:::Card{variant=accent eyebrow="02 · En autonomie" title="Retirer un critère" size=sm}
+Supprimez le noyau Fortran de l’énoncé. La réponse change-t-elle ? Quel argument disparaît ?
+
+::Detail
+Puis un modèle différent derrière chaque camp, avec la ligne `model:` des débatteurs.
+::
+:::
+:::Card{variant=accent eyebrow="03 · En autonomie" title="Une décision de votre domaine" size=sm}
+Écrivez un énoncé avec ses exigences, pour une décision que vous avez réellement eue à prendre.
+
+::Detail
+Comparez le débat à ce que vous aviez décidé.
+::
+:::
+::::
+
+::Note{tag="Plafonner chaque tour" .mt-2}
+Un débatteur gemma a appelé `read` **259 fois** dans un seul tour : la boucle de Pi n’a pas de maximum d’appels d’outils. `/swarm` donne 5 minutes par tour, `--timeout 3m` raccourcit, et un membre coupé deux fois sort du débat. Lisez `usage.json` après chaque exécution.
+::
+:::::
+
+---
+section: Partie 4 · L’essaim
+---
+
+# Généraliser
+
+::::Cols{cols=2 gap=5 fill content=center}
+:::Item{variant=adv n=1}
+Un débat reflète son cadre
+::Detail
+Mêmes agents, même question : aucun vote ne bouge, puis un accord, selon une phrase de la consigne. En lisant un débat, on évalue le harnais autant que les agents.
+::
+:::
+:::Item{variant=adv n=2}
+Des copies ne sont pas des avis indépendants
+::Detail
+Sans camp, elles votent ce que le modèle dirait seul. Le désaccord doit venir de la construction, écrit dans le fichier de chaque agent.
+::
+:::
+:::Item{variant=adv n=3}
+Une raison de bouger, un terrain commun
+::Detail
+La phrase sur le but donne la première, le cahier des charges le second.
+::
+:::
+:::Item{variant=adv n=4}
+L’arrêt suit l’espace des réponses
+::Detail
+`--until agree` compte des votes identiques : restreignez le vote, ou lisez la convergence dans le tableau.
+::
+:::
+:::Item{variant=adv n=5}
+Les plafonds font partie du débat
+::Detail
+Environ quinze fois plus de tokens qu’une conversation selon [Anthropic](https://www.anthropic.com/engineering/multi-agent-research-system), et un débatteur qui boucle peut tout consommer.
+::
+:::
+:::Item{variant=adv n=6}
+Explorer une décision avant de la prendre
+::Detail
+Faire apparaître les arguments et le critère de chaque option, pas rendre un verdict. Pour un ticket au chemin connu, le workflow reste moins cher.
+::
+:::
+::::
+
+---
+layout: section
+index: Partie 5 / 5
+---
+
+::SectionHead{num="05" detail="Faire survivre le travail au processus"}
 # Pi Durable
 ::
 
@@ -1579,7 +2104,7 @@ index: Partie 4 / 4
 ::
 
 ---
-section: Partie 4 · Pi Durable
+section: Partie 5 · Pi Durable
 ---
 
 # Pi et Pi Durable : deux rôles distincts
@@ -1614,7 +2139,7 @@ Le SDK fournit le moteur durable, pas l’interface utilisateur.
 :::::
 
 ---
-section: Partie 4 · Pi Durable
+section: Partie 5 · Pi Durable
 ---
 
 # Installation et premiers pas :Hint[README officiel]{href="https://github.com/earendil-works/pi/blob/main/packages/durable/README.md"}
@@ -1651,7 +2176,7 @@ SQLite ou JSONL pour reprendre après un arrêt.
 :::::
 
 ---
-section: Partie 4 · Pi Durable
+section: Partie 5 · Pi Durable
 ---
 
 # Deux exemples parmi d’autres
