@@ -33,7 +33,7 @@ Chaque commande a sa variante pour les jours 2 et 3 : `dev:jour2`,
 ```
 jour1.md                  jour 1
 jour2.md                  jour 2 : Pi, sandbox, contexte, évaluation et skills
-jour3.md                  jour 3 : hooks, délégation, workflows et Pi Durable
+jour3.md                  jour 3 : hooks, délégation, workflows, essaim et Pi Durable
 public/images/            les figures, logos et avatars
 theme/                    le thème maison
   styles/tokens.css       palette, typographie, géométrie
@@ -133,6 +133,7 @@ Ce qu'il faut retenir.
 | `ContextStack` | les cinq sources de la fenêtre de contexte (jour 3) |
 | `LoopMap` | la boucle explorer → planner → coder → reviewer (jour 3) |
 | `Motifs` | les cinq motifs d'un flux de travail (jour 3) |
+| `Topologies` | délégation, workflow et essaim : qui parle après qui (jour 3) |
 
 Les classes `.code-sm` et `.code-xs` posées sur un bloc (`:::Cell{.code-sm}`)
 réduisent les blocs de code qu'il contient.

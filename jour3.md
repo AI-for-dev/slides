@@ -1,6 +1,6 @@
 ---
 theme: ./theme
-title: Hooks, délégation, workflows et Pi Durable - IA4Dev 2026
+title: Hooks, délégation, workflows, essaim et Pi Durable - IA4Dev 2026
 info: |
   IA4Dev 2026 - ANF jour 3, octobre 2026
   Max Beligné (PUD-GA / MSH Alpes / UGA) · Loïc Gouarin (CMAP / CNRS / École polytechnique)
@@ -32,7 +32,7 @@ IA4Dev 2026 · ANF jour 3
 :::
 
 ::CoverTitle{sub="Comprendre et construire son harnais" style="transform: translateY(-3rem)"}
-# Hooks, délégation,<br />workflows et Pi Durable
+# Hooks, délégation, workflows,<br />essaim et Pi Durable
 ::
 
 :::Cols{cols="1fr auto" align=end}
@@ -51,9 +51,9 @@ Octobre 2026
 section: Introduction
 ---
 
-# Le programme du jour
+# Le programme du jour :Hint[NÉON]{prefix="Fil rouge," href="https://github.com/AI-for-dev/neon"}
 
-::::Stack{fill gap=1.5}
+::::Stack{gap=1}
 ::Act{n=1 title="Les hooks"}
 Déclencher du code à un moment défini de la boucle, de manière déterministe
 ::
@@ -63,26 +63,27 @@ Découper le travail en sous-agents, et tenir la boucle à la main
 ::Act{n=3 title="Les workflows"}
 La même boucle, écrite dans un fichier que Pi déroule seul
 ::
-::Act{n=4 title="Pi Durable"}
+::Act{n=4 title="L’essaim"}
+Faire débattre des agents sur un tableau commun, jusqu’à l’accord
+::
+::Act{n=5 title="Pi Durable"}
 Faire survivre l’état d’exécution et les tâches au processus qui les porte
 ::
 ::::
 
-::::Stack{gap=1.5 .mt-4}
+::::Stack{gap=1 .mt-4}
 ::Note{tag="Version écrite"}
-Les trois premières parties suivent un module du cours :
+Les quatre premières parties suivent un module du cours :
 [hooks](https://ai-for-dev.github.io/hands-on-harness/act2-hooks),
 [délégation](https://ai-for-dev.github.io/hands-on-harness/act2-delegation),
-[workflows](https://ai-for-dev.github.io/hands-on-harness/act2-workflows)
-::
-::Note{tag="Fil rouge"}
-Toujours [NÉON](https://github.com/AI-for-dev/neon) : seuls `game/neon.js` et `game/neon.test.js` changent, et `npm test` finit vert
+[workflows](https://ai-for-dev.github.io/hands-on-harness/act2-workflows),
+[essaim](https://ai-for-dev.github.io/hands-on-harness/act2-swarm)
 ::
 ::::
 
 ---
 layout: section
-index: Partie 1 / 4
+index: Partie 1 / 5
 ---
 
 ::SectionHead{num="01" detail="Des événements déterministes"}
@@ -596,7 +597,7 @@ Le gros avantage du sous-agent : **son contexte est indépendant** de celui de l
 
 ---
 layout: section
-index: Partie 2 / 4
+index: Partie 2 / 5
 ---
 
 ::SectionHead{num="02" detail="Découper le travail en sous-agents"}
@@ -1107,7 +1108,7 @@ Tenir la boucle à la main fait apparaître les décisions, les critères et les
 
 ---
 layout: section
-index: Partie 3 / 4
+index: Partie 3 / 5
 ---
 
 ::SectionHead{num="03" detail="La boucle écrite dans un fichier"}
@@ -1565,10 +1566,399 @@ section: Partie 3 · Les workflows
 
 ---
 layout: section
-index: Partie 4 / 4
+index: Partie 4 / 5
 ---
 
-::SectionHead{num="04" detail="Faire survivre le travail au processus"}
+::SectionHead{num="04" detail="Faire débattre des agents"}
+# L’essaim
+::
+
+::Agenda
+- Ce qui sépare un essaim d’une délégation ou d’un workflow
+- Le tableau partagé, et ce qui arrête une discussion
+- Faire débattre trois agents, et observer ce qui les fait bouger
+- Donner au débat une question qu’il peut trancher
+::
+
+---
+section: Partie 4 · L’essaim
+---
+
+# Des agents qui se répondent :Hint[module essaim]{prefix="Cours," href="https://ai-for-dev.github.io/hands-on-harness/act2-swarm"}
+
+::Stack{fill center}
+<Topologies />
+::
+
+::::Cols{cols=2 gap=6 .mt-4}
+::Takeaway
+Une question **sans chemin connu** demande une discussion : quelqu’un qui défend une autre option, et qui change d’avis quand vous avez raison.
+::
+::Note{tag="Le prix"}
+Chaque membre relit à chaque tour ce que les autres ont écrit, et on ne sait pas d’avance combien de tours il faudra.
+::
+::::
+
+---
+section: Partie 4 · L’essaim
+---
+
+# Le tableau : un journal partagé :Hint[doc de combo, essaims]{href="https://github.com/AI-for-dev/combo/blob/main/docs/guide/swarm.md"}
+
+::::Cols{cols=2 gap=8 fill align=center}
+:::Stack{gap=4}
+::Lead
+Un membre d’essaim est un agent ordinaire dont la panoplie contient l’outil `board`. Il garde son contexte et ne voit des autres que **ce qu’ils publient**.
+::
+::Specs{w="7rem" raw}
+- **ajout seul** personne ne modifie ni n’efface un message : le débat se relit tel qu’il s’est déroulé
+- **auteur** inscrit par le tableau, pas déclaré par le membre : nul ne parle au nom d’un autre
+- **à chaque tour** combo remet à chaque membre ce qui est nouveau, en commençant par ce qui lui répond
+- **plafonds** 200 messages, 50 par membre, 2 000 caractères, pas deux fois le même message
+::
+:::
+:::Stack{gap=4}
+:Eyebrow[Trois sortes de messages pour un débat]{tone=teal}
+
+::Matrix{size=md left first="6rem"}
+| sorte | usage |
+| --- | --- |
+| `result` | sa réponse à la question, ici son vote ; une seule par tour |
+| `tell` | un argument ; avec `re`, il répond à un message précis |
+| `ask` | une question, adressée à un seul membre avec `to` |
+::
+
+::Note{tag="Ailleurs"}
+Dans [Swarm](https://github.com/openai/swarm) d’OpenAI, un agent passe la main à un autre, qui hérite de tout l’historique. combo garde un contexte par membre : la trace dit qui a dit quoi à qui.
+::
+:::
+::::
+
+---
+section: Partie 4 · L’essaim
+---
+
+# Qu’est-ce qui arrête un essaim ?
+
+:::::Stack{fill center gap=5}
+::Lead
+Un ticket est fini quand les tests passent. Un débat n’a pas de critère aussi net : combo en propose trois.
+::
+
+::::Cols{cols=3 gap=5}
+:::Card{badge="1" title="Le nombre de tours" size=sm}
+`--rounds`, 3 par défaut. Il borne la dépense.
+
+::Detail
+Un débat arrêté par ce plafond n’a rien conclu.
+::
+:::
+:::Card{badge="2" badgeTone=teal title="La couverture" size=sm}
+`--claim` donne une liste de choses à prendre, et l’essaim s’arrête quand chacune a un résultat.
+
+::Detail
+Détourné pour distribuer les camps : `--hold 1` limite chaque membre à une prise.
+::
+:::
+:::Card{variant=accent badge="3" title="L’accord" size=sm}
+`--until agree` : chaque membre publie un `result` qui commence par `VOTE: <réponse>`, et l’essaim s’arrête quand **tous** les derniers votes sont identiques.
+
+::Detail
+Deux sur trois ne suffisent pas. Un membre qui abandonne empêche l’accord.
+::
+:::
+::::
+:::::
+
+---
+section: Partie 4 · L’essaim
+---
+
+# Le débatteur livré avec combo
+
+::::Cols{cols="5fr 4fr" gap=7 fill align=center}
+:::Stack{gap=2 .code-xs}
+:Eyebrow[combo/agents/debater.md, extrait]{tone=quiet code}
+
+```markdown
+---
+name: debater
+description: Argues one side of a question beside other
+  debaters, and votes every turn until they all vote the same
+tools: board
+lifetime: workflow
+---
+
+You are one of several agents arguing about one question.
+The others argue at the same time, none of you can see
+another's context, and nobody arbitrates.
+
+Every turn, post one `result` to the board: your vote,
+and under it the one argument the others have not answered.
+
+To answer somebody, post a `tell` with `re` set to the id
+of the post you are answering.
+
+Change your vote when somebody is right: agreeing is the
+result, not a defeat. But agreeing to be done with it,
+without a reason you could give out loud, is worse than
+still disagreeing.
+```
+:::
+:::Stack{gap=4}
+::Specs{w="6.4rem" raw}
+- **tools** le seul outil `board` : il ne lit aucun fichier, le débat ne dépend pas du dépôt
+- **lifetime** `workflow` : il se souvient de ce qu’on lui a objecté au tour d’avant
+- **consigne** un vote par tour, répondre avec `re`, changer d’avis quand l’autre a raison, jamais pour en finir
+::
+::Note{tag="combo ≥ 0.5.0"}
+Première version qui livre `--until agree` et l’agent `debater`.
+::
+:::
+::::
+
+---
+section: Partie 4 · L’essaim
+---
+
+# Exercice : trois copies, puis trois camps à prendre
+
+::::Cols{cols=2 gap=8 fill align=center}
+:::Stack{gap=2 .code-xs}
+:Eyebrow[1 · Sans camp]{tone=quiet code}
+
+```text
+/herdr on
+/swarm --members 3 --until agree --rounds 4 --agent debater
+       Quel langage choisir pour écrire un nouveau
+       logiciel de calcul scientifique ?
+```
+
+:Eyebrow[2 · Un langage à prendre par membre]{tone=quiet code .mt-3}
+
+```text
+/swarm --members 3 --claim Python,Julia,C++ --hold 1
+       --until agree --rounds 4 --agent debater
+       Quel langage choisir pour écrire un nouveau
+       logiciel de calcul scientifique ? Chacun de vous
+       défend au départ le langage qu'il a pris.
+```
+
+::Note{tag="--claim" .mt-3}
+Un membre qui demande un langage déjà pris est refusé, et invité à choisir parmi ceux qui restent libres.
+::
+:::
+:::Stack{gap=4}
+:Eyebrow[À relever, dans le volet board et les sessions]{tone=teal}
+
+::Specs{w="6rem" raw}
+- **prise** le langage demandé par chaque membre, et ce que l’outil lui a répondu
+- **vote** le langage de chaque membre, à chaque tour
+- **échanges** les `tell` avec `re` qui répondent à un autre membre
+- **tours** combien ont été joués avant l’arrêt
+::
+
+::Card{variant=soft eyebrow="À discuter" size=sm}
+Trois copies d’un même agent, est-ce trois avis ? Un langage qui n’a qu’un détenteur est-il pour autant défendu ?
+::
+:::
+::::
+
+---
+section: Partie 4 · L’essaim
+---
+
+# Un agent par camp :Hint[hands-on-harness/scripts/agents/]{href="https://github.com/AI-for-dev/hands-on-harness/tree/main/scripts/agents"}
+
+::::Cols{cols=2 gap=8 fill align=center}
+:::Stack{gap=2 .code-xs}
+:Eyebrow[neon/.pi/agents/debat-julia.md, extrait]{tone=quiet code}
+
+```markdown
+---
+name: debat-julia
+tools: board
+lifetime: workflow
+model: ilaas/gemma-4-31b
+---
+
+You are one of three agents debating one question on a
+shared board. You open for Julia. The two others open for
+Python and C++. […]
+```
+
+```text
+/herdr on
+/swarm --agent debat-python,debat-julia,debat-cpp
+       --until agree --rounds 6
+       Quel langage choisir pour écrire un nouveau
+       logiciel de calcul scientifique ?
+```
+:::
+:::Stack{gap=4}
+::Lead
+Un fichier par camp, avec son prompt, son modèle et la ligne qui dit ce qu’il défend. Un camp **écrit** ne peut pas être refusé.
+::
+::Note{tag="--agent"}
+Une liste d’agents place chacun d’eux une fois sur le tableau. Demande combo > 0.6.0.
+::
+::Note{tag="--timeout"}
+Un débatteur peut relire le tableau en boucle : `/swarm` coupe un tour après 5 minutes, `--timeout 3m` raccourcit, et un membre coupé deux fois sort du débat.
+::
+::Card{variant=accent eyebrow="En salle" size=sm}
+Copiez `debat-*.md` dans `.pi/agents/`, lancez le débat et suivez le volet `board`. Dans `runs/<date>/1-swarm/`, notez à quel tour chaque débatteur change de vote, s’il en change.
+::
+:::
+::::
+
+---
+section: Partie 4 · L’essaim
+---
+
+# Lire la trace d’un débat
+
+::::Cols{cols=2 gap=8 fill align=center}
+:::Stack{gap=4}
+::Lead
+Trois endroits où regarder, du plus visible au plus intime.
+::
+::Specs{w="7.6rem" raw}
+- **volet board** l’ordre des messages, et à quoi répond chaque `tell`
+- **session HTML** le raisonnement de chaque débatteur, tour par tour : ce qu’il cherche à obtenir
+- **usage.json** les tokens, la durée, les membres coupés par le délai
+::
+:::
+:::Stack{gap=3}
+:Eyebrow[Pour la mise en commun]{tone=teal}
+
+::Bullet{size=sm k="1"}
+Un vote a-t-il bougé ? À quel tour, et sous l’effet de **quel message** ?
+::
+::Bullet{size=sm k="2"}
+Les débatteurs se répondent-ils, ou chacun répète-t-il son cas ?
+::
+::Bullet{size=sm k="3"}
+Que dit le raisonnement d’un débatteur sur ce qu’il appelle **gagner** ?
+::
+::Bullet{size=sm k="4"}
+Si l’accord arrive, est-il motivé par un argument, ou par l’envie d’en finir ?
+::
+:::
+::::
+
+---
+section: Partie 4 · L’essaim
+---
+
+# Faire varier le cadre
+
+:::::Stack{fill center gap=5}
+::Lead
+Même débat, un seul réglage changé à la fois. Chaque groupe en prend un, et on compare au tableau.
+::
+
+::::Cols{cols=3 gap=5}
+:::Card{badge="1" title="La consigne" size=sm}
+Ajoutez une phrase à la question :
+
+« Le but n’est pas de gagner : c’est de trouver la réponse que les autres peuvent aussi tenir. »
+:::
+:::Card{badge="2" badgeTone=teal title="Le modèle" size=sm}
+`--model` impose un même modèle à tous les membres. Essayez-en un autre que celui des fichiers, par exemple `qwen3.8-flash` ou `deepseek-v4.1-flash`.
+:::
+:::Card{badge="3" title="Le format du vote" size=sm}
+Relisez la dernière ligne `VOTE:` de chaque membre. `--until agree` les compare **au caractère près** : disent-elles la même chose sans l’écrire pareil ?
+:::
+::::
+
+::Note{tag="Une exécution, un essai"}
+Deux exécutions identiques peuvent différer : avant de conclure sur un réglage, relancez.
+::
+:::::
+
+---
+section: Partie 4 · L’essaim
+---
+
+# Donner au débat une question qu’il peut trancher
+
+::::Cols{cols="3fr 2fr" gap=7 fill align=center}
+:::Card{variant=soft eyebrow="L’énoncé, à la suite de la commande" size=sm}
+<p class="mono muted" style="font-size:0.64rem;line-height:1.45;white-space:nowrap">/swarm --agent debat-python,debat-julia,debat-cpp --until agree --rounds 4</p>
+
+Une équipe de six physiciens et deux ingénieurs de recherche lance un nouveau code de simulation de plasma. Il doit tourner sur les **GPU NVIDIA et AMD** du calculateur national, être maintenu **au moins dix ans**, et reprendre un **noyau existant de 40 000 lignes en Fortran 90**. Les physiciens connaissent **bien Python et peu le C++**. Quel langage principal choisir pour ce code ?
+
+:Rule
+
+Votez pour le langage principal seulement, en un mot : la place des autres langages va dans votre argument. Le but n’est pas de gagner : c’est de trouver la réponse que les autres peuvent aussi tenir.
+:::
+:::Stack{gap=3}
+::Bullet{size=sm k="critères" badge=tag}
+Des exigences écrites, sur lesquelles un argument peut en battre un autre
+::
+::Bullet{size=sm k="vote" badge=tag}
+Un mot, la répartition entre langages va dans l’argument
+::
+::Bullet{size=sm k="but" badge=tag}
+La phrase sur le but, reprise de l’essai précédent
+::
+::Card{variant=soft eyebrow="À discuter" size=sm .mt-2}
+Que ne disait pas la première question ? Qu’est-ce qui change dans les échanges ?
+::
+:::
+::::
+
+---
+section: Partie 4 · L’essaim
+---
+
+# Mise en commun
+
+::::Cols{cols=2 gap=5 fill content=center}
+:::Item{variant=adv n=1}
+Des copies, des avis ?
+::Detail
+Qu’ont fait trois copies du même agent, sans camp ? Que faut-il pour qu’un essaim débatte vraiment ?
+::
+:::
+:::Item{variant=adv n=2}
+Qu’est-ce qui fait bouger un vote ?
+::Detail
+Un argument, une phrase de la consigne, un critère de l’énoncé, le modèle ?
+::
+:::
+:::Item{variant=adv n=3}
+L’arrêt a-t-il tout vu ?
+::Detail
+Des membres d’accord sur le fond ont-ils voté différemment ? Que compte exactement `--until agree` ?
+::
+:::
+:::Item{variant=adv n=4}
+Que vaut la réponse ?
+::Detail
+Diffère-t-elle de celle d’un agent seul ? Qui peut la juger, et avec quoi en main ?
+::
+:::
+:::Item{variant=adv n=5}
+Pour quelle décision ?
+::Detail
+Combien de tokens et de minutes ? Pour quelle décision de votre domaine un débat vaut-il ce coût, et quand un workflow suffit-il ?
+::
+:::
+:::Item{variant=adv n=6}
+Où se place l’humain ?
+::Detail
+Qui pose la question, choisit les camps et fixe l’arrêt ? Que reste-t-il à décider après le débat ?
+::
+:::
+::::
+
+---
+layout: section
+index: Partie 5 / 5
+---
+
+::SectionHead{num="05" detail="Faire survivre le travail au processus"}
 # Pi Durable
 ::
 
@@ -1579,7 +1969,7 @@ index: Partie 4 / 4
 ::
 
 ---
-section: Partie 4 · Pi Durable
+section: Partie 5 · Pi Durable
 ---
 
 # Pi et Pi Durable : deux rôles distincts
@@ -1614,7 +2004,7 @@ Le SDK fournit le moteur durable, pas l’interface utilisateur.
 :::::
 
 ---
-section: Partie 4 · Pi Durable
+section: Partie 5 · Pi Durable
 ---
 
 # Installation et premiers pas :Hint[README officiel]{href="https://github.com/earendil-works/pi/blob/main/packages/durable/README.md"}
@@ -1651,7 +2041,7 @@ SQLite ou JSONL pour reprendre après un arrêt.
 :::::
 
 ---
-section: Partie 4 · Pi Durable
+section: Partie 5 · Pi Durable
 ---
 
 # Deux exemples parmi d’autres
