@@ -33,7 +33,7 @@ Chaque commande a sa variante pour les jours 2 et 3 : `dev:jour2`,
 ```
 jour1.md                  jour 1
 jour2.md                  jour 2 : Pi, sandbox, contexte, évaluation et skills
-jour3.md                  jour 3 : hooks, délégation et workflows
+jour3.md                  jour 3 : hooks, délégation, workflows et Pi Durable
 public/images/            les figures, logos et avatars
 theme/                    le thème maison
   styles/tokens.css       palette, typographie, géométrie
