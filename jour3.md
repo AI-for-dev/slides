@@ -1619,8 +1619,9 @@ section: Partie 4 · Pi Durable
 
 # Installation et premiers pas :Hint[README officiel]{href="https://github.com/earendil-works/pi/blob/main/packages/durable/README.md"}
 
+:::::Stack{fill center gap=5}
 ::Lead
-Node.js ≥ 22.19 et npm — un SDK qui s’installe à côté de Pi.
+Un SDK qui s’installe à côté de Pi, avec npm et Node.js 22.19 ou plus récent :
 ::
 
 :::Cell{.code-sm}
@@ -1629,7 +1630,7 @@ npm install @earendil-works/pi-durable @earendil-works/pi-ai @earendil-works/cho
 ```
 :::
 
-::::Cols{cols=4 gap=4 fill align=center .mt-5}
+::::Cols{cols=4 gap=4 align=stretch}
 ::Step{n="01" title="Choisir le modèle"}
 Clé API ou authentification.
 ::
@@ -1644,9 +1645,10 @@ SQLite ou JSONL pour reprendre après un arrêt.
 ::
 ::::
 
-::Note{tag="Exemples" .mt-5}
+::Note{tag="Exemples"}
 [Agent de code](https://github.com/earendil-works/pi/blob/main/packages/durable/test/examples/26-coding-agent.ts) · [sous-agents en arrière-plan](https://github.com/earendil-works/pi/blob/main/packages/durable/test/examples/23-subagent-background.ts)
 ::
+:::::
 
 ---
 section: Partie 4 · Pi Durable
@@ -1654,7 +1656,8 @@ section: Partie 4 · Pi Durable
 
 # Deux exemples parmi d’autres
 
-::::Cols{cols=2 gap=7 fill}
+:::::Stack{fill center}
+::::Cols{cols=2 gap=7 align=stretch}
 :::Card{variant=accent eyebrow="Expérience collaborative" title="Pi Pocket" size=sm}
 - Application web et mobile pour Pi
 - Accès aux agents depuis un navigateur
@@ -1685,6 +1688,7 @@ section: Partie 4 · Pi Durable
 ::
 :::
 ::::
+:::::
 
 ---
 layout: statement
