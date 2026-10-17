@@ -1576,7 +1576,7 @@ index: Partie 4 / 5
 ::Agenda
 - Ce qui sépare un essaim d’une délégation ou d’un workflow
 - Le tableau partagé, et ce qui arrête une discussion
-- Trois débats qui ne tranchent rien, et pourquoi
+- Faire débattre trois agents, et observer ce qui les fait bouger
 - Donner au débat une question qu’il peut trancher
 ::
 
@@ -1733,24 +1733,25 @@ section: Partie 4 · L’essaim
 ```
 
 ::Card{variant=accent eyebrow="En salle" size=sm}
-Un volet herdr par membre, plus un volet `board` : la seule vue où l’on voit **un échange** et non trois monologues. Dans `runs/<date>/1-debater/`, notez le nombre de tours, le langage choisi, et les `tell` avec `re`.
+Un volet herdr par membre, plus un volet `board` : la seule vue où l’on voit **un échange** et non trois monologues.
+::
+
+::Note{tag="La trace"}
+`runs/<date>/1-debater/` : une session HTML par membre, et `usage.json` pour les tokens et la durée.
 ::
 :::
 :::Stack{gap=4}
-:Eyebrow[Notre exécution, trois copies de gemma-4-31b]{tone=teal}
+:Eyebrow[À relever]{tone=teal}
 
-::Specs{w="5.6rem" raw}
-- **vote** Julia pour les trois, dès le premier message
-- **argument** le même : le « problème des deux langages »
-- **durée** un tour, 51 secondes, un seul message qui répond à un autre
+::Specs{w="6rem" raw}
+- **tours** combien ont été joués avant l’arrêt
+- **vote** le langage de chaque membre, à chaque tour
+- **échanges** combien de `tell` avec `re` répondent à un autre membre
+- **arguments** qui avance quoi, et qui reprend l’argument d’un autre
 ::
 
-::Card{variant=soft size=sm}
-« Je suis tout à fait d’accord. La compilation JIT est justement ce qui permet d’éviter le passage au C/Fortran. »
-::
-
-::Takeaway
-Trois copies d’un même modèle partagent la même réponse la plus probable : les faire voter revient à poser **trois fois** la question à un seul agent.
+::Card{variant=soft eyebrow="À discuter" size=sm}
+Trois copies d’un même agent, est-ce trois avis ?
 ::
 :::
 ::::
@@ -1761,8 +1762,8 @@ section: Partie 4 · L’essaim
 
 # Imposer le désaccord avec --claim
 
-:::::Cols{cols=2 gap=8 fill align=center}
-::::Stack{gap=4 .code-xs}
+::::Cols{cols=2 gap=8 fill align=center}
+:::Stack{gap=4 .code-xs}
 ```text
 /swarm --members 3 --claim Python,Julia,C++ --hold 1
        --until agree --rounds 4 --agent debater
@@ -1771,29 +1772,28 @@ section: Partie 4 · L’essaim
        défend au départ le langage qu'il a pris.
 ```
 
-:Eyebrow[Ce qu’ont reçu debater#1 et debater#2]{tone=quiet code}
-
-```text
-`Julia` is held by debater#3 - ask debater#3,
-or take something else. Still free: Python, C++
-```
-::::
-::::Stack{gap=4}
 ::Lead
-Les trois copies ont demandé Julia. debater#3 l’a obtenu, les deux autres ont été refusés…
-::
-:::Card{variant=soft size=sm}
-… et **aucun** n’a pris Python ni C++. Ils ont voté Julia comme s’ils l’avaient obtenu : accord au premier tour, en 105 secondes.
-
-::Detail
-La doc de combo rapporte la même chose sur gemma-4-31b et qwen-3.6-35b-instruct : deux exécutions sur quatre.
+Chaque langage devient une chose à prendre, et `--hold 1` limite chaque membre à une prise. Un membre qui demande un langage déjà pris est refusé, et invité à choisir parmi ceux qui restent libres.
 ::
 :::
-::Takeaway
-Le mécanisme a fonctionné, mais il n’oblige personne à défendre ce qui reste. Un membre ne défend une position que si elle est **écrite dans son prompt système**.
+:::Stack{gap=4}
+:Eyebrow[À relever dans chaque session]{tone=teal}
+
+::Bullet{size=sm k="1"}
+Quel langage chaque membre a-t-il **demandé** ?
 ::
+::Bullet{size=sm k="2"}
+Qu’a répondu l’outil à chacun ?
+::
+::Bullet{size=sm k="3"}
+Pour quel langage a-t-il **voté** ensuite ?
+::
+
+::Card{variant=soft eyebrow="À discuter" size=sm}
+Le mécanisme garantit qu’un langage n’a qu’un détenteur. Garantit-il que chaque langage sera défendu ?
+::
+:::
 ::::
-:::::
 
 ---
 section: Partie 4 · L’essaim
@@ -1843,66 +1843,33 @@ Copiez `debat-*.md` dans `.pi/agents/`, lancez le débat et suivez le volet `boa
 section: Partie 4 · L’essaim
 ---
 
-# Ils se répondent, et personne ne bouge
-
-::::Cols{cols="4fr 5fr" gap=8 fill align=center}
-:::Stack{gap=4}
-::Lead
-Deux exécutions sur gemma-4-31b : les six tours permis, **aucun vote** n’a bougé.
-::
-::Matrix{size=md left first="8rem"}
-| exécution | messages | réponses adressées (`re`) |
-| --- | --- | --- |
-| première | 61 | 43 |
-| seconde | 49 | 31 |
-::
-::Note{tag="Ce n’est pas"}
-un défaut de communication : le tableau est plein de réponses qui citent l’argument d’en face.
-::
-:::
-:::Stack{gap=3}
-::Card{size=sm eyebrow="C++ · p7, en réponse à Python"}
-« L’écosystème de Python repose presque entièrement sur des bibliothèques écrites en C ou Fortran. Pour un nouveau logiciel qui doit innover dans les calculs \[…\], Python devient un goulot d’étranglement. »
-::
-::Card{variant=teal size=sm tone=teal eyebrow="Python · p9, en réponse à p7"}
-« L’argument du “goulot d’étranglement” est aujourd’hui largement mitigé par des outils comme Numba, Cython ou Jax \[…\] sans quitter l’écosystème Python. »
-::
-::Card{size=sm eyebrow="C++ · p14, en réponse à p9"}
-« S’appuyer sur Numba ou Jax revient à admettre que Python n’est qu’une interface. »
-::
-:::
-::::
-
----
-section: Partie 4 · L’essaim
----
-
-# Qu’est-ce qui empêche des agents de converger ?
+# Lire la trace d’un débat
 
 ::::Cols{cols=2 gap=8 fill align=center}
 :::Stack{gap=4}
-:Eyebrow[Le débatteur Python, au quatrième tour]{tone=teal}
-
-::Pull
-« However, to win the debate (get everyone to vote the same), I need to find a way to convince them \[…\]. But as a Python agent, my primary goal is to defend Python. »
-::
-
 ::Lead
-Chacun traite son camp comme une identité et l’accord comme la reddition des autres. Conclusion à chaque tour : « Maintain my vote ».
+Trois endroits où regarder, du plus visible au plus intime.
+::
+::Specs{w="7.6rem" raw}
+- **volet board** l’ordre des messages, et à quoi répond chaque `tell`
+- **session HTML** le raisonnement de chaque débatteur, tour par tour : ce qu’il cherche à obtenir
+- **usage.json** les tokens, la durée, les membres coupés par le délai
 ::
 :::
 :::Stack{gap=3}
+:Eyebrow[Pour la mise en commun]{tone=teal}
+
 ::Bullet{size=sm k="1"}
-**La consigne de vote** se termine par « This ends when every one of you has voted for the same thing » : gemma la lit comme un objectif de victoire
+Un vote a-t-il bougé ? À quel tour, et sous l’effet de **quel message** ?
 ::
 ::Bullet{size=sm k="2"}
-**Le prompt** pousse à tenir : « agreeing to be done with it \[…\] is worse than still disagreeing »
+Les débatteurs se répondent-ils, ou chacun répète-t-il son cas ?
 ::
 ::Bullet{size=sm k="3"}
-**La question** n’a aucun critère : chacun ramène le débat sur l’axe où son langage gagne, la performance, l’écosystème ou le coût humain
+Que dit le raisonnement d’un débatteur sur ce qu’il appelle **gagner** ?
 ::
-::Card{variant=accent eyebrow="Une seule phrase ajoutée à la question" size=sm .mt-2}
-« Le but n’est pas de gagner : c’est de trouver la réponse que les autres peuvent aussi tenir. »
+::Bullet{size=sm k="4"}
+Si l’accord arrive, est-il motivé par un argument, ou par l’envie d’en finir ?
 ::
 :::
 ::::
@@ -1911,37 +1878,31 @@ Chacun traite son camp comme une identité et l’accord comme la reddition des 
 section: Partie 4 · L’essaim
 ---
 
-# Trois modèles, trois conditions
+# Faire varier le cadre
 
+:::::Stack{fill center gap=5}
 ::Lead
-Les mêmes essais, en imposant le modèle à tous les membres avec `--model`.
+Même débat, un seul réglage changé à la fois. Chaque groupe en prend un, et on compare au tableau.
 ::
 
-:::Stack{fill center}
-::Matrix{size=md left first="17rem"}
-| condition | gemma-4-31b | qwen3.8-flash | deepseek-v4.1-flash |
-| --- | --- | --- | --- |
-| trois copies de `debater`, sans camp | Julia au 1er tour | Julia au 2e tour | Julia au 3e tour |
-| un agent par camp | 2 × aucun vote ne bouge | pas d’accord, deux membres coupés par le délai | accord sur Julia au 6e tour |
-| un agent par camp, avec la phrase sur le but | 1 accord (Julia), 1 membre sorti | accord sur le fond, **non compté** | accord sur Python au 3e tour |
-::
+::::Cols{cols=3 gap=5}
+:::Card{badge="1" title="La consigne" size=sm}
+Ajoutez une phrase à la question :
+
+« Le but n’est pas de gagner : c’est de trouver la réponse que les autres peuvent aussi tenir. »
 :::
-
-::::Cols{cols=3 gap=5 .mt-2}
-::Note{tag="gemma"}
-La phrase compte beaucoup : ses débatteurs la citent presque à chaque tour, et leurs changements de vote restent motivés.
-::
-::Note{tag="deepseek"}
-Converge même sans elle, en zigzag : son débatteur C++ passe à Python au 4e tour, puis à Julia au 5e.
-::
-::Note{tag="qwen"}
-Trois votes pour la même architecture, écrits chacun à sa façon : « Python pour piloter, C++ pour le noyau »… `--until agree` compare à l’identique.
-::
+:::Card{badge="2" badgeTone=teal title="Le modèle" size=sm}
+`--model` impose un même modèle à tous les membres. Essayez-en un autre que celui des fichiers, par exemple `qwen3.8-flash` ou `deepseek-v4.1-flash`.
+:::
+:::Card{badge="3" title="Le format du vote" size=sm}
+Relisez la dernière ligne `VOTE:` de chaque membre. `--until agree` les compare **au caractère près** : disent-elles la même chose sans l’écrire pareil ?
+:::
 ::::
 
-::Takeaway{.mt-4}
-Une case, une exécution : ce tableau ne mesure pas les modèles. Il montre que l’issue dépend de **réglages qu’on choisit**, la consigne, le format du vote et le modèle.
+::Note{tag="Une exécution, un essai"}
+Deux exécutions identiques peuvent différer : avant de conclure sur un réglage, relancez.
 ::
+:::::
 
 ---
 section: Partie 4 · L’essaim
@@ -1961,48 +1922,16 @@ Votez pour le langage principal seulement, en un mot : la place des autres lang
 :::
 :::Stack{gap=3}
 ::Bullet{size=sm k="critères" badge=tag}
-Des exigences que tous reconnaissent, sur lesquelles un argument peut en battre un autre
+Des exigences écrites, sur lesquelles un argument peut en battre un autre
 ::
 ::Bullet{size=sm k="vote" badge=tag}
-Un mot : l’accord devient comptable, la répartition entre langages va dans l’argument
+Un mot, la répartition entre langages va dans l’argument
 ::
 ::Bullet{size=sm k="but" badge=tag}
-Une raison de bouger : chercher une réponse commune plutôt que gagner
+La phrase sur le but, reprise de l’essai précédent
 ::
-::Takeaway{.mt-2}
-« Un nouveau logiciel de calcul scientifique » n’a pas de réponse : rien ne dit ce qu’il doit faire. Une décision réelle s’appuie sur des **exigences**.
-::
-:::
-::::
-
----
-section: Partie 4 · L’essaim
----
-
-# Six débats, six accords
-
-::::Cols{cols="11fr 9fr" gap=7 fill align=center}
-:::Stack{gap=4}
-::Matrix{size=md left first="10rem"}
-| modèle | sans camp | débat 1 | débat 2 |
-| --- | --- | --- | --- |
-| gemma-4-31b | C++ | Julia (4) | Julia (3) |
-| qwen3.8-flash | Fortran | C++ (2) | C++ (2) |
-| deepseek-v4.1-flash | Fortran | C++ (4) | Fortran (3) |
-::
-::Lead
-Entre parenthèses, les tours joués. Chaque changement de vote cite un **critère de l’énoncé**, et cinq débats sur six s’écartent du témoin : le débat ne restitue pas seulement l’a priori du modèle.
-::
-:::
-:::Stack{gap=3}
-::Card{size=sm eyebrow="gemma · C++ se rallie à Julia"}
-« Le risque de dépendance exclusive envers les deux ingénieurs pour la maintenance d’un code C++ sur dix ans est plus critique que le risque technique lié à l’utilisation de Julia. »
-::
-::Card{variant=accent size=sm eyebrow="deepseek · Julia corrige son propre argument"}
-« Les 40 000 lignes doivent tourner sur GPU, pas seulement être liées. Mon ccall vers le F90 ne les exécutait que sur le CPU \[…\]. Le portage caché que je reprochais aux autres, je le portais aussi. »
-::
-::Note{tag="Désaccords lisibles"}
-gemma met en premier l’autonomie des physiciens, qwen la pérennité des outils, deepseek de ne pas réécrire un noyau validé.
+::Card{variant=soft eyebrow="À discuter" size=sm .mt-2}
+Que ne disait pas la première question ? Qu’est-ce qui change dans les échanges ?
 ::
 :::
 ::::
@@ -2019,7 +1948,7 @@ section: Partie 4 · L’essaim
 Lancez le débat sur l’énoncé du plasma. Pour chaque changement de vote, retrouvez dans le tableau le critère invoqué.
 
 ::Detail
-Puis trois copies de `debater` sur la même question, sans camp : comparez.
+Puis trois copies de `debater` sur la même question, sans camp : comparez leur réponse à celle du débat.
 ::
 :::
 :::Card{variant=accent eyebrow="02 · En autonomie" title="Retirer un critère" size=sm}
@@ -2039,7 +1968,7 @@ Comparez le débat à ce que vous aviez décidé.
 ::::
 
 ::Note{tag="Plafonner chaque tour" .mt-2}
-Un débatteur gemma a appelé `read` **259 fois** dans un seul tour : la boucle de Pi n’a pas de maximum d’appels d’outils. `/swarm` donne 5 minutes par tour, `--timeout 3m` raccourcit, et un membre coupé deux fois sort du débat. Lisez `usage.json` après chaque exécution.
+La boucle de Pi n’a pas de maximum d’appels d’outils, et un débatteur peut relire le tableau en boucle pendant son tour. `/swarm` donne 5 minutes par tour, `--timeout 3m` raccourcit, et un membre coupé deux fois sort du débat. Lisez `usage.json` après chaque exécution.
 ::
 :::::
 
@@ -2047,43 +1976,43 @@ Un débatteur gemma a appelé `read` **259 fois** dans un seul tour : la boucle
 section: Partie 4 · L’essaim
 ---
 
-# Généraliser
+# Mise en commun
 
 ::::Cols{cols=2 gap=5 fill content=center}
 :::Item{variant=adv n=1}
-Un débat reflète son cadre
+Des copies, des avis ?
 ::Detail
-Mêmes agents, même question : aucun vote ne bouge, puis un accord, selon une phrase de la consigne. En lisant un débat, on évalue le harnais autant que les agents.
+Qu’ont fait trois copies du même agent, sans camp ? Que faut-il pour qu’un essaim débatte vraiment ?
 ::
 :::
 :::Item{variant=adv n=2}
-Des copies ne sont pas des avis indépendants
+Qu’est-ce qui fait bouger un vote ?
 ::Detail
-Sans camp, elles votent ce que le modèle dirait seul. Le désaccord doit venir de la construction, écrit dans le fichier de chaque agent.
+Un argument, une phrase de la consigne, un critère de l’énoncé, le modèle ?
 ::
 :::
 :::Item{variant=adv n=3}
-Une raison de bouger, un terrain commun
+L’arrêt a-t-il tout vu ?
 ::Detail
-La phrase sur le but donne la première, le cahier des charges le second.
+Des membres d’accord sur le fond ont-ils voté différemment ? Que compte exactement `--until agree` ?
 ::
 :::
 :::Item{variant=adv n=4}
-L’arrêt suit l’espace des réponses
+Que vaut la réponse ?
 ::Detail
-`--until agree` compte des votes identiques : restreignez le vote, ou lisez la convergence dans le tableau.
+Diffère-t-elle de celle d’un agent seul ? Qui peut la juger, et avec quoi en main ?
 ::
 :::
 :::Item{variant=adv n=5}
-Les plafonds font partie du débat
+Pour quelle décision ?
 ::Detail
-Environ quinze fois plus de tokens qu’une conversation selon [Anthropic](https://www.anthropic.com/engineering/multi-agent-research-system), et un débatteur qui boucle peut tout consommer.
+Combien de tokens et de minutes ? Pour quelle décision de votre domaine un débat vaut-il ce coût, et quand un workflow suffit-il ?
 ::
 :::
 :::Item{variant=adv n=6}
-Explorer une décision avant de la prendre
+Où se place l’humain ?
 ::Detail
-Faire apparaître les arguments et le critère de chaque option, pas rendre un verdict. Pour un ticket au chemin connu, le workflow reste moins cher.
+Qui pose la question, choisit les camps et fixe l’arrêt ? Que reste-t-il à décider après le débat ?
 ::
 :::
 ::::
