@@ -62,7 +62,7 @@ section: Introduction
 
 ::::Stack{gap=1}
 ::Act{n=1 title="Premier pas avec Pi"}
-Installer, se connecter aux modèles, comparer leurs réponses
+Installer, prendre herdr en main, comparer les modèles
 ::
 ::Act{n=2 title="Sécurité et sandbox"}
 Mesurer ce que vaut une consigne face à un garde-fou
@@ -129,8 +129,9 @@ index: Partie 1 / 5
 
 ::Agenda
 - Ce que fait Pi quand vous lui posez une question
-- Installer Pi et herdr, se connecter aux modèles
-- Les modèles de la formation
+- Installer Pi et herdr
+- Prendre Herdr et Fresh en main
+- Se connecter aux modèles de la formation
 - Comparer deux modèles et deux niveaux de réflexion
 ::
 
@@ -219,8 +220,65 @@ Si le terminal ne trouve pas la commande, ouvrez-en un nouveau : l’installeur 
 ::::::
 
 ---
+section: Partie 1 · Premier pas avec Pi
+---
+
+# Prendre Herdr en main
+
+:::Stack{gap=3}
+:Eyebrow[Dans le terminal]
+
+```bash
+herdr
+```
+
+::Note{tag="Raccourci essentiel"}
+Appuyez sur `Ctrl+B`, relâchez, puis choisissez une touche.<br />Par exemple, `?` affiche la liste complète des raccourcis actifs.
+::
+:::
+
+::Lead{.mt-3}
+**La souris fonctionne aussi pour naviguer.**
+::
+
+::::Cols{cols="3fr 2fr" gap=6 align=center .mt-2}
+<Fig src="/images/herdr-interface.jpg" frame="screen" h="13.6rem" caption="Interface" />
+<Fig src="/images/herdr-tree.png" h="13.6rem" caption="Schéma fonctionnel" />
+::::
+
+---
+section: Partie 1 · Premier pas avec Pi
+---
+
+# Utiliser Fresh dans Herdr
+
+::::::Stack{fill center gap=5}
+:::Stack{gap=3}
+:Eyebrow[Dans un pane herdr]
+
+```bash
+fresh
+```
+:::
+
+::::Cols{cols=2 gap=5 align=stretch}
+:::Card{variant=soft eyebrow="Clavier" title="Afficher l’explorateur"}
+`Ctrl+B` affiche ou masque l’explorateur, mais herdr utilise déjà ce raccourci.
+
+`Ctrl+B`, relâchez, puis `Ctrl+B` : herdr transmet alors un `Ctrl+B` à Fresh.
+:::
+:::Card{variant=soft eyebrow="Souris" tone=teal title="Ouvrir le menu contextuel d’un fichier"}
+Un clic droit affiche le menu de herdr, qui le garde pour lui.
+
+`Ctrl` + clic droit transmet le clic à Fresh, qui affiche le menu contextuel du fichier.
+:::
+::::
+::::::
+
+---
 # V2 : JSON corrigé (virgules en trop) et second modèle repris du cours ; note du cours sur le bloc cost
 section: Partie 1 · Premier pas avec Pi
+routeAlias: connecter
 ---
 
 # Se connecter à des modèles :Hint[pi.dev/docs/latest/providers]{href="https://pi.dev/docs/latest/providers"}
@@ -264,6 +322,45 @@ Le coût qu’affiche un agent ne vient pas du fournisseur : c’est une multip
 ::::
 
 ---
+# D’après le README et extensions/index.ts de github.com/AI-for-dev/providers (octobre 2026)
+section: Partie 1 · Premier pas avec Pi
+---
+
+# Se connecter à des modèles :Hint[github.com/AI-for-dev/providers]{href="https://github.com/AI-for-dev/providers"}
+
+::Lead
+**Méthode 2** : avec le paquet de la formation, qui ajoute nos deux fournisseurs à Pi
+::
+
+::::Cols{cols="5fr 6fr" gap=7 fill align=center}
+:::Stack{gap=3}
+:Eyebrow[Installer, une seule fois]
+
+```bash
+pi install npm:@ai-for-dev/providers
+```
+
+:Eyebrow[Se connecter]{.mt-2}
+
+1. Lancez `pi`
+2. Tapez `/login ia4dev-ilaas` ou `/login ia4dev-gricad`
+3. Collez votre clé API
+4. Choisissez un modèle avec `/model`
+:::
+
+:::Stack{gap=4}
+::Card{variant=soft eyebrow="Ce que le paquet règle pour vous" tone=teal}
+- **la liste des modèles**, lue sur le serveur avec votre clé
+- **la fenêtre**, **la lecture d’images** et **le raisonnement** de chaque modèle, mesurés sur les serveurs
+::
+
+::Note{tag="Méthodes 1 et 2"}
+Un fournisseur de même nom dans `~/.pi/agent/models.json` prend le dessus sur celui du paquet.
+::
+:::
+::::
+
+---
 # Chiffres relevés sur les fiches Hugging Face (octobre 2026) : google/gemma-4-31B-it, Qwen/Qwen3.8-27B,
 # deepseek-ai/DeepSeek-V4-Flash, deepseek-ai/DeepSeek-V4.1-Flash, zai-org/GLM-5.2, zai-org/GLM-5.3.
 # V4.1 Flash : 552B de backbone (763B sur le Hub avec la mémoire Engram), 8B actifs au prefill, 16B au décodage.
@@ -271,7 +368,7 @@ Le coût qu’affiche un agent ne vient pas du fournisseur : c’est une multip
 section: Partie 1 · Premier pas avec Pi
 ---
 
-# Les modèles de la formation :Hint[tous open weight]
+# Quatre familles de modèles :Hint[tous open weight]
 
 ::::::Stack{fill center gap=6}
 ::::Cols{cols=4 gap=4 align=stretch}
@@ -316,6 +413,47 @@ Tous les paramètres travaillent à chaque token. Une trentaine de milliards : c
 ::
 ::Note{tag="MoE"}
 Seuls quelques experts s’activent par token (le « A » : A13B, A40B). Trop gros pour un poste de travail, on les utilise via un fournisseur.
+::
+::::
+::::::
+
+---
+# Fenêtres, vision et raisonnement : table ENDPOINTS de github.com/AI-for-dev/providers (extensions/index.ts),
+# valeurs mesurées sur les serveurs. La vision concorde avec pi.dev/models et le pipeline_tag des fiches Hugging Face.
+# Raisonnement : « always » sur l’offre Scaleway, « toggle » pour Qwen3.6 et Gemma 4, par niveau pour Qwen3.8 et DeepSeek V4.1 sur GRICAD.
+section: Partie 1 · Premier pas avec Pi
+---
+
+# Les modèles de la formation :Hint[configuration des endpoints]{to="connecter"}
+
+::::::Stack{fill center gap=4}
+:Eyebrow[Chaque ligne : la fenêtre de contexte servie par la plateforme]{tone=quiet}
+
+::::Cols{cols="1.15fr 1fr 1fr" gap=5 align=stretch}
+:::Card{variant=accent eyebrow="ILaaS" title="Offre Scaleway (crédits limités)"}
+- **GLM 5.2** · 256K
+- **GLM 5.3** · 256K
+- **DeepSeek V4.1 Flash** · 256K
+- **DeepSeek V4 Flash 0731** · 256K
+- **Qwen3.8 27B** · 262K
+:::
+:::Card{variant=soft eyebrow="ILaaS" title="Hors offre Scaleway"}
+- **Qwen3.6 35B Instruct** · 262K
+- **Gemma 4 31B** · 131K
+:::
+:::Card{variant=teal eyebrow="GRICAD" title="Plateforme IA4Dev"}
+- **Qwen3.8 27B** · 262K
+- **DeepSeek V4.1 Flash** · 1M
+- **Gemma 4 31B** · 159K
+:::
+::::
+
+::::Stack{gap=2}
+::Note{tag="Vision"}
+Gemma 4, Qwen3.6, Qwen3.8 et DeepSeek V4.1 Flash lisent aussi les images. GLM et DeepSeek V4 Flash, non.
+::
+::Note{tag="Réflexion"}
+Toujours active sur l’offre Scaleway. Qwen3.6 et Gemma 4 l’activent ou non. Sur GRICAD, Qwen3.8 et DeepSeek V4.1 se règlent par niveau avec `Shift+Tab`.
 ::
 ::::
 ::::::
@@ -2168,7 +2306,7 @@ Création d’un dossier `.pi` au niveau de votre home
 section: Annexe A · Pi en détail
 ---
 
-# Méthode 2 : la commande /login dans Pi
+# Méthode 3 : la commande /login dans Pi
 
 ::::Cols{cols="4fr 3fr" gap=8 fill align=center}
 :::Stack{gap=5}
