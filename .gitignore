@@ -3,8 +3,9 @@ dist/
 export-png/
 export-png-jour2/
 export-png-jour3/
+export-png-jour1-en/
 worktree/
 .DS_Store
 
-# Les PDF sont des artefacts d'export (npm run export)
+# Les PDF sont des artefacts d'export (npm run export:jour1…)
 *.pdf

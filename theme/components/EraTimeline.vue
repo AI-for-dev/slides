@@ -4,36 +4,26 @@
  * est une projection : cadre estompé et flèche pointillée. Au-delà de quatre
  * époques, la frise resserre sa typographie.
  */
+import { t } from '../lib/i18n'
+
 type Era = { year: string; title: string; lines: string[]; tone: 'a' | 'b' | 'c' | 'd'; detail?: string[]; future?: boolean }
 
 const p = defineProps<{ eras?: Era[] }>()
 
-const defaultEras: Era[] = [
-  {
-    year: '2021 – 22',
-    title: 'Autocomplétion',
-    lines: ['Suggestions en ligne plus développées'],
-    tone: 'a',
-  },
-  {
-    year: '2023 – 24',
-    title: 'Chat + multi edit',
-    lines: ['Prompt engineering', 'Multi-fichiers'],
-    tone: 'b',
-  },
-  {
-    year: '2025',
-    title: 'Agent',
-    lines: ['Itération + tools, MCP, skill, …', 'Context engineering'],
-    tone: 'c',
-  },
-  {
-    year: '2026',
-    title: 'Harnais',
-    lines: ['Tout ce qui entoure le modèle', '+ prise en compte du cycle complet de dev logiciel'],
-    tone: 'd',
-  },
-]
+const defaultEras: Era[] = t<Era[]>({
+  fr: [
+    { year: '2021 – 22', title: 'Autocomplétion', lines: ['Suggestions en ligne plus développées'], tone: 'a' },
+    { year: '2023 – 24', title: 'Chat + multi edit', lines: ['Prompt engineering', 'Multi-fichiers'], tone: 'b' },
+    { year: '2025', title: 'Agent', lines: ['Itération + tools, MCP, skill, …', 'Context engineering'], tone: 'c' },
+    { year: '2026', title: 'Harnais', lines: ['Tout ce qui entoure le modèle', '+ prise en compte du cycle complet de dev logiciel'], tone: 'd' },
+  ],
+  en: [
+    { year: '2021 – 22', title: 'Autocomplete', lines: ['Richer inline suggestions'], tone: 'a' },
+    { year: '2023 – 24', title: 'Chat + multi edit', lines: ['Prompt engineering', 'Multi-file'], tone: 'b' },
+    { year: '2025', title: 'Agent', lines: ['Iteration + tools, MCP, skill, …', 'Context engineering'], tone: 'c' },
+    { year: '2026', title: 'Harness', lines: ['Everything around the model', '+ the whole software development cycle'], tone: 'd' },
+  ],
+})
 
 const eras = p.eras ?? defaultEras
 const cols = `repeat(${eras.length - 1}, 1fr 18px) 1fr`

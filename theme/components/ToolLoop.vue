@@ -6,14 +6,44 @@
 import { useId } from 'vue'
 import { arrowHead, graphiteFilter, line, rect, rng } from '../lib/pencil'
 import type { Pt, Stroke } from '../lib/pencil'
+import { t } from '../lib/i18n'
 
 const X = { user: 68, harness: 310, model: 590, tool: 832 }
-const actors = [
-  { id: 'user', label: 'utilisateur', role: 'demande', w: 142, tone: 'quiet' },
-  { id: 'harness', label: 'le harnais', role: 'orchestre', w: 174, tone: 'accent' },
-  { id: 'model', label: 'le modèle', role: 'décide', w: 154, tone: 'plain' },
-  { id: 'tool', label: 'l’outil', role: 'agit', w: 142, tone: 'blue' },
-] as const
+const TEXT = t({
+  fr: {
+    actors: { user: ['utilisateur', 'demande'], harness: ['le harnais', 'orchestre'], model: ['le modèle', 'décide'], tool: ['l’outil', 'agit'] },
+    messages: [
+      ['question'],
+      ['messages + outils disponibles', 'instructions · historique · schémas'],
+      ['appel d’outil structuré', 'read({ path: « game/neon.js » })'],
+      ['permission, puis exécution', 'execute(« read », { path })'],
+      ['résultat de l’outil', '{ success, data: contenu }'],
+      ['résultat ajouté au contexte'],
+    ],
+    next: ' réponse finale… ou nouvel appel d’outil',
+    aria: 'Séquence d’un appel d’outil entre l’utilisateur, le harnais, le modèle et l’outil',
+  },
+  en: {
+    actors: { user: ['user', 'asks'], harness: ['the harness', 'orchestrates'], model: ['the model', 'decides'], tool: ['the tool', 'acts'] },
+    messages: [
+      ['question'],
+      ['messages + available tools', 'instructions · history · schemas'],
+      ['structured tool call', 'read({ path: "game/neon.js" })'],
+      ['permission, then execution', 'execute("read", { path })'],
+      ['tool result', '{ success, data: content }'],
+      ['result added to the context'],
+    ],
+    next: ' final answer… or another tool call',
+    aria: 'Sequence of a tool call between the user, the harness, the model and the tool',
+  },
+})
+
+const actors = ([
+  { id: 'user', w: 142, tone: 'quiet' },
+  { id: 'harness', w: 174, tone: 'accent' },
+  { id: 'model', w: 154, tone: 'plain' },
+  { id: 'tool', w: 142, tone: 'blue' },
+] as const).map(a => ({ ...a, label: TEXT.actors[a.id][0], role: TEXT.actors[a.id][1] }))
 
 type Actor = keyof typeof X
 type Tone = 'plain' | 'accent' | 'blue'
@@ -27,14 +57,15 @@ interface Message {
   tone: Tone
 }
 
-const messages: Message[] = [
-  { from: 'user', to: 'harness', y: 78, n: '1', label: 'question', tone: 'plain' },
-  { from: 'harness', to: 'model', y: 118, n: '2', label: 'messages + outils disponibles', detail: 'instructions · historique · schémas', tone: 'plain' },
-  { from: 'model', to: 'harness', y: 158, n: '3', label: 'appel d’outil structuré', detail: 'read({ path: « game/neon.js » })', tone: 'accent' },
-  { from: 'harness', to: 'tool', y: 201, n: '4', label: 'permission, puis exécution', detail: 'execute(« read », { path })', tone: 'accent' },
-  { from: 'tool', to: 'harness', y: 244, n: '5', label: 'résultat de l’outil', detail: '{ success, data: contenu }', tone: 'blue' },
-  { from: 'harness', to: 'model', y: 284, n: '6', label: 'résultat ajouté au contexte', tone: 'blue' },
+const ARROWS: Omit<Message, 'label' | 'detail'>[] = [
+  { from: 'user', to: 'harness', y: 78, n: '1', tone: 'plain' },
+  { from: 'harness', to: 'model', y: 118, n: '2', tone: 'plain' },
+  { from: 'model', to: 'harness', y: 158, n: '3', tone: 'accent' },
+  { from: 'harness', to: 'tool', y: 201, n: '4', tone: 'accent' },
+  { from: 'tool', to: 'harness', y: 244, n: '5', tone: 'blue' },
+  { from: 'harness', to: 'model', y: 284, n: '6', tone: 'blue' },
 ]
+const messages: Message[] = ARROWS.map((m, i) => ({ ...m, label: TEXT.messages[i][0], detail: TEXT.messages[i][1] }))
 
 const fid = `g${useId().replace(/[^a-zA-Z0-9]/g, '')}`
 const frames = Object.fromEntries(actors.map((a) => [
@@ -67,7 +98,7 @@ const activations = [
 
 <template>
   <svg class="tl" viewBox="0 0 900 320" preserveAspectRatio="xMidYMid meet" role="img"
-       aria-label="Séquence d’un appel d’outil entre l’utilisateur, le harnais, le modèle et l’outil">
+       :aria-label="TEXT.aria">
     <defs v-html="graphiteFilter(fid, 9)" />
 
     <!-- Acteurs et lignes de vie -->
@@ -97,7 +128,7 @@ const activations = [
       <text v-if="m.detail" :x="mid(m)" :y="m.y - 5" text-anchor="middle" class="tl-detail" :class="{ 'is-code': m.n === '3' || m.n === '4' || m.n === '5' }">{{ m.detail }}</text>
     </g>
 
-    <text :x="X.model + 18" y="311" class="tl-next"><tspan class="tl-hook">↳</tspan> réponse finale… ou nouvel appel d’outil</text>
+    <text :x="X.model + 18" y="311" class="tl-next"><tspan class="tl-hook">↳</tspan>{{ TEXT.next }}</text>
   </svg>
 </template>
 

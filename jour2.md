@@ -5,6 +5,7 @@ info: |
   IA4Dev 2026 - ANF jour 2, octobre 2026
   Max Beligné (PUD-GA / MSH Alpes / UGA) · Loïc Gouarin (CMAP / CNRS / École polytechnique)
 author: Max Beligné, Loïc Gouarin
+lang: fr
 colorSchema: auto
 # Logo de l'organisation AI-for-dev (dépôt AI-for-dev/.github, profile/brand).
 favicon: /favicon.svg

@@ -7,6 +7,7 @@ Supports de l'atelier (ANF, octobre 2026), construits avec
 - Jour 1 : <https://ai-for-dev.github.io/slides/jour1/>
 - Jour 2 : <https://ai-for-dev.github.io/slides/jour2/>
 - Jour 3 : <https://ai-for-dev.github.io/slides/jour3/>
+- En anglais : <https://ai-for-dev.github.io/slides/en/> (accueil et jour 1 pour l'instant)
 
 ## Publication
 
@@ -15,7 +16,7 @@ les decks et les publie sur GitHub Pages (source : GitHub Actions). La page
 d'accueil (`index.md`) occupe la racine et renvoie vers les trois jours, qui
 sortent dans `dist/jour1/`, `dist/jour2/` et `dist/jour3/`. Ils utilisent
 `routerMode: hash`, parce que le `404.html` servi par GitHub Pages est celui
-de l'accueil.
+de l'accueil. La version anglaise suit le même schéma sous `dist/en/`.
 
 ## Lancer
 
@@ -31,6 +32,8 @@ npm run export:png:jour1 # une image par slide dans export-png/
 
 Les commandes du jour 1 existent aussi pour les jours 2 et 3 : `dev:jour2`,
 `build:jour2`, `export:jour2`, `export:png:jour2`, et de même avec `jour3`.
+Les versions anglaises ajoutent `:en` (`dev:jour1:en`, `build:index:en`…), et
+`npm run check:translations` vérifie qu'elles restent alignées sur le français.
 En local, les liens de l'accueil ne mènent nulle part : les decks ne sont
 réunis qu'une fois publiés.
 
@@ -38,14 +41,18 @@ réunis qu'une fois publiés.
 
 ```
 index.md                  page d'accueil : un lien par jour
+index.en.md, jour1.en.md  versions anglaises, slide pour slide
 jour1.md                  jour 1
 jour2.md                  jour 2 : Pi, sandbox, contexte, évaluation et skills
 jour3.md                  jour 3 : hooks, délégation, workflows, essaim et Pi Durable
 public/images/            les figures, logos et avatars
+scripts/                  check-translations.mjs, lancé par la CI avant le build
 theme/                    le thème maison
   styles/tokens.css       palette, typographie, géométrie
   styles/pencil.ts        les traits au crayon réutilisés par le CSS
   lib/pencil.ts           le tracé à main levée (lignes, cadres, hachures)
+  lib/i18n.ts             la langue du deck et les textes des composants
+  custom-nav-controls.vue le bouton de langue dans la barre de Slidev
   styles/base.css         éléments de base (titres, listes, liens)
   styles/components.css   vocabulaire visuel (card, tag, figure, num…)
   styles/blocks.css       compositions propres au deck
@@ -169,6 +176,26 @@ cette licence, avec un lien vers `licenseUrl`.
 Chaque composant émet la classe CSS qui porte son nom (`Card` → `.card`,
 `Criterion` → `.criterion`…) : pour changer une apparence, chercher la classe
 dans `theme/styles/`.
+
+## Version anglaise
+
+Chaque deck traduit a son fichier `x.en.md` à côté de `x.md`. Le français fait
+référence : on modifie d'abord `x.md`, puis on reporte dans `x.en.md`. Les
+commentaires de travail (`# V2 : …`) restent dans la version française.
+
+- **Mêmes slides, même ordre, même layout.** Le bouton de langue garde le
+  numéro de slide (`#/12` ouvre `#/12` dans l'autre langue). La CI lance
+  `scripts/check-translations.mjs` avant le build et bloque la publication si
+  une version est décalée.
+- **L'en-tête porte la langue et le lien.** `lang: fr` ou `lang: en`, et
+  `themeConfig.translation`, le chemin de l'autre version relatif à celle-ci :
+  `../en/jour1/` depuis `jour1.md`, `../../jour1/` depuis `jour1.en.md`. Sans
+  `translation`, le bouton n'apparaît pas.
+- **Les composants qui portent du texte le donnent dans les deux langues**, via
+  `t({ fr: …, en: … })` de `theme/lib/i18n.ts` (pied de page, schémas comme
+  `HarnessMap` ou `ToolLoop`). Un nouveau composant avec du texte en dur suit la
+  même règle.
+- **Typographie.** Pas d'espace avant `: ; ! ?` en anglais, guillemets “ ”.
 
 ## Pièges MDC à connaître
 

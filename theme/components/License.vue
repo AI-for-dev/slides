@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useSlideContext } from '@slidev/client'
+import { t } from '../lib/i18n'
 
 /**
  * Pictogrammes de la licence Creative Commons du deck (`themeConfig.license`,
@@ -17,6 +18,7 @@ const ICONS: Record<string, string> = {
 }
 
 const { $slidev } = useSlideContext()
+const prefix = t({ fr: 'Licence', en: 'License' })
 const label = computed<string>(() => $slidev.themeConfigs.license ?? '')
 const icons = computed(() => {
   const m = label.value.match(/^CC\s+([A-Z-]+)/i)
@@ -31,7 +33,7 @@ const icons = computed(() => {
     :href="$slidev.themeConfigs.licenseUrl"
     target="_blank"
     rel="license noopener"
-    :aria-label="`Licence ${label}`"
+    :aria-label="`${prefix} ${label}`"
     :title="label"
   >
     <svg v-for="k in icons" :key="k" :viewBox="k === 'nd' ? '0 0 64 64' : '5.5 -3.5 64 64'" aria-hidden="true">
