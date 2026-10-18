@@ -249,7 +249,7 @@ Un papier presque neutre, une encre graphite, et deux crayons de couleur dont un
 
 Canevas Slidev 16:9 à 16px. Les slides ordinaires ont des marges de 2.1rem en haut, 3rem sur les côtés, 3.4rem en bas ; la couverture et les slides de partie respirent un peu plus (3.4rem sur les côtés). Le corps est une colonne flex : titre souligné, puis contenu qui remplit la hauteur restante. Les grilles viennent des composants `Cols` (CSS grid) et `Stack` (colonne flex), avec `is-fill` pour occuper la place.
 
-Mobilier commun aux slides ordinaires et aux citations : pied de page en mono à 1.1rem du bas (section à gauche, `n / total` à droite en chiffres tabulaires) et, au-dessus, une règle d'avancement nette de 1 px repassée à la sanguine jusqu'à la slide courante.
+Mobilier commun aux slides ordinaires et aux citations : pied de page en mono à 1.1rem du bas (section à gauche ; à droite, auteurs et licence en `quiet` puis `n / total` en chiffres tabulaires) et, au-dessus, une règle d'avancement nette de 1 px repassée à la sanguine jusqu'à la slide courante.
 
 Couverture : titre en grand à gauche, bifurcation entière à droite, logos en haut à droite, auteurs et date en bas. Slide de partie : fond `surface`, bloc de gauche sur 55 % de la largeur (titre, précision, sommaire), grand numéro hachuré en haut à droite, bifurcation en bas avec le trait de sanguine à l'étape courante, index de partie en bas à gauche. Slide d'énoncé : centrée sur `surface`, bifurcation à l'étape finale.
 

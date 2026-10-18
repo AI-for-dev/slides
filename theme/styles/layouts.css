@@ -45,6 +45,26 @@
   margin: -0.22em 0;
 }
 .slide-foot .foot-right {
+  display: flex;
+  align-items: center;
+  gap: 2.2em;
+}
+/* Auteurs et licence : présents sur chaque slide, sans prendre la parole. */
+.slide-foot .foot-credits {
+  display: flex;
+  align-items: center;
+  /* l'écart d'une espace, comme le « · » entre les noms */
+  gap: 0.7em;
+}
+.slide-foot .foot-license {
+  color: inherit;
+  border-bottom: 0;
+  pointer-events: auto;
+}
+.slide-foot .foot-license:hover {
+  color: var(--accent-deep);
+}
+.slide-foot .foot-page {
   font-variant-numeric: tabular-nums;
   color: var(--muted);
 }
@@ -169,6 +189,24 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--muted);
+}
+
+/* Pictogrammes CC, devant la date : même gris que les métadonnées. */
+.license {
+  display: inline-flex;
+  gap: 0.25rem;
+  margin-right: 0.55rem;
+  vertical-align: middle;
+}
+.slidev-layout a.license {
+  color: var(--muted);
+  border-bottom: 0;
+}
+.slidev-layout a.license:hover { color: var(--ink); }
+.license svg {
+  width: 1.15rem;
+  height: 1.15rem;
+  fill: currentColor;
 }
 
 .author {

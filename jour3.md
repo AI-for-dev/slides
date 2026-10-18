@@ -8,6 +8,9 @@ author: Max Beligné, Loïc Gouarin
 colorSchema: auto
 themeConfig:
   footer: IA4Dev 2026 · ANF jour 3
+  authors: Max Beligné · Loïc Gouarin
+  license: CC BY-SA 4.0
+  licenseUrl: https://creativecommons.org/licenses/by-sa/4.0/deed.fr
 # Publié sous /slides/jour3/ : le 404.html de GitHub Pages est celui du jour 1,
 # donc les liens profonds passent par le hash.
 routerMode: hash
@@ -43,6 +46,7 @@ IA4Dev 2026 · ANF jour 3
 :Author{name="Loïc Gouarin" org="CMAP / CNRS / École polytechnique"}
 ::
 ::CoverMeta
+:License
 Octobre 2026
 ::
 :::
