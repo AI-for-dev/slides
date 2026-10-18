@@ -245,8 +245,8 @@ Appuyez sur `Ctrl+B`, relâchez, puis choisissez une touche.<br />Par exemple, `
 ::
 
 ::::Cols{cols="3fr 2fr" gap=6 align=center .mt-2}
-<Fig src="/images/herdr-interface.jpg" frame="screen" h="13.6rem" caption="Interface" />
-<Fig src="/images/herdr-tree.png" h="13.6rem" caption="Schéma fonctionnel" />
+<Fig src="/images/herdr-interface.jpg" frame="bare" h="13.6rem" caption="Interface" captionAlign="center" />
+<Fig src="/images/herdr-tree.png" h="13.6rem" caption="Schéma fonctionnel" captionAlign="center" />
 ::::
 
 ---
