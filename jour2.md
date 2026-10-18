@@ -666,50 +666,53 @@ La règle la plus spécifique l’emporte. Une commande que l’analyseur ne sai
 ::::
 
 ---
+# Fusion de la slide worktree de la #22 (Max) et de la #21. Sources : herdr.dev/docs (0.9.5, oct. 2026),
+# sections « Worktrees » de cli-reference et configuration ; menu contextuel et raccourci prefix+shift+g
+# relevés dans le code de herdr (src/client/shell/context_menu.rs, src/main.rs).
 section: Partie 2 · Sécurité et sandbox
 ---
 
-# Créer un espace jetable avec un worktree
+# Un worktree par agent :Hint[herdr.dev/docs/cli-reference]{href="https://herdr.dev/docs/cli-reference/#worktrees"}
 
-::::Cols{cols=2 gap=7 fill align=center}
+::::::Stack{fill center gap=6}
+::::Cols{cols="5fr 6fr" gap=7 align=start}
 :::Stack{gap=4}
 ::Lead
-Un **worktree Git** est un exemple de « clone jetable ». De plus, c’est une bonne pratique si plusieurs agents travaillent sur un même projet.
+Une branche sépare l’historique, un worktree sépare les fichiers : c’est un second répertoire de travail du même dépôt, sur sa propre branche.
 ::
 
-:::Card{variant=soft eyebrow="À ne pas confondre" tone=teal}
 ::Specs{w="7rem"}
-- **Branche** un historique distinct
-- **Worktree** un répertoire distinct
+- **En parallèle** deux agents sur deux tâches ne touchent jamais les mêmes fichiers
+- **Relisible** le travail de l’agent tient dans le diff de sa branche
+- **Jetable** on supprime le répertoire, votre copie de travail n’a pas bougé
 ::
 
-Le worktree partage l’historique Git du dépôt : ce n’est pas une copie indépendante.
-:::
+::Detail
+Un exemple de « clone jetable », mais pas une copie indépendante : l’historique Git reste partagé.
+::
 :::
 
 :::Stack{gap=3 .code-sm}
-:Eyebrow[Depuis le dépôt NÉON]{tone=quiet code}
+:Eyebrow[Avec herdr, depuis le dépôt NÉON]{tone=teal}
 
 ```bash
 herdr worktree create \
-  --branch atelier/garde-fou \
-  --base dev \
-  --focus
+  --branch atelier/garde-fou --base dev --focus
 ```
 
-:::Card{variant=accent eyebrow="Créé par herdr"}
-Herdr range tous ses worktrees sous :
-
-`~/.herdr/worktrees/`
-
-`--focus` ouvre le nouveau worktree dans herdr.
-:::
+::Specs{w="7rem"}
+- **Créer** clic droit sur le workspace, *New worktree*, ou `Ctrl+B` puis `Shift+G`
+- **Grouper** un workspace par worktree, avec son agent, sous le dépôt d’origine
+- **Dossier** `~/.herdr/worktrees/neon/atelier-garde-fou`
+- **Supprimer** *Delete worktree checkout…* lance `git worktree remove`, la branche reste
+::
 :::
 ::::
 
-::Takeaway{.mt-4}
-Pour l’exercice, ce répertoire joue le rôle du clone jetable : vos essais restent hors du répertoire de travail principal.
+::Takeaway
+**Un agent, une branche, un répertoire.** Pour l’exercice, ce worktree joue le rôle du clone jetable. Mais avec vos droits : il protège des erreurs, pas d’un agent qui sort du dépôt.
 ::
+::::::
 
 ---
 # NOUVEAU V2 : exercice en salle du cours (module sandbox)
@@ -721,7 +724,7 @@ section: Partie 2 · Sécurité et sandbox
 :::::Stack{fill center gap=5}
 ::::Cols{cols=3 gap=5}
 :::Card{variant=accent eyebrow="En salle · 1" size=sm}
-Dans un **clone jetable** de NÉON, déposez la configuration ci-dessus dans le `.pi` du projet, puis demandez à Pi :
+Dans un **worktree** de NÉON, déposez la configuration ci-dessus dans le `.pi` du projet, puis demandez à Pi :
 
 1. de lire le `.env`
 2. d’effacer `game/` avec `rm -rf`
