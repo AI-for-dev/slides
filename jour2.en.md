@@ -1330,6 +1330,9 @@ The ball goes through the bricks. The code comment describes the basic fix. `ISS
 ::Note{tag="On purpose"}
 The ticket points to `ISSUE.md`, without the S: does the model look for the right file, or give up?
 ::
+::Note{tag="Data"}
+Experiment, sessions and raw results: [zenodo.23452689](https://doi.org/10.5281/zenodo.23452689)
+::
 :::
 ::::
 
@@ -1932,6 +1935,9 @@ The sloppy request, with no `ISSUES.md` and no git history: otherwise the agent 
 
 ::Note{tag="Models"}
 `gemma-4-31b` (high reasoning), `qwen-3.8-27b` and `DeepSeek-V4.1-Flash` (medium), all on GRICAD.
+::
+::Note{tag="Data"}
+Experiment, sessions and raw results: [zenodo.23452689](https://doi.org/10.5281/zenodo.23452689)
 ::
 :::
 :::Stack{gap=4}
