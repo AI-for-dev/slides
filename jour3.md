@@ -6,6 +6,8 @@ info: |
   Max Beligné (PUD-GA / MSH Alpes / UGA) · Loïc Gouarin (CMAP / CNRS / École polytechnique)
 author: Max Beligné, Loïc Gouarin
 colorSchema: auto
+# Logo de l'organisation AI-for-dev (dépôt AI-for-dev/.github, profile/brand).
+favicon: /favicon.svg
 themeConfig:
   footer: IA4Dev 2026 · ANF jour 3
   authors: Max Beligné · Loïc Gouarin
