@@ -4,6 +4,8 @@ import { asset } from '../lib/asset'
 withDefaults(defineProps<{
   src: string
   caption?: string
+  /** alignement de la légende sous l’image */
+  captionAlign?: 'start' | 'center'
   href?: string
   /** 'paper' = light card, 'screen' = dark chrome for terminal captures, 'bare' = no frame */
   frame?: 'paper' | 'screen' | 'bare'
@@ -19,7 +21,7 @@ withDefaults(defineProps<{
     <div class="fig-media">
       <img :src="asset(src)" alt="" />
     </div>
-    <figcaption v-if="caption" class="fig-cap">
+    <figcaption v-if="caption" class="fig-cap" :class="captionAlign ? 'is-' + captionAlign : ''">
       <span class="fig-cap-mark" />
       <span>
         <template v-if="href"><a :href="href" target="_blank">{{ caption }}</a></template>
@@ -75,6 +77,7 @@ withDefaults(defineProps<{
   letter-spacing: 0.02em;
   color: var(--muted);
 }
+.fig-cap.is-center { justify-content: center; }
 .fig-cap-mark {
   width: 16px;
   height: 7px;

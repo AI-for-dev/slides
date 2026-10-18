@@ -39,7 +39,7 @@ IA4Dev 2026 · ANF jour 2
 ::
 :::
 
-::CoverTitle{sub="Comprendre et construire son harnais"}
+::CoverTitle{sub="Comprendre et construire son harnais" style="transform: translateY(-2rem)"}
 # Atelier<br />Acte 2
 ::
 
@@ -101,7 +101,7 @@ section: Introduction
 
 ::::::Stack{fill center gap=6}
 ::Lead
-Une exécution unique ne dit presque rien d’un modèle. Chaque exercice de la journée suit donc le même déroulé.
+Une exécution unique ne dit presque rien d’un modèle. <br /> Chaque exercice de la journée suit donc le même déroulé.
 ::
 
 ::::Cols{cols=3 gap=5}
@@ -117,7 +117,7 @@ Comparez ce que l’agent a lu et fait, pas seulement le résultat. `/export` vo
 ::::
 
 ::Takeaway
-L'analyse des traces permet de connaître finement les qualités et les défauts d'un modèle. Vous savez ensuite dire quel modèle utiliser selon vos besoins.
+L'analyse des traces permet de connaître finement les qualités et les défauts d'un modèle. <br /> Vous savez ensuite dire quel modèle utiliser selon vos besoins.
 ::
 ::::::
 
@@ -245,8 +245,8 @@ Appuyez sur `Ctrl+B`, relâchez, puis choisissez une touche.<br />Par exemple, `
 ::
 
 ::::Cols{cols="3fr 2fr" gap=6 align=center .mt-2}
-<Fig src="/images/herdr-interface.jpg" frame="screen" h="13.6rem" caption="Interface" />
-<Fig src="/images/herdr-tree.png" h="13.6rem" caption="Schéma fonctionnel" />
+<Fig src="/images/herdr-interface.jpg" frame="bare" h="13.6rem" caption="Interface" captionAlign="center" />
+<Fig src="/images/herdr-tree.png" h="13.6rem" caption="Schéma fonctionnel" captionAlign="center" />
 ::::
 
 ---
@@ -371,7 +371,7 @@ Un fournisseur de même nom dans `~/.pi/agent/models.json` prend le dessus sur c
 section: Partie 1 · Premier pas avec Pi
 ---
 
-# Quatre familles de modèles :Hint[tous open weight]
+# Deux familles de modèles :Hint[tous open weight]
 
 ::::::Stack{fill center gap=6}
 ::::Cols{cols=4 gap=4 align=stretch}
@@ -662,6 +662,52 @@ La règle la plus spécifique l’emporte. Une commande que l’analyseur ne sai
 ::::
 
 ---
+section: Partie 2 · Sécurité et sandbox
+---
+
+# Créer un espace jetable avec un worktree
+
+::::Cols{cols=2 gap=7 fill align=center}
+:::Stack{gap=4}
+::Lead
+Un **worktree Git** est un exemple de « clone jetable ». De plus, c’est une bonne pratique si plusieurs agents travaillent sur un même projet.
+::
+
+:::Card{variant=soft eyebrow="À ne pas confondre" tone=teal}
+::Specs{w="7rem"}
+- **Branche** un historique distinct
+- **Worktree** un répertoire distinct
+::
+
+Le worktree partage l’historique Git du dépôt : ce n’est pas une copie indépendante.
+:::
+:::
+
+:::Stack{gap=3 .code-sm}
+:Eyebrow[Depuis le dépôt NÉON]{tone=quiet code}
+
+```bash
+herdr worktree create \
+  --branch atelier/garde-fou \
+  --base dev \
+  --focus
+```
+
+:::Card{variant=accent eyebrow="Créé par herdr"}
+Herdr range tous ses worktrees sous :
+
+`~/.herdr/worktrees/`
+
+`--focus` ouvre le nouveau worktree dans herdr.
+:::
+:::
+::::
+
+::Takeaway{.mt-4}
+Pour l’exercice, ce répertoire joue le rôle du clone jetable : vos essais restent hors du répertoire de travail principal.
+::
+
+---
 # NOUVEAU V2 : exercice en salle du cours (module sandbox)
 section: Partie 2 · Sécurité et sandbox
 ---
@@ -727,7 +773,7 @@ Le troisième niveau du tableau. Pi tourne dans sa propre machine virtuelle, et 
 
 ::Detail
 Docker publie aussi 70 kits dans [docker/sbx-kits-contrib](https://github.com/docker/sbx-kits-contrib) : 33 agents, dont Pi (`sbx/pi-kit`), et 37 compléments comme GitLab, Playwright ou Trivy.<br />
-Mise en route avec notre kit, gestion des clés et limites du bac à sable : annexe B.
+Mise en route avec notre kit, gestion des clés et limites du bac à sable : cf. annexe.
 ::
 :::::
 
@@ -975,7 +1021,7 @@ section: Partie 3 · Contexte
 ::
 
 ::Lead
-Suffisant dans la plupart des cas. `/tools` en donne la liste.
+Suffisant dans la plupart des cas.
 ::
 
 ::Card{variant=accent eyebrow="En salle" size=sm}
@@ -2223,7 +2269,7 @@ layout: statement
 ::
 
 ---
-# V2 court : une annexe par partie, dans l’ordre de la journée
+# V2 court : deux annexes, sécurité et skills
 layout: section
 index: Annexes
 ---
@@ -2233,662 +2279,15 @@ index: Annexes
 ::
 
 ::Agenda{numbering=alpha}
-- Pi en détail : installation, raccourcis, settings, extensions, outils
-- Sécurité et sandbox : quatre approches d’isolation, le kit Docker Sandboxes
-- Contexte : prompt cache, prix, compaction, `codemode`
-- Évaluer : `blind` et `ISSUES.md`
-- Skills : méthode, sources d’inspiration, tools et skills
+- Sécurité et sandbox : trois approches d’isolation, le kit Docker Sandboxes
+- Skills : méthode, sources d’inspiration et approches comparées
 ::
 
 ---
-section: Annexe A · Pi en détail
+section: Annexe A · Sécurité et sandbox
 ---
 
-# L’organisation du code source de Pi :Hint[github.com/earendil-works/pi]{href="https://github.com/earendil-works/pi/"}
-
-::::::Stack{fill center gap=6}
-::Lead
-Le dépôt du projet est organisé en trois briques principales :
-::
-
-::::Cols{cols=3 gap=6}
-:::Card{center}
-:Eyebrow[Couche applicative de Pi]
-
-<p class="card-title mt-4">pi-coding-agent</p>
-
-CLI/TUI · sessions · extensions · configuration
-:::
-:::Card{center}
-:Eyebrow[Runtime agentique]{tone=teal}
-
-<p class="card-title mt-4">pi-agent-core</p>
-
-Boucle agentique<br />état · outils · sessions · événements
-:::
-:::Card{center}
-:Eyebrow[Accès modèles]{tone=quiet}
-
-<p class="card-title mt-4">pi-ai</p>
-
-API multi-fournisseurs : commerciale et locale
-:::
-::::
-::::::
-
----
-section: Annexe A · Pi en détail
----
-
-# L’installation de Pi (déjà faite normalement ✅)
-
-::::Cols{cols="3fr 2fr" gap=8 fill align=center}
-:::Stack{gap=5}
-::Card{variant=soft eyebrow="Rappel"}
-Procédure d’installation de Pi : [pi.dev/docs/latest/quickstart](https://pi.dev/docs/latest/quickstart)
-::
-
-::Stack{gap=2}
-Commande :
-
-```bash
-npm install -g --ignore-scripts @earendil-works/pi-coding-agent
-```
-::
-
-::Takeaway
-Création d’un dossier `.pi` au niveau de votre home
-::
-:::
-:::Cell
-<Fig src="/images/jour2/pi-dossier-agent.jpg" />
-:::
-::::
-
----
-section: Annexe A · Pi en détail
----
-
-# Méthode 3 : la commande /login dans Pi
-
-::::Cols{cols="4fr 3fr" gap=8 fill align=center}
-:::Stack{gap=5}
-::Card{variant=soft}
-- lancer votre terminal
-- taper `pi`
-- taper `/login`
-- choisir `sign in with an account` (Échap pour revenir en arrière) ou `with API key`
-::
-
-::Card{variant=accent eyebrow="Attention"}
-Anthropic apparaît, mais son abonnement est réservé à ses propres applications. En OAuth, Pi se présente comme Claude Code, ce qu’Anthropic interdit : risque de suspension du compte.
-Passez par une clé d’API, facturée à l’usage.
-::
-:::
-:::Stack{gap=3}
-Les clés déjà configurées apparaissent. Ex. :
-
-<Fig src="/images/jour2/pi-login-cles.jpg" frame="screen" />
-:::
-::::
-
----
-section: Annexe A · Pi en détail
----
-
-# Cas des modèles locaux
-
-::::Cols{cols=2 gap=8 fill align=center}
-:::Stack{gap=6}
-- [llama.cpp](https://github.com/ggml-org/llama.cpp) est un bon choix : [intégration dans Pi](https://pi.dev/docs/latest/llama-cpp)
-- [llmfit](https://github.com/AlexsJones/llmfit) permet de voir si un modèle est adapté à votre matériel
-
-::Card{variant=soft eyebrow="Pour des travaux au-delà de choses simples"}
-Viser 24 Go de VRAM avec un modèle Qwen 3.8 quantifié : cf. [unsloth.ai/docs/fr/modeles/qwen3.8](https://unsloth.ai/docs/fr/modeles/qwen3.8)
-::
-:::
-:::Cell
-<Fig src="/images/jour2/llmfit.jpg" frame="screen" caption="source : korben.info/llmfit-trouver-llm-compatible-hardware.html" href="https://korben.info/llmfit-trouver-llm-compatible-hardware.html" />
-:::
-::::
-
----
-section: Annexe A · Pi en détail
----
-
-# Sécuriser clés et tokens :Hint[docs/providers.md]{prefix="source :" href="https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/providers.md"}
-
-::::Cols{cols="3fr 2fr" gap=8 fill align=center}
-:::Stack{gap=4}
-Si vous ouvrez votre `auth.json`, vous pouvez voir vos clés et tokens d’accès en clair.
-
-Pi crée le fichier avec les permissions `0600` : lecture + écriture pour le propriétaire, aucun droit pour le groupe ni pour les autres.
-
-::Card{variant=soft eyebrow="Conseils" size=sm}
-- chiffrement de votre disque dur (ex. VeraCrypt)
-- si vous avez des sauvegardes synchronisées dans le cloud et que vous avez un peu peur d’une maladresse, possible d’avoir des `!command`
-::
-:::
-:::Stack{gap=3 .code-sm}
-<Fig src="/images/jour2/pi-dossier-agent.jpg" h="190px" />
-
-```json
-{
-  "anthropic": {
-    "type": "api_key",
-    "key": "!security find-generic-password -ws 'anthropic'"
-  }
-}
-```
-:::
-::::
-
----
-section: Annexe A · Pi en détail
----
-
-# Les premiers raccourcis au quotidien
-
-::Lead
-Pour la liste complète des raccourcis : `/hotkeys`
-::
-
-::::Cols{cols=2 gap=7 fill align=start .mt-4}
-:::Stack{gap=3}
-::Card{variant=soft eyebrow="Pour aller à la ligne" size=sm}
-`Shift+Enter`, ou `Ctrl+J` si le terminal ne transmet pas `Shift+Enter`.
-::
-::Card{variant=accent eyebrow="Attention au Ctrl+C" size=sm}
-Ce n’est pas « copier » mais « effacer dans l’éditeur ».
-::
-::Card{variant=soft eyebrow="Interrompre et quitter" size=sm}
-`Échap` interrompt l’agent et restaure les messages en file dans l’éditeur. `Ctrl+D` pour quitter.
-::
-:::
-:::Card{size=sm}
-::Specs{w="8.5rem"}
-- **Copier** `Ctrl+Shift+C` sous Linux et Windows Terminal, `Cmd+C` sous macOS, ou `Ctrl+X` et `/copy`
-- **Coller du texte** `Ctrl+Shift+V` sous Linux et Windows Terminal, `Cmd+V` sous macOS
-- **Coller des images** `Ctrl+V` sous Linux natif et macOS, `Alt+V` sous Windows et WSL
-::
-
-::Detail{.mt-3}
-Inutile si le modèle utilisé n’est pas multimodal…
-::
-:::
-::::
-
----
-section: Annexe A · Pi en détail
----
-
-# Une petite subtilité : steering et follow-up
-
-::::Cols{cols=2 gap=7}
-::Card{variant=accent eyebrow="Entrée → steering" size=sm}
-L’appel d’outil en cours se termine, puis le message est pris en compte. L’agent peut ainsi corriger sa trajectoire en cours de route.
-::
-::Card{variant=teal eyebrow="Alt+Entrée → follow-up" tone=teal size=sm}
-Met en file un message de suivi, livré seulement une fois que l’agent a terminé tout son travail.
-Sur Mac, c’est `Option+Entrée`. Sous Windows et WSL, `Ctrl+Q`.
-::
-::::
-
-::::Cols{cols=2 gap=7 fill align=center .mt-4}
-:::Card{size=sm}
-::Specs{w="4rem" raw}
-- **@** dans l’éditeur pour chercher et insérer un fichier (`Tab` pour compléter)
-- **!** pour lancer une commande shell directement
-::
-:::
-::Note{tag="Raccourcis"}
-Modifiables dans `~/.pi/agent/keybindings.json`, cf. [Keybindings Reference](https://pi.dev/docs/latest/keybindings)
-::
-::::
-
----
-# V2 : pi -p ajouté d’après le cours, il sert aux mesures de la partie 4
-section: Annexe A · Pi en détail
----
-
-# Reprendre, dupliquer, nettoyer
-
-::::::Stack{fill center gap=6}
-::::Stack{gap=2.5}
-:::Bullet{k="12" accent}
-Sortez de votre session (`Ctrl+D`). `pi -c` reprend votre dernière session
-:::
-:::Bullet{k="13" accent}
-Quelques commandes utiles à tester :
-::Detail
-`/fork` repart d’un ancien message, mais dans **une nouvelle session**.
-`/clone` duplique la branche active dans **une nouvelle session**.
-`pi -p "…"` lance une requête sans interface et rend la main.
-::
-:::
-::::
-
-::Card{variant=accent eyebrow="Attention"}
-Pi ne supprime jamais vos sessions de lui-même. Elles sont rangées sous `~/.pi/agent/` : effacer un projet ne les efface pas !
-Vous pouvez le faire à la main, ou faire des nettoyages ciblés avec l’extension `pi-session-cleanup`.
-::
-::::::
-
----
-# V2 : trust.json et chargement du .pi local d’après le cours
-section: Annexe A · Pi en détail
----
-
-# Du system prompt à l’AGENTS.md
-
-::::Stack{gap=4}
-Le system prompt de Pi se lit dans votre export de session. On peut le personnaliser pour un projet :
-
-::Specs{w="8.5rem" raw}
-- **SYSTEM.md** `…/neon/.pi/SYSTEM.md` **remplace** le system prompt par défaut de Pi pour ce projet
-- **APPEND_SYSTEM.md** `…/neon/.pi/APPEND_SYSTEM.md` **ajoute** votre contenu au system prompt de Pi
-::
-
-::Note{tag="Attention"}
-En pratique, on modifie très rarement le system prompt. La bonne pratique, c’est d’ajouter un fichier AGENTS.md.
-::
-::::
-
-::::Cols{cols=2 gap=6 .mt-5}
-::Takeaway
-**Distinguer le dossier global `~/.pi/agent/` du `.pi` local à chaque projet** (ici `…/neon/.pi`), utile aussi pour des settings, skills… propres au projet.
-::
-::Card{variant=soft eyebrow="Projet de confiance" tone=teal size=sm}
-Pi ne charge le `.pi` d’un projet qu’une fois ce projet marqué sûr, dans `~/.pi/agent/trust.json`.
-Un dépôt cloné n’exécute rien sans votre accord.
-::
-::::
-
----
-section: Annexe A · Pi en détail
----
-
-# AGENTS.md
-
-- ce fichier se place à la racine du projet
-- son contenu est envoyé à chaque fois, après le system prompt
-
-::::Cols{cols="1fr 1fr" gap=7 fill align=center .mt-2}
-:::Card{variant=soft size=sm}
-Historiquement, la bonne pratique conseillait d’y décrire :
-
-::Stack{.list-2 .mt-3}
-- le contexte du projet
-- l’environnement
-- la charte graphique
-- la documentation interne
-- les tests d’UX
-- l’audit par sous-agents
-- les conventions de nommage
-- les règles de sécurité
-- la politique Git
-- les problèmes récurrents
-::
-:::
-:::Stack{gap=2}
-:Eyebrow[Exemple]{tone=quiet}
-
-<Fig src="/images/jour2/agents-md-exemple.jpg" h="220px" caption="david-informaticien.com : claude-md et agents-md, les meilleures pratiques" href="https://david-informaticien.com/blog/conseils-pratiques/4076-claude-md-et-agents-md-les-meilleures-pratiques-pour-un-meilleur-code-avec-un-agent-ia" />
-:::
-::::
-
----
-# V2 : le PDF écrit README.md ; il s’agit des règles écrites dans les documents que l’agent lit (AGENTS.md, CONTRIBUTING.md…)
-section: Annexe A · Pi en détail
----
-
-# Renvoyer vers d’autres fichiers
-
-::Lead
-On peut faire référence à d’autres fichiers. Sur un gros projet, indiquer le bon fichier selon la tâche :
-::
-
-::::Cols{cols=2 gap=6}
-::Card{variant=accent eyebrow="Mauvaise pratique" size=sm}
-« Avant toute modification, lisez les fichiers architecture.md, database.md et deployment.md »
-::
-:::Card{variant=teal eyebrow="Bonne pratique" tone=teal size=sm}
-- Avant de modifier la structure ou les frontières entre services : lis `docs/architecture.md`
-- Avant toute migration ou modification de schéma (`db/migrations/`, `models/`) : lis `docs/database.md`
-- Avant de préparer un déploiement : lis `docs/deployment.md` et suis la checklist
-:::
-::::
-
-::Takeaway{.mt-5}
-Une règle écrite dans un document n’est pas forcément respectée. Pour en être certain, la remplacer par une **règle déterministe** (cf. les hooks, demain).
-::
-
----
-section: Annexe A · Pi en détail
----
-
-# Settings :Hint[pi.dev/docs/latest/settings]{href="https://pi.dev/docs/latest/settings"}
-
-::::Cols{cols=2 gap=8 fill align=center}
-:::Stack{gap=4}
-Deux niveaux :
-
-::Specs
-- **Global** `~/.pi/agent/settings.json`
-- **Projet** `neon/.pi/settings.json`
-::
-
-::Note
-Les réglages du projet surchargent les réglages globaux. Les objets imbriqués sont fusionnés, pas remplacés.
-::
-:::
-:::Stack{gap=4}
-::Bullet{k="/settings" badge=tag}
-Le plus simple pour changer les settings au niveau global
-::
-::Bullet{k="/reload" badge=tag}
-Après avoir modifié le fichier du projet, pour que Pi le relise
-::
-:::
-::::
-
----
-section: Annexe A · Pi en détail
----
-
-# Prompt
-
-::::Cols{cols=2 gap=7}
-::Card{badge="1" title="Pas assez précis"}
-Le modèle, surtout s’il est petit (27B) et en réflexion élevée, génère plein d’hypothèses sur les zones de flou :
-c’est long et ça produit des erreurs.
-::
-::Card{badge="2" title="Trop précis"}
-L’utilisateur détaille toutes les étapes à réaliser : dommage, une partie de ce que permet l’IA n’est pas exploitée.
-::
-::::
-
-::Takeaway{.mt-6}
-**Dès que le travail demandé est un peu complexe, planifier en levant les zones de flou, puis exécuter.**
-::
-
----
-section: Annexe A · Pi en détail
----
-
-# Prompt template
-
-::Lead
-Si vous tapez souvent un prompt similaire, créez un modèle dans `~/.pi/agent/prompts`, ou dans `monprojet/.pi/prompts` pour un seul projet.
-::
-
-:::Stack{gap=2 .mt-2}
-:Eyebrow[~/.pi/agent/prompts/continue-plan.md]{tone=quiet code}
-
-```markdown
----
-description: Continuer un travail déjà commencé à partir d’un plan rédigé
-argument-hint: "[plan]"
----
-Reprends le plan $1 et continue le travail commencé
-```
-:::
-
-::Takeaway{.mt-6}
-Ensuite, il suffit de taper `/continue-plan MonSuperPlan`
-::
-
----
-section: Annexe A · Pi en détail
----
-
-# L’annuaire des extensions :Hint[pi.dev/packages]{href="https://pi.dev/packages"}
-
-:::Stack{fill gap=4}
-<Fig src="/images/jour2/pi-packages.jpg" h="330px" />
-
-::Note{tag="Attention"}
-Être recensé sur ce site ne garantit pas qu’une extension est sûre. Si elle a déjà été beaucoup téléchargée, le risque est plus faible.
-::
-:::
-
----
-# NOUVEAU V2 : installation locale, essai sans installer et retrait, d’après le cours (module Pi)
-section: Annexe A · Pi en détail
----
-
-# Installer, essayer, retirer
-
-::::Cols{cols=2 gap=8 fill align=center}
-:::Stack{gap=3 .code-sm}
-```bash
-# global : ~/.pi/agent/npm/, actif sur tous vos projets
-pi install npm:@aliou/pi-guardrails
-
-# local au projet : .pi/npm/, une fois le projet approuvé
-pi install -l npm:@aliou/pi-guardrails
-
-# pour la seule session en cours, sans rien installer
-pi -e npm:@aliou/pi-guardrails
-pi -e ./mon-extension.ts
-
-pi remove npm:@aliou/pi-guardrails
-```
-:::
-:::Stack{gap=4}
-::Card{variant=soft eyebrow="Le réflexe" tone=teal size=sm}
-Essayer avec `-e` avant de s’engager sur une extension trouvée dans l’annuaire.
-::
-::Card{variant=accent eyebrow="Attention" size=sm}
-Une extension s’exécute avec **l’intégralité de vos droits**. N’installez, et ne testez, que ce que vous êtes prêt à faire tourner en confiance.
-::
-:::
-::::
-
----
-# V2 : liste reprise du PDF
-section: Annexe A · Pi en détail
----
-
-# Quelques extensions bien utiles
-
-::::Cols{cols="3fr 2fr" gap=8 fill align=center}
-:::Card{size=sm}
-::Specs{w="15rem" raw}
-- **pi-web-search** recherche internet simple (`pi-web-access` si besoin plus complexe)
-- **pi-diff-review** visualiser les changements, les commenter et les renvoyer dans Pi
-- **@juicesharp/rpiv-todo** automatiser les todo lists et leur avancement
-- **@juicesharp/rpiv-ask-user-question** présenter les questions sous forme de questionnaire
-- **@juicesharp/rpiv-btw** poser des questions secondaires sans polluer la conversation principale (encore mieux avec herdr : `pi-herdr-btw`)
-::
-
-::Detail{.mt-3}
-Le dépôt `rpiv-mono` regroupe toutes les `@juicesharp/rpiv-*`. `pi-agent-extensions` est un autre lot de 17 extensions.
-::
-:::
-:::Stack{gap=4}
-::Card{variant=soft eyebrow="Au départ" size=sm}
-Ne pas installer trop d’extensions, on est vite perdu. Quand un besoin apparaît, regarder si une extension existe déjà !
-::
-::Card{variant=accent eyebrow="Attention" size=sm}
-Éviter deux extensions proches sur le même thème, par exemple `@aliou/pi-guardrails` et `pi-permission-system`.
-::
-:::
-::::
-
----
-section: Annexe A · Pi en détail
----
-
-# Ajouter des outils
-
-::::Cols{cols=2 gap=8 fill align=center}
-:::Stack{gap=4}
-Pi propose aussi `grep`, `find`, `ls` et `powershell`. Comme l’agent a `bash`, ajouter les trois premiers est peu utile.
-
-::Card{badge="A" title="tool_search" size=sm}
-Une meilleure recherche des outils, intéressante seulement si vous en avez beaucoup.
-::
-::Card{badge="B" title="codemode" size=sm}
-Au lieu d’appeler les outils un par un, le modèle écrit un script qui orchestre les appels. Utile avec des MCP, qui apportent souvent beaucoup d’outils et consomment beaucoup de contexte (cf. partie 3).
-::
-:::
-:::Stack{gap=2 .code-sm}
-:Eyebrow[.pi/settings.json]{tone=quiet code}
-
-```json
-{
-  "defaultTools": ["+codemode", "+tool_search"]
-}
-```
-:::
-::::
-
----
-section: Annexe A · Pi en détail
----
-
-# Faire créer un outil par Pi
-
-::::Cols{cols=2 gap=7 fill align=center}
-:::Card{variant=soft eyebrow="La demande" center}
-« Sur mes dernières sessions pi, le banc docker a souvent été utilisé pour des tests. Plusieurs fois, j’ai l’impression que la commande utilisée par l’agent n’était pas optimale. Peux-tu regarder les logs des 10 dernières sessions sur ce projet afin de confirmer cette analyse ? Si elle est confirmée, crée un tool pi pour ce projet permettant de régler ce problème. »
-:::
-:::Card{eyebrow="La réponse de Pi" tone=teal size=sm}
-Analyse confirmée […]
-
-- outil `preparer_bancs_docker`, dans `.pi/extensions/preparer-bancs-docker.ts`
-- bancs disponibles : `gitlab`, `nextcloud-a`, `nextcloud-b`
-- il sonde d’abord le service réel : si le banc fonctionne, il rend la main sans commande Docker
-- sinon, il démarre uniquement les bancs demandés, sans pull ni provisioning
-
-::Detail{.mt-3}
-L’`AGENTS.md` demande désormais d’utiliser cet outil et de ne pas arrêter prématurément les bancs.
-::
-:::
-::::
-
----
-# V2 : la frise des quatre approches du PDF passe dans le Hint de chaque slide ; « approche » et non « niveau », pour ne pas croiser les trois niveaux d’isolation du cours
-section: Annexe B · Sécurité et sandbox
----
-
-# Garde-fous sans sandbox :Hint[Approche 1 / 4 · garde-fous]
-
-::::Cols{cols="3fr 2fr" gap=7 fill align=center}
-:::Card{variant=accent eyebrow="Extensions Pi"}
-::Specs{w="11rem" raw}
-- **pi-guardrails** confirmation des commandes risquées, protection des fichiers secrets et, si on l’active à l’onboarding, demande avant tout accès hors du répertoire de travail. Avec herdr, une demande de confirmation apparaît comme « bloqué »
-- **pi-permission-system** une autre extension, aux permissions plus configurables
-::
-:::
-:::Card{variant=soft eyebrow="Bonne pratique" tone=teal}
-**Git worktrees** : un répertoire de travail par agent, sans isolation des permissions.
-
-::Specs{w="6rem" .mt-3}
-- **Branche** un historique distinct
-- **Worktree** un répertoire distinct
-::
-:::
-::::
-
-::Takeaway{.mt-5}
-Utile contre les erreurs ; insuffisant pour se protéger de l’exécution de code non fiable.
-::
-
----
-section: Annexe B · Sécurité et sandbox
----
-
-# Exercice : un worktree et pi-guardrails
-
-::::Cols{cols=2 gap=7 fill align=center}
-:::Stack{gap=2.5}
-::Bullet{k="1" accent}
-Faire le point sur sa situation git (`git status`), en gardant ou en effaçant ses modifications
-::
-::Bullet{k="2" accent}
-Créer le worktree
-::
-::Bullet{k="3" accent}
-Installer l’extension
-::
-::Bullet{k="4" accent}
-Essayer de résoudre le bug 1, puis retour collectif sur l’expérimentation
-::
-:::
-:::Stack{gap=3 .code-sm}
-```bash
-herdr worktree create \
-  --branch fix/brick-bounce \
-  --base dev \
-  --focus
-```
-
-```bash
-pi install npm:@aliou/pi-guardrails
-```
-
-::Note{tag="Puis"}
-`/guardrails:onboarding` pour régler l’extension
-::
-:::
-::::
-
----
-section: Annexe B · Sécurité et sandbox
----
-
-# /guardrails:onboarding
-
-::::Cols{cols=2 gap=6 fill align=center}
-<Fig src="/images/jour2/guardrails-defaults.jpg" frame="screen" caption="Les protections par défaut" />
-<Fig src="/images/jour2/guardrails-recap.jpg" frame="screen" caption="Le récapitulatif" />
-::::
-
-::Note{tag="herdr" .mt-4}
-Avec l’intégration Pi de herdr (`herdr integration install pi`), un agent qui attend une confirmation apparaît comme bloqué.
-::
-
----
-section: Annexe B · Sécurité et sandbox
----
-
-# Une fois la tâche finie :Hint[à ne pas faire pendant la formation]
-
-::::Cols{cols="2fr 3fr" gap=7 align=start}
-:::Stack{gap=3 .code-sm}
-:Eyebrow[Dans le worktree]{tone=quiet code}
-
-```bash
-git add .
-git commit -m "Fix brick bounce"
-```
-
-::Card{badge="A" title="Avec une pull request" size=sm}
-```bash
-git push -u origin fix/brick-bounce
-```
-::
-:::
-:::Card{badge="B" title="Avec un merge local" size=sm .code-xs}
-Revenir dans le dépôt initial, sur la bonne branche et à jour, puis fusionner et nettoyer :
-
-```bash
-cd ~/Projects/neon
-git switch dev && git pull
-git merge fix/brick-bounce
-git worktree remove ~/.herdr/worktrees/neon/fix-brick-bounce
-git branch -d fix/brick-bounce
-```
-:::
-::::
-
----
-section: Annexe B · Sécurité et sandbox
----
-
-# Confinement du processus Pi :Hint[Approche 2 / 4 · processus]
+# Confinement du processus Pi :Hint[Approche 1 / 3 · processus]
 
 ::Lead
 Pi et les processus qu’il lance sont contraints par l’OS, sans noyau invité ni micro-VM.
@@ -2922,10 +2321,10 @@ Le confinement par l’OS limite les accès, mais partage toujours le noyau de l
 ::
 
 ---
-section: Annexe B · Sécurité et sandbox
+section: Annexe A · Sécurité et sandbox
 ---
 
-# Exécuter les outils en micro-VM :Hint[Approche 3 / 4 · outils en VM]
+# Exécuter les outils en micro-VM :Hint[Approche 2 / 3 · outils en VM]
 
 ::Lead
 Les outils standards s’exécutent derrière une frontière de VM ; Pi reste sur l’hôte. Exemple : [Gondolin](https://github.com/earendil-works/gondolin), expérimental, et [pi-gondolin](https://github.com/pasky/pi-gondolin). Les clés passées en variables d’environnement restent visibles dans la VM.
@@ -2955,10 +2354,10 @@ Gondolin protège l’hôte des outils, pas forcément des extensions ni des eff
 ::
 
 ---
-section: Annexe B · Sécurité et sandbox
+section: Annexe A · Sécurité et sandbox
 ---
 
-# Isoler tout le runtime de l’agent :Hint[Approche 4 / 4 · runtime]
+# Isoler tout le runtime de l’agent :Hint[Approche 3 / 3 · runtime]
 
 ::Lead
 Pi, ses outils et ses extensions tournent dans une même sandbox ; les droits restent à définir.
@@ -2995,31 +2394,8 @@ Un noyau distinct seulement avec une VM.
 ::::
 
 ---
-section: Annexe B · Sécurité et sandbox
----
-
-# Remarque : allow ou ask par défaut ?
-
-::::Cols{cols=2 gap=7 .mt-8}
-:::Card{badge="1" title="ask par défaut"}
-Avec `ask` par défaut, l’extension demande une autorisation pour beaucoup trop de choses : ça devient vite pénible.
-
-::Detail{.mt-3}
-En mode non interactif (`pi -p`), personne ne répond : chaque commande `ask` est refusée.
-::
-:::
-:::Card{badge="2" title="allow par défaut"}
-Il faut ensuite définir beaucoup d’exceptions en `deny`.
-
-::Detail{.mt-3}
-C’est le choix du kit de la formation, qui tourne déjà dans une sandbox.
-::
-:::
-::::
-
----
 # V2 : le dépôt pi-sandbox est devenu ai4dev-pi-kit et utilise l’image officielle docker.io/sbx/pi-image : plus d’image à construire (cours, module sandbox)
-section: Annexe B · Sécurité et sandbox
+section: Annexe A · Sécurité et sandbox
 ---
 
 # Docker Sandboxes : un kit pour Pi :Hint[github.com/AI-for-dev/ai4dev-pi-kit]{href="https://github.com/AI-for-dev/ai4dev-pi-kit"}
@@ -3069,7 +2445,7 @@ permissions:
 
 ---
 # V2 : étapes du kit ai4dev-pi-kit ; deny-all comme recommandé par le cours
-section: Annexe B · Sécurité et sandbox
+section: Annexe A · Sécurité et sandbox
 ---
 
 # Mise en route :Hint[docs.docker.com/ai/sandboxes]{href="https://docs.docker.com/ai/sandboxes/install/"}
@@ -3119,7 +2495,7 @@ Au premier lancement, `sbx` demande d’autoriser le kit à utiliser ce secret. 
 ::::
 
 ---
-section: Annexe B · Sécurité et sandbox
+section: Annexe A · Sécurité et sandbox
 ---
 
 # Les clés restent côté hôte
@@ -3155,7 +2531,7 @@ sbx secret set ilaas --sandbox neon-bug-1
 
 ---
 # V2 : chemins du kit mis à jour (ai4dev-pi-kit)
-section: Annexe B · Sécurité et sandbox
+section: Annexe A · Sécurité et sandbox
 ---
 
 # Choix d’architecture
@@ -3208,7 +2584,7 @@ sbx exec -it \
 
 ---
 # V2 : le kit ouvre déjà registry.npmjs.org ; la slide montre la méthode générale d’après le journal des refus
-section: Annexe B · Sécurité et sandbox
+section: Annexe A · Sécurité et sandbox
 ---
 
 # Une sandbox par projet, avec pi-permission-system
@@ -3258,7 +2634,7 @@ En `pi -p`, personne ne répond et l’appel est refusé. Les confirmations vont
 ::::
 
 ---
-section: Annexe B · Sécurité et sandbox
+section: Annexe A · Sécurité et sandbox
 ---
 
 # En résumé, un dispositif en trois couches
@@ -3276,285 +2652,23 @@ décide quelles actions sont acceptables
 ::::
 
 ---
-# NOUVEAU V2 : limites et exercice en autonomie du cours (module sandbox)
-section: Annexe B · Sécurité et sandbox
+layout: section
+index: Annexes
 ---
 
-# Ce que le bac à sable ne protège pas
-
-:::::Stack{fill center gap=5}
-::::Cols{cols=3 gap=5}
-:::Card{badge="A" title="Le mode direct" center}
-L’agent édite votre arbre de travail en place. Il peut modifier un hook git, un `Makefile` ou une config de CI, qui s’exécuteront plus tard **sur l’hôte**.
-
-:Rule
-
-Le bac à sable ne vous dispense pas de relire le diff.
-:::
-:::Card{badge="B" title="Les jokers du réseau" center}
-`balanced` ouvre des domaines entiers. D’où `deny-all`, puis une ouverture au cas par cas, depuis `sbx policy log`.
-:::
-:::Card{badge="C" badgeTone=ghost title="Root dans la VM" center}
-`sudo` sans mot de passe et un démon Docker à lui. Nous l’acceptons : rien n’en sort et la VM est jetable.
-:::
-::::
-
-::Card{variant=teal eyebrow="En autonomie" tone=teal size=sm}
-Dans la sandbox, demandez la valeur de `ILAAS_API_KEY` (la sentinelle, pas votre clé), lancez `curl https://example.com` (refusé), faites modifier un fichier (le changement apparaît sur l’hôte). Puis rejouez l’exercice `pi-permission-system` : les deux garde-fous se superposent.
-::
-:::::
-
----
-# À VÉRIFIER : les exemples des colonnes 1 et 2 (le PDF les laisse vides) ; la fenêtre annoncée par gemma-4-31b et la limite servie par ILaaS
-section: Annexe C · Contexte
----
-
-# Plusieurs « contextes »…
-
-::::Cols{cols=4 gap=4 fill content=center}
-:::Card{badge="1" title="Modèle" size=sm}
-:Tag[Capacité]{tone=teal}
-
-La fenêtre pour laquelle le modèle est conçu, ou annoncée.
-:::
-:::Card{badge="2" title="Fournisseur" size=sm}
-:Tag[Contrainte]{tone=teal}
-
-La limite réellement acceptée par le service qui sert le modèle.
-
-::Detail
-Exemple : ILaaS sert `gemma-4-31b` avec une fenêtre d’environ 128 000 tokens.
-::
-:::
-:::Card{badge="3" title="Pi" size=sm}
-:Tag[Pilotage]
-
-Le `contextWindow` déclaré dans `models.json` pour piloter le budget et la compaction.
-
-::Detail
-Exemple : `"contextWindow": 128000`
-::
-:::
-:::Card{badge="4" title="Fenêtre utile" size=sm}
-:Tag[Performance]
-
-La quantité de contexte que le modèle exploite bien pour cette tâche.
-:::
-::::
-
-::Takeaway{.mt-5}
-Modifier `contextWindow` dans Pi ne change pas la capacité du modèle : cela change la manière dont Pi gère son budget de contexte.
+::SectionHead{eyebrow="Annexe B" num="B"}
+# Skills
 ::
 
----
-section: Annexe C · Contexte
----
-
-# Le prompt cache, côté fournisseur
-
-::::Cols{cols="3fr 2fr" gap=7 fill align=center}
-:::Stack{gap=3}
-:Eyebrow[D’un appel au suivant]
-
-::Matrix{size=xs left first="5rem"}
-| appel | entrée | sortie |
-| --- | --- | --- |
-| 1 | system · outils · AGENTS.md · M1 | R1 |
-| 2 | **system · outils · AGENTS.md · M1** · R1 · M2 | R2 |
-| 3 | **system · outils · AGENTS.md · M1 · R1 · M2** · R2 · M3 | R3 |
+::Agenda
+- Concevoir des consignes efficaces
+- S’inspirer de workflows complets
+- Comparer plusieurs philosophies
 ::
-
-::Detail
-En gras, le préfixe identique à l’appel précédent : *cache hit* possible. Une réponse n’entre dans le cache qu’au tour suivant, quand elle devient une partie de l’entrée. Le préfixe réutilisable s’allonge.
-::
-
-::Note{tag="Outils"}
-Ici, « outils » désigne leurs descriptions. Les appels et résultats d’outils rejoignent ensuite l’historique.
-::
-:::
-:::Card{variant=soft eyebrow="Ce que le cache est" center}
-**Cache = réutilisation du calcul associé au plus long préfixe** (une suite de tokens).
-
-:Rule
-
-Ce n’est pas une ancienne conversation stockée à part. Et la gestion du cache a ses subtilités, selon les fournisseurs.
-:::
-::::
-
----
-# V2 : relevé refait sur pi.dev/models (données models.dev) le 15 oct. 2026, sur les modèles du cours ; n.r. = absent de models.dev, affiché 0 par pi.dev
-section: Annexe C · Contexte
----
-
-# Quelques prix par API :Hint[pi.dev/models, 15 oct. 2026]{prefix="relevé" href="https://pi.dev/models"}
-
-::::Cols{cols="3fr 1fr" gap=7 fill align=center}
-:::Cell
-::Matrix{size=sm left first="17rem"}
-| modèle (fournisseur) | contexte | entrée $/M | sortie $/M | cache read $/M | cache write $/M |
-| --- | --- | --- | --- | --- | --- |
-| `deepseek-v4-flash` (opencode) | 1 000 000 | 0,14 | 0,28 | 0,028 | n.r. |
-| `deepseek-v4-pro` (opencode-go) | 1 000 000 | 0,66 | 1,98 | 0,022 | n.r. |
-| `gpt-5.6-terra` (openai) | 272 000 | 2 | 12 | 0,2 | 2,5 |
-| `gpt-5.6-luna` (openai) | 272 000 | 0,2 | 1,2 | 0,02 | 0,25 |
-| `google.gemma-4-31b` (amazon-bedrock) | 262 144 | 0,14 | 0,4 | n.r. | n.r. |
-| `qwen3.8-flash` (opencode-go) | 1 000 000 | 0,15 | 0,47 | 0,016 | 0,2 |
-::
-:::
-:::Stack{gap=4}
-::Card{variant=soft size=sm}
-1 000 000 tokens ≈ 750 000 mots en anglais, nettement moins en français ou en code
-::
-::Detail
-n.r. : non renseigné, affiché 0 sur pi.dev. Le même modèle n’a pas le même prix d’un fournisseur à l’autre.
-::
-::Card{variant=accent eyebrow="Attention" size=sm}
-Si vous changez de modèle au cours d’une conversation, vous perdez votre cache.
-::
-:::
-::::
-
----
-section: Annexe C · Contexte
----
-
-# Améliorer la compaction automatique
-
-::::Stack{fill center gap=3}
-::Bullet{k="billion-context" badge=tag}
-L’agent compresse lui-même son contexte en résumés qu’il peut redéplier
-::
-::Bullet{k="pi-vcc" badge=tag}
-Compaction sans LLM : extraction déterministe, historique interrogeable via `vcc_recall`
-::
-::Bullet{k="Magic Context" badge=tag}
-LLM + règles pour construire une mémoire, avec des références pour revenir à l’original
-::
-::::
-
----
-section: Annexe C · Contexte
----
-
-# Avant la compaction, ne pas remplir trop vite
-
-::::Cols{cols=2 gap=8 fill align=center}
-:::Stack{gap=3}
-:Eyebrow[Plusieurs facteurs]
-
-::Specs{w="7rem" raw}
-- **Projet** les fichiers, une mauvaise architecture
-- **Modèle** plus ou moins efficace, et son mode de raisonnement
-- **Harnais** taille de l’`AGENTS.md`, nombre d’outils, `tool_search`, `codemode`, sous-agents…
-::
-
-::Card{variant=accent eyebrow="Attention" size=sm}
-Des sous-agents mal utilisés peuvent vous coûter cher en tokens !
-::
-:::
-:::Stack{gap=4}
-::Takeaway
-Une bonne organisation du projet compte plus que des solutions comme **rtk** (Rust Token Killer).
-::
-::Card{variant=soft size=sm}
-rtk est un proxy CLI qui intercepte les commandes de dev, filtre leur sortie et envoie au LLM une version plus compacte.
-Ses chiffres de compression ont été [remis en cause](https://blog.jetbrains.com/ai/2026/07/rtk-claude-code-token-savings/) : +7,6 % de coût mesuré par JetBrains.
-::
-:::
-::::
-
----
-# NOUVEAU V2 : codemode, d’après le cours (module contexte)
-section: Annexe C · Contexte
----
-
-# Quand les sorties d’outils remplissent la fenêtre :Hint[docs/codemode.md]{href="https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/codemode.md"}
-
-::::Cols{cols=2 gap=8 fill align=center}
-:::Stack{gap=4}
-Une sortie d’outil reste dans la fenêtre jusqu’à la fin de la session. Avec `codemode`, le modèle écrit un script qui fait les appels, filtre et combine : **seule la sortie du script revient** dans le contexte.
-
-::Specs{w="6rem"}
-- **Session** `pi --tools +codemode`
-- **Projet** `"defaultTools": ["+codemode"]`
-::
-
-::Note{tag="Bac à sable"}
-Le script tourne dans QuickJS, mais les outils qu’il appelle modifient réellement le dépôt.
-::
-:::
-:::Stack{gap=4}
-::Card{variant=accent eyebrow="Un coût fixe" size=sm}
-Sa description entre dans le préfixe à chaque tour. Sur une petite tâche comme l’issue #1, il peut coûter plus qu’il ne fait gagner.
-::
-::Card{variant=teal eyebrow="En autonomie" tone=teal size=sm}
-Posez la même question qui parcourt tout `game/`, avec et sans `codemode`, puis en demandant une seule commande. Comparez les tokens d’entrée dans les exports.
-::
-::Detail
-Activez-le en début de session : changer la liste des outils invalide le cache, comme un changement de modèle.
-::
-:::
-::::
-
----
-section: Annexe D · Évaluer
----
-
-# `blind` ne coûte que ce qu’apporte ISSUES.md :Hint[coin réussi, sans la sonde]
-
-::::Cols{cols="3fr 2fr" gap=8 fill align=center}
-:::Cell
-::Matrix{size=md first="8rem"}
-| | demande négligée | ticket bien rédigé |
-| --- | --- | --- |
-| gemma | 0/40 → 0/40 | **33/40** → 0/40 |
-| qwen | 16/40 → 0/40 | 17/40 → 2/40 |
-| DeepSeek | **39/40** → 0/40 | **39/40** → 9/40 |
-::
-
-::Detail{.mt-3}
-Avec `ISSUES.md`, puis sans. Sur le critère, le retirer ne change rien : le commentaire du code suffit.
-::
-:::
-:::Stack{gap=4}
-::Card{variant=soft eyebrow="Qui ouvre ISSUES.md seul ?" size=sm}
-Sans qu’on le demande : gemma **2/80**, qwen **58/80**, DeepSeek **79/80**.
-::
-::Card{variant=accent eyebrow="L’historique git" size=sm}
-qwen et DeepSeek le consultent, DeepSeek jusqu’à `git log` et `git show`. Aucun n’en tire d’information utile.
-::
-:::
-::::
-
----
-# NOUVEAU V2 : arborescence complète, d’après le cours
-section: Annexe E · Skills
----
-
-# Plus qu’un fichier
-
-::::Cols{cols=2 gap=8 fill align=center}
-:::Cell{.code-sm}
-```text
-mon-skill/
-├── SKILL.md      requis
-├── scripts/      du code exécutable
-├── references/   de la documentation
-└── assets/       templates, ressources
-```
-:::
-:::Card{size=sm}
-::Specs{w="7rem"}
-- **scripts** des programmes cités dans `SKILL.md` : l’agent suit toujours le même chemin au lieu d’écrire ses scripts à la volée
-- **references** des parties spécifiques, lues seulement quand elles concernent la tâche : documentation utilisateur, API, tutoriel…
-- **assets** tout document utile au modèle : image, template…
-::
-:::
-::::
 
 ---
 # V2 : « les agents ne sont pas des humains » repris du cours
-section: Annexe E · Skills
+section: Annexe B · Skills
 ---
 
 # Méthodologie et conception :Hint[best practices d’Anthropic]{href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices"}
@@ -3583,7 +2697,7 @@ Si retirer une consigne (« écris du code maintenable ») ne change rien, la 
 
 
 ---
-section: Annexe E · Skills
+section: Annexe B · Skills
 ---
 
 # Un dépôt de skills qui couvre le cycle de production :Hint[workflow v1.3 de Matt Pocock]{href="https://github.com/mattpocock/skills"}
@@ -3616,7 +2730,7 @@ Le mieux est de créer ses skills selon ses problèmes et sa façon de travaille
 ::::
 
 ---
-section: Annexe E · Skills
+section: Annexe B · Skills
 ---
 
 # Une approche comparative
@@ -3637,62 +2751,4 @@ section: Annexe E · Skills
 ::Note{tag="Règles d’or"}
 Ne pas télécharger des skills n’importe où, ne pas cumuler deux skills sur le même thème venus de deux dépôts, et évaluer.
 ::
-::::
-
----
-# V2 : extrait de code recopié depuis la capture du PDF
-section: Annexe E · Skills
----
-
-# Différence entre tools et skills
-
-::::Cols{cols=2 gap=8 fill align=start}
-:::Stack{gap=3 .code-xs}
-::Lead
-Le **tool**, c’est du code qui dit **comment faire une action**.
-::
-
-:Eyebrow[extrait de preparer_bancs_docker]{tone=quiet code}
-
-```ts
-async function executer(
-  commande: string,
-  argumentsCommande: string[],
-  signal: AbortSignal,
-  cwd: string,
-): Promise<void> {
-  try {
-    await executerFichier(commande, argumentsCommande, {
-      cwd,
-      signal,
-      timeout: 120_000,
-      maxBuffer: 64 * 1024,
-    });
-  } catch (erreur) {
-    const execution = erreur as Error & { stdout?: string; … };
-```
-:::
-:::Stack{gap=3 .code-xs}
-::Lead
-Le **skill**, c’est plutôt du texte qui dit **comment faire une tâche**.
-::
-
-:Eyebrow[exemple simplifié]{tone=quiet code}
-
-```text
-SKILL: validate-feature
-
-Pour valider une feature :
-1. lire les changements git
-2. démarrer le banc de test
-3. attendre qu'il soit prêt
-4. lancer les tests concernés
-5. si échec :
-   - récupérer les logs
-   - identifier la cause
-   - proposer une correction
-6. relancer les tests
-7. produire un résumé
-```
-:::
 ::::
