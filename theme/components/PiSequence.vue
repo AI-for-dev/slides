@@ -3,27 +3,69 @@
 // utilisateur, Pi, LLM et outils. Trois phases colorées : la question part au
 // LLM (encre), l'outil s'exécute (braise), le résultat revient au LLM (sarcelle).
 // viewBox fixe 760x400 pour une géométrie exacte à toute taille.
+import { t } from '../lib/i18n'
+
+const TEXT = t({
+  fr: {
+    actors: { user: 'Utilisateur', pi: 'Assistant IA (Pi)', llm: 'LLM', tools: 'Tools' },
+    msgs: [
+      'Saisie de la question / commande',
+      'HTTPS POST (messages JSON)',
+      'Réponse du LLM (tool call : read)',
+      'execute(« read », { path })',
+      '{ success, data: contenu }',
+      'Nouvel appel LLM (+ résultat outil)',
+      'Réponse du LLM (texte)',
+      'Affichage de la réponse',
+    ],
+    pre: 'Le harnais exécute réellement l’outil.',
+    notes: [['Traitement par le LLM', '(génération du tool call)'], ['Le LLM génère maintenant', 'la réponse finale.']],
+    build: 'Construction du message',
+    buildSub: '(system prompt + historique + tools + …)',
+    aria: 'Séquence d\'une requête impliquant une lecture de fichier',
+  },
+  en: {
+    actors: { user: 'User', pi: 'AI assistant (Pi)', llm: 'LLM', tools: 'Tools' },
+    msgs: [
+      'Question / command typed in',
+      'HTTPS POST (JSON messages)',
+      'LLM reply (tool call: read)',
+      'execute("read", { path })',
+      '{ success, data: content }',
+      'New LLM call (+ tool result)',
+      'LLM reply (text)',
+      'Reply displayed',
+    ],
+    pre: 'The harness actually runs the tool.',
+    notes: [['Processed by the LLM', '(generates the tool call)'], ['The LLM now generates', 'the final answer.']],
+    build: 'Building the message',
+    buildSub: '(system prompt + history + tools + …)',
+    aria: 'Sequence of a request that involves reading a file',
+  },
+})
+
 const X = { user: 75, pi: 285, llm: 495, tools: 685 }
-const actors = [
-  { id: 'user', label: 'Utilisateur', glyph: '●' },
-  { id: 'pi', label: 'Assistant IA (Pi)', glyph: '◆' },
-  { id: 'llm', label: 'LLM', glyph: '◎' },
-  { id: 'tools', label: 'Tools', glyph: '⚒' },
-] as const
+const actors = ([
+  { id: 'user', glyph: '●' },
+  { id: 'pi', glyph: '◆' },
+  { id: 'llm', glyph: '◎' },
+  { id: 'tools', glyph: '⚒' },
+] as const).map(a => ({ ...a, label: TEXT.actors[a.id] }))
 
 type Phase = 1 | 2 | 3
 interface Msg { from: keyof typeof X; to: keyof typeof X; y: number; phase: Phase; label: string; pre?: string; italic?: boolean }
 
-const msgs: Msg[] = [
-  { from: 'user', to: 'pi', y: 72, phase: 1, label: 'Saisie de la question / commande' },
-  { from: 'pi', to: 'llm', y: 132, phase: 1, label: 'HTTPS POST (messages JSON)' },
-  { from: 'llm', to: 'pi', y: 192, phase: 1, label: 'Réponse du LLM (tool call : read)' },
-  { from: 'pi', to: 'tools', y: 226, phase: 2, label: 'execute(« read », { path })' },
-  { from: 'tools', to: 'pi', y: 270, phase: 2, label: '{ success, data: contenu }', pre: 'Le harnais exécute réellement l’outil.' },
-  { from: 'pi', to: 'llm', y: 304, phase: 3, label: 'Nouvel appel LLM (+ résultat outil)' },
-  { from: 'llm', to: 'pi', y: 356, phase: 3, label: 'Réponse du LLM (texte)' },
-  { from: 'pi', to: 'user', y: 388, phase: 3, label: 'Affichage de la réponse' },
+const ARROWS: Omit<Msg, 'label'>[] = [
+  { from: 'user', to: 'pi', y: 72, phase: 1 },
+  { from: 'pi', to: 'llm', y: 132, phase: 1 },
+  { from: 'llm', to: 'pi', y: 192, phase: 1 },
+  { from: 'pi', to: 'tools', y: 226, phase: 2 },
+  { from: 'tools', to: 'pi', y: 270, phase: 2, pre: TEXT.pre },
+  { from: 'pi', to: 'llm', y: 304, phase: 3 },
+  { from: 'llm', to: 'pi', y: 356, phase: 3 },
+  { from: 'pi', to: 'user', y: 388, phase: 3 },
 ]
+const msgs: Msg[] = ARROWS.map((m, i) => ({ ...m, label: TEXT.msgs[i] }))
 
 const activations = [
   { x: X.llm, y1: 132, y2: 192, phase: 1 as Phase },
@@ -32,8 +74,8 @@ const activations = [
 ]
 
 const notes = [
-  { y: 148, phase: 1 as Phase, lines: ['Traitement par le LLM', '(génération du tool call)'] },
-  { y: 318, phase: 3 as Phase, lines: ['Le LLM génère maintenant', 'la réponse finale.'] },
+  { y: 148, phase: 1 as Phase, lines: TEXT.notes[0] },
+  { y: 318, phase: 3 as Phase, lines: TEXT.notes[1] },
 ]
 
 function arrow(m: Msg) {
@@ -46,7 +88,7 @@ function arrow(m: Msg) {
 
 <template>
   <svg class="pi-seq" viewBox="0 0 760 400" preserveAspectRatio="xMidYMid meet" role="img"
-       aria-label="Séquence d'une requête impliquant une lecture de fichier">
+       :aria-label="TEXT.aria">
     <defs>
       <marker v-for="p in [1, 2, 3]" :id="'ps-h' + p" :key="p" viewBox="0 0 10 10" refX="8.5" refY="5"
               markerWidth="7" markerHeight="7" orient="auto">
@@ -65,8 +107,8 @@ function arrow(m: Msg) {
     </g>
 
     <!-- construction du message, côté Pi -->
-    <text :x="(X.pi + X.llm) / 2" y="94" text-anchor="middle" class="ps-label">Construction du message</text>
-    <text :x="(X.pi + X.llm) / 2" y="108" text-anchor="middle" class="ps-label is-muted">(system prompt + historique + tools + …)</text>
+    <text :x="(X.pi + X.llm) / 2" y="94" text-anchor="middle" class="ps-label">{{ TEXT.build }}</text>
+    <text :x="(X.pi + X.llm) / 2" y="108" text-anchor="middle" class="ps-label is-muted">{{ TEXT.buildSub }}</text>
 
     <!-- activations -->
     <rect v-for="(a, i) in activations" :key="'a' + i" :x="a.x - 6" :y="a.y1" width="12" :height="a.y2 - a.y1"

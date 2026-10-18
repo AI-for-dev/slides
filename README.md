@@ -7,7 +7,7 @@ Supports de l'atelier (ANF, octobre 2026), construits avec
 - Jour 1 : <https://ai-for-dev.github.io/slides/jour1/>
 - Jour 2 : <https://ai-for-dev.github.io/slides/jour2/>
 - Jour 3 : <https://ai-for-dev.github.io/slides/jour3/>
-- En anglais : <https://ai-for-dev.github.io/slides/en/> (accueil et jour 1 pour l'instant)
+- En anglais : <https://ai-for-dev.github.io/slides/en/>
 
 ## Publication
 
@@ -47,7 +47,7 @@ sous `/slides/`, comme GitHub Pages.
 
 ```
 index.md                  page d'accueil : un lien par jour
-index.en.md, jour1.en.md  versions anglaises, slide pour slide
+*.en.md                   versions anglaises, slide pour slide
 jour1.md                  jour 1
 jour2.md                  jour 2 : Pi, sandbox, contexte, évaluation et skills
 jour3.md                  jour 3 : hooks, délégation, workflows, essaim et Pi Durable

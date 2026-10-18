@@ -2,12 +2,35 @@
 // Les cinq sources qui remplissent la fenêtre de contexte, dans l'ordre où
 // Pi les empile. Les quatre premières restent stables d'un tour à l'autre,
 // l'historique grossit à chaque tour.
-const layers = [
-  { n: 1, title: 'Prompt système', desc: 'rôle, outils, conventions', size: '≈ 550 tokens' },
-  { n: 2, title: 'Fichiers de contexte', desc: 'AGENTS.md, CLAUDE.md : home, parents, répertoire courant', size: '' },
-  { n: 3, title: 'Descriptions des outils', desc: 'du JSON, une par outil disponible', size: '' },
-  { n: 4, title: 'Votre question', desc: 'une ligne dans tout l’empilement', size: '' },
-]
+import { t } from '../lib/i18n'
+
+const TEXT = t({
+  fr: {
+    layers: [
+      { n: 1, title: 'Prompt système', desc: 'rôle, outils, conventions', size: '≈ 550 tokens' },
+      { n: 2, title: 'Fichiers de contexte', desc: 'AGENTS.md, CLAUDE.md : home, parents, répertoire courant', size: '' },
+      { n: 3, title: 'Descriptions des outils', desc: 'du JSON, une par outil disponible', size: '' },
+      { n: 4, title: 'Votre question', desc: 'une ligne dans tout l’empilement', size: '' },
+    ],
+    history: 'Historique',
+    historyDesc: 'réponses du modèle et raisonnement, appels d’outils, sorties d’outils',
+    stable: 'stable d’un tour à l’autre',
+    grow: 'grossit à chaque tour',
+  },
+  en: {
+    layers: [
+      { n: 1, title: 'System prompt', desc: 'role, tools, conventions', size: '≈ 550 tokens' },
+      { n: 2, title: 'Context files', desc: 'AGENTS.md, CLAUDE.md: home, parents, current directory', size: '' },
+      { n: 3, title: 'Tool descriptions', desc: 'JSON, one per available tool', size: '' },
+      { n: 4, title: 'Your question', desc: 'one line in the whole stack', size: '' },
+    ],
+    history: 'History',
+    historyDesc: 'model replies and reasoning, tool calls, tool outputs',
+    stable: 'stable from one turn to the next',
+    grow: 'grows every turn',
+  },
+})
+const layers = TEXT.layers
 </script>
 
 <template>
@@ -23,13 +46,13 @@ const layers = [
     <div class="ctx-row is-history">
       <span class="ctx-n">5</span>
       <span class="ctx-text">
-        <span class="ctx-title">Historique</span>
-        <span class="ctx-desc">réponses du modèle et raisonnement, appels d’outils, sorties d’outils</span>
+        <span class="ctx-title">{{ TEXT.history }}</span>
+        <span class="ctx-desc">{{ TEXT.historyDesc }}</span>
       </span>
       <span class="ctx-grow"><i /><i /><i /><i /><i /></span>
     </div>
-    <div class="ctx-br is-stable"><span>stable d’un tour à l’autre</span></div>
-    <div class="ctx-br is-grow"><span>grossit à chaque tour</span></div>
+    <div class="ctx-br is-stable"><span>{{ TEXT.stable }}</span></div>
+    <div class="ctx-br is-grow"><span>{{ TEXT.grow }}</span></div>
   </div>
 </template>
 
