@@ -3,34 +3,41 @@
 Supports de l'atelier (ANF, octobre 2026), construits avec
 [Slidev](https://sli.dev).
 
-- Jour 1 : <https://ai-for-dev.github.io/slides/>
+- Accueil : <https://ai-for-dev.github.io/slides/>
+- Jour 1 : <https://ai-for-dev.github.io/slides/jour1/>
 - Jour 2 : <https://ai-for-dev.github.io/slides/jour2/>
 - Jour 3 : <https://ai-for-dev.github.io/slides/jour3/>
 
 ## Publication
 
 Chaque push sur `main` déclenche `.github/workflows/deploy.yml`, qui construit
-les decks et les publie sur GitHub Pages (source : GitHub Actions). Les jours 2
-et 3 sortent dans `dist/jour2/` et `dist/jour3/` et utilisent
+les decks et les publie sur GitHub Pages (source : GitHub Actions). La page
+d'accueil (`index.md`) occupe la racine et renvoie vers les trois jours, qui
+sortent dans `dist/jour1/`, `dist/jour2/` et `dist/jour3/`. Ils utilisent
 `routerMode: hash`, parce que le `404.html` servi par GitHub Pages est celui
-du jour 1.
+de l'accueil.
 
 ## Lancer
 
 ```bash
 npm install
-npm run dev        # présentation live sur http://localhost:3030
-npm run build      # site statique dans dist/
-npm run export     # Jour1.pdf
-npm run export:png # une image par slide dans export-png/
+npm run dev:index        # page d'accueil sur http://localhost:3030
+npm run dev:jour1        # présentation live du jour 1
+npm run build            # page d'accueil dans dist/
+npm run build:jour1      # jour 1 dans dist/jour1/
+npm run export:jour1     # Jour1.pdf
+npm run export:png:jour1 # une image par slide dans export-png/
 ```
 
-Chaque commande a sa variante pour les jours 2 et 3 : `dev:jour2`,
+Les commandes du jour 1 existent aussi pour les jours 2 et 3 : `dev:jour2`,
 `build:jour2`, `export:jour2`, `export:png:jour2`, et de même avec `jour3`.
+En local, les liens de l'accueil ne mènent nulle part : les decks ne sont
+réunis qu'une fois publiés.
 
 ## Organisation
 
 ```
+index.md                  page d'accueil : un lien par jour
 jour1.md                  jour 1
 jour2.md                  jour 2 : Pi, sandbox, contexte, évaluation et skills
 jour3.md                  jour 3 : hooks, délégation, workflows, essaim et Pi Durable
@@ -42,9 +49,9 @@ theme/                    le thème maison
   styles/base.css         éléments de base (titres, listes, liens)
   styles/components.css   vocabulaire visuel (card, tag, figure, num…)
   styles/blocks.css       compositions propres au deck
-  styles/layouts.css      cover / section / quote / statement / default
+  styles/layouts.css      cover / home / section / quote / statement / default
   styles/mdc.css          colle entre le markdown et les blocs
-  layouts/*.vue           les cinq gabarits de slide
+  layouts/*.vue           les six gabarits de slide
   components/*.vue        les briques utilisées dans les decks
 archive-original-jour1/   trace de la version d'origine
 ```
@@ -134,6 +141,7 @@ Ce qu'il faut retenir.
 | `LoopMap` | la boucle explorer → planner → coder → reviewer (jour 3) |
 | `Motifs` | les cinq motifs d'un flux de travail (jour 3) |
 | `Topologies` | délégation, workflow et essaim : qui parle après qui (jour 3) |
+| `DeckLink` | carte de la page d'accueil, tout entière un lien vers un deck |
 
 Les classes `.code-sm` et `.code-xs` posées sur un bloc (`:::Cell{.code-sm}`)
 réduisent les blocs de code qu'il contient.

@@ -13,6 +13,9 @@ themeConfig:
   authors: Max Beligné · Loïc Gouarin
   license: CC BY-SA 4.0
   licenseUrl: https://creativecommons.org/licenses/by-sa/4.0/deed.fr
+# Publié sous /slides/jour1/ : le 404.html de GitHub Pages est celui de
+# l'accueil, donc les liens profonds passent par le hash.
+routerMode: hash
 mdc: true
 editor: false
 drawings:
