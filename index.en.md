@@ -48,10 +48,10 @@ IA4Dev 2026 · ANF · October 2026
 :::DeckLink{href="/jour1/" title="Understand the harness"}
 From model to agent, what a harness is, our tools and the NÉON example
 :::
-:::DeckLink{href="../jour2/" title="Build it block by block" note="In French"}
+:::DeckLink{href="/jour2/" title="Build it block by block"}
 Pi, the sandbox, context, evaluation and skills
 :::
-:::DeckLink{href="../jour3/" title="Orchestrate agents" note="In French"}
+:::DeckLink{href="/jour3/" title="Orchestrate agents"}
 Hooks, delegation, workflows, swarm and Pi Durable
 :::
 ::::

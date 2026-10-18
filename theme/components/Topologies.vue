@@ -1,8 +1,36 @@
 <script setup lang="ts">
 // Délégation, workflow, essaim : qui parle à qui, et qui en décide.
 // Même vocabulaire que Motifs : chaque schéma tient dans un viewBox de 180x100.
+import { t } from '../lib/i18n'
+
 const W = 34
 const H = 22
+const TEXT = t({
+  fr: {
+    you: 'vous',
+    task: 'une tâche',
+    conclusion: 'sa conclusion',
+    topos: [
+      ['délégation', 'Un sous-agent part d’un contexte vide, travaille seul et ne renvoie que sa conclusion.', 'vous'],
+      ['workflow', 'Les sous-agents s’enchaînent selon le graphe écrit à l’avance : personne ne répond à celui qui l’a précédé.', 'le fichier du flow'],
+      ['essaim', 'Les membres travaillent en même temps, se lisent sur un tableau commun et décident seuls de ce qu’ils répondent.', 'personne, chacun lit le tableau'],
+    ],
+    who: 'qui parle après qui',
+    diagram: 'schéma : ',
+  },
+  en: {
+    you: 'you',
+    task: 'a task',
+    conclusion: 'its conclusion',
+    topos: [
+      ['delegation', 'A sub-agent starts from an empty context, works alone and only sends back its conclusion.', 'you'],
+      ['workflow', 'Sub-agents follow one another along a graph written in advance: nobody answers the one before.', 'the flow file'],
+      ['swarm', 'Members work at the same time, read each other on a shared board and decide on their own what to answer.', 'nobody, each one reads the board'],
+    ],
+    who: 'who speaks after whom',
+    diagram: 'diagram: ',
+  },
+})
 
 interface Box { x: number; y: number; hi?: boolean; label?: string }
 interface Topo {
@@ -20,7 +48,7 @@ interface Topo {
 
 const c = (b: Box) => ({ l: b.x, r: b.x + W, t: b.y, b: b.y + H, my: b.y + H / 2, mx: b.x + W / 2 })
 
-const del: Box[] = [{ x: 8, y: 39, hi: true, label: 'vous' }, { x: 138, y: 39 }]
+const del: Box[] = [{ x: 8, y: 39, hi: true, label: TEXT.you }, { x: 138, y: 39 }]
 const wf: Box[] = [{ x: 8, y: 39 }, { x: 73, y: 39 }, { x: 138, y: 39 }]
 const sw: Box[] = [{ x: 8, y: 8 }, { x: 8, y: 70 }, { x: 138, y: 39 }]
 // le tableau, au centre de l'essaim
@@ -28,21 +56,21 @@ const B = { x: 76, y: 24, w: 30, h: 52 }
 
 const topos: Topo[] = [
   {
-    name: 'délégation',
-    desc: 'Un sous-agent part d’un contexte vide, travaille seul et ne renvoie que sa conclusion.',
-    who: 'vous',
+    name: TEXT.topos[0][0],
+    desc: TEXT.topos[0][1],
+    who: TEXT.topos[0][2],
     boxes: del,
     edges: [`M ${c(del[0]).r} ${c(del[0]).t + 6} C 75 18, 105 18, ${c(del[1]).l - 3} ${c(del[1]).t + 6}`],
     dashed: [`M ${c(del[1]).l} ${c(del[1]).b - 6} C 105 82, 75 82, ${c(del[0]).r + 3} ${c(del[0]).b - 6}`],
     labels: [
-      { x: 90, y: 16, t: 'une tâche' },
-      { x: 90, y: 92, t: 'sa conclusion', accent: true },
+      { x: 90, y: 16, t: TEXT.task },
+      { x: 90, y: 92, t: TEXT.conclusion, accent: true },
     ],
   },
   {
-    name: 'workflow',
-    desc: 'Les sous-agents s’enchaînent selon le graphe écrit à l’avance : personne ne répond à celui qui l’a précédé.',
-    who: 'le fichier du flow',
+    name: TEXT.topos[1][0],
+    desc: TEXT.topos[1][1],
+    who: TEXT.topos[1][2],
     boxes: wf,
     edges: [
       `M ${c(wf[0]).r} ${c(wf[0]).my} H ${c(wf[1]).l - 3}`,
@@ -50,9 +78,9 @@ const topos: Topo[] = [
     ],
   },
   {
-    name: 'essaim',
-    desc: 'Les membres travaillent en même temps, se lisent sur un tableau commun et décident seuls de ce qu’ils répondent.',
-    who: 'personne, chacun lit le tableau',
+    name: TEXT.topos[2][0],
+    desc: TEXT.topos[2][1],
+    who: TEXT.topos[2][2],
     accent: true,
     boxes: sw,
     board: true,
@@ -69,7 +97,7 @@ const topos: Topo[] = [
   <div class="topos">
     <div v-for="t in topos" :key="t.name" class="topo" :class="{ 'is-accent': t.accent }">
       <div class="topo-name">{{ t.name }}</div>
-      <svg class="topo-svg" viewBox="0 0 180 100" role="img" :aria-label="'schéma : ' + t.name">
+      <svg class="topo-svg" viewBox="0 0 180 100" role="img" :aria-label="TEXT.diagram + t.name">
         <defs>
           <marker :id="'th-' + t.name" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
             <path d="M1 1.5 L9 5 L1 8.5" fill="none" stroke="var(--muted)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
@@ -95,7 +123,7 @@ const topos: Topo[] = [
         </template>
       </svg>
       <div class="topo-desc">{{ t.desc }}</div>
-      <div class="topo-who"><span>qui parle après qui</span>{{ t.who }}</div>
+      <div class="topo-who"><span>{{ TEXT.who }}</span>{{ t.who }}</div>
     </div>
   </div>
 </template>

@@ -3,6 +3,8 @@
 // délégation, telle qu'on la tient à la main. Rectangles : les sous-agents.
 // Pilules en pointillés : les gestes que l'on fait soi-même.
 // viewBox fixe 960x250 pour une géométrie exacte à toute taille.
+import { t } from '../lib/i18n'
+
 type Kind = 'end' | 'agent' | 'human' | 'decision'
 interface Node { id: string; kind: Kind; w: number; title: string; sub?: string }
 
@@ -10,17 +12,57 @@ const Y = 62
 const H = 58
 const GAP = 17
 
-const spec: Node[] = [
-  { id: 'ticket', kind: 'end', w: 72, title: 'ticket #2' },
-  { id: 'explorer', kind: 'agent', w: 88, title: 'explorer', sub: 'note d’impact' },
-  { id: 'read', kind: 'human', w: 92, title: 'vous relisez', sub: 'la note' },
-  { id: 'planner', kind: 'agent', w: 88, title: 'planner', sub: 'plan en pas' },
-  { id: 'coder', kind: 'agent', w: 88, title: 'coder', sub: 'diff d’un pas' },
-  { id: 'test', kind: 'human', w: 92, title: 'vous lancez', sub: 'npm test' },
-  { id: 'reviewer', kind: 'agent', w: 88, title: 'reviewer', sub: 'verdict motivé' },
-  { id: 'verdict', kind: 'decision', w: 70, title: 'verdict' },
-  { id: 'done', kind: 'end', w: 78, title: 'ticket livré' },
+const TEXT = t({
+  fr: {
+    nodes: {
+      ticket: ['ticket #2'],
+      explorer: ['explorer', 'note d’impact'],
+      read: ['vous relisez', 'la note'],
+      planner: ['planner', 'plan en pas'],
+      coder: ['coder', 'diff d’un pas'],
+      test: ['vous lancez', 'npm test'],
+      reviewer: ['reviewer', 'verdict motivé'],
+      verdict: ['verdict'],
+      done: ['ticket livré'],
+    } as Record<string, string[]>,
+    last: 'dernier pas',
+    returns: ['APPROVED, pas suivant · refus, le code est en cause', 'refus, le pas est en cause'],
+    legendAgent: 'sous-agent lancé par /step',
+    legendHuman: 'geste que vous faites vous-même',
+    aria: 'La boucle explorer, planner, coder, reviewer, et les retours selon le verdict',
+  },
+  en: {
+    nodes: {
+      ticket: ['ticket #2'],
+      explorer: ['explorer', 'impact note'],
+      read: ['you read', 'the note'],
+      planner: ['planner', 'plan in steps'],
+      coder: ['coder', 'diff for a step'],
+      test: ['you run', 'npm test'],
+      reviewer: ['reviewer', 'verdict + why'],
+      verdict: ['verdict'],
+      done: ['ticket done'],
+    } as Record<string, string[]>,
+    last: 'last step',
+    returns: ['APPROVED, next step · rejected, the code is at fault', 'rejected, the step is at fault'],
+    legendAgent: 'sub-agent run by /step',
+    legendHuman: 'something you do yourself',
+    aria: 'The explorer, planner, coder, reviewer loop, and the returns depending on the verdict',
+  },
+})
+
+const SPEC: Omit<Node, 'title' | 'sub'>[] = [
+  { id: 'ticket', kind: 'end', w: 72 },
+  { id: 'explorer', kind: 'agent', w: 88 },
+  { id: 'read', kind: 'human', w: 92 },
+  { id: 'planner', kind: 'agent', w: 88 },
+  { id: 'coder', kind: 'agent', w: 88 },
+  { id: 'test', kind: 'human', w: 92 },
+  { id: 'reviewer', kind: 'agent', w: 88 },
+  { id: 'verdict', kind: 'decision', w: 70 },
+  { id: 'done', kind: 'end', w: 78 },
 ]
+const spec: Node[] = SPEC.map(n => ({ ...n, title: TEXT.nodes[n.id][0], sub: TEXT.nodes[n.id][1] }))
 
 // Positions : un rang, de gauche à droite ; l'écart avant « livré » est plus
 // large pour porter son étiquette.
@@ -41,8 +83,8 @@ const forward = nodes.slice(0, -1).map((n, i) => ({
 const BOTTOM = Y + H
 const v = by.verdict
 const returns = [
-  { to: by.coder, y: BOTTOM + 46, label: 'APPROVED, pas suivant · refus, le code est en cause' },
-  { to: by.planner, y: BOTTOM + 96, label: 'refus, le pas est en cause' },
+  { to: by.coder, y: BOTTOM + 46, label: TEXT.returns[0] },
+  { to: by.planner, y: BOTTOM + 96, label: TEXT.returns[1] },
 ]
 function path(r: typeof returns[number]) {
   return `M ${v.cx} ${Y + H / 2 + 31} V ${r.y} H ${r.to.cx} V ${BOTTOM + 4}`
@@ -51,7 +93,7 @@ function path(r: typeof returns[number]) {
 
 <template>
   <svg class="loop-map" viewBox="0 0 960 250" preserveAspectRatio="xMidYMid meet" role="img"
-       aria-label="La boucle explorer, planner, coder, reviewer, et les retours selon le verdict">
+       :aria-label="TEXT.aria">
     <defs>
       <marker id="lm-head" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto">
         <path d="M1 1.5 L9 5 L1 8.5" fill="none" stroke="var(--line-2)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
@@ -65,7 +107,7 @@ function path(r: typeof returns[number]) {
     <g stroke="var(--line-2)" stroke-width="1.4" fill="none">
       <line v-for="(f, i) in forward" :key="'f' + i" :x1="f.x1" :y1="Y + H / 2" :x2="f.x2" :y2="Y + H / 2" marker-end="url(#lm-head)" />
     </g>
-    <text :x="(by.verdict.x + by.verdict.w + by.done.x) / 2" :y="Y + H / 2 - 8" text-anchor="middle" class="lm-edge">dernier pas</text>
+    <text :x="(by.verdict.x + by.verdict.w + by.done.x) / 2" :y="Y + H / 2 - 8" text-anchor="middle" class="lm-edge">{{ TEXT.last }}</text>
 
     <!-- retours -->
     <g v-for="(r, i) in returns" :key="'r' + i">
@@ -91,9 +133,9 @@ function path(r: typeof returns[number]) {
     <!-- légende -->
     <g class="lm-legend">
       <rect x="4" y="8" width="22" height="14" rx="4" class="lm-agent" />
-      <text x="33" y="19">sous-agent lancé par /step</text>
+      <text x="33" y="19">{{ TEXT.legendAgent }}</text>
       <rect x="214" y="8" width="22" height="14" rx="7" class="lm-human" />
-      <text x="243" y="19">geste que vous faites vous-même</text>
+      <text x="243" y="19">{{ TEXT.legendHuman }}</text>
     </g>
   </svg>
 </template>

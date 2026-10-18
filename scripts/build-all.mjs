@@ -14,6 +14,8 @@ export const DECKS = [
   ['jour3.md', 'jour3/'],
   ['index.en.md', 'en/'],
   ['jour1.en.md', 'en/jour1/'],
+  ['jour2.en.md', 'en/jour2/'],
+  ['jour3.en.md', 'en/jour3/'],
 ]
 
 const base = process.argv[2] ?? '/'

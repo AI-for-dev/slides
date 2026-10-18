@@ -297,10 +297,6 @@
   white-space: nowrap;
   color: var(--muted);
 }
-.deck-note {
-  margin-left: auto;
-  color: var(--quiet);
-}
 .deck-go svg {
   width: 1.35rem;
   height: 0.7rem;

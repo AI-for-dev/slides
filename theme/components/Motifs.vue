@@ -2,8 +2,38 @@
 // Les cinq motifs d'un flux de travail, chacun avec un mini-schéma, son
 // exemple dans la boucle du ticket #2 et la façon de l'écrire dans un flow.
 // Chaque schéma tient dans un viewBox fixe de 180x100.
+import { t } from '../lib/i18n'
+
 const W = 34
 const H = 22
+const TEXT = t({
+  fr: {
+    desc: {
+      'chain': 'Le planner reçoit la note de l’explorer, le coder reçoit le plan.',
+      'fan-out': 'L’explorer et le tester lisent le ticket en même temps : aucun n’écrit.',
+      'orchestrate': 'Le planner décide combien de pas il faut, puis chaque pas part au coder.',
+      'loop': 'Le coder et le reviewer recommencent tant que le pas n’est pas validé.',
+      'reduce': 'Un agent relit plusieurs branches et en tire une réponse : l’auditeur.',
+    } as Record<string, string>,
+    chainFlow: 'nœuds à la suite',
+    steps: '× n pas',
+    max: 'jusqu’à max',
+    inFlow: 'dans un flow',
+  },
+  en: {
+    desc: {
+      'chain': 'The planner gets the explorer’s note, the coder gets the plan.',
+      'fan-out': 'The explorer and the tester read the ticket at the same time: neither writes.',
+      'orchestrate': 'The planner decides how many steps are needed, then each step goes to the coder.',
+      'loop': 'The coder and the reviewer start again until the step is approved.',
+      'reduce': 'One agent reads several branches and draws one answer from them: the auditor.',
+    } as Record<string, string>,
+    chainFlow: 'nodes in sequence',
+    steps: '× n steps',
+    max: 'up to max',
+    inFlow: 'in a flow',
+  },
+})
 
 interface Box { x: number; y: number; hi?: boolean }
 interface Motif {
@@ -27,8 +57,8 @@ const red: Box[] = [{ x: 8, y: 6 }, { x: 8, y: 39 }, { x: 8, y: 72 }, { x: 138, 
 const motifs: Motif[] = [
   {
     name: 'chain',
-    desc: 'Le planner reçoit la note de l’explorer, le coder reçoit le plan.',
-    flow: 'nœuds à la suite',
+    desc: TEXT.desc['chain'],
+    flow: TEXT.chainFlow,
     boxes: chain,
     edges: [
       `M ${c(chain[0]).r} ${c(chain[0]).my} H ${c(chain[1]).l - 3}`,
@@ -37,7 +67,7 @@ const motifs: Motif[] = [
   },
   {
     name: 'fan-out',
-    desc: 'L’explorer et le tester lisent le ticket en même temps : aucun n’écrit.',
+    desc: TEXT.desc['fan-out'],
     flow: 'parallel',
     boxes: fan,
     edges: [
@@ -47,7 +77,7 @@ const motifs: Motif[] = [
   },
   {
     name: 'orchestrate',
-    desc: 'Le planner décide combien de pas il faut, puis chaque pas part au coder.',
+    desc: TEXT.desc['orchestrate'],
     flow: 'map-from',
     boxes: orch,
     edges: [
@@ -58,7 +88,7 @@ const motifs: Motif[] = [
   },
   {
     name: 'loop',
-    desc: 'Le coder et le reviewer recommencent tant que le pas n’est pas validé.',
+    desc: TEXT.desc['loop'],
     flow: 'loop + max',
     boxes: loop,
     edges: [`M ${c(loop[0]).r} ${c(loop[0]).my} H ${c(loop[1]).l - 3}`],
@@ -67,7 +97,7 @@ const motifs: Motif[] = [
   },
   {
     name: 'reduce',
-    desc: 'Un agent relit plusieurs branches et en tire une réponse : l’auditeur.',
+    desc: TEXT.desc['reduce'],
     flow: 'reads: [a, b, c]',
     boxes: red,
     edges: red.slice(0, 3).map(b =>
@@ -97,13 +127,13 @@ const motifs: Motif[] = [
           <line x1="80" y1="50" x2="98" y2="50" />
           <line x1="80" y1="57" x2="93" y2="57" />
         </g>
-        <text v-if="m.extra === 'list'" x="155" y="80" text-anchor="middle" class="motif-lbl">× n pas</text>
-        <text v-if="m.extra === 'max'" x="90" y="94" text-anchor="middle" class="motif-lbl is-accent">jusqu’à max</text>
+        <text v-if="m.extra === 'list'" x="155" y="80" text-anchor="middle" class="motif-lbl">{{ TEXT.steps }}</text>
+        <text v-if="m.extra === 'max'" x="90" y="94" text-anchor="middle" class="motif-lbl is-accent">{{ TEXT.max }}</text>
         <rect v-for="(b, i) in m.boxes" :key="'b' + i" :x="b.x" :y="b.y" :width="W" :height="H" rx="6"
               :class="b.hi ? 'motif-box is-hi' : 'motif-box'" />
       </svg>
       <div class="motif-desc">{{ m.desc }}</div>
-      <div class="motif-flow"><span>dans un flow</span><code>{{ m.flow }}</code></div>
+      <div class="motif-flow"><span>{{ TEXT.inFlow }}</span><code>{{ m.flow }}</code></div>
     </div>
   </div>
 </template>
