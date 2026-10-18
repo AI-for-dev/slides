@@ -145,6 +145,19 @@ Le pied de page affiche le `section` de la slide, sinon
 slide y ajoute l'étiquette « Pour aller plus loin », pour les slides qu'on
 passe vite en salle.
 
+À droite, avant le numéro de slide, viennent les auteurs et la licence, lus
+dans l'en-tête du deck :
+
+```yaml
+themeConfig:
+  authors: Max Beligné · Loïc Gouarin
+  license: CC BY-SA 4.0
+  licenseUrl: https://creativecommons.org/licenses/by-sa/4.0/deed.fr
+```
+
+Sur la couverture, `:License` affiche les pictogrammes Creative Commons de
+cette licence, avec un lien vers `licenseUrl`.
+
 Chaque composant émet la classe CSS qui porte son nom (`Card` → `.card`,
 `Criterion` → `.criterion`…) : pour changer une apparence, chercher la classe
 dans `theme/styles/`.
