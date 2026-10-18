@@ -112,7 +112,7 @@ Avant de lancer, posez-vous quelques questions : quel modèle réussit, ce qu�
 La même demande sur deux modèles, ou avec deux réglages, chacune dans une session neuve.
 ::
 ::Step{n=3 title="Lire la session"}
-Comparez ce que l’agent a lu et fait, pas seulement le résultat. `/export` vous donne la session en html.
+Comparez ce que l’agent a lu et fait, pas seulement le résultat.
 ::
 ::::
 
@@ -378,6 +378,7 @@ section: Partie 1 · Premier pas avec Pi
 :::Card{eyebrow="Google" title="Gemma 4 31B" size=sm}
 ::Specs{w="5rem"}
 - **Type** dense
+- **Sortie** 2026
 - **Taille** 31B
 - **Fenêtre** 256K
 - **Licence** Apache 2.0
@@ -386,6 +387,7 @@ section: Partie 1 · Premier pas avec Pi
 :::Card{eyebrow="Alibaba" title="Qwen3.8 27B" size=sm}
 ::Specs{w="5rem"}
 - **Type** dense
+- **Sortie** 2026
 - **Taille** 27B
 - **Fenêtre** 256K
 - **Licence** Apache 2.0
@@ -394,6 +396,7 @@ section: Partie 1 · Premier pas avec Pi
 :::Card{variant=soft eyebrow="DeepSeek" tone=teal title="V4 et V4.1 Flash" size=sm}
 ::Specs{w="5rem"}
 - **Type** MoE
+- **Sortie** 2026
 - **V4** 284B A13B
 - **V4.1** 552B A16B
 - **Fenêtre** 1M
@@ -403,6 +406,7 @@ section: Partie 1 · Premier pas avec Pi
 :::Card{variant=soft eyebrow="Z.ai" tone=teal title="GLM 5.2 et 5.3" size=sm}
 ::Specs{w="5rem"}
 - **Type** MoE
+- **Sortie** 2026
 - **Taille** 753B A40B
 - **Fenêtre** 1M
 - **Licence** MIT (5.2)<br />maison (5.3)
@@ -1005,7 +1009,7 @@ De nombreuses extensions existent déjà sur [pi.dev/packages](https://pi.dev/pa
 ::::
 
 ---
-# V2 : /tools et l’exercice du cours ajoutés
+# V2 : l’exercice du cours ajouté
 section: Partie 3 · Contexte
 ---
 
