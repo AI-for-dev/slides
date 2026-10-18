@@ -204,3 +204,10 @@ dans `theme/styles/`.
   Instrument Serif pour les citations. Un titre ne doit jamais être composé
   dans la police du texte.
 - Espaces insécables devant `: ; ! ?` et dans les guillemets.
+
+## Licence
+
+Les slides de Max Beligné et Loïc Gouarin sont publiées sous licence
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.fr) (texte
+complet dans `LICENSE`). Les logos partenaires et les figures reprises
+d'autres auteurs restent soumis à leurs propres droits.
