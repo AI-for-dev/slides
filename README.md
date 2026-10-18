@@ -16,7 +16,9 @@ les decks et les publie sur GitHub Pages (source : GitHub Actions). La page
 d'accueil (`index.md`) occupe la racine et renvoie vers les trois jours, qui
 sortent dans `dist/jour1/`, `dist/jour2/` et `dist/jour3/`. Ils utilisent
 `routerMode: hash`, parce que le `404.html` servi par GitHub Pages est celui
-de l'accueil. La version anglaise suit le même schéma sous `dist/en/`.
+de l'accueil. La version anglaise suit le même schéma sous `dist/en/`. La
+liste des decks et leurs dossiers sont dans `scripts/build-all.mjs`, que la CI
+appelle.
 
 ## Lancer
 
@@ -28,14 +30,18 @@ npm run build            # page d'accueil dans dist/
 npm run build:jour1      # jour 1 dans dist/jour1/
 npm run export:jour1     # Jour1.pdf
 npm run export:png:jour1 # une image par slide dans export-png/
+npm run preview          # tout le site, comme en ligne, sur http://localhost:4173/slides/
 ```
 
 Les commandes du jour 1 existent aussi pour les jours 2 et 3 : `dev:jour2`,
 `build:jour2`, `export:jour2`, `export:png:jour2`, et de même avec `jour3`.
 Les versions anglaises ajoutent `:en` (`dev:jour1:en`, `build:index:en`…), et
 `npm run check:translations` vérifie qu'elles restent alignées sur le français.
-En local, les liens de l'accueil ne mènent nulle part : les decks ne sont
-réunis qu'une fois publiés.
+
+`npm run dev:*` ne sert qu'un deck : toute adresse y ramène, donc les liens de
+l'accueil et le bouton de langue n'y mènent nulle part (le bouton s'affiche
+barré). Pour les essayer, `npm run preview` construit tout le site et le sert
+sous `/slides/`, comme GitHub Pages.
 
 ## Organisation
 
@@ -46,7 +52,8 @@ jour1.md                  jour 1
 jour2.md                  jour 2 : Pi, sandbox, contexte, évaluation et skills
 jour3.md                  jour 3 : hooks, délégation, workflows, essaim et Pi Durable
 public/images/            les figures, logos et avatars
-scripts/                  check-translations.mjs, lancé par la CI avant le build
+scripts/                  build-all.mjs (tout le site), preview.mjs (le servir
+                          en local), check-translations.mjs (lancé par la CI)
 theme/                    le thème maison
   styles/tokens.css       palette, typographie, géométrie
   styles/pencil.ts        les traits au crayon réutilisés par le CSS
@@ -190,7 +197,8 @@ commentaires de travail (`# V2 : …`) restent dans la version française.
 - **L'en-tête porte la langue et le lien.** `lang: fr` ou `lang: en`, et
   `themeConfig.translation`, le chemin de l'autre version relatif à celle-ci :
   `../en/jour1/` depuis `jour1.md`, `../../jour1/` depuis `jour1.en.md`. Sans
-  `translation`, le bouton n'apparaît pas.
+  `translation`, le bouton n'apparaît pas. Un nouveau deck traduit s'ajoute
+  aussi à la liste de `scripts/build-all.mjs`.
 - **Les composants qui portent du texte le donnent dans les deux langues**, via
   `t({ fr: …, en: … })` de `theme/lib/i18n.ts` (pied de page, schémas comme
   `HarnessMap` ou `ToolLoop`). Un nouveau composant avec du texte en dur suit la
