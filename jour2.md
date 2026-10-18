@@ -1365,6 +1365,9 @@ La balle traverse les briques. Le commentaire du code décrit le correctif de ba
 ::Note{tag="Voulu"}
 Le ticket renvoie à `ISSUE.md`, sans S : le modèle cherche-t-il le bon fichier ou est-ce qu'il abandonne ?
 ::
+::Note{tag="Données"}
+Expérience, sessions et résultats bruts : [zenodo.23452689](https://doi.org/10.5281/zenodo.23452689)
+::
 :::
 ::::
 
@@ -1975,6 +1978,9 @@ La demande négligée, sans `ISSUES.md` ni historique git : l’agent serait si
 
 ::Note{tag="Modèles"}
 `gemma-4-31b` (raisonnement high), `qwen-3.8-27b` et `DeepSeek-V4.1-Flash` (medium), tous chez GRICAD.
+::
+::Note{tag="Données"}
+Expérience, sessions et résultats bruts : [zenodo.23452689](https://doi.org/10.5281/zenodo.23452689)
 ::
 :::
 :::Stack{gap=4}
