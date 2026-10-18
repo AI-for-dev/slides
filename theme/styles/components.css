@@ -258,6 +258,61 @@
   filter: brightness(1.04) contrast(1.05);
 }
 
+/* ── Lien vers un deck (page d'accueil) ────────────────────────────────── */
+
+.slidev-layout a.deck {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1rem 1.15rem 0.9rem;
+  color: var(--ink);
+  border-bottom: 0;
+  background: var(--paper);
+  text-decoration: none;
+}
+.deck-title {
+  font-family: var(--font-title);
+  font-size: 1.2rem;
+  font-weight: 660;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+.deck-desc {
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: var(--muted);
+}
+.deck-desc p { margin: 0; }
+.deck-go {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: auto;
+  padding-top: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.deck-go svg {
+  width: 1.35rem;
+  height: 0.7rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+/* Au survol, le cadre et la flèche passent à la sanguine. */
+.slidev-layout a.deck:is(:hover, :focus-visible) {
+  --pc: var(--accent);
+  --pc-o: 0.95;
+  outline: none;
+}
+.slidev-layout a.deck:is(:hover, :focus-visible) .deck-go { color: var(--accent-deep); }
+
 /* ── Avatar ────────────────────────────────────────────────────────────── */
 
 .avatar {

@@ -6,6 +6,7 @@
 .slidev-layout.sect,
 .slidev-layout.cvr,
 .slidev-layout.qte,
+.slidev-layout.home,
 .slidev-layout.stmt {
   position: relative;
   width: 100%;
@@ -224,6 +225,40 @@
 .author .where {
   font-size: 0.76rem;
   color: var(--muted);
+}
+
+/* ── home : page d'accueil des supports ─────────────────────────────────── */
+
+.slidev-layout.home { padding: 0; }
+
+.home-inner {
+  position: relative;
+  height: 100%;
+  padding: 2.4rem 3.4rem 2.3rem;
+  display: flex;
+  flex-direction: column;
+}
+.slidev-layout.home h1 {
+  font-size: 2.9rem;
+  font-weight: 720;
+  line-height: 1;
+  letter-spacing: -0.025em;
+  margin-top: 1.5rem;
+}
+.home-authors {
+  display: flex;
+  gap: 2.2rem;
+  margin-top: 1rem;
+}
+/* Les trois decks, alignés sur les tiers du diagramme. */
+.home-decks {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 1.9rem;
+}
+.home-foot {
+  margin-top: auto;
 }
 
 /* ── section ───────────────────────────────────────────────────────────── */

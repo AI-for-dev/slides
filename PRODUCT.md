@@ -26,8 +26,8 @@ Une formation faite par des ingénieurs de recherche pour leurs pairs, dans les 
 
 - Projeté sur vidéoprojecteur en salle, souvent lu de loin, et présenté en plein écran sur des écrans de tailles variées.
 - Partagé en visio pour les participants à distance.
-- Publié sur GitHub Pages (<https://ai-for-dev.github.io/slides/>) à chaque push sur `main`, et relu après l'atelier.
-- Exporté en PDF (`npm run export`) et distribué.
+- Publié sur GitHub Pages à chaque push sur `main`, et relu après l'atelier. La racine (<https://ai-for-dev.github.io/slides/>) est une page d'accueil qui renvoie vers les trois jours.
+- Exporté en PDF (`npm run export:jour1`, et de même pour les jours 2 et 3) et distribué.
 - Une version longue et rédigée existe à part : <https://github.com/AI-for-dev/hands-on-harness>.
 
 ## Capabilities and Constraints
