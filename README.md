@@ -119,7 +119,7 @@ Ce qu'il faut retenir.
 | `Tag` | étiquette inline ; `tone`, `code`, `href` (étiquette cliquable) |
 | `Eyebrow` | sur-titre isolé ; `tone` |
 | `Pull` | exergue en serif ; `size` |
-| `Hint` | note à droite du titre ; `prefix`, `href` |
+| `Hint` | note à droite du titre ; `prefix`, `href` (site externe), `to` (slide du deck, par numéro ou `routeAlias`) |
 | `Ord` | numéro romain devant un titre |
 | `Fig` | figure encadrée ; `src`, `caption`, `href`, `frame`, `contain` |
 | `Added` | ajout des auteurs dans une citation (les crochets viennent du CSS) |
