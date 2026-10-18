@@ -110,7 +110,7 @@ Before running, ask yourself a few questions: which model succeeds, what it will
 The same request on two models, or with two settings, each in a fresh session.
 ::
 ::Step{n=3 title="Read the session"}
-Compare what the agent read and did, not just the result. `/export` gives you the session as html.
+Compare what the agent read and did, not just the result.
 ::
 ::::
 
@@ -369,6 +369,7 @@ section: Part 1 · First steps with Pi
 :::Card{eyebrow="Google" title="Gemma 4 31B" size=sm}
 ::Specs{w="5rem"}
 - **Type** dense
+- **Released** 2026
 - **Size** 31B
 - **Window** 256K
 - **Licence** Apache 2.0
@@ -377,6 +378,7 @@ section: Part 1 · First steps with Pi
 :::Card{eyebrow="Alibaba" title="Qwen3.8 27B" size=sm}
 ::Specs{w="5rem"}
 - **Type** dense
+- **Released** 2026
 - **Size** 27B
 - **Window** 256K
 - **Licence** Apache 2.0
@@ -385,6 +387,7 @@ section: Part 1 · First steps with Pi
 :::Card{variant=soft eyebrow="DeepSeek" tone=teal title="V4 and V4.1 Flash" size=sm}
 ::Specs{w="5rem"}
 - **Type** MoE
+- **Released** 2026
 - **V4** 284B A13B
 - **V4.1** 552B A16B
 - **Window** 1M
@@ -394,6 +397,7 @@ section: Part 1 · First steps with Pi
 :::Card{variant=soft eyebrow="Z.ai" tone=teal title="GLM 5.2 and 5.3" size=sm}
 ::Specs{w="5rem"}
 - **Type** MoE
+- **Released** 2026
 - **Size** 753B A40B
 - **Window** 1M
 - **Licence** MIT (5.2)<br />custom (5.3)
