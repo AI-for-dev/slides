@@ -650,47 +650,47 @@ The most specific rule wins. A command the parser cannot classify is denied.
 section: Part 2 · Security and sandbox
 ---
 
-# Create a throwaway workspace with a worktree
+# One worktree per agent :Hint[herdr.dev/docs/cli-reference]{href="https://herdr.dev/docs/cli-reference/#worktrees"}
 
-::::Cols{cols=2 gap=7 fill align=center}
+::::::Stack{fill center gap=6}
+::::Cols{cols="5fr 6fr" gap=7 align=start}
 :::Stack{gap=4}
 ::Lead
-A **Git worktree** is an example of a “throwaway clone”. It is also good practice when several agents work on the same project.
+A branch separates the history, a worktree separates the files: it is a second working directory of the same repository, on its own branch.
 ::
 
-:::Card{variant=soft eyebrow="Do not confuse them" tone=teal}
 ::Specs{w="7rem"}
-- **Branch** a separate history
-- **Worktree** a separate directory
+- **In parallel** two agents on two tasks never touch the same files
+- **Reviewable** the agent’s work fits in its branch’s diff
+- **Disposable** delete the directory, your own checkout has not moved
 ::
 
-The worktree shares the repository’s Git history: it is not an independent copy.
-:::
+::Detail
+An example of a “throwaway clone”, but not an independent copy: the Git history stays shared.
+::
 :::
 
 :::Stack{gap=3 .code-sm}
-:Eyebrow[From the NÉON repository]{tone=quiet code}
+:Eyebrow[With herdr, from the NÉON repository]{tone=teal}
 
 ```bash
 herdr worktree create \
-  --branch workshop/guardrail \
-  --base dev \
-  --focus
+  --branch workshop/guardrail --base dev --focus
 ```
 
-:::Card{variant=accent eyebrow="Created by herdr"}
-Herdr stores all its worktrees under:
-
-`~/.herdr/worktrees/`
-
-`--focus` opens the new worktree in herdr.
-:::
+::Specs{w="7rem"}
+- **Create** right-click the workspace, *New worktree*, or `Ctrl+B` then `Shift+G`
+- **Group** one workspace per worktree, with its agent, under the original repository
+- **Folder** `~/.herdr/worktrees/neon/workshop-guardrail`
+- **Delete** *Delete worktree checkout…* runs `git worktree remove`, the branch stays
+::
 :::
 ::::
 
-::Takeaway{.mt-4}
-For the exercise, this directory acts as the throwaway clone: your experiments stay out of the main working directory.
+::Takeaway
+**One agent, one branch, one directory.** For the exercise, this worktree acts as the throwaway clone. But with your rights: it protects against mistakes, not against an agent that leaves the repository.
 ::
+::::::
 
 ---
 section: Part 2 · Security and sandbox
@@ -701,7 +701,7 @@ section: Part 2 · Security and sandbox
 :::::Stack{fill center gap=5}
 ::::Cols{cols=3 gap=5}
 :::Card{variant=accent eyebrow="In the room · 1" size=sm}
-In a **throwaway clone** of NÉON, put the configuration above in the project’s `.pi`, then ask Pi:
+In a **worktree** of NÉON, put the configuration above in the project’s `.pi`, then ask Pi:
 
 1. to read the `.env`
 2. to delete `game/` with `rm -rf`
