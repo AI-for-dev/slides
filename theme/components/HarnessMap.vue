@@ -5,20 +5,52 @@
 import { useId } from 'vue'
 import { ellipse, graphiteFilter, line, rect, rng } from '../lib/pencil'
 import type { Stroke } from '../lib/pencil'
+import { t } from '../lib/i18n'
 
 const CARD_W = 268
 const CARD_H = 78
 const HUB = { x: 450, y: 150, rx: 88, ry: 47 }
 
-const bricks = [
-  { n: '1', x: 0,   y: 0,   title: 'GESTION DU CONTEXTE', lines: ['Sélectionner, ordonner', 'et compacter'] },
-  { n: '2', x: 0,   y: 118, title: 'OUTILS',              lines: ['Donner des capacités', 'd\u2019actions si c\u2019est utile'] },
-  { n: '3', x: 0,   y: 236, title: 'DÉLÉGATION',          lines: ['Sous-tâches à des agents pour alléger', 'le contexte du fil principal'] },
-  { n: '7', x: 632, y: 0,   title: 'VÉRIFICATION ET ÉVALUATION', lines: ['Tester, évaluer et boucler', 'sur la qualité et le coût'] },
-  { n: '6', x: 632, y: 118, title: 'SÛRETÉ',              lines: ['Borner les permissions', 'et isoler l\u2019exécution'] },
-  { n: '5', x: 632, y: 236, title: 'MÉMOIRE',             lines: ['Persister décisions, règles', 'et état entre les sessions'] },
-  { n: '4', x: 316, y: 322, title: 'ORCHESTRATION',       lines: ['Coordonner agents, plans, exécution', 'et tâches de longue durée'] },
+const POS = [
+  { n: '1', x: 0,   y: 0 },
+  { n: '2', x: 0,   y: 118 },
+  { n: '3', x: 0,   y: 236 },
+  { n: '7', x: 632, y: 0 },
+  { n: '6', x: 632, y: 118 },
+  { n: '5', x: 632, y: 236 },
+  { n: '4', x: 316, y: 322 },
 ]
+const TEXT = t({
+  fr: {
+    hub: 'HARNAIS',
+    sub: '7 briques',
+    aria: 'Les sept briques d\u2019un harnais organisées autour d\u2019un centre',
+    bricks: [
+      { title: 'GESTION DU CONTEXTE', lines: ['Sélectionner, ordonner', 'et compacter'] },
+      { title: 'OUTILS', lines: ['Donner des capacités', 'd\u2019actions si c\u2019est utile'] },
+      { title: 'DÉLÉGATION', lines: ['Sous-tâches à des agents pour alléger', 'le contexte du fil principal'] },
+      { title: 'VÉRIFICATION ET ÉVALUATION', lines: ['Tester, évaluer et boucler', 'sur la qualité et le coût'] },
+      { title: 'SÛRETÉ', lines: ['Borner les permissions', 'et isoler l\u2019exécution'] },
+      { title: 'MÉMOIRE', lines: ['Persister décisions, règles', 'et état entre les sessions'] },
+      { title: 'ORCHESTRATION', lines: ['Coordonner agents, plans, exécution', 'et tâches de longue durée'] },
+    ],
+  },
+  en: {
+    hub: 'HARNESS',
+    sub: '7 building blocks',
+    aria: 'The seven building blocks of a harness, arranged around a centre',
+    bricks: [
+      { title: 'CONTEXT MANAGEMENT', lines: ['Select, order', 'and compact'] },
+      { title: 'TOOLS', lines: ['Give the ability to act', 'when it is useful'] },
+      { title: 'DELEGATION', lines: ['Hand sub-tasks to agents to lighten', 'the main thread\u2019s context'] },
+      { title: 'VERIFICATION AND EVALUATION', lines: ['Test, evaluate and iterate', 'on quality and cost'] },
+      { title: 'SAFETY', lines: ['Bound permissions', 'and isolate execution'] },
+      { title: 'MEMORY', lines: ['Persist decisions, rules', 'and state across sessions'] },
+      { title: 'ORCHESTRATION', lines: ['Coordinate agents, plans, execution', 'and long-running tasks'] },
+    ],
+  },
+})
+const bricks = POS.map((p, i) => ({ ...p, ...TEXT.bricks[i] }))
 
 // Anchor on each card pointing back at the hub.
 function anchor(b: typeof bricks[number]) {
@@ -44,7 +76,7 @@ const hub: Stroke[] = ellipse(HUB.x, HUB.y, HUB.rx, HUB.ry, r, { passes: 3, wobb
 
 <template>
   <svg class="harness-map" viewBox="0 0 900 400" preserveAspectRatio="xMidYMid meet" role="img"
-       aria-label="Les sept briques d'un harnais organisées autour d'un centre">
+       :aria-label="TEXT.aria">
     <defs v-html="graphiteFilter(fid, 9)" />
 
     <g fill="none" stroke-linecap="round" :filter="`url(#${fid})`">
@@ -56,8 +88,8 @@ const hub: Stroke[] = ellipse(HUB.x, HUB.y, HUB.rx, HUB.ry, r, { passes: 3, wobb
     </g>
 
     <!-- hub -->
-    <text :x="HUB.x" :y="HUB.y + 4" text-anchor="middle" class="hub-label">HARNAIS</text>
-    <text :x="HUB.x" :y="HUB.y + 23" text-anchor="middle" class="hub-sub">7 briques</text>
+    <text :x="HUB.x" :y="HUB.y + 4" text-anchor="middle" class="hub-label">{{ TEXT.hub }}</text>
+    <text :x="HUB.x" :y="HUB.y + 23" text-anchor="middle" class="hub-sub">{{ TEXT.sub }}</text>
 
     <!-- cards -->
     <g v-for="b in bricks" :key="b.n">

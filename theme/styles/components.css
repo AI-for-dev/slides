@@ -294,7 +294,12 @@
   font-size: 0.6rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  white-space: nowrap;
   color: var(--muted);
+}
+.deck-note {
+  margin-left: auto;
+  color: var(--quiet);
 }
 .deck-go svg {
   width: 1.35rem;

@@ -30,15 +30,15 @@ jobs:
       # --omit=dev : évite le téléchargement de playwright-chromium (export PDF uniquement)
       - run: npm ci --omit=dev
 
-      # La page d'accueil est servie sous https://<org>.github.io/<repo>/, les
-      # trois jours sous .../<repo>/jourN/. Ils se construisent après l'accueil,
-      # dont le build vide dist/.
+      # Le bouton de langue garde le numéro de slide : une version anglaise
+      # décalée par rapport à la française bloque la publication.
+      - run: npm run check:translations
+
+      # Servi sous https://<org>.github.io/<repo>/ : l'accueil à la racine, les
+      # trois jours sous .../<repo>/jourN/, la version anglaise sous .../en/.
+      # La liste des decks est dans scripts/build-all.mjs.
       - name: Build
-        run: |
-          npm run build -- --base /${{ github.event.repository.name }}/
-          npm run build:jour1 -- --base /${{ github.event.repository.name }}/jour1/
-          npm run build:jour2 -- --base /${{ github.event.repository.name }}/jour2/
-          npm run build:jour3 -- --base /${{ github.event.repository.name }}/jour3/
+        run: npm run build:all -- /${{ github.event.repository.name }}/
 
       - uses: actions/configure-pages@v5
 

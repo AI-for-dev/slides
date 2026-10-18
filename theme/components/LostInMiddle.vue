@@ -7,6 +7,26 @@
 import { useId } from 'vue'
 import { graphiteFilter, line, polyline, rect, rng } from '../lib/pencil'
 import type { Pt, Stroke } from '../lib/pencil'
+import { t } from '../lib/i18n'
+
+const TEXT = t({
+  fr: {
+    aria: 'La fenêtre de contexte : une information au début ou à la fin est bien exploitée, au milieu elle l\'est mal',
+    axis: 'exploitation de l’information selon sa place',
+    start: 'début', startSub: 'bien exploité',
+    middle: 'milieu', middleSub: 'mal exploité',
+    end: 'fin', endSub: 'bien exploitée',
+    size: 'taille maximale : ', sizeStrong: 'plus d’1 M de tokens', sizeEnd: ' sur certains modèles',
+  },
+  en: {
+    aria: 'The context window: information at the start or the end is used well, in the middle it is used poorly',
+    axis: 'how well information is used, by position',
+    start: 'start', startSub: 'used well',
+    middle: 'middle', middleSub: 'used poorly',
+    end: 'end', endSub: 'used well',
+    size: 'maximum size: ', sizeStrong: 'over 1 M tokens', sizeEnd: ' on some models',
+  },
+})
 
 const X0 = 40
 const X1 = 860
@@ -39,10 +59,10 @@ const mid: Stroke[] = rect(MID.x0, BAND.y - 4, MID.x1 - MID.x0, BAND.h + 8, r, {
 
 <template>
   <svg class="lim" viewBox="0 0 900 300" preserveAspectRatio="xMidYMid meet" role="img"
-       aria-label="La fenêtre de contexte : une information au début ou à la fin est bien exploitée, au milieu elle l'est mal">
+       :aria-label="TEXT.aria">
     <defs v-html="graphiteFilter(fid, 9)" />
 
-    <text :x="X0" y="22" class="lim-axis">exploitation de l’information selon sa place</text>
+    <text :x="X0" y="22" class="lim-axis">{{ TEXT.axis }}</text>
 
     <g fill="none" stroke-linecap="round" :filter="`url(#${fid})`">
       <path v-for="(s, i) in curve" :key="'c' + i" :d="s.d" class="lim-curve" :stroke-width="2.4 * s.w" :stroke-opacity="s.o" />
@@ -51,16 +71,16 @@ const mid: Stroke[] = rect(MID.x0, BAND.y - 4, MID.x1 - MID.x0, BAND.h + 8, r, {
       <path v-for="(s, i) in mid" :key="'m' + i" :d="s.d" class="lim-mid" :stroke-opacity="s.o" />
     </g>
 
-    <text :x="X0" :y="BAND.y + BAND.h + 34" class="lim-label">début</text>
-    <text :x="X0" :y="BAND.y + BAND.h + 56" class="lim-sub">bien exploité</text>
+    <text :x="X0" :y="BAND.y + BAND.h + 34" class="lim-label">{{ TEXT.start }}</text>
+    <text :x="X0" :y="BAND.y + BAND.h + 56" class="lim-sub">{{ TEXT.startSub }}</text>
 
-    <text :x="(MID.x0 + MID.x1) / 2" :y="BAND.y + BAND.h + 34" text-anchor="middle" class="lim-label lim-hot">milieu</text>
-    <text :x="(MID.x0 + MID.x1) / 2" :y="BAND.y + BAND.h + 56" text-anchor="middle" class="lim-sub lim-hot">mal exploité</text>
+    <text :x="(MID.x0 + MID.x1) / 2" :y="BAND.y + BAND.h + 34" text-anchor="middle" class="lim-label lim-hot">{{ TEXT.middle }}</text>
+    <text :x="(MID.x0 + MID.x1) / 2" :y="BAND.y + BAND.h + 56" text-anchor="middle" class="lim-sub lim-hot">{{ TEXT.middleSub }}</text>
 
-    <text :x="X1" :y="BAND.y + BAND.h + 34" text-anchor="end" class="lim-label">fin</text>
-    <text :x="X1" :y="BAND.y + BAND.h + 56" text-anchor="end" class="lim-sub">bien exploitée</text>
+    <text :x="X1" :y="BAND.y + BAND.h + 34" text-anchor="end" class="lim-label">{{ TEXT.end }}</text>
+    <text :x="X1" :y="BAND.y + BAND.h + 56" text-anchor="end" class="lim-sub">{{ TEXT.endSub }}</text>
 
-    <text :x="X0" :y="BAND.y - 16" class="lim-size">taille maximale : <tspan class="lim-strong">plus d’1 M de tokens</tspan> sur certains modèles</text>
+    <text :x="X0" :y="BAND.y - 16" class="lim-size">{{ TEXT.size }}<tspan class="lim-strong">{{ TEXT.sizeStrong }}</tspan>{{ TEXT.sizeEnd }}</text>
   </svg>
 </template>
 

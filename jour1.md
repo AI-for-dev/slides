@@ -5,6 +5,7 @@ info: |
   IA4Dev 2026 - ANF jour 1, octobre 2026
   Max Beligné (PUD-GA / MSH Alpes / UGA) · Loïc Gouarin (CMAP / CNRS / École polytechnique)
 author: Max Beligné, Loïc Gouarin
+lang: fr
 colorSchema: auto
 # Logo de l'organisation AI-for-dev (dépôt AI-for-dev/.github, profile/brand).
 favicon: /favicon.svg
@@ -13,6 +14,8 @@ themeConfig:
   authors: Max Beligné · Loïc Gouarin
   license: CC BY-SA 4.0
   licenseUrl: https://creativecommons.org/licenses/by-sa/4.0/deed.fr
+  # Le même deck en anglais, relatif à celui-ci (/slides/jour1/).
+  translation: ../en/jour1/
 # Publié sous /slides/jour1/ : le 404.html de GitHub Pages est celui de
 # l'accueil, donc les liens profonds passent par le hash.
 routerMode: hash
@@ -1066,7 +1069,7 @@ Petit casse-briques HTML/JS sur `<canvas>`, sans dépendance.
 - Tests partiels
 - Historique git réel
 - Fichier piégé + `.env` sensible
-- Contrainte « zéro dépendance »
+- Contrainte « zéro dépendance »
 ::
 :::
 ::::

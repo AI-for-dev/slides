@@ -36,6 +36,7 @@ Une formation faite par des ingénieurs de recherche pour leurs pairs, dans les 
 - Trois decks partagent le thème : `jour1.md` (jour 1), `jour2.md` et `jour3.md` (pages dans `pages/`). Le thème doit rester un système réutilisable, pas une collection de cas particuliers.
 - Schéma clair ou sombre selon le réglage de l'écran. Les figures sont des captures sur fond clair : elles gardent une plaque claire en sombre, comme les logos et les avatars.
 - Contenu en français, avec espaces insécables devant `: ; ! ?` et dans les guillemets.
+- Une version anglaise suit le français slide pour slide (`x.en.md`, publiée sous `/slides/en/`) ; le bouton de langue de la barre Slidev passe de l'une à l'autre sur la même slide. Le français fait référence.
 - Polices auto-hébergées via Fontsource (pas de chargement réseau en salle).
 - Le rendu doit tenir en projection, en visio, dans un navigateur et en PDF.
 
