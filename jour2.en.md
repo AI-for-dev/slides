@@ -362,7 +362,7 @@ A provider with the same name in `~/.pi/agent/models.json` takes precedence over
 section: Part 1 · First steps with Pi
 ---
 
-# Four model families :Hint[all open weight]
+# Two model families :Hint[all open weight]
 
 ::::::Stack{fill center gap=6}
 ::::Cols{cols=4 gap=4 align=stretch}
@@ -650,6 +650,52 @@ The most specific rule wins. A command the parser cannot classify is denied.
 section: Part 2 · Security and sandbox
 ---
 
+# Create a throwaway workspace with a worktree
+
+::::Cols{cols=2 gap=7 fill align=center}
+:::Stack{gap=4}
+::Lead
+A **Git worktree** is an example of a “throwaway clone”. It is also good practice when several agents work on the same project.
+::
+
+:::Card{variant=soft eyebrow="Do not confuse them" tone=teal}
+::Specs{w="7rem"}
+- **Branch** a separate history
+- **Worktree** a separate directory
+::
+
+The worktree shares the repository’s Git history: it is not an independent copy.
+:::
+:::
+
+:::Stack{gap=3 .code-sm}
+:Eyebrow[From the NÉON repository]{tone=quiet code}
+
+```bash
+herdr worktree create \
+  --branch workshop/guardrail \
+  --base dev \
+  --focus
+```
+
+:::Card{variant=accent eyebrow="Created by herdr"}
+Herdr stores all its worktrees under:
+
+`~/.herdr/worktrees/`
+
+`--focus` opens the new worktree in herdr.
+:::
+:::
+::::
+
+::Takeaway{.mt-4}
+For the exercise, this directory acts as the throwaway clone: your experiments stay out of the main working directory.
+::
+
+---
+section: Part 2 · Security and sandbox
+---
+
 # Exercise: an instruction against a guardrail
 
 :::::Stack{fill center gap=5}
@@ -709,7 +755,7 @@ The third level of the table. Pi runs in its own virtual machine, and everything
 
 ::Detail
 Docker also publishes 70 kits in [docker/sbx-kits-contrib](https://github.com/docker/sbx-kits-contrib): 33 agents, including Pi (`sbx/pi-kit`), and 37 add-ons such as GitLab, Playwright or Trivy.<br />
-Getting started with our kit, key handling and the sandbox’s limits: appendix B.
+Getting started with our kit, key handling and the sandbox’s limits: cf. appendix
 ::
 :::::
 
@@ -950,7 +996,7 @@ section: Part 3 · Context
 ::
 
 ::Lead
-Enough in most cases. `/tools` lists them.
+Enough in most cases.
 ::
 
 ::Card{variant=accent eyebrow="In the room" size=sm}

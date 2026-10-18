@@ -39,7 +39,7 @@ IA4Dev 2026 · ANF jour 2
 ::
 :::
 
-::CoverTitle{sub="Comprendre et construire son harnais"}
+::CoverTitle{sub="Comprendre et construire son harnais" style="transform: translateY(-2rem)"}
 # Atelier<br />Acte 2
 ::
 
@@ -101,7 +101,7 @@ section: Introduction
 
 ::::::Stack{fill center gap=6}
 ::Lead
-Une exécution unique ne dit presque rien d’un modèle. Chaque exercice de la journée suit donc le même déroulé.
+Une exécution unique ne dit presque rien d’un modèle. <br /> Chaque exercice de la journée suit donc le même déroulé.
 ::
 
 ::::Cols{cols=3 gap=5}
@@ -117,7 +117,7 @@ Comparez ce que l’agent a lu et fait, pas seulement le résultat. `/export` vo
 ::::
 
 ::Takeaway
-L'analyse des traces permet de connaître finement les qualités et les défauts d'un modèle. Vous savez ensuite dire quel modèle utiliser selon vos besoins.
+L'analyse des traces permet de connaître finement les qualités et les défauts d'un modèle. <br /> Vous savez ensuite dire quel modèle utiliser selon vos besoins.
 ::
 ::::::
 
@@ -371,7 +371,7 @@ Un fournisseur de même nom dans `~/.pi/agent/models.json` prend le dessus sur c
 section: Partie 1 · Premier pas avec Pi
 ---
 
-# Quatre familles de modèles :Hint[tous open weight]
+# Deux familles de modèles :Hint[tous open weight]
 
 ::::::Stack{fill center gap=6}
 ::::Cols{cols=4 gap=4 align=stretch}
@@ -662,6 +662,52 @@ La règle la plus spécifique l’emporte. Une commande que l’analyseur ne sai
 ::::
 
 ---
+section: Partie 2 · Sécurité et sandbox
+---
+
+# Créer un espace jetable avec un worktree
+
+::::Cols{cols=2 gap=7 fill align=center}
+:::Stack{gap=4}
+::Lead
+Un **worktree Git** est un exemple de « clone jetable ». De plus, c’est une bonne pratique si plusieurs agents travaillent sur un même projet.
+::
+
+:::Card{variant=soft eyebrow="À ne pas confondre" tone=teal}
+::Specs{w="7rem"}
+- **Branche** un historique distinct
+- **Worktree** un répertoire distinct
+::
+
+Le worktree partage l’historique Git du dépôt : ce n’est pas une copie indépendante.
+:::
+:::
+
+:::Stack{gap=3 .code-sm}
+:Eyebrow[Depuis le dépôt NÉON]{tone=quiet code}
+
+```bash
+herdr worktree create \
+  --branch atelier/garde-fou \
+  --base dev \
+  --focus
+```
+
+:::Card{variant=accent eyebrow="Créé par herdr"}
+Herdr range tous ses worktrees sous :
+
+`~/.herdr/worktrees/`
+
+`--focus` ouvre le nouveau worktree dans herdr.
+:::
+:::
+::::
+
+::Takeaway{.mt-4}
+Pour l’exercice, ce répertoire joue le rôle du clone jetable : vos essais restent hors du répertoire de travail principal.
+::
+
+---
 # NOUVEAU V2 : exercice en salle du cours (module sandbox)
 section: Partie 2 · Sécurité et sandbox
 ---
@@ -727,7 +773,7 @@ Le troisième niveau du tableau. Pi tourne dans sa propre machine virtuelle, et 
 
 ::Detail
 Docker publie aussi 70 kits dans [docker/sbx-kits-contrib](https://github.com/docker/sbx-kits-contrib) : 33 agents, dont Pi (`sbx/pi-kit`), et 37 compléments comme GitLab, Playwright ou Trivy.<br />
-Mise en route avec notre kit, gestion des clés et limites du bac à sable : annexe B.
+Mise en route avec notre kit, gestion des clés et limites du bac à sable : cf. annexe.
 ::
 :::::
 
@@ -975,7 +1021,7 @@ section: Partie 3 · Contexte
 ::
 
 ::Lead
-Suffisant dans la plupart des cas. `/tools` en donne la liste.
+Suffisant dans la plupart des cas.
 ::
 
 ::Card{variant=accent eyebrow="En salle" size=sm}
