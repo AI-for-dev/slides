@@ -19,6 +19,9 @@ themeConfig:
 # Publié sous /slides/jour2/ : le 404.html de GitHub Pages est celui de
 # l'accueil, donc les liens profonds passent par le hash.
 routerMode: hash
+# Bouton « Download as PDF » dans la barre de navigation : le PDF est
+# exporté au build (Playwright) et servi avec le deck.
+download: true
 mdc: true
 editor: false
 drawings:

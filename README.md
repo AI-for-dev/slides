@@ -20,6 +20,13 @@ de l'accueil. La version anglaise suit le même schéma sous `dist/en/`. La
 liste des decks et leurs dossiers sont dans `scripts/build-all.mjs`, que la CI
 appelle.
 
+Les six decks ont `download: true` dans leur en-tête : le build exporte le PDF
+du deck (`slidev-exported.pdf`, à côté de son `index.html`) et la barre de
+navigation du site publié affiche un bouton « Download as PDF ». Le build a
+donc besoin de Chromium (`npx playwright install chromium`). Ne pas ajouter
+`exportFilename` : Slidev écrirait alors le PDF hors de `dist/` et le bouton
+pointerait vers un fichier absent.
+
 ## Lancer
 
 ```bash

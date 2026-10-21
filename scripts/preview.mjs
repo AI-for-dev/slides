@@ -17,6 +17,7 @@ const TYPES = {
   '.jpg': 'image/jpeg',
   '.woff2': 'font/woff2',
   '.json': 'application/json',
+  '.pdf': 'application/pdf',
 }
 
 createServer((req, res) => {

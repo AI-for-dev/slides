@@ -27,8 +27,11 @@ jobs:
           node-version: 22
           cache: npm
 
-      # --omit=dev : évite le téléchargement de playwright-chromium (export PDF uniquement)
-      - run: npm ci --omit=dev
+      - run: npm ci
+
+      # Chaque deck a `download: true` : son build exporte le PDF proposé par
+      # le bouton de téléchargement, ce qui demande Chromium.
+      - run: npx playwright install --with-deps chromium
 
       # Le bouton de langue garde le numéro de slide : une version anglaise
       # décalée par rapport à la française bloque la publication.
