@@ -11,6 +11,7 @@
         "provider": "none"
       },
       "colorSchema": "auto",
+      "selectable": true,
       "aspectRatio": "16/9"
     }
   }
