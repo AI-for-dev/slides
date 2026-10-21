@@ -19,6 +19,9 @@ themeConfig:
 # Version anglaise de jour3.md, slide pour slide : le bouton de langue garde
 # le numéro de slide. Publiée sous /slides/en/jour3/, en hash comme les autres.
 routerMode: hash
+# Bouton « Download as PDF » dans la barre de navigation : le PDF est
+# exporté au build (Playwright) et servi avec le deck.
+download: true
 mdc: true
 editor: false
 drawings:
